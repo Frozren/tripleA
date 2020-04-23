@@ -1,4 +1,4 @@
-package dao;
+package dao.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,13 +6,14 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import dao.IDAOPlayer;
 import model.AI;
 import model.Card;
 import model.Game;
 import model.Human;
 import model.Player;
 
-public class DAOPlayerJDBC implements DAOPlayer {
+public class DAOPlayerJDBC implements IDAOPlayer {
 	
 
 	@Override

@@ -1,14 +1,15 @@
-package dao;
+package dao.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
 
+import dao.IDAOCard;
 import model.Card;
 import model.Game;
 
-public class DAOCardJDBC implements DAOCard {
+public class DAOCardJDBC implements IDAOCard {
 
     @Override
     public void insert(Card c) {
@@ -30,7 +31,6 @@ public class DAOCardJDBC implements DAOCard {
             e.printStackTrace();
         }
     }
-    
     
     public int insert(Card c,boolean returnId) {
     	int key = -1;
