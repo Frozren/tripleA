@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 
-<html>
+<html translate="no">
 
 <head>
 <meta charset="UTF-8">
@@ -256,13 +256,13 @@
 		
 		function soundDef(){
 			var sound = document.getElementById("sDef");
-			sDef.volume = 0.0;
+			sDef.volume = 0.2;
             sound.play();
 		}
 		
 		function soundAtt(){
 			var sound = document.getElementById("sAtt");
-			sAtt.volume = 0.0;
+			sAtt.volume = 0.2;
             sound.play();
 		}
 		
