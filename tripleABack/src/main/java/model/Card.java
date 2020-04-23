@@ -1,8 +1,28 @@
 package model;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
+@Entity
+@Table(name="card")
+
 public class Card {
 	//ATTRIBUTS
-	protected int life = 100, atk = 20, def = 25;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id", updatable = false)
+	protected int id;
+	
+	@Column(name="life", length = 11, nullable = false)
+	protected int life = 100;
+	
+	@Column(name="atk", length = 11, nullable = false)
+	protected int atk = 20;
+	
+	@Column(name="def", length = 11, nullable = false)
+	protected int def = 25;
+	
 	protected boolean position = false;		//true = à distance
 	protected boolean protection = false;
 	
@@ -24,8 +44,18 @@ public class Card {
 	}
 
 	//GETTER & SETTER
+	
+	
 	public int getLife() {
 		return life;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public void setLife(int life) {
