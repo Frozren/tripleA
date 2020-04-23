@@ -1,7 +1,11 @@
 package model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name="card")
@@ -23,7 +27,7 @@ public class Card {
 	@Column(name="def", length = 11, nullable = false)
 	protected int def = 25;
 	
-	protected boolean position = false;		//true = à distance
+	protected boolean position = false;		//true = ï¿½ distance
 	protected boolean protection = false;
 	
 	//CONSTRUCTOR	
@@ -109,10 +113,10 @@ public class Card {
 	public void isAttackedBy(Card c) {
 		if (this.isProtection()) {
 			this.life -= (c.getAtk() - (c.getAtk() * 90) / 100);
-			System.out.println("Cardatt" + c.getAtk() + " inflige " + (c.getAtk() - (c.getAtk() * 90) / 100) + "dgt à cardatt" + this.getAtk());
+			System.out.println("Cardatt" + c.getAtk() + " inflige " + (c.getAtk() - (c.getAtk() * 90) / 100) + "dgt ï¿½ cardatt" + this.getAtk());
 		} else {
 			this.life -= (c.getAtk() - (c.getAtk() * this.def) / 100);
-			System.out.println("Cardatt" + c.getAtk() + " inflige " + (c.getAtk() - (c.getAtk() * this.def) / 100) + "dgt à cardatt" + this.getAtk());
+			System.out.println("Cardatt" + c.getAtk() + " inflige " + (c.getAtk() - (c.getAtk() * this.def) / 100) + "dgt ï¿½ cardatt" + this.getAtk());
 		}
 	}
 
