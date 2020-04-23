@@ -28,42 +28,33 @@ public class Human extends Player {
 		this.typePlayer = true;
 	}
 	
-	public boolean attack(Human h, AI ai, int att, int target) {
-		List<Card> deckH = h.deck();
-		List<Card> deckAI = ai.deck();
+public String attack(List<Card> deckH, List<Card> deckAI, AI ai, int att, int target) {
 		
-		if (deckAI.size() != 1) {
+		if (ai.deck().size() != 1) {
 			ai.protection();
 		} else {
-			deckAI.get(ai.getCardProtected()).setProtection(false);
+			ai.deck().get(0).setProtection(false);
 		}
 		
-		if ((att + 1) > deckH.size()) {
-			att = 0;
-		}
-		
-		if ((target-1) > deckAI.size()) {
-			target = 1;
-		}
-		
-		deckAI.get(target-1).isAttackedBy(deckH.get(att));
+		int dmg=deckAI.get(target-1).isAttackedBy(deckH.get(att));
 		System.out.println("hCard" + att + " attaque aicard" + (target-1));
-		return ai.verifyEnd();
+		String msg="<p>c"+(att+1)+" inflige "+dmg+" dégats à c"+(target+3)+"</p>";
+		
+		return msg;
 	}
 	
-	public boolean protection(int choix) {
-		List<Card> deckH = this.deck();
-		int p = this.getCardProtected();
-		
-		if (choix == p) {
-			return false;
-		}
-		
-		deckH.get(p-1).setProtection(false);
-		deckH.get(choix-1).setProtection(true);
-		System.out.println("L'homme protege card" + (choix-1));
-		
-		return true;
+public boolean protection(List<Card> deckH, int choix) {
+	int p = this.getCardProtected(deckH);
+	
+	if (choix == p) {
+		return false;
 	}
+	
+	deckH.get(p-1).setProtection(false);
+	deckH.get(choix-1).setProtection(true);
+	System.out.println("L'homme protege card" + (choix-1));
+	
+	return true;
+}
 	
 }

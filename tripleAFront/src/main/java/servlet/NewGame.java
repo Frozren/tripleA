@@ -23,7 +23,7 @@ public class NewGame extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String name = request.getParameter("pseudo").toUpperCase();
 		Human h = Game.getInstance().getHuman();
-		h = (Human) Game.getInstance().getDaoP().checkConnect(name);
+		h = (Human) Game.getInstance().getDaoPlayer().checkConnect(name);
 		
 		if (h instanceof Human) {
 			request.getSession().setAttribute("erreur", "Y");

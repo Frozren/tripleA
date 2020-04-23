@@ -114,14 +114,23 @@ public class Card {
 	}
 
 	//METHODS
-	public void isAttackedBy(Card c) {
+	public int isAttackedBy(Card c) {
+		int dmg;
 		if (this.isProtection()) {
-			this.life -= (c.getAtk() - (c.getAtk() * 90) / 100);
-			System.out.println("Cardatt" + c.getAtk() + " inflige " + (c.getAtk() - (c.getAtk() * 90) / 100) + "dgt ï¿½ cardatt" + this.getAtk());
+			dmg=(c.getAtk() - (c.getAtk() * 90) / 100);
+			if(this.life>dmg) {
+			this.life -= dmg;}
+			else {this.life=0;}
+			
+			System.out.println("Cardatt" + c.getAtk() + " inflige " + dmg + "dgt à cardatt" + this.getAtk());
 		} else {
-			this.life -= (c.getAtk() - (c.getAtk() * this.def) / 100);
-			System.out.println("Cardatt" + c.getAtk() + " inflige " + (c.getAtk() - (c.getAtk() * this.def) / 100) + "dgt ï¿½ cardatt" + this.getAtk());
+			dmg=(c.getAtk() - (c.getAtk() * this.def) / 100);
+			if(this.life>dmg) {
+			this.life -= dmg;}
+			else {this.life=0;}
+			System.out.println("Cardatt" + c.getAtk() + " inflige " + dmg + "dgt à cardatt" + this.getAtk());
 		}
+		return dmg;
 	}
 
 	@Override

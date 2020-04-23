@@ -55,18 +55,18 @@ public class Choice extends HttpServlet {
 		ai.setCard2(ai.createCardRNG(pts));
 		ai.setCard3(ai.createCardRNG(pts));
 		
-		Game.getInstance().getDaoP().insert(h);
-		Game.getInstance().getDaoP().insert(ai);
+		Game.getInstance().getDaoPlayer().insert(h);
+		Game.getInstance().getDaoPlayer().insert(ai);
 		
-		h = (Human) Game.getInstance().getDaoP().checkConnect(h.getName());
-		ai = (AI) Game.getInstance().getDaoP().checkConnect(ai.getName());
+		h = (Human) Game.getInstance().getDaoPlayer().checkConnect(h.getName());
+		ai = (AI) Game.getInstance().getDaoPlayer().checkConnect(ai.getName());
 		
 		h.setIdOpponent(ai.getId());
 		ai.setIdOpponent(h.getId());
 		ai.setName("AI" + ai.getId());
 		
-		Game.getInstance().getDaoP().update(h);
-		Game.getInstance().getDaoP().update(ai);
+		Game.getInstance().getDaoPlayer().update(h);
+		Game.getInstance().getDaoPlayer().update(ai);
 		
 		request.getSession().setAttribute("Human", h);
 		request.getSession().setAttribute("AI", ai);

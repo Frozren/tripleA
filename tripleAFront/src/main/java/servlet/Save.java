@@ -19,7 +19,7 @@ import model.Player;
 public class Save extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Player> list = Game.getInstance().getDaoP().selectAll();
+		List<Player> list = Game.getInstance().getDaoPlayer().selectAll();
 		if (list.isEmpty()) {
 			request.setAttribute("emptyList", true);
 		} else {
@@ -39,8 +39,8 @@ public class Save extends HttpServlet {
 		
 		String name = list.get(Integer.parseInt(saveId)).getName();
 		
-		h = (Human) Game.getInstance().getDaoP().checkConnect(name);
-		ai = (AI) Game.getInstance().getDaoP().selectById(h.getIdOpponent());
+		h = (Human) Game.getInstance().getDaoPlayer().checkConnect(name);
+		ai = (AI) Game.getInstance().getDaoPlayer().selectById(h.getIdOpponent());
 		
 		request.getSession().setAttribute("Human", h);
 		request.getSession().setAttribute("AI", ai);

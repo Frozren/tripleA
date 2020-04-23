@@ -41,32 +41,31 @@ public class AI extends Player {
 		}
 	}
 	
-	public boolean attack(Human h, AI ai, int att) {
-		List<Card> deckH = h.deck();
-		List<Card> deckAI = ai.deck();
+	public String attack(List<Card> deckH, List<Card> deckAI, AI ai, int att) {
 		int target = 0;
 		
-		if ((att + 1) > deckAI.size()) {
-			att = 0;
-		}
+		while (deckH.get(target=ai.RNG(3)).getLife() <= 0) {}
 		
-		while ((target = ai.RNG(3)) > (deckH.size()-1)) {}
+		int dmg=deckH.get(target).isAttackedBy(deckAI.get(att));
+		System.out.println("aicard" + (att+3) + " attaque hcard" + target);
+		String msg="<p>c"+(att+4)+" inflige "+dmg+" dégats à c"+(target+1)+"</p>";
 		
-		deckH.get(target).isAttackedBy(deckAI.get(att));
-		System.out.println("aicard" + att + " attaque hcard" + target);
-		return h.verifyEnd();
+		return msg;
 	}
 	
 	public void protection() {
 		List<Card> deckAI = this.deck();
-		int p = this.getCardProtected(), protectionAI = 0;
-		
+		int p = this.getCardProtected(deckAI), protectionAI = 0;
+		if(deckAI.size()>1) {
 		do {
 			protectionAI = this.RNG(3);
 		} while(protectionAI == p || protectionAI > (deckAI.size()-1));
 		
 		deckAI.get(p-1).setProtection(false);
+		
 		deckAI.get(protectionAI).setProtection(true);
+		}
+		else {deckAI.get(0).setProtection(false);}
 		System.out.println("L'ia protege card" + protectionAI);
 	}
 	
