@@ -4,12 +4,51 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public abstract class Player {
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.Table;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
-	protected int id, idOpponent;
+@Entity
+@Table(name = "player")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="typePlayer")
+public abstract class Player {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")
+	protected int id;
+	
+	@Column(name="idopponent")
+	protected int idOpponent;
+	
+	@Column(name="name", length=50, nullable = false)
 	protected String name;
+	
+	@Column(name="typePlayer")
 	protected boolean typePlayer;
-	protected Card card1, card2, card3;
+	
+	@OneToOne
+	@JoinColumn(name="idCard1")
+	protected Card card1;
+	
+	@OneToOne
+	@JoinColumn(name="idCard2")
+	protected Card card2;
+	
+	@OneToOne
+	@JoinColumn(name="idCard3")
+	protected Card card3;
+	
+	
 	
 	public Player(int id, String name, Card carte1, Card carte2, Card carte3, boolean typePlayer, int idOpponent) {
 		this.id = id;
