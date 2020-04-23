@@ -9,8 +9,6 @@ import javax.persistence.Entity;
 @DiscriminatorValue("1")
 public class Human extends Player {
 	
-	
-	
 	public Human(int id, String name, Card carte1, Card carte2, Card carte3, boolean typePlayer, int idOpponent) {
 		super(id, name, carte1, carte2, carte3, typePlayer, idOpponent);
 	}

@@ -4,7 +4,6 @@ import java.util.List;
 
 import dao.IDAOCard;
 import model.Card;
-import model.Game;
 
 public class DAOCardJPA extends DAOJPA implements IDAOCard {
 
@@ -19,11 +18,6 @@ public class DAOCardJPA extends DAOJPA implements IDAOCard {
 			e.printStackTrace(); 
 			this.em.getTransaction().rollback();
 		}
-	}
-	
-	public Card addCard(Card entity) {
-		Game.getInstance().getDaoCard().insert(entity);
-		return entity;
 	}
 
 	@Override
@@ -69,6 +63,4 @@ public class DAOCardJPA extends DAOJPA implements IDAOCard {
 			this.em.getTransaction().rollback();
 		}
 	}
-
-
 }

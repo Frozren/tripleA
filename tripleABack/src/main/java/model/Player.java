@@ -19,7 +19,7 @@ import javax.persistence.OneToOne;
 @Entity
 @Table(name = "player")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="typePlayer")
+@DiscriminatorColumn(name = "typeplayer")
 public abstract class Player {
 	
 	@Id
@@ -33,22 +33,20 @@ public abstract class Player {
 	@Column(name="name", length=50, nullable = false)
 	protected String name;
 	
-	@Column(name="typePlayer")
+	@Column(name="typeplayer", insertable = false, updatable = false)
 	protected boolean typePlayer;
 	
 	@OneToOne
-	@JoinColumn(name="idCard1")
+	@JoinColumn(name="idcard1")
 	protected Card card1;
 	
 	@OneToOne
-	@JoinColumn(name="idCard2")
+	@JoinColumn(name="idcard2")
 	protected Card card2;
 	
 	@OneToOne
-	@JoinColumn(name="idCard3")
+	@JoinColumn(name="idcard3")
 	protected Card card3;
-	
-	
 	
 	public Player(int id, String name, Card carte1, Card carte2, Card carte3, boolean typePlayer, int idOpponent) {
 		this.id = id;
@@ -125,6 +123,7 @@ public abstract class Player {
 	public void setIdOpponent(int idOpponent) {
 		this.idOpponent = idOpponent;
 	}
+	
 	
 	public List<Card> createChoice(int n, int pts){
 		List<Card> list = new ArrayList();

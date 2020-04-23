@@ -5,7 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public abstract class DAOJPA {
-	protected final static EntityManagerFactory emf = Persistence.createEntityManagerFactory("HopitalUnit");
+	protected final static EntityManagerFactory emf = Persistence.createEntityManagerFactory("TripleAUnit");
 	
 	protected final EntityManager em = emf.createEntityManager();
 

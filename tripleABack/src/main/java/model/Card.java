@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="card")
@@ -15,7 +16,7 @@ public class Card {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id", updatable = false)
+	@Column(name="id")
 	protected int id;
 	
 	@Column(name="life", length = 11, nullable = false)
@@ -27,7 +28,10 @@ public class Card {
 	@Column(name="def", length = 11, nullable = false)
 	protected int def = 25;
 	
+	@Transient
 	protected boolean position = false;		//true = � distance
+	
+	@Transient
 	protected boolean protection = false;
 	
 	//CONSTRUCTOR	
@@ -122,8 +126,7 @@ public class Card {
 
 	@Override
 	public String toString() {
-		return "Card [life=" + life + ", atk=" + atk + ", def=" + def + ", position=" + position + "]";
+		return "Card [id=" + id + ", life=" + life + ", atk=" + atk + ", def=" + def + ", position=" + position
+				+ ", protection=" + protection + "]";
 	}
-
-	
 }

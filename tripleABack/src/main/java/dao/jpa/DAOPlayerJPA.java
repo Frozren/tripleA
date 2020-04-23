@@ -31,7 +31,7 @@ public class DAOPlayerJPA extends DAOJPA implements IDAOPlayer {
 	@Override
 	public List<Player> selectAll() {
 		return this.em
-				.createQuery("select p from Player p", Player.class)
+				.createQuery("select p from Player p where p.typePlayer = 1", Player.class)
 				.getResultList();
 	}
 
@@ -53,19 +53,11 @@ public class DAOPlayerJPA extends DAOJPA implements IDAOPlayer {
 		this.em.getTransaction().begin();
 		
 		try {
-			//this.em.remove(this.SelectById(id));
 			Human humanToRemove = new Human();
 			humanToRemove.setId(id);
 			
-			AI aiToRemove = new AI();
-			aiToRemove.setId(humanToRemove.getIdOpponent());
-			
 			this.em.remove(
 				this.em.merge(humanToRemove)
-			);
-			
-			this.em.remove(
-					this.em.merge(aiToRemove)
 			);
 			
 			this.em.getTransaction().commit();
@@ -73,5 +65,40 @@ public class DAOPlayerJPA extends DAOJPA implements IDAOPlayer {
 			e.printStackTrace();
 			this.em.getTransaction().rollback();
 		}
+	}
+	
+	public void deleteAI(Integer id) {
+		this.em.getTransaction().begin();
+		
+		try {
+			AI aiToRemove = new AI();
+			aiToRemove.setId(id);
+			
+			this.em.remove(
+				this.em.merge(aiToRemove)
+			);
+			
+			this.em.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.em.getTransaction().rollback();
+		}
+	}
+
+	@Override
+	public Player checkConnect(String name) {
+				
+		Player p =null;
+		
+		try {
+		p =  this.em
+						.createQuery("select p from Player p where p.name = ?1", Player.class)
+						.setParameter(1, name)
+						.getSingleResult();
+		} catch (Exception e) {
+			e.getStackTrace();
+		}
+		
+		return p;
 	}
 }
