@@ -28,7 +28,6 @@ public class battleField extends HttpServlet {
 	static Boolean end=false;
 	// static Human h = null;
 	// static AI ai = null;
-	Card cx = new Card();
 
 
 	// à changer
@@ -38,6 +37,7 @@ public class battleField extends HttpServlet {
 	static Card c4 = new Card(126, 26, 43);
 	static Card c5 = new Card(148, 22, 25);
 	static Card c6 = new Card(136, 30, 29);
+	
 	//static Human h = Game().getInstance().getH();
 	//static Human ai = Game().getInstance().getAI();
 	static Human h = new Human(1, "Coco", c1, c2, c3, true, 2);
@@ -45,92 +45,44 @@ public class battleField extends HttpServlet {
 	static List<Card> deckH = h.deck();
 	static List<Card> deckAI = ai.deck();
 	// à changer
-	int maxhp1 = deckH.get(0).getLife() + deckH.get(1).getLife() + deckH.get(2).getLife();
-	int maxhp2 = deckAI.get(0).getLife() + deckAI.get(1).getLife() + deckAI.get(2).getLife();
+	static int maxhp1 = deckH.get(0).getLife() + deckH.get(1).getLife() + deckH.get(2).getLife();
+	static int maxhp2 = deckAI.get(0).getLife() + deckAI.get(1).getLife() + deckAI.get(2).getLife();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("turn="+turn);
-		
-		request.getSession().setAttribute("message", message);
-		request.getSession().setAttribute("hpb1", (deckH.get(0).getLife() + deckH.get(1).getLife() + deckH.get(2).getLife()) * 100 / maxhp1);
-		request.getSession().setAttribute("hpb2", (deckAI.get(0).getLife() + deckAI.get(1).getLife() + deckAI.get(2).getLife()) * 100 / maxhp2);
 		request.getSession().setAttribute("namec1", "Legolas");
 		request.getSession().setAttribute("classc1", "Codeur");
-		request.getSession().setAttribute("hpc1", deckH.get(0).getLife());
-		request.getSession().setAttribute("atkc1", deckH.get(0).getAtk());
-		request.getSession().setAttribute("defc1", deckH.get(0).getDef());
 		request.getSession().setAttribute("namec2", "Aragorn");
 		request.getSession().setAttribute("classc2", "Hacker");
-		request.getSession().setAttribute("hpc2", deckH.get(1).getLife());
-		request.getSession().setAttribute("atkc2", deckH.get(1).getAtk());
-		request.getSession().setAttribute("defc2", deckH.get(1).getDef());
 		request.getSession().setAttribute("namec3", "Gimli");
 		request.getSession().setAttribute("classc3", "Debugeur");
-		request.getSession().setAttribute("hpc3", deckH.get(2).getLife());
-		request.getSession().setAttribute("atkc3", deckH.get(2).getAtk());
-		request.getSession().setAttribute("defc3", deckH.get(2).getDef());
 		request.getSession().setAttribute("namec4", "Smaug");
 		request.getSession().setAttribute("classc4", "Omniscient");
-		request.getSession().setAttribute("hpc4", deckAI.get(0).getLife());
-		request.getSession().setAttribute("atkc4", deckAI.get(0).getAtk());
-		request.getSession().setAttribute("defc4", deckAI.get(0).getDef());
 		request.getSession().setAttribute("namec5", "Sauron");
 		request.getSession().setAttribute("classc5", "Maitre du jeu");
-		request.getSession().setAttribute("hpc5", deckAI.get(1).getLife());
-		request.getSession().setAttribute("atkc5", deckAI.get(1).getAtk());
-		request.getSession().setAttribute("defc5", deckAI.get(1).getDef());
 		request.getSession().setAttribute("namec6", "Saroumane");
 		request.getSession().setAttribute("classc6", "Mentaliste");
-		request.getSession().setAttribute("hpc6", deckAI.get(2).getLife());
-		request.getSession().setAttribute("atkc6", deckAI.get(2).getAtk());
-		request.getSession().setAttribute("defc6", deckAI.get(2).getDef());
 		
-		
-		if(c1.getLife()>0) {request.getSession().setAttribute("disc1", "visible");}
-		else {request.getSession().setAttribute("disc1", "hidden");}
-		if(c2.getLife()>0) {request.getSession().setAttribute("disc2", "visible");}
-		else {request.getSession().setAttribute("disc2", "hidden");}
-		if(c3.getLife()>0) {request.getSession().setAttribute("disc3", "visible");}
-		else {request.getSession().setAttribute("disc3", "hidden");}
-		if(c4.getLife()>0) {request.getSession().setAttribute("disc4", "visible");}
-		else {request.getSession().setAttribute("disc4", "hidden");}
-		if(c5.getLife()>0) {request.getSession().setAttribute("disc5", "visible");}
-		else {request.getSession().setAttribute("disc5", "hidden");}
-		if(c6.getLife()>0) {request.getSession().setAttribute("disc6", "visible");}
-		else {request.getSession().setAttribute("disc6", "hidden");}
-		
-		if(def==1) {request.getSession().setAttribute("cursor", "img/cursor/shield.ico");
-		request.getSession().setAttribute("cursorai", "");
-		request.getSession().setAttribute("cursorch", "img/cursor/shield.ico");}
-		else if(def==0) {request.getSession().setAttribute("cursor", "img/cursor/epeg.ico");
-		request.getSession().setAttribute("cursorai", "img/cursor/eped.ico");
-		request.getSession().setAttribute("cursorch", "");}
-		
-		
-		
-		
+		refresh(request);		
 
 		this.getServletContext().getRequestDispatcher("/WEB-INF/battleField.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		int card = Integer.parseInt(request.getParameter("card"));
-		if (card==1) {cx = c1;}
-		else if (card==2) {cx = c2;}
-		else if (card==3) {cx = c3;}
-		else if (card==4) {cx = c4;}
-		else if (card==5) {cx = c5;}
-		else if (card==6) {cx = c6;}
-		else {}
 
 		if (turn == 0) {
-			//this.getServletContext().getRequestDispatcher("/WEB-INF/music.jsp").forward(request, response);
-			int target=h.RNG(3);
-			deckAI.get(target).setProtection(true);turn++;
+			c1.setPosition(true);
+			c6.setPosition(true);
+			int targeth=h.RNG(3);
+			deckH.get(targeth).setProtection(true);
+			int targetai=h.RNG(3);
+			deckAI.get(targetai).setProtection(true);
 			message="<p>Fight!!!</p>"+message;
 			tour = h.RNG(2);
 			if (tour==0) {message="<p>Saisir carte adverse à attaquer avec c1</p>"+message;def=0;}
-			else {message=msgDef+message;def=1;}
+			else if (tour==1) {message=msgDef+message;def=1;}
+			turn++;
 		}
 			
 		else {
@@ -190,7 +142,9 @@ public class battleField extends HttpServlet {
 		}
 		if(ai.verifyEnd()) {message="<p>Le joueur a gagné!!!</p>"+message;}
 		else if(h.verifyEnd()) {message="<p>Le joueur a perdu...</p>"+message;}
-		doGet(request, response);
+		refresh(request);
+		this.getServletContext().getRequestDispatcher("/WEB-INF/fieldAjax.jsp").forward(request, response);
+
 	}
 	
 	public static void nextTurn() {
@@ -221,5 +175,57 @@ public class battleField extends HttpServlet {
 		else {System.out.println("Erreur de saisie");}
 		}
 		return catt;
+	}
+	
+	public static void refresh(HttpServletRequest request) {
+		System.out.println("turn="+turn);
+		request.getSession().setAttribute("message", message);
+		request.getSession().setAttribute("hpb1", (deckH.get(0).getLife() + deckH.get(1).getLife() + deckH.get(2).getLife()) * 100 / maxhp1);
+		request.getSession().setAttribute("hpb2", (deckAI.get(0).getLife() + deckAI.get(1).getLife() + deckAI.get(2).getLife()) * 100 / maxhp2);
+		
+		request.getSession().setAttribute("hpc1", deckH.get(0).getLife());
+		request.getSession().setAttribute("atkc1", deckH.get(0).getAtk());
+		request.getSession().setAttribute("defc1", deckH.get(0).getDef());
+		
+		request.getSession().setAttribute("hpc2", deckH.get(1).getLife());
+		request.getSession().setAttribute("atkc2", deckH.get(1).getAtk());
+		request.getSession().setAttribute("defc2", deckH.get(1).getDef());
+		
+		request.getSession().setAttribute("hpc3", deckH.get(2).getLife());
+		request.getSession().setAttribute("atkc3", deckH.get(2).getAtk());
+		request.getSession().setAttribute("defc3", deckH.get(2).getDef());
+		
+		request.getSession().setAttribute("hpc4", deckAI.get(0).getLife());
+		request.getSession().setAttribute("atkc4", deckAI.get(0).getAtk());
+		request.getSession().setAttribute("defc4", deckAI.get(0).getDef());
+		
+		request.getSession().setAttribute("hpc5", deckAI.get(1).getLife());
+		request.getSession().setAttribute("atkc5", deckAI.get(1).getAtk());
+		request.getSession().setAttribute("defc5", deckAI.get(1).getDef());
+		
+		request.getSession().setAttribute("hpc6", deckAI.get(2).getLife());
+		request.getSession().setAttribute("atkc6", deckAI.get(2).getAtk());
+		request.getSession().setAttribute("defc6", deckAI.get(2).getDef());
+		
+		
+		if(c1.getLife()>0) {request.getSession().setAttribute("disc1", "visible");}
+		else {request.getSession().setAttribute("disc1", "hidden");}
+		if(c2.getLife()>0) {request.getSession().setAttribute("disc2", "visible");}
+		else {request.getSession().setAttribute("disc2", "hidden");}
+		if(c3.getLife()>0) {request.getSession().setAttribute("disc3", "visible");}
+		else {request.getSession().setAttribute("disc3", "hidden");}
+		if(c4.getLife()>0) {request.getSession().setAttribute("disc4", "visible");}
+		else {request.getSession().setAttribute("disc4", "hidden");}
+		if(c5.getLife()>0) {request.getSession().setAttribute("disc5", "visible");}
+		else {request.getSession().setAttribute("disc5", "hidden");}
+		if(c6.getLife()>0) {request.getSession().setAttribute("disc6", "visible");}
+		else {request.getSession().setAttribute("disc6", "hidden");}
+		
+		if(def==1) {request.getSession().setAttribute("cursor", "img/cursor/shield.ico");
+		request.getSession().setAttribute("cursorai", "");
+		request.getSession().setAttribute("cursorch", "img/cursor/shield.ico");}
+		else if(def==0) {request.getSession().setAttribute("cursor", "img/cursor/epeg.ico");
+		request.getSession().setAttribute("cursorai", "img/cursor/eped.ico");
+		request.getSession().setAttribute("cursorch", "");}
 	}
 }

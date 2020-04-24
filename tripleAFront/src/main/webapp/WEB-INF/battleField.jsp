@@ -10,8 +10,7 @@
 
 <title>BattleField</title>
 </head>
-<body id="battle"
-	style="cursor: url('${sessionScope.cursor}'), crosshair;">
+<body id="battle">
 	<form method="POST" action="battleField">
 
 		<div class="row" id="top">
@@ -56,14 +55,14 @@
 				<div class="scroll" id="console">${sessionScope.message}</div>
 			</div>
 
-			<div id="field">
+			<div id="field" style="cursor: url('${sessionScope.cursor}'), crosshair;">
 				<div class="row" id="hfield">
 					<div class="col-2" id="left">
 						<div class="row" id="tleft"></div>
 						<div class="row" id="hcard">
 							<div class="col-8">
 								<div id="card">
-									<input type="image" class="imgcard" idCard="1"  id="c1"
+									<input type="image" class="imgcard" idCard="1" id="c1"
 										src="img/card/cardAP.png"
 										style="visibility: ${sessionScope.disc1}; cursor: url('${sessionScope.cursorch}'), not-allowed;">
 									<div class="divname" style="visibility: ${sessionScope.disc1}">
@@ -91,7 +90,7 @@
 							<div class="col-1" id="ltcard"></div>
 							<div class="col-2">
 								<div id="card">
-									<input type="image" class="imgcard" idCard="2"  id="c2"
+									<input type="image" class="imgcard" idCard="2" id="c2"
 										src="img/card/cardAB.png"
 										style="visibility: ${sessionScope.disc2}; cursor: url('${sessionScope.cursorch}'), not-allowed;">
 									<div class="divname" style="visibility: ${sessionScope.disc2}">
@@ -114,7 +113,7 @@
 							<div class="col-5" id="mtcard"></div>
 							<div class="col-2">
 								<div id="card">
-									<input type="image" class="imgcard"  idCard="4" id="c4"
+									<input type="image" class="imgcard" idCard="4" id="c4"
 										src="img/card/cardTG.png"
 										style="visibility: ${sessionScope.disc4}; cursor: url('${sessionScope.cursorai}'), not-allowed;">
 									<div class="divname" style="visibility: ${sessionScope.disc4}">
@@ -140,7 +139,7 @@
 							<div class="col-1" id="ltcard"></div>
 							<div class="col-2">
 								<div id="card">
-									<input type="image" class="imgcard"  idCard="3" id="c3"
+									<input type="image" class="imgcard" idCard="3" id="c3"
 										src="img/card/cardAV.png"
 										style="visibility: ${sessionScope.disc3}; cursor: url('${sessionScope.cursorch}'), not-allowed;">
 									<div class="divname" style="visibility: ${sessionScope.disc3}">
@@ -164,7 +163,7 @@
 							<div class="col-5" id="mtcard"></div>
 							<div class="col-2">
 								<div id="card">
-									<input type="image" class="imgcard" idCard="5"  id="c5"
+									<input type="image" class="imgcard" idCard="5" id="c5"
 										src="img/card/cardJR.png"
 										style="visibility: ${sessionScope.disc5}; cursor: url('${sessionScope.cursorai}'), not-allowed;">
 									<div class="divname" style="visibility: ${sessionScope.disc5}">
@@ -217,7 +216,12 @@
 			</div>
 		</div>
 		<div class="row" id="bottom">
-			<div class="col-5">
+			<div class="col-2">
+				<audio controls="controls" id="music" loop="loop" autoplay="autoplay">
+					<source id="sBat" src="sound/ff7-boss-theme-remake.mp3" type="audio/mp3"/>
+				</audio>
+			</div>
+			<div class="col-3">
 				<audio id="sDef" src="sound/def.mp3"></audio>
 				<audio id="sAtt" src="sound/att.mp3"></audio>
 			</div>
@@ -225,51 +229,98 @@
 				<img src="img/field/exit.png" id="exit">
 			</div>
 		</div>
-
-
 	</form>
 </body>
 
 <script type="text/javascript">
+	function initCard(){
+		$('input[type="image"]').on('click', function() {
+			let idCard = $(this).attr('idCard');
+			$('#c').val(idCard);
+			console.log(idCard)
+			
+			$.ajax({
+				type : 'POST',
+				processData : false,
+				contentType : false,
+				url : "battleField?card=" + idCard,
+				success : function(resp) {
+					
+					let container = $('<div />');
+					container.html(resp);
+					console.log(container);
+					
+					$('#hp1').parent().html(
+						container.find('#hp1').html()
+					)
+						
+					$('#hp2').parent().html(
+						container.find('#hp2').html()
+					)
+					
+					$('#field').parent().html(
+						container.find('#field').html()
+					)
+				
+					console.log(resp);
+					console.log("OK");
+					initCard()
+					setVar()
+				}
+			})
+			return false;
+		});
+	}
 	
 	
-		var c=document.getElementById("c");
+	$("form").submit(function(e){
+		concole.log('form submit')
+		e.preventDefault();
+		return false;
+	});
+	
+	function setVar(){
 		var c1=document.getElementById("c1");
 		var c2=document.getElementById("c2");
 		var c3=document.getElementById("c3");
 		var c4=document.getElementById("c4");
 		var c5=document.getElementById("c5");
 		var c6=document.getElementById("c6");
-				
-		c1.onmouseover=c1OnClick;
-		function c1OnClick(){soundDef();c.value="1";}
-		c2.onmouseover=c2OnClick;
-		function c2OnClick(){soundDef();c.value="2";}
-		c3.onmouseover=c3OnClick;
-		function c3OnClick(){soundDef();c.value="3";}
-		c4.onmouseover=c4OnClick;
-		function c4OnClick(){soundAtt();c.value="4";}
-		c5.onmouseover=c5OnClick;
-		function c5OnClick(){soundAtt();c.value="5";}
-		c6.onmouseover=c6OnClick;
-		function c6OnClick(){soundAtt();c.value="6";}
+		var sound = document.getElementById("music");
+		c1.onmouseover=soundDef;
+		c2.onmouseover=soundDef;
+		c3.onmouseover=soundDef;
+		c4.onmouseover=soundAtt;
+		c5.onmouseover=soundAtt;
+		c6.onmouseover=soundAtt;
+	}
+
+	function setVolume() {
+		var sound = document.getElementById("music");
+		sound.volume = 0.1;
+	}
+	
+	function soundDef() {
+		var sound = document.getElementById("sDef");
+		sDef.volume = 0.2;
+		sound.play();
+	}
+
+	function soundAtt() {
+		var sound = document.getElementById("sAtt");
+		sAtt.volume = 0.2;
+		sound.play();
+	}
+
+
+	$("#exit").click(function() {
+		alert("test");
 		
-		function soundDef(){
-			var sound = document.getElementById("sDef");
-			sDef.volume = 0.2;
-            sound.play();
-		}
-		
-		function soundAtt(){
-			var sound = document.getElementById("sAtt");
-			sAtt.volume = 0.2;
-            sound.play();
-		}
-		
-		
-		
-		
-		
-	</script>
+	});
+	
+	initCard()
+	setVar()
+	setVolume()
+</script>
 
 </html>

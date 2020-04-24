@@ -802,7 +802,7 @@ body
 
 #battle #divconsole{width: 15%;}
 
-#battle #console{position: relative;top:25%;left: 15%;height:60%;width:80%;
+#battle #console{position: absolute;top:35%;left: 1%;height:40%;width:13%;
 border: solid 1px white;background-color: #330000;
 font-size: 0.8vw;}
 
@@ -810,7 +810,9 @@ font-size: 0.8vw;}
 
 #battle #controls{height: 10%;}
 
-#battle #music{}
+#battle #music{opacity:0;}
+
+#battle #music:hover{opacity:1;}
 
 #battle .scroll{overflow-x: hidden; overflow-x: auto; text-align:justify;}
 
@@ -887,4 +889,4 @@ font-size: 0.8vw;}
 
 #bottom{height: 13%;}
 
-#battle #exit{height: 100%;}
+#battle #exit{position:relative; height: 50%;}

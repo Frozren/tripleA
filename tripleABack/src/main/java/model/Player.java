@@ -190,10 +190,10 @@ public abstract class Player {
 		return i;
 	}
 	
-	public int getCardProtected(List<Card> deckH) {
+	public int getCardProtected(List<Card> deck) {
 		int i = 0;
 		
-		for(Card c : deckH) {
+		for(Card c : deck) {
 			i++;
 			if (c.isProtection()) {
 				break;

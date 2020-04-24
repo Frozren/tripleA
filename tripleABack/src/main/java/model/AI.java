@@ -56,17 +56,24 @@ public class AI extends Player {
 	public void protection() {
 		List<Card> deckAI = this.deck();
 		int p = this.getCardProtected(deckAI), protectionAI = 0;
-		if(deckAI.size()>1) {
+		if(deckAI.size()==3) {
 		do {
 			protectionAI = this.RNG(3);
-		} while(protectionAI == p || protectionAI > (deckAI.size()-1));
+		} while(protectionAI == p-1);
 		
 		deckAI.get(p-1).setProtection(false);
-		
 		deckAI.get(protectionAI).setProtection(true);
 		}
-		else {deckAI.get(0).setProtection(false);}
-		System.out.println("L'ia protege card" + protectionAI);
+		else if(deckAI.size()==2) {
+			if(p==1) {
+				protectionAI=1;
+			}
+			else {protectionAI=0;}
+			deckAI.get(p-1).setProtection(false);
+			deckAI.get(protectionAI).setProtection(true);
+		}
+		else {deckAI.get(p-1).setProtection(false);}
+		System.out.println("L'ia protege card" + protectionAI+" et p = "+p);
 	}
 	
 }
