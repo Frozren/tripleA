@@ -5,8 +5,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import dao.IDAOCard;
+import dao.IDAOHistory;
 import dao.IDAOPlayer;
 import dao.jpa.DAOCardJPA;
+import dao.jpa.DAOHistoryJPA;
 import dao.jpa.DAOPlayerJPA;
 
 public class Game {
@@ -18,6 +20,7 @@ public class Game {
 	private static Game _instance = null;
 	private IDAOCard daoCard;
 	private IDAOPlayer daoPlayer;
+	private IDAOHistory daoHistory;
 	private Human h = new Human();
 	private AI ai = new AI();
 
@@ -45,6 +48,14 @@ public class Game {
 		}
 		return daoPlayer;
 	}
+	
+	public IDAOHistory getDaoHistory() {
+		if (daoHistory == null) {
+			daoHistory = new DAOHistoryJPA();
+		}
+		return daoHistory;
+	}
+	
 	public int getPassivePoints() {
 		return passivePoints;
 	}

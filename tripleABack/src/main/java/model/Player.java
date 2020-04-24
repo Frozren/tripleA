@@ -126,7 +126,7 @@ public abstract class Player {
 	
 	
 	public List<Card> createChoice(int n, int pts){
-		List<Card> list = new ArrayList();
+		List<Card> list = new ArrayList<>();
 
 		for (int i = 0; i < n; i++) {
 			list.add(createCardRNG(pts));
@@ -160,7 +160,7 @@ public abstract class Player {
 	}
 	
 	public List<Card> deck(){
-		List<Card> list = new ArrayList();
+		List<Card> list = new ArrayList<>();
 		
 		if (this.getCard1().getLife() > 0) {
 			list.add(this.getCard1());

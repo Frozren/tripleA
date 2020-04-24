@@ -38,7 +38,7 @@ public String attack(List<Card> deckH, List<Card> deckAI, AI ai, int att, int ta
 		
 		int dmg=deckAI.get(target-1).isAttackedBy(deckH.get(att));
 		System.out.println("hCard" + att + " attaque aicard" + (target-1));
-		String msg="<p>c"+(att+1)+" inflige "+dmg+" dégats à c"+(target+3)+"</p>";
+		String msg="<p>c"+(att+1)+" inflige "+dmg+" dï¿½gats ï¿½ c"+(target+3)+"</p>";
 		
 		return msg;
 	}

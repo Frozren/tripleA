@@ -26,7 +26,7 @@ public class AI extends Player {
 	}
 
 	public void choiceDistance() {
-		List<Integer> l = new ArrayList();
+		List<Integer> l = new ArrayList<>();
 		
 		l.add(this.getCard1().getLife() + this.getCard1().getDef());
 		l.add(this.getCard2().getLife() + this.getCard2().getDef());
@@ -48,7 +48,7 @@ public class AI extends Player {
 		
 		int dmg=deckH.get(target).isAttackedBy(deckAI.get(att));
 		System.out.println("aicard" + (att+3) + " attaque hcard" + target);
-		String msg="<p>c"+(att+4)+" inflige "+dmg+" dégats à c"+(target+1)+"</p>";
+		String msg="<p>c"+(att+4)+" inflige "+dmg+" dï¿½gats ï¿½ c"+(target+1)+"</p>";
 		
 		return msg;
 	}
