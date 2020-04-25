@@ -9,7 +9,7 @@
 
 		<properties>
 			<property  name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/triple_a" />
-			<property  name="hibernate.connection.driver" value="com.mysql.jdbc.Driver" />
+			<property  name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" /> <!-- hibernate.connection.driver ne fonctionne pas ?? -->
 			<property  name="hibernate.connection.user" value="root" />
 			<property  name="hibernate.connection.password" value="" />
 			

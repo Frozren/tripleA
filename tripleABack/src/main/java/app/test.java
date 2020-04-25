@@ -5,8 +5,10 @@ import java.util.List;
 import dao.IDAOCard;
 import dao.IDAOHistory;
 import dao.IDAOPlayer;
+import model.Card;
 import model.Game;
-import model.History;
+import model.Human;
+import model.Player;
 
 public class test {
 
@@ -33,6 +35,18 @@ public class test {
 //			for (Player p : listp) {
 //				System.out.println(p);
 //			}
+			
+//			Card c1 = new Card(100, 50, 25);
+//			Card c2 = new Card(100, 50, 25);
+//			Card c3 = new Card(100, 50, 25);
+//			
+//			daoCard.insert(c1);
+//			daoCard.insert(c2);
+//			daoCard.insert(c3);
+//			
+//			Human h = new Human("Jeremy", c1, c2, c3);
+//			
+//			daoPlayer.insert(h);
 					
 		}
 }

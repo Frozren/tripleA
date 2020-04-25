@@ -11,7 +11,7 @@
 
 	<body>
 		<div id="options">
-			<div id="home"><a href="#"><img src="img/logo.png"/></a></div>
+			<div><a href="#"><img id="home" src="img/logo.png"/></a></div>
 			<h1>Options</h1>
 			<div>
 				<form method="POST" action="home" name="formOption">

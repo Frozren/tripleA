@@ -8,10 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.AI;
+import dao.IDAOPlayer;
 import model.Game;
 import model.Human;
-import model.Player;
 
 @WebServlet("/newGame")
 public class NewGame extends HttpServlet {
@@ -21,9 +20,11 @@ public class NewGame extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		IDAOPlayer daoPlayer = Game.getInstance().getDaoPlayer();
+		
 		String name = request.getParameter("pseudo").toUpperCase();
 		Human h = Game.getInstance().getHuman();
-		h = (Human) Game.getInstance().getDaoPlayer().checkConnect(name);
+		h = (Human) daoPlayer.checkConnect(name);
 		
 		if (h instanceof Human) {
 			request.getSession().setAttribute("erreur", "Y");

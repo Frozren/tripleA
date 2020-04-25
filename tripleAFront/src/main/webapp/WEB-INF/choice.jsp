@@ -155,11 +155,11 @@
 				var s = parseInt(hp.value) + parseInt(atk.value) + parseInt(def.value);
 				
 				if (s != 50 && numberCard != 2){
-					alert("Put all stats points and select two cards !");
+					alert("Attribuer tous les points de stats et choisir deux cartes !");
 				} else if (s != 50 && numberCard == 2){
-					alert("Put all stats points !");
+					alert("Attribuer tous les points de stats !");
 				} else if (s == 50 && numberCard != 2){
-					alert("Select two cards !");
+					alert("Choisir deux cartes !");
 				} else if (s == 50 && numberCard == 2) {
 					setTimeout(getAll, 2000);
 				}
