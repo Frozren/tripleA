@@ -63,15 +63,20 @@ public class Choice extends HttpServlet {
 		h.setCard3(c3);
 		
 		int pts = 100 - Game.getInstance().getPassivePoints();
-		ai.setCard1(ai.createCardRNG(pts));
-		ai.setCard2(ai.createCardRNG(pts));
-		ai.setCard3(ai.createCardRNG(pts));
+		c1 = ai.createCardRNG(pts);
+		c2 = ai.createCardRNG(pts);
+		c3 = ai.createCardRNG(pts);
+		
+		daoCard.insert(c1);
+		daoCard.insert(c2);
+		daoCard.insert(c3);
+		
+		ai.setCard1(c1);
+		ai.setCard2(c2);
+		ai.setCard3(c3);
 		
 		daoPlayer.insert(h);
 		daoPlayer.insert(ai);
-		
-		h = (Human) daoPlayer.checkConnect(h.getName());
-		ai = (AI) daoPlayer.checkConnect(ai.getName());
 		
 		h.setIdOpponent(ai.getId());
 		ai.setIdOpponent(h.getId());
@@ -79,9 +84,6 @@ public class Choice extends HttpServlet {
 		
 		daoPlayer.update(h);
 		daoPlayer.update(ai);
-		
-		request.getSession().setAttribute("Human", h);
-		request.getSession().setAttribute("AI", ai);
 		
 		response.sendRedirect("matchup");
 	}

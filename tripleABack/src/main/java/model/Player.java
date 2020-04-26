@@ -7,6 +7,7 @@ import java.util.Random;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,15 +37,15 @@ public abstract class Player {
 	@Column(name="typeplayer", insertable = false, updatable = false)
 	protected boolean typePlayer;
 	
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="idcard1")
 	protected Card card1;
 	
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="idcard2")
 	protected Card card2;
 	
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="idcard3")
 	protected Card card3;
 	

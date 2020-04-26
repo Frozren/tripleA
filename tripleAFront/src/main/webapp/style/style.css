@@ -102,6 +102,130 @@ body
 	-webkit-transition-timing-function: ease-out;
 }
 
+#home #history
+{
+	position: absolute;
+	top: 1%;
+	right: 1%;
+}
+
+#home #history tbody {
+    display: block;
+    max-height: 185px;
+    overflow-y: scroll;
+}
+
+#home #history thead, tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+#home #history thead {
+    width: 485px; 
+}
+
+#home #history table {
+    width: 500px;
+}
+
+#home #history tbody::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+#home #history tbody::-webkit-scrollbar-button {
+  width: 100px;
+  height: 100px;
+}
+
+#home #history tbody::-webkit-scrollbar-thumb {
+  background: #6a0000;
+  border-radius: 100px;
+}
+
+#home #history tbody::-webkit-scrollbar-thumb:hover {
+  background: #800000;
+}
+
+#home #history tbody::-webkit-scrollbar-track {
+  background: #c8c8c8;
+  border-radius: 100px;
+}
+
+#home #tableTitle
+{
+	color: #c8c8c8;
+	font-size: 1.5vw;
+	text-shadow: 0 0 20px #b00000;
+	margin-bottom: 1vw;
+	box-shadow: 0 1px 0px darkred;
+	padding-bottom: 5px;
+}
+
+#home #tableTitles
+{
+	color: #c8c8c8;
+	text-shadow: 0 0 20px #b00000;
+	height: 40px;
+}
+
+#home table
+{
+	color: white;
+	text-align: center;
+}
+
+#home #toptier
+{
+	position: absolute;
+	top: 10%;
+	left: 1%;
+	color: #c8c8c8;
+	font-size: 1em;
+	text-shadow: 0 0 20px #b00000;
+}
+
+#home #toptier strong
+{
+	font-size: 1.9em;
+}
+
+#home #toptier img
+{
+	width: 500px;
+	height: auto;
+	filter: drop-shadow(0 0 0.75rem crimson);
+}
+
+#home #toptier #first
+{
+	position: relative;
+	bottom: 330px;
+}
+
+#home #toptier #second
+{
+	position: relative;
+	bottom: 340px;
+	right: 160px;
+}
+
+#home #toptier #third
+{
+	position: relative;
+	bottom: 370px;
+	left: 160px;
+}
+
+#home #toptier #tri
+{
+	position: relative;
+	color: #c8c8c8;
+	font-size: 1.2em;
+	bottom: 290px;
+}
+
 /*-----------------
 -----CHOIX NOM-----
 -----------------*/

@@ -28,7 +28,7 @@ public class DAOHistoryJPA extends DAOJPA implements IDAOHistory {
 	@Override
 	public List<History> selectAll() {
 		return this.em
-				.createQuery("select h from History h", History.class)
+				.createQuery("select h from History h order by dateEnd desc", History.class) // order by date_end desc
 				.getResultList();
 	}
 
@@ -63,5 +63,27 @@ public class DAOHistoryJPA extends DAOJPA implements IDAOHistory {
 			this.em.getTransaction().rollback();
 		}
 	}
-
+	
+	public List<String> selectNames() {
+		return this.em
+				.createQuery("select distinct name from History h where etat=1", String.class)
+				.getResultList();
+	}
+	
+	public Long countWin(String name){
+		return this.em
+				.createQuery("select count(*) from History h where etat=1 and name=?1", Long.class)
+				.setParameter(1, name)
+				.getSingleResult();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

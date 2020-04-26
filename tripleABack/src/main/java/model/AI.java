@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
@@ -28,15 +29,17 @@ public class AI extends Player {
 	public void choiceDistance() {
 		List<Integer> l = new ArrayList<>();
 		
-		l.add(this.getCard1().getLife() + this.getCard1().getDef());
-		l.add(this.getCard2().getLife() + this.getCard2().getDef());
-		l.add(this.getCard3().getLife() + this.getCard3().getDef());
+		l.add(this.getCard1().getAtk());
+		l.add(this.getCard2().getAtk());
+		l.add(this.getCard3().getAtk());
+		
+		Collections.sort(l, Collections.reverseOrder());
 
-		if (l.get(0) < l.get(1) && l.get(0) < l.get(2)) {
+		if (l.get(0) == this.getCard1().getAtk()) {
 			this.getCard1().setPosition(true);
-		} else if (l.get(1) < l.get(2)) {
+		} else if (l.get(0) == this.getCard2().getAtk()) {
 			this.getCard2().setPosition(true);
-		} else {
+		} else if (l.get(0) == this.getCard3().getAtk()){
 			this.getCard3().setPosition(true);
 		}
 	}

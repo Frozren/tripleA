@@ -18,19 +18,10 @@ import model.Player;
 @WebServlet("/save")
 public class Save extends HttpServlet {
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		System.out.println("début2");
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		IDAOPlayer daoPlayer = Game.getInstance().getDaoPlayer();
 		
 		List<Player> list = daoPlayer.selectAll();
-		
-		for (Player p : list) {
-			System.out.println(p);
-		}
-		
-		System.out.println();
 		
 		if (list.isEmpty()) {
 			request.setAttribute("emptyList", true);
@@ -45,19 +36,16 @@ public class Save extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		IDAOPlayer daoPlayer = Game.getInstance().getDaoPlayer();
 		
-		Human h = Game.getInstance().getHuman();
-		AI ai = Game.getInstance().getAI();
-		
 		String saveId = request.getParameter("saveId");
 		List<Player> list = (List<Player>) request.getSession().getAttribute("player");
 		
 		String name = list.get(Integer.parseInt(saveId)).getName();
 		
-		h = (Human) daoPlayer.checkConnect(name);
-		ai = (AI) daoPlayer.selectById(h.getIdOpponent());
+		Game.getInstance().setHuman((Human) daoPlayer.checkConnect(name));
 		
-		request.getSession().setAttribute("Human", h);
-		request.getSession().setAttribute("AI", ai);
+		Human h = Game.getInstance().getHuman();
+		
+		Game.getInstance().setAI((AI) daoPlayer.selectById(h.getIdOpponent()));
 		
 		response.sendRedirect("matchup");
 	}

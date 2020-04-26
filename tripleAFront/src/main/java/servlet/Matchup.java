@@ -20,11 +20,11 @@ public class Matchup extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Human h = (Human) request.getSession().getAttribute("Human");
-		AI ai = (AI) request.getSession().getAttribute("AI");
+//		Human h = (Human) request.getSession().getAttribute("Human");
+//		AI ai = (AI) request.getSession().getAttribute("AI");
 		
-		System.out.println(h);
-		System.out.println(ai);
+		Human h = Game.getInstance().getHuman();
+		AI ai = Game.getInstance().getAI();
 		
 		List<Card> cardH = h.deck();
 		List<Card> cardAI = ai.deck();
@@ -38,11 +38,18 @@ public class Matchup extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String choiceStats = request.getParameter("choicePos");
-
-		Human h = (Human) request.getSession().getAttribute("Human");
-		AI ai = (AI) request.getSession().getAttribute("AI");
-
 		
+		Human h = Game.getInstance().getHuman();
+		AI ai = Game.getInstance().getAI();
 		
+		if (choiceStats.contentEquals("1")) {
+			h.getCard1().setPosition(true);
+		} else if (choiceStats.contentEquals("2")) {
+			h.getCard2().setPosition(true);
+		} else if (choiceStats.contentEquals("3")) {
+			h.getCard3().setPosition(true);
+		}
+		
+		ai.choiceDistance();		
 	}
 }
