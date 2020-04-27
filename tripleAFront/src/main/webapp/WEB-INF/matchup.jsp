@@ -8,7 +8,7 @@
 
 	<body>
 		<div id="matchup">
-			<div><a href="#"><img id="home" src="img/logo.png"/></a></div>
+			<div><a href="#"><img id="logoHome" src="img/logo.png"/></a></div>
 			<div>
 				<h1>MATCHUP</h1>
 			</div>
@@ -100,7 +100,7 @@
 		}
 		
 		function select(e){
-			if (e.target.id == "home"){
+			if (e.target.id == "logoHome"){
 				window.location.href = "${pageContext.request.contextPath}/home";
 			} else if (e.target.id == "card1"){
 				card1.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 10px #00e4ff)");

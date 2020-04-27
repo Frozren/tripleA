@@ -53,18 +53,19 @@ public class test {
 //			daoPlayer.insert(h);
 			
 
-//			List<History> history = daoHistory.selectAll();
-//			
-//			for (History h : history) {
-//	
-//				System.out.println(h);
-//	
-//			}
-//			System.out.println("");
+			List<History> history = daoHistory.selectAll();
+			
+			for (History h : history) {
+	
+				System.out.println(h);
+	
+			}
+			System.out.println("");
 			
 //			history.sort(Comparator.comparing(History::getDmg_dealt).reversed());
 //			history.sort(Comparator.comparing(History::getEtat).thenComparing(History::getDmg_dealt).reversed()); //DAMAGE DEALT !! OK
 //			history.sort(Comparator.comparing(History::getDmg_taken).thenComparing(History::getEtat)); // DAMAGE TAKEN !! OK
+//			history.sort(Comparator.comparing(History::getNbWin));
 //			
 //			for (History h : history) {
 //				
@@ -72,23 +73,42 @@ public class test {
 //				
 //			}
 			
-			List<String> listH = daoHistory.selectNames();
-			List<Long> listI = new ArrayList<>();
-			int i = 0;
+//			for (int i = history.size()-1; i>0; i--) {
+//				if (history.get(i).getName().contentEquals(history.get(i-1).getName())) {
+//					history.remove(i);
+//				}
+//			}
 			
-			for (String h : listH) {
-				listI.add(daoHistory.countWin(listH.get(i)));
-				System.out.print(h);
-				System.out.println(": " + listI.get(i) + " win(s) !!");
-				i++;
+//			history.sort(Comparator.comparing(History::getNbWin).reversed());
+			
+			for (History h : history) {
+				
+				System.out.println(h);
+				
 			}
 			
+//			List<String> listH = daoHistory.selectNames();
+//			List<Long> listI = new ArrayList<>();
+//			int i = 0;
+//			
+//			for (String h : listH) {
+//				listI.add(daoHistory.countWin(listH.get(i)));
+//				System.out.print(h);
+//				System.out.println(": " + listI.get(i) + " win(s) !!");
+//				i++;
+//			}
 			
 			
-			
-			
-			
-			
+//			Human human = (Human) daoPlayer.selectById(100);
+//			
+//			History history = new History(human, 3, true, 2569, 3256);
+//
+//			System.out.println(history);
+//			
+//			history.setNbWin(daoHistory.countWin(history.getName())+1); // SI WIN
+////			history.setNbWin(daoHistory.countWin(history.getName())); // SI LOSE
+//			daoHistory.update(history);
+//			System.out.println(history);
 			
 			
 			

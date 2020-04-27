@@ -11,7 +11,7 @@
 
 	<body>
 		<div id="choice">
-			<div><a href="#"><img id="home" src="img/logo.png"/></a></div>
+			<div><a href="#"><img id="logoHome" src="img/logo.png"/></a></div>
 			<div>
 				<h1>CHOIX DE L'ÉQUIPE</h1>
 			</div>
@@ -163,7 +163,7 @@
 				} else if (s == 50 && numberCard == 2) {
 					setTimeout(getAll, 2000);
 				}
-			} else if (e.target.id == "home"){
+			} else if (e.target.id == "logoHome"){
 				window.location.href = "${pageContext.request.contextPath}/home";
 			}
 		}

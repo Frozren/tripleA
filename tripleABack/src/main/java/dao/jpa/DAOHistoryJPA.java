@@ -75,15 +75,5 @@ public class DAOHistoryJPA extends DAOJPA implements IDAOHistory {
 				.createQuery("select count(*) from History h where etat=1 and name=?1", Long.class)
 				.setParameter(1, name)
 				.getSingleResult();
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}	
 }

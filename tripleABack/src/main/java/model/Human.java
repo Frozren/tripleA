@@ -2,12 +2,19 @@ package model;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity 
 @DiscriminatorValue("1")
 public class Human extends Player {
+	
+	@Column(name="dmgDealt")
+	private int dmgDealt;
+	
+	@Column(name="dmgTaken")
+	private int dmgTaken;
 	
 	public Human(int id, String name, Card carte1, Card carte2, Card carte3, boolean typePlayer, int idOpponent) {
 		super(id, name, carte1, carte2, carte3, typePlayer, idOpponent);

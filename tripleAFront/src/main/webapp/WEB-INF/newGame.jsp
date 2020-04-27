@@ -11,7 +11,7 @@
 
 	<body>
 		<div id="newGame">
-			<div><a href="#"><img id="home" src="img/logo.png"/></a></div>
+			<div><a href="#"><img id="logoHome" src="img/logo.png"/></a></div>
 			<div><h1 id="titre">NOM DE VOTRE HÉROS</h1></div>
 			<div>
 				<form method="POST" action="newGame">
@@ -26,7 +26,7 @@
 	<script type="text/javascript">
 		var input = document.getElementById("pseudo");
 		var titre = document.getElementById("titre");
-		var home = document.getElementById("home");
+		var home = document.getElementById("logoHome");
 		var messErreur = document.getElementById("erreur");
 	
 		home.onclick = retour;

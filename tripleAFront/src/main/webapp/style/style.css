@@ -115,7 +115,7 @@ body
     overflow-y: scroll;
 }
 
-#home #history thead, tbody tr {
+#home #history thead, #home #history tbody tr {
     display: table;
     width: 100%;
     table-layout: fixed;
@@ -226,10 +226,34 @@ body
 	bottom: 290px;
 }
 
+#home #loader {
+	border: 12px solid #f3f3f3;
+	border-radius: 50%;
+	border-top: 12px solid #444444;
+	width: 70px;
+	height: 70px;
+	animation: spin 1s linear infinite;
+} 
+          
+@keyframes spin {
+	100% {
+		transform: rotate(360deg);
+	}
+}
+          
+#home .center {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+
 /*-----------------
 -----CHOIX NOM-----
 -----------------*/
-#newGame #home
+#newGame #logoHome
 {
 	position: absolute;
 	width: 10%;
@@ -237,7 +261,7 @@ body
 	left: 10px;
 }
 
-#newGame #home:hover
+#newGame #logoHome:hover
 {
 	filter: drop-shadow(0 0 0.75rem #762919);
 }
@@ -299,7 +323,7 @@ body
 /*--------------------
 -----CHOIX CARTES-----
 --------------------*/
-#choice #home
+#choice #logoHome
 {
 	position: absolute;
 	width: 10%;
@@ -307,7 +331,7 @@ body
 	left: 10px;
 }
 
-#choice #home:hover
+#choice #logoHome:hover
 {
 	filter: drop-shadow(0 0 0.75rem #762919);
 }
@@ -584,7 +608,7 @@ body
 /*-------------------
 -----SAUVEGARDES-----
 -------------------*/
-#save #home
+#save #logoHome
 {
 	position: absolute;
 	width: 10%;
@@ -592,7 +616,7 @@ body
 	left: 10px;
 }
 
-#save #home:hover
+#save #logoHome:hover
 {
 	filter: drop-shadow(0 0 0.75rem #762919);
 }
@@ -714,7 +738,7 @@ body
 /*--------------
 -----PAGE 5-----
 --------------*/
-#matchup #home
+#matchup #logoHome
 {
 	position: absolute;
 	width: 10%;
@@ -722,7 +746,7 @@ body
 	left: 10px;
 }
 
-#matchup #home:hover
+#matchup #logoHome:hover
 {
 	filter: drop-shadow(0 0 0.75rem #762919);
 }
@@ -846,7 +870,7 @@ body
 /*--------------
 -----PAGE 6-----
 --------------*/
-#options #home
+#options #logoHome
 {
     position: absolute;
     width: 10%;
@@ -854,7 +878,7 @@ body
     left: 10px;
 }
 
-#options #home:hover
+#options #logoHome:hover
 {
 	filter: drop-shadow(0 0 0.75rem #762919);
 }

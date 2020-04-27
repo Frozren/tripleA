@@ -44,8 +44,8 @@
 									<td>${h.dateEnd}</td>
 									<td>${h.name}</td>
 									<td>${h.phase}</td>
-									<td>${h.dmg_dealt}</td>
-									<td>${h.dmg_taken}</td>
+									<td>${h.dmgDealt}</td>
+									<td>${h.dmgTaken}</td>
 								</tr>
 							</c:if>
 							<c:if test = "${h.etat == false}">
@@ -53,8 +53,8 @@
 									<td>${h.dateEnd}</td>
 									<td>${h.name}</td>
 									<td>${h.phase}</td>
-									<td>${h.dmg_dealt}</td>
-									<td>${h.dmg_taken}</td>
+									<td>${h.dmgDealt}</td>
+									<td>${h.dmgTaken}</td>
 								</tr>
 							</c:if>
 						</c:forEach>
@@ -62,8 +62,8 @@
 							<td>${history[0].dateEnd}</td>
 							<td>${history[0].name}</td>
 							<td>${history[0].phase}</td>
-							<td>${history[0].dmg_dealt}</td>
-							<td>${history[0].dmg_taken}</td>
+							<td>${history[0].dmgDealt}</td>
+							<td>${history[0].dmgTaken}</td>
 						</tr>
 						<tr style="color: darkred">
 							<td>2020.02.28</td>
@@ -231,9 +231,9 @@
 			</div>
 			<div id="toptier">
 				<img src="img/podium.png">
-				<div id="first" style="color: gold"><strong id="premierNom">${histoD[0].name}</strong><br /><span id="premierDate">${histoD[0].dateEnd}</span></div>
-				<div id="second" style="color: silver"><strong id="secondNom">${histoD[1].name}</strong><br /><span id="secondDate">${histoD[1].dateEnd}</span></div>
-				<div id="third" style="color: brown"><strong id="troisiemeNom">${histoD[2].name}</strong><br /><span id="troisiemeDate">${histoD[2].dateEnd}</span></div>
+				<div id="first" style="color: gold"><strong id="premierNom">${histoD[0].name}</strong><br /><span id="premierData">${histoD[0].dmgDealt}</span></div>
+				<div id="second" style="color: silver"><strong id="secondNom">${histoD[1].name}</strong><br /><span id="secondData">${histoD[1].dmgDealt}</span></div>
+				<div id="third" style="color: brown"><strong id="troisiemeNom">${histoD[2].name}</strong><br /><span id="troisiemeData">${histoD[2].dmgDealt}</span></div>
 				<div id="tri"> Dégâts infligés </div>
 			</div>
 		</div>
@@ -241,17 +241,17 @@
 	
 	<script type="text/javascript">
 		var premierNom = document.getElementById("premierNom");
-		var premierDate = document.getElementById("premierDate");
+		var premierData = document.getElementById("premierData");
 		var secondNom = document.getElementById("secondNom");
-		var secondDate = document.getElementById("secondDate");
+		var secondData = document.getElementById("secondData");
 		var troisiemeNom = document.getElementById("troisiemeNom");
-		var troisiemeDate = document.getElementById("troisiemeDate");
+		var troisiemeData = document.getElementById("troisiemeData");
 		var tri = document.getElementById("tri");
 		var empty = ${emptyHistory};
 		var scores = [" Dégâts infligés ", " Dégâts reçus ", " Nombre de victoires "];
 		var a = 1;
 		var b = 1;
-	
+		
 		window.onload = smoothOpening;
 		window.onclick = menu;
 		
@@ -272,21 +272,27 @@
 				
 				if (a == 0){
 					premierNom.innerHTML = "${histoD[0].name}";
-					premierDate.innerHTML = "${histoD[0].dateEnd}";
+					premierData.innerHTML = "${histoD[0].dmgDealt}";
 					secondNom.innerHTML = "${histoD[1].name}";
-					secondDate.innerHTML = "${histoD[1].dateEnd}";
+					secondData.innerHTML = "${histoD[1].dmgDealt}";
 					troisiemeNom.innerHTML = "${histoD[2].name}";
-					troisiemeDate.innerHTML = "${histoD[2].dateEnd}";
+					troisiemeData.innerHTML = "${histoD[2].dmgDealt}";
 					a++;
 				} else if (a == 1){
 					premierNom.innerHTML = "${histoT[0].name}";
-					premierDate.innerHTML = "${histoT[0].dateEnd}";
+					premierData.innerHTML = "${histoT[0].dmgTaken}";
 					secondNom.innerHTML = "${histoT[1].name}";
-					secondDate.innerHTML = "${histoT[1].dateEnd}";
+					secondData.innerHTML = "${histoT[1].dmgTaken}";
 					troisiemeNom.innerHTML = "${histoT[2].name}";
-					troisiemeDate.innerHTML = "${histoT[2].dateEnd}";
+					troisiemeData.innerHTML = "${histoT[2].dmgTaken}";
 					a++;
 				} else if (a == 2){
+					premierNom.innerHTML = "${histoWin[0].name}";
+					premierData.innerHTML = "${histoWin[0].nbWin}";
+					secondNom.innerHTML = "${histoWin[1].name}";
+					secondData.innerHTML = "${histoWin[1].nbWin}";
+					troisiemeNom.innerHTML = "${histoWin[2].name}";
+					troisiemeData.innerHTML = "${histoWin[2].nbWin}";
 					a = 0;
 				}
 				b = 1;

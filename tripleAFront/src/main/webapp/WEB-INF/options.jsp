@@ -11,7 +11,7 @@
 
 	<body>
 		<div id="options">
-			<div><a href="#"><img id="home" src="img/logo.png"/></a></div>
+			<div><a href="#"><img id="logoHome" src="img/logo.png"/></a></div>
 			<h1>Options</h1>
 			<div>
 				<form method="POST" action="home" name="formOption">
@@ -77,7 +77,7 @@
 	</body>
 	
 	<script type="text/javascript">
-		var home = document.getElementById("home");
+		var home = document.getElementById("logoHome");
 		var lum = document.getElementById("lum");
 	
 		home.onclick = retour;

@@ -32,21 +32,24 @@ public class Home extends HttpServlet {
 			
 			List<History> histoT = new ArrayList<History>(history);
 			List<History> histoD = new ArrayList<History>(history);
-//			List<String> listName = daoHistory.selectNames();
-//			List<Long> listWin = new ArrayList<>();
-//			int i = 0;
+			List<History> histoWin = new ArrayList<History>(history);
 			
-			histoT.sort(Comparator.comparing(History::getDmg_taken).thenComparing(History::getEtat));
-			histoD.sort(Comparator.comparing(History::getEtat).thenComparing(History::getDmg_dealt).reversed());
+			histoT.sort(Comparator.comparing(History::getDmgTaken).thenComparing(History::getEtat));
+			histoD.sort(Comparator.comparing(History::getEtat).thenComparing(History::getDmgDealt).reversed());
+			histoWin.sort(Comparator.comparing(History::getName));
 			
-//			for (String h : listName) {
-//				listWin.add(daoHistory.countWin(listName.get(i)));
-//				i++;
-//			}
+			for (int i = histoWin.size() - 1; i > 0; i--) {
+				if (histoWin.get(i).getName().contentEquals(histoWin.get(i - 1).getName())) {
+					histoWin.remove(i);
+				}
+			}
+			
+			histoWin.sort(Comparator.comparing(History::getNbWin).reversed());
 						
 			request.setAttribute("emptyHistory", false);
 			request.setAttribute("histoT", histoT);
 			request.setAttribute("histoD", histoD);
+			request.setAttribute("histoWin", histoWin);
 			request.setAttribute("history", history);
 		}
 		

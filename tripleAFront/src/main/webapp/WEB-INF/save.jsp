@@ -11,7 +11,7 @@
 
 	<body>
 		<div id="save">
-			<div><a href="#"><img id="home" src="img/logo.png"/></a></div>
+			<div><a href="#"><img id="logoHome" src="img/logo.png"/></a></div>
 			<div>
 				<h1>SAUVEGARDES</h1>
 			</div>
@@ -90,7 +90,7 @@
 				text.innerHTML = "Partie de " + arr[k];
 				index.innerHTML = (k+1) + "/" + i;
 			} else {
-				if (e.target.id == "home" || e.target.id == "text"){
+				if (e.target.id == "logoHome" || e.target.id == "text"){
 					window.location.href = "${pageContext.request.contextPath}/home";
 				}
 			}

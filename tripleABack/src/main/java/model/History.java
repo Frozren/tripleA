@@ -17,11 +17,11 @@ public class History {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name = "dmg_taken")
-	private int dmg_taken;
+	@Column(name = "dmgTaken")
+	private int dmgTaken;
 	
-	@Column(name = "dmg_dealt")
-	private int dmg_dealt;
+	@Column(name = "dmgDealt")
+	private int dmgDealt;
 
 	@Column(name = "phase")
 	private int phase;
@@ -29,21 +29,34 @@ public class History {
 	@Column(name = "etat")
 	private Boolean etat;
 
-	@Column(name = "date_end")
+	@Column(name = "dateEnd")
 	private LocalDate dateEnd;
 	
 	@Column(name = "name")
 	private String name;
 	
+	@Column(name = "nbWin")
+	private long nbWin;
+	
 	public History() {}
 
-	public History(int dmg_taken, int dmg_dealt, int phase, Boolean etat, LocalDate dateEnd, Human human) {
-		this.dmg_taken = dmg_taken;
-		this.dmg_dealt = dmg_dealt;
+	public History(int dmgTaken, int dmgDealt, int phase, Boolean etat, LocalDate dateEnd, Human human) {
+		this.dmgTaken = dmgTaken;
+		this.dmgDealt = dmgDealt;
 		this.phase = phase;
 		this.etat = etat;
 		this.dateEnd = dateEnd;
 		this.name = human.getName();
+	}
+	
+	public History(Human human, int phase, Boolean etat, int dmg_taken, int dmg_dealt) {
+		this.name = human.getName();
+		this.phase = phase;
+		this.etat = etat;
+		this.dmgDealt = dmg_dealt;
+		this.dmgTaken = dmg_taken;
+		this.dateEnd = LocalDate.now();
+		
 	}
 
 	public int getId() {
@@ -54,20 +67,20 @@ public class History {
 		this.id = id;
 	}
 
-	public int getDmg_taken() {
-		return dmg_taken;
+	public int getDmgTaken() {
+		return dmgTaken;
 	}
 
-	public void setDmg_taken(int dmg_taken) {
-		this.dmg_taken = dmg_taken;
+	public void setDmgTaken(int dmgTaken) {
+		this.dmgTaken = dmgTaken;
 	}
 
-	public int getDmg_dealt() {
-		return dmg_dealt;
+	public int getDmgDealt() {
+		return dmgDealt;
 	}
 
-	public void setDmg_dealt(int dmg_dealt) {
-		this.dmg_dealt = dmg_dealt;
+	public void setDmgDealt(int dmgDealt) {
+		this.dmgDealt = dmgDealt;
 	}
 
 	public int getPhase() {
@@ -102,9 +115,19 @@ public class History {
 		this.name = name;
 	}
 
+	public long getNbWin() {
+		return nbWin;
+	}
+
+	public void setNbWin(long nbWin) {
+		this.nbWin = nbWin;
+	}
+
 	@Override
 	public String toString() {
-		return "History [id=" + id + ", dmg_taken=" + dmg_taken + ", dmg_dealt=" + dmg_dealt + ", phase=" + phase
-				+ ", etat=" + etat + ", dateEnd=" + dateEnd + ", name=" + name + "]";
+		return "History [id=" + id + ", dmg_taken=" + dmgTaken + ", dmg_dealt=" + dmgDealt + ", phase=" + phase
+				+ ", etat=" + etat + ", dateEnd=" + dateEnd + ", name=" + name + ", nbWin=" + nbWin + "]";
 	}
+	
+	
 }
