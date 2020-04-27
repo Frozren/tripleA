@@ -16,5 +16,9 @@ public class Options extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
+		
+		int lum = Integer.parseInt(request.getParameter("lum"));
+
+		request.getSession().setAttribute("lum", lum);
 	}
 }
