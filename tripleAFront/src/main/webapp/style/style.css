@@ -1150,6 +1150,7 @@ body
 
 #battle #field #card
 {
+	z-index : 1;
 	position: relatif;
 	left: 1%;
 	top: 1%;
@@ -1168,8 +1169,16 @@ body
 	height: 13%;
 }
 
+#battle #win, #battle #lose{
+	visibility: hidden;
+	z-index : 2;
+	position: absolute;
+	top: 0%; left: 15%;
+	height: 100%;
+}
+
 #battle #exit
 {
 	position: relative;
-	height: 50%;
+	height: 70%;
 }

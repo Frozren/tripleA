@@ -16,7 +16,7 @@
 <title>BattleField</title>
 </head>
 <body id="battle">
-	<form method="POST" action="battleField">
+	<form method="POST" action="BattleField">
 
 		<div class="row" id="top">
 			<div class="col-2">
@@ -139,7 +139,10 @@
 								</div>
 							</div>
 						</div>
-						<div class="row" id="midField"></div>
+						<div class="row" id="midField">
+							<img src="img/youWin.png" id="win">
+							<img src="img/gameOver.gif" id="lose">
+						</div>
 						<div class="row" id="hcard">
 							<div class="col-1" id="ltcard"></div>
 							<div class="col-2">
@@ -229,9 +232,13 @@
 			<div class="col-3">
 				<audio id="sDef" src="sound/def.mp3"></audio>
 				<audio id="sAtt" src="sound/att.mp3"></audio>
+				<audio id="gameOver" src="sound/gameOver.mp3"></audio>
 			</div>
 			<div class="col-2">
 				<img src="img/field/exit.png" id="exit">
+			</div>
+			<div class="col-2">
+				
 			</div>
 		</div>
 	</form>
@@ -269,6 +276,7 @@
 				
 					console.log(resp);
 					console.log("OK");
+					endGame()
 					initCard()
 					setVar()
 				}
@@ -319,9 +327,28 @@
 
 
 	$("#exit").click(function() {
-		alert("test");
+		window.location.href = "${pageContext.request.contextPath}/home";
 		
 	});
+	
+	function endGame() {
+		if ("${sessionScope.endGame}"=="win"){
+			document.getElementById('win').style.visibility='visible';
+			var sound = document.getElementById("gameOver");
+			gameOver.volume = 0.2;
+			sound.play();
+			//setTimeout(() => { window.location.href = "${pageContext.request.contextPath}/nextRound"; }, 2000);
+			
+		}
+		else if ("${sessionScope.endGame}"=="lose"){
+			document.getElementById('lose').style.visibility='visible';
+			var sound = document.getElementById("gameOver");
+			gameOver.volume = 0.2;
+			sound.play();
+			//setTimeout(() => { window.location.href = "${pageContext.request.contextPath}/home"; }, 2000);
+		}
+	}
+	
 	
 	initCard()
 	setVar()
