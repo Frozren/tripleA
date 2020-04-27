@@ -33,8 +33,8 @@
 					<div class="progress">
 						<div
 							class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
-							role="progressbar" style="width: ${sessionScope.hpb1}%"
-							aria-valuenow="${sessionScope.hpb1}" aria-valuemin="0"
+							role="progressbar" style="width: ${hpb1}%"
+							aria-valuenow="${hpb1}" aria-valuemin="0"
 							aria-valuemax="100"></div>
 					</div>
 				</div>
@@ -47,8 +47,8 @@
 					<div class="progress">
 						<div
 							class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
-							role="progressbar" style="width: ${sessionScope.hpb2}%"
-							aria-valuenow="${sessionScope.hpb2}" aria-valuemin="0"
+							role="progressbar" style="width: ${hpb2}%"
+							aria-valuenow="${hpb2}" aria-valuemin="0"
 							aria-valuemax="100"></div>
 					</div>
 				</div>
@@ -57,10 +57,10 @@
 
 		<div class="row" id="mid">
 			<div id="divconsole">
-				<div class="scroll" id="console">${sessionScope.message}</div>
+				<div class="scroll" id="console">${message}</div>
 			</div>
 
-			<div id="field" style="cursor: url('${sessionScope.cursor}'), crosshair;">
+			<div id="field" style="cursor: url('${cursor}'), crosshair;">
 				<div class="row" id="hfield">
 					<div class="col-2" id="left">
 						<div class="row" id="tleft"></div>
@@ -69,21 +69,21 @@
 								<div id="card">
 									<input type="image" class="imgcard" idCard="1" id="c1"
 										src="img/card/cardAP.png"
-										style="visibility: ${sessionScope.disc1}; cursor: url('${sessionScope.cursorch}'), not-allowed;">
-									<div class="divname" style="visibility: ${sessionScope.disc1}">
-										<p class="name">${sessionScope.namec1}</p>
+										style="visibility: ${disc1}; cursor: url('${cursorch}'), not-allowed;">
+									<div class="divname" style="visibility: ${disc1}">
+										<p class="name">${namec1}</p>
 									</div>
-									<div class="divclass" style="visibility: ${sessionScope.disc1}">
-										<p class="class">Carte C1: ${sessionScope.classc1}</p>
+									<div class="divclass" style="visibility: ${disc1}">
+										<p class="class">Carte C1: ${classc1}</p>
 									</div>
-									<div class="def" style="visibility: ${sessionScope.disc1}">
-										<p class="stat">${sessionScope.defc1}</p>
+									<div class="def" style="visibility: ${disc1}">
+										<p class="stat">${deckH[0].def}</p>
 									</div>
-									<div class="atk" style="visibility: ${sessionScope.disc1}">
-										<p class="stat">${sessionScope.atkc1}</p>
+									<div class="atk" style="visibility: ${disc1}">
+										<p class="stat">${deckH[0].atk}</p>
 									</div>
-									<div class="life" style="visibility: ${sessionScope.disc1}">
-										<p class="stat">${sessionScope.hpc1}</p>
+									<div class="life" style="visibility: ${disc1}">
+										<p class="stat">${deckH[0].life}</p>
 									</div>
 								</div>
 							</div>
@@ -97,21 +97,21 @@
 								<div id="card">
 									<input type="image" class="imgcard" idCard="2" id="c2"
 										src="img/card/cardAB.png"
-										style="visibility: ${sessionScope.disc2}; cursor: url('${sessionScope.cursorch}'), not-allowed;">
-									<div class="divname" style="visibility: ${sessionScope.disc2}">
-										<p class="name">${sessionScope.namec2}</p>
+										style="visibility: ${disc2}; cursor: url('${cursorch}'), not-allowed;">
+									<div class="divname" style="visibility: ${disc2}">
+										<p class="name">${namec2}</p>
 									</div>
-									<div class="divclass" style="visibility: ${sessionScope.disc2}">
-										<p class="class">Carte C2: ${sessionScope.classc2}</p>
+									<div class="divclass" style="visibility: ${disc2}">
+										<p class="class">Carte C2: ${classc2}</p>
 									</div>
-									<div class="def" style="visibility: ${sessionScope.disc2}">
-										<p class="stat">${sessionScope.defc2}</p>
+									<div class="def" style="visibility: ${disc2}">
+										<p class="stat">${deckH[1].def}</p>
 									</div>
-									<div class="atk" style="visibility: ${sessionScope.disc2}">
-										<p class="stat">${sessionScope.atkc2}</p>
+									<div class="atk" style="visibility: ${disc2}">
+										<p class="stat">${deckH[1].atk}</p>
 									</div>
-									<div class="life" style="visibility: ${sessionScope.disc2}">
-										<p class="stat">${sessionScope.hpc2}</p>
+									<div class="life" style="visibility: ${disc2}">
+										<p class="stat">${deckH[1].life}</p>
 									</div>
 								</div>
 							</div>
@@ -120,21 +120,21 @@
 								<div id="card">
 									<input type="image" class="imgcard" idCard="4" id="c4"
 										src="img/card/cardTG.png"
-										style="visibility: ${sessionScope.disc4}; cursor: url('${sessionScope.cursorai}'), not-allowed;">
-									<div class="divname" style="visibility: ${sessionScope.disc4}">
-										<p class="name">${sessionScope.namec4}</p>
+										style="visibility: ${disc4}; cursor: url('${cursorai}'), not-allowed;">
+									<div class="divname" style="visibility: ${disc4}">
+										<p class="name">${namec4}</p>
 									</div>
-									<div class="divclass" style="visibility: ${sessionScope.disc4}">
-										<p class="class">Carte C4: ${sessionScope.classc4}</p>
+									<div class="divclass" style="visibility: ${disc4}">
+										<p class="class">Carte C4: ${classc4}</p>
 									</div>
-									<div class="def" style="visibility: ${sessionScope.disc4}">
-										<p class="stat">${sessionScope.defc4}</p>
+									<div class="def" style="visibility: ${disc4}">
+										<p class="stat">${deckAI[0].def}</p>
 									</div>
-									<div class="atk" style="visibility: ${sessionScope.disc4}">
-										<p class="stat">${sessionScope.atkc4}</p>
+									<div class="atk" style="visibility: ${disc4}">
+										<p class="stat">${deckAI[0].atk}</p>
 									</div>
-									<div class="life" style="visibility: ${sessionScope.disc4}">
-										<p class="stat">${sessionScope.hpc4}</p>
+									<div class="life" style="visibility: ${disc4}">
+										<p class="stat">${deckAI[0].life}</p>
 									</div>
 								</div>
 							</div>
@@ -149,21 +149,21 @@
 								<div id="card">
 									<input type="image" class="imgcard" idCard="3" id="c3"
 										src="img/card/cardAV.png"
-										style="visibility: ${sessionScope.disc3}; cursor: url('${sessionScope.cursorch}'), not-allowed;">
-									<div class="divname" style="visibility: ${sessionScope.disc3}">
-										<p class="name">${sessionScope.namec3}</p>
+										style="visibility: ${disc3}; cursor: url('${cursorch}'), not-allowed;">
+									<div class="divname" style="visibility: ${disc3}">
+										<p class="name">${namec3}</p>
 									</div>
-									<div class="divclass" style="visibility: ${sessionScope.disc3}">
-										<p class="class">Carte C3: ${sessionScope.classc3}</p>
+									<div class="divclass" style="visibility: ${disc3}">
+										<p class="class">Carte C3: ${classc3}</p>
 									</div>
-									<div class="def" style="visibility: ${sessionScope.disc3}">
-										<p class="stat">${sessionScope.defc3}</p>
+									<div class="def" style="visibility: ${disc3}">
+										<p class="stat">${deckH[2].def}</p>
 									</div>
-									<div class="atk" style="visibility: ${sessionScope.disc3}">
-										<p class="stat">${sessionScope.atkc3}</p>
+									<div class="atk" style="visibility: ${disc3}">
+										<p class="stat">${deckH[2].atk}</p>
 									</div>
-									<div class="life" style="visibility: ${sessionScope.disc3}">
-										<p class="stat">${sessionScope.hpc3}</p>
+									<div class="life" style="visibility: ${disc3}">
+										<p class="stat">${deckH[2].life}</p>
 									</div>
 								</div>
 							</div>
@@ -173,21 +173,21 @@
 								<div id="card">
 									<input type="image" class="imgcard" idCard="5" id="c5"
 										src="img/card/cardJR.png"
-										style="visibility: ${sessionScope.disc5}; cursor: url('${sessionScope.cursorai}'), not-allowed;">
-									<div class="divname" style="visibility: ${sessionScope.disc5}">
-										<p class="name">${sessionScope.namec5}</p>
+										style="visibility: ${disc5}; cursor: url('${cursorai}'), not-allowed;">
+									<div class="divname" style="visibility: ${disc5}">
+										<p class="name">${namec5}</p>
 									</div>
-									<div class="divclass" style="visibility: ${sessionScope.disc5}">
-										<p class="class">Carte C5: ${sessionScope.classc5}</p>
+									<div class="divclass" style="visibility: ${disc5}">
+										<p class="class">Carte C5: ${classc5}</p>
 									</div>
-									<div class="def" style="visibility: ${sessionScope.disc5}">
-										<p class="stat">${sessionScope.defc5}</p>
+									<div class="def" style="visibility: ${disc5}">
+										<p class="stat">${deckAI[1].def}</p>
 									</div>
-									<div class="atk" style="visibility: ${sessionScope.disc5}">
-										<p class="stat">${sessionScope.atkc5}</p>
+									<div class="atk" style="visibility: ${disc5}">
+										<p class="stat">${deckAI[1].atk}</p>
 									</div>
-									<div class="life" style="visibility: ${sessionScope.disc5}">
-										<p class="stat">${sessionScope.hpc5}</p>
+									<div class="life" style="visibility: ${disc5}">
+										<p class="stat">${deckAI[1].life}</p>
 									</div>
 								</div>
 							</div>
@@ -200,21 +200,21 @@
 								<div id="card">
 									<input type="image" class="imgCard" idCard="6" id="c6"
 										src="img/card/cardJA.png"
-										style="visibility: ${sessionScope.disc6}; cursor: url('${sessionScope.cursorai}'), not-allowed;">
-									<div class="divname" style="visibility: ${sessionScope.disc6}">
-										<p class="name">${sessionScope.namec6}</p>
+										style="visibility: ${disc6}; cursor: url('${cursorai}'), not-allowed;">
+									<div class="divname" style="visibility: ${disc6}">
+										<p class="name">${namec6}</p>
 									</div>
-									<div class="divclass" style="visibility: ${sessionScope.disc6}">
-										<p class="class">Carte C6: ${sessionScope.classc6}</p>
+									<div class="divclass" style="visibility: ${disc6}">
+										<p class="class">Carte C6: ${classc6}</p>
 									</div>
-									<div class="def" style="visibility: ${sessionScope.disc6}">
-										<p class="stat">${sessionScope.defc6}</p>
+									<div class="def" style="visibility: ${disc6}">
+										<p class="stat">${deckAI[2].def}</p>
 									</div>
-									<div class="atk" style="visibility: ${sessionScope.disc6}">
-										<p class="stat">${sessionScope.atkc6}</p>
+									<div class="atk" style="visibility: ${disc6}">
+										<p class="stat">${deckAI[2].atk}</p>
 									</div>
-									<div class="life" style="visibility: ${sessionScope.disc6}">
-										<p class="stat">${sessionScope.hpc6}</p>
+									<div class="life" style="visibility: ${disc6}">
+										<p class="stat">${deckAI[2].life}</p>
 									</div>
 								</div>
 							</div>
@@ -233,18 +233,38 @@
 				<audio id="sDef" src="sound/def.mp3"></audio>
 				<audio id="sAtt" src="sound/att.mp3"></audio>
 				<audio id="gameOver" src="sound/gameOver.mp3"></audio>
+				<audio id="victory" src="sound/victory.mp3"></audio>
 			</div>
 			<div class="col-2">
-				<img src="img/field/exit.png" id="exit">
-			</div>
-			<div class="col-2">
-				
+				<img src="img/field/exit.png" id="exit" type="button" data-toggle="modal"  data-target="#modalClose">
+				<div class="modal fade" id="modalClose" tabindex="-1" role="dialog" aria-labelledby="closeModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document" id="modal">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="closeModalLabel">Quitter</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								Voullez vous quitter la partie?
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal" id="annuler">Annuler</button>
+								<button type="button" class="btn btn-primary" id="fermer">Confirmer</button>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</form>
 </body>
 
 <script type="text/javascript">
+	var buttonClose=document.getElementById("fermer");
+	buttonClose.onclick=fermer;
+	
 	function initCard(){
 		$('input[type="image"]').on('click', function() {
 			let idCard = $(this).attr('idCard');
@@ -287,7 +307,7 @@
 	
 	
 	$("form").submit(function(e){
-		concole.log('form submit')
+		console.log('form submit')
 		e.preventDefault();
 		return false;
 	});
@@ -306,6 +326,7 @@
 		c4.onmouseover=soundAtt;
 		c5.onmouseover=soundAtt;
 		c6.onmouseover=soundAtt;
+
 	}
 
 	function setVolume() {
@@ -324,29 +345,35 @@
 		sAtt.volume = 0.2;
 		sound.play();
 	}
-
-
-	$("#exit").click(function() {
+	
+	function fermer() {
 		window.location.href = "${pageContext.request.contextPath}/home";
-		
-	});
+	}
+
+	/* $("#exit").click(function() {
+		if(confirm("Quitter?")){
+			window.location.href = "${pageContext.request.contextPath}/home";
+		}
+	}); */
 	
 	function endGame() {
-		if ("${sessionScope.endGame}"=="win"){
+		if ("${endGame}"=="win") {
 			document.getElementById('win').style.visibility='visible';
-			var sound = document.getElementById("gameOver");
+			var sound = document.getElementById("victory");
 			gameOver.volume = 0.2;
 			sound.play();
-			//setTimeout(() => { window.location.href = "${pageContext.request.contextPath}/nextRound"; }, 2000);
+			setTimeout(function(){window.location.href = "${pageContext.request.contextPath}/nextRound";}, 6000);
 			
 		}
-		else if ("${sessionScope.endGame}"=="lose"){
+		else if ("${endGame}"=="lose") {
 			document.getElementById('lose').style.visibility='visible';
 			var sound = document.getElementById("gameOver");
-			gameOver.volume = 0.2;
+			gameOver.volume = 0.1;
 			sound.play();
-			//setTimeout(() => { window.location.href = "${pageContext.request.contextPath}/home"; }, 2000);
+			setTimeout(function(){window.location.href = "${pageContext.request.contextPath}/home";}, 6000);
 		}
+		else{
+			console.log("rien");}
 	}
 	
 	

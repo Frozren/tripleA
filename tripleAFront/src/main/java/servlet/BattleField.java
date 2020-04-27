@@ -9,14 +9,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.IDAOCard;
+import dao.IDAOHistory;
+import dao.IDAOPlayer;
+import dao.jdbc.DAOPlayerJDBC;
+import dao.jpa.DAOCardJPA;
+import dao.jpa.DAOHistoryJPA;
+import dao.jpa.DAOPlayerJPA;
 import model.AI;
 import model.Card;
+import model.Game;
+import model.History;
 import model.Human;
+import model.Player;
 
 @WebServlet("/battleField")
 public class BattleField extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 	//test: http://localhost:8181/tripleAFront/
+	static IDAOPlayer daoPlayer = new DAOPlayerJPA();
+	static IDAOHistory daoHistory =new DAOHistoryJPA();
+	static IDAOCard daoCard = new DAOCardJPA();
 	String card = "0";
 	static String message = "<p>Cliquez sur une carte pour commencer</p>";
 	static String msgDef = "<p>Saisir carte à protéger</p>";
@@ -141,13 +153,24 @@ public class BattleField extends HttpServlet {
 				}
 			}
 		}
-		request.getSession().setAttribute("endGame", "lose");	//a enlever
+
 		if(ai.verifyEnd()) {
 			message="<p>Le joueur a gagné!!!</p>"+message;
 			request.getSession().setAttribute("endGame", "win");
 			}
 		else if(h.verifyEnd()) {
 			message="<p>Le joueur a perdu...</p>"+message;
+			
+			
+			History history = new History(Game.getInstance().getHuman(), 3, false, 2569, 3256);
+            daoHistory.insert(history);
+            List<History> listh = daoHistory.selectAll();
+            for (History h : listh) {
+                h.setNbWin(daoHistory.countWin(h.getName()));
+                daoHistory.update(h);
+            }
+            deletePlayer(h);
+            deletePlayer(ai);
 			request.getSession().setAttribute("endGame", "lose");
 		}
 		refresh(request);
@@ -187,38 +210,16 @@ public class BattleField extends HttpServlet {
 	
 	public static void refresh(HttpServletRequest request) {
 		System.out.println("turn="+turn);
-		request.setAttribute("message", message);
-		request.setAttribute("hpb1", (deckH.get(0).getLife() + deckH.get(1).getLife() + deckH.get(2).getLife()) * 100 / maxhp1);
-		request.setAttribute("hpb2", (deckAI.get(0).getLife() + deckAI.get(1).getLife() + deckAI.get(2).getLife()) * 100 / maxhp2);
+		request.getSession().setAttribute("message", message);
+		request.getSession().setAttribute("hpb1", (deckH.get(0).getLife() + deckH.get(1).getLife() + deckH.get(2).getLife()) * 100 / maxhp1);
+		request.getSession().setAttribute("hpb2", (deckAI.get(0).getLife() + deckAI.get(1).getLife() + deckAI.get(2).getLife()) * 100 / maxhp2);
 		
-		request.setAttribute("hpc1", deckH.get(0).getLife());
-		request.setAttribute("atkc1", deckH.get(0).getAtk());
-		request.setAttribute("defc1", deckH.get(0).getDef());
-		
-		request.setAttribute("hpc2", deckH.get(1).getLife());
-		request.setAttribute("atkc2", deckH.get(1).getAtk());
-		request.setAttribute("defc2", deckH.get(1).getDef());
-		
-		request.setAttribute("hpc3", deckH.get(2).getLife());
-		request.setAttribute("atkc3", deckH.get(2).getAtk());
-		request.setAttribute("defc3", deckH.get(2).getDef());
-		
-		request.setAttribute("hpc4", deckAI.get(0).getLife());
-		request.setAttribute("atkc4", deckAI.get(0).getAtk());
-		request.setAttribute("defc4", deckAI.get(0).getDef());
-		
-		request.setAttribute("hpc5", deckAI.get(1).getLife());
-		request.setAttribute("atkc5", deckAI.get(1).getAtk());
-		request.setAttribute("defc5", deckAI.get(1).getDef());
-		
-		request.setAttribute("hpc6", deckAI.get(2).getLife());
-		request.setAttribute("atkc6", deckAI.get(2).getAtk());
-		request.setAttribute("defc6", deckAI.get(2).getDef());
-		
+		request.getSession().setAttribute("deckH", deckH);
+		request.getSession().setAttribute("deckAI", deckAI);
 		
 		if(c1.getLife()>0) {request.getSession().setAttribute("disc1", "visible");}
 		else {request.getSession().setAttribute("disc1", "hidden");}
-		if(c2.getLife()>0) {request.getSession().setAttribute("disc2", "visible");}
+		if(c2.getLife()>0) {request.setAttribute("disc2", "visible");}
 		else {request.getSession().setAttribute("disc2", "hidden");}
 		if(c3.getLife()>0) {request.getSession().setAttribute("disc3", "visible");}
 		else {request.getSession().setAttribute("disc3", "hidden");}
@@ -229,11 +230,22 @@ public class BattleField extends HttpServlet {
 		if(c6.getLife()>0) {request.getSession().setAttribute("disc6", "visible");}
 		else {request.getSession().setAttribute("disc6", "hidden");}
 		
-		if(def==1) {request.getSession().setAttribute("cursor", "img/cursor/shield.ico");
+		if(def==1) {request.setAttribute("cursor", "img/cursor/shield.ico");
 		request.getSession().setAttribute("cursorai", "");
 		request.getSession().setAttribute("cursorch", "img/cursor/shield.ico");}
 		else if(def==0) {request.getSession().setAttribute("cursor", "img/cursor/epeg.ico");
 		request.getSession().setAttribute("cursorai", "img/cursor/eped.ico");
 		request.getSession().setAttribute("cursorch", "");}
 	}
+	
+	public static void deletePlayer(Player player) {
+        Card c1 = player.getCard1();
+        Card c2 = player.getCard2();
+        Card c3 = player.getCard3();
+        daoPlayer.delete(player.getId());
+        daoCard.delete(c1.getId());
+        daoCard.delete(c2.getId());
+        daoCard.delete(c3.getId());
+	}
+	
 }

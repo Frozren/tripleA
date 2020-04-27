@@ -1182,3 +1182,22 @@ body
 	position: relative;
 	height: 70%;
 }
+
+#battle .modal-content {
+	background-image: url("../img/background.jpg");
+	background-size: cover;
+	color: white;
+	text-shadow: 0 0 10px #b30000;
+}
+
+#battle #annuler {
+	color: white;
+	text-shadow: 0 0 10px #b30000;
+}
+
+#battle #fermer {
+	background-color: #800000;
+	border: solid black 1px;
+	color: white;
+	text-shadow: 0 0 10px #b30000;
+}
