@@ -75,7 +75,7 @@
 					k--;
 				} else if (e.target.id == "imgNext"){
 					k++;
-				} else if (e.target.id == "home"){
+				} else if (e.target.id == "logoHome"){
 					window.location.href = "${pageContext.request.contextPath}/home";
 				} else if (e.target.id == "text"){
 					saveId.value = k;

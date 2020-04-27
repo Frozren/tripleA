@@ -59,13 +59,6 @@
 							</c:if>
 						</c:forEach>
 						<tr style="color: darkred">
-							<td>${history[0].dateEnd}</td>
-							<td>${history[0].name}</td>
-							<td>${history[0].phase}</td>
-							<td>${history[0].dmgDealt}</td>
-							<td>${history[0].dmgTaken}</td>
-						</tr>
-						<tr style="color: darkred">
 							<td>2020.02.28</td>
 							<td>MERLIN</td>
 							<td>2</td>
@@ -248,6 +241,7 @@
 		var troisiemeData = document.getElementById("troisiemeData");
 		var tri = document.getElementById("tri");
 		var empty = ${emptyHistory};
+		var nc = ${nc};
 		var scores = [" Dégâts infligés ", " Dégâts reçus ", " Nombre de victoires "];
 		var a = 1;
 		var b = 1;
@@ -258,7 +252,20 @@
 		function smoothOpening() {
 			bodyOp(0);
 			bodyOpTimer(0);
-			histo();
+			if (nc){
+				nonCom();
+			} else {
+				histo();
+			}
+		}
+		
+		function nonCom(){
+			premierNom.innerHTML = "NC";
+			premierData.innerHTML = "nc";
+			secondNom.innerHTML = "NC";
+			secondData.innerHTML = "nc";
+			troisiemeNom.innerHTML = "NC";
+			troisiemeData.innerHTML = "nc";
 		}
 		
 		function histo(){

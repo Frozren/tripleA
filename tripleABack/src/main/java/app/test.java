@@ -1,10 +1,5 @@
 package app;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
 import dao.IDAOCard;
 import dao.IDAOHistory;
 import dao.IDAOPlayer;
@@ -12,7 +7,6 @@ import model.Card;
 import model.Game;
 import model.History;
 import model.Human;
-import model.Player;
 
 public class test {
 
@@ -53,14 +47,14 @@ public class test {
 //			daoPlayer.insert(h);
 			
 
-			List<History> history = daoHistory.selectAll();
+			//List<History> history = daoHistory.selectAll();
 			
-			for (History h : history) {
-	
-				System.out.println(h);
-	
-			}
-			System.out.println("");
+//			for (History h : history) {
+//	
+//				System.out.println(h);
+//	
+//			}
+//			System.out.println("");
 			
 //			history.sort(Comparator.comparing(History::getDmg_dealt).reversed());
 //			history.sort(Comparator.comparing(History::getEtat).thenComparing(History::getDmg_dealt).reversed()); //DAMAGE DEALT !! OK
@@ -81,11 +75,11 @@ public class test {
 			
 //			history.sort(Comparator.comparing(History::getNbWin).reversed());
 			
-			for (History h : history) {
-				
-				System.out.println(h);
-				
-			}
+//			for (History h : history) {
+//				
+//				System.out.println(h);
+//				
+//			}
 			
 //			List<String> listH = daoHistory.selectNames();
 //			List<Long> listI = new ArrayList<>();
@@ -98,19 +92,48 @@ public class test {
 //				i++;
 //			}
 			
-			
-//			Human human = (Human) daoPlayer.selectById(100);
+//			Human human = new Human();
 //			
-//			History history = new History(human, 3, true, 2569, 3256);
+//			History history = new History(Game.getInstance().getHuman(), 3, true);
+//			
+//			daoHistory.insert(history);
+//			
 //
-//			System.out.println(history);
+//			List<History> listh = daoHistory.selectAll();
 //			
+//			for (History h : listh) {
+//				h.setNbWin(daoHistory.countWin(h.getName()));
+//				daoHistory.update(h);
+//			}
+//			
+//			daoPlayer.delete(human.getId());
+
+			
 //			history.setNbWin(daoHistory.countWin(history.getName())+1); // SI WIN
 ////			history.setNbWin(daoHistory.countWin(history.getName())); // SI LOSE
 //			daoHistory.update(history);
 //			System.out.println(history);
 			
 			
+			Card c1 = new Card(0, 120, 50, 25);
+			Card c2 = new Card(1, 120, 50, 25);
+			Card c3 = new Card(2, 120, 50, 25);
+			
+			daoCard.insert(c1);
+			daoCard.insert(c2);
+			daoCard.insert(c3);
+			
+			Human h = new Human("KIKI");
+			
+			h.setCard1(c1);
+			h.setCard2(c2);
+			h.setCard3(c3);
+			
+			System.out.println(h);
+			
+			daoPlayer.insert(h);
+			
+			System.out.println(h);
 			
 			
 			

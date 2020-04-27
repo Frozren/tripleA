@@ -64,7 +64,7 @@
 			<div>
 				<form id="myform" method="POST" action="matchup">
 					<input type="hidden" value="" id="choicePos" name="choicePos"/>
-					<a href="#" id="continue">CONTINUER<br>>></a>
+					<a href="#" id="continue">FIGHT<br>>></a>
 				</form>
 			</div>
 			<img id="vs" src="img/vs.png">
@@ -119,7 +119,7 @@
 				card = 3;
 			} else if (e.target.id == "continue"){
 				if (card == 0){
-					alert("Select your ranged card.");
+					alert("Choisir votre carte à distance !");
 				} else {
 					choicePos.value = card;
 					document.forms["myform"].submit();

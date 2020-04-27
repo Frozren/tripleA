@@ -29,7 +29,8 @@ public class Choice extends HttpServlet {
 
 			List<Card> listChoice = h.createChoice(n, pts);
 			
-			request.getSession().setAttribute("pts", pts);
+			request.setAttribute("pts", pts);
+			request.setAttribute("nbCards", n);
 			request.getSession().setAttribute("listChoice", listChoice);
 			
 			this.getServletContext().getRequestDispatcher("/WEB-INF/choice.jsp").forward(request, response);
@@ -54,6 +55,9 @@ public class Choice extends HttpServlet {
 		Card c2 = listChoice.get(Integer.parseInt(stats[3])-1);
 		Card c3 = listChoice.get(Integer.parseInt(stats[4])-1);
 		
+		c2.setId(0);
+		c3.setId(0);
+		
 		daoCard.insert(c1);
 		daoCard.insert(c2);
 		daoCard.insert(c3);
@@ -62,20 +66,21 @@ public class Choice extends HttpServlet {
 		h.setCard2(c2);
 		h.setCard3(c3);
 		
-		int pts = 100 - Game.getInstance().getPassivePoints();
-		c1 = ai.createCardRNG(pts);
-		c2 = ai.createCardRNG(pts);
-		c3 = ai.createCardRNG(pts);
-		
-		daoCard.insert(c1);
-		daoCard.insert(c2);
-		daoCard.insert(c3);
-		
-		ai.setCard1(c1);
-		ai.setCard2(c2);
-		ai.setCard3(c3);
-		
 		daoPlayer.insert(h);
+		
+		int pts = 50;
+		Card c4 = ai.createCardRNG(pts);
+		Card c5 = ai.createCardRNG(pts);
+		Card c6 = ai.createCardRNG(pts);
+		
+		daoCard.insert(c4);
+		daoCard.insert(c5);
+		daoCard.insert(c6);
+		
+		ai.setCard1(c4);
+		ai.setCard2(c5);
+		ai.setCard3(c6);
+		
 		daoPlayer.insert(ai);
 		
 		h.setIdOpponent(ai.getId());

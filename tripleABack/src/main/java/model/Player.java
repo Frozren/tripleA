@@ -130,10 +130,27 @@ public abstract class Player {
 		List<Card> list = new ArrayList<>();
 
 		for (int i = 0; i < n; i++) {
-			list.add(createCardRNG(pts));
+			list.add(createCardRNG(pts, i));
 		}
 		
 		return list;
+	}
+	
+	public Card createCardRNG(int pts, int i) {
+		Card c = new Card();
+		int n = 0;
+		
+		n = RNG(pts+1);
+		c.addLife(n);
+		pts -= n;
+		n = RNG(pts+1);
+		c.addAtk(n);
+		pts -= n;
+		c.addDef(pts);
+		
+		c.setId(i);
+
+		return c;
 	}
 
 	public Card createCardRNG(int pts) {

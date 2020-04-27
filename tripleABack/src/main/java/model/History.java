@@ -27,7 +27,7 @@ public class History {
 	private int phase;
 
 	@Column(name = "etat")
-	private Boolean etat;
+	private Boolean etat; //true = win
 
 	@Column(name = "dateEnd")
 	private LocalDate dateEnd;
@@ -49,12 +49,12 @@ public class History {
 		this.name = human.getName();
 	}
 	
-	public History(Human human, int phase, Boolean etat, int dmg_taken, int dmg_dealt) {
+	public History(Human human, int phase, Boolean etat) {
 		this.name = human.getName();
 		this.phase = phase;
 		this.etat = etat;
-		this.dmgDealt = dmg_dealt;
-		this.dmgTaken = dmg_taken;
+		this.dmgDealt = human.getDmgDealt();
+		this.dmgTaken = human.getDmgTaken();
 		this.dateEnd = LocalDate.now();
 		
 	}

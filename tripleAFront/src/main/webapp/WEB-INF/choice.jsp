@@ -35,41 +35,15 @@
 			<div id="inter"></div>
 			<div id="table2">
 				<ul>
-					<li>
-						<a href="#"><img id="card1" src="img/emptyCard.png" class="cards"></a>
-						<div class="cardhp" id="c1hp">${listChoice[0].life}</div>
-						<div class="cardatk" id="c1atk">${listChoice[0].atk}</div>
-						<div class="carddef" id="c1def">${listChoice[0].def}</div>
-						<div class="titre">GARASU-HÔ</div>
-					</li>
-					<li>
-						<a href="#"><img id="card2" src="img/emptyCard.png" class="cards"></a>
-						<div class="cardhp" id="c2hp">${listChoice[1].life}</div>
-						<div class="cardatk" id="c2hp">${listChoice[1].atk}</div>
-						<div class="carddef" id="c2hp">${listChoice[1].def}</div>
-						<div class="titre">SHÌRUDO</div>
-					</li>
-					<li>
-						<a href="#"><img id="card3" src="img/emptyCard.png" class="cards"></a>
-						<div class="cardhp" id="c3hp">${listChoice[2].life}</div>
-						<div class="cardatk" id="c3hp">${listChoice[2].atk}</div>
-						<div class="carddef" id="c3hp">${listChoice[2].def}</div>
-						<div class="titre">KAWARANAI</div>
-					</li>
-					<li>
-						<a href="#"><img id="card4" src="img/emptyCard.png" class="cards"></a>
-						<div class="cardhp" id="c4hp">${listChoice[3].life}</div>
-						<div class="cardatk" id="c4hp">${listChoice[3].atk}</div>
-						<div class="carddef" id="c4hp">${listChoice[3].def}</div>
-						<div class="titre">BAGGAREUR</div>
-					</li>
-					<li>
-						<a href="#"><img id="card5" src="img/emptyCard.png" class="cards"></a>
-						<div class="cardhp" id="c5hp">${listChoice[4].life}</div>
-						<div class="cardatk" id="c5hp">${listChoice[4].atk}</div>
-						<div class="carddef" id="c5hp">${listChoice[4].def}</div>
-						<div class="titre">BAGGAREUR</div>
-					</li>
+					<c:forEach items="${listChoice}" var="c">
+						<li>
+							<a href="#"><img id="card${c.id}" src="img/emptyCard.png" class="cards"></a>
+							<div class="cardhp">${c.life}</div>
+							<div class="cardatk">${c.atk}</div>
+							<div class="carddef">${c.def}</div>
+							<div class="titre">GARASU-HÔ</div>
+						</li>
+					</c:forEach>
 				</ul>
 			</div>
 			<div>
@@ -90,12 +64,11 @@
 		var textdef = document.getElementById("textdef");
 		var dt = new Date();
 		var numberCard = 0;
-		var pts = "${sessionScope.pts}";
+		var pts = "${pts}";
 		var choiceStats = document.getElementById("choiceStats");
 		
 		window.onload = smoothOpening;
 		window.onclick = select;
-		
 		
 		function smoothOpening() {
 			bodyOp(0);
@@ -170,12 +143,12 @@
 		
 		function getAll(){
 			var a="";
-			for (var i = 1; i < 6; i++) {
+			for (var i = 0; i < "${nbCards}"; i++) {
 				if (getMargin("card" + i) == "0px"){
 					if (a == ""){
-						a += i.toString() + "|";
+						a += (i+1).toString() + "|";
 					} else {
-						a += i.toString();
+						a += (i+1).toString();
 					}
 				}
 			}

@@ -26,9 +26,10 @@ public class Home extends HttpServlet {
 		
 		List<History> history = daoHistory.selectAll();
 		
-		if (history.isEmpty()) {
+		if (history.size() < 3) {
 			request.setAttribute("emptyHistory", true);
-		} else {
+			request.setAttribute("nc", true);
+		} else if (history.size() >= 3){
 			
 			List<History> histoT = new ArrayList<History>(history);
 			List<History> histoD = new ArrayList<History>(history);
@@ -50,9 +51,10 @@ public class Home extends HttpServlet {
 			request.setAttribute("histoT", histoT);
 			request.setAttribute("histoD", histoD);
 			request.setAttribute("histoWin", histoWin);
-			request.setAttribute("history", history);
+			request.setAttribute("nc", false);
 		}
-		
+
+		request.setAttribute("history", history);
 		this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
 	}
 

@@ -31,7 +31,7 @@ public class BattleField extends HttpServlet {
 	static IDAOCard daoCard = new DAOCardJPA();
 	String card = "0";
 	static String message = "<p>Cliquez sur une carte pour commencer</p>";
-	static String msgDef = "<p>Saisir carte à protéger</p>";
+	static String msgDef = "<p>Saisir carte ï¿½ protï¿½ger</p>";
 	static int turn = 0;
 	static int i=0;
 	static int tour=0;
@@ -42,7 +42,7 @@ public class BattleField extends HttpServlet {
 	// static AI ai = null;
 
 
-	// à changer
+	// ï¿½ changer
 	static Card c1 = new Card(137, 33, 25);
 	static Card c2 = new Card(150, 20, 25);
 	static Card c3 = new Card(124, 34, 37);
@@ -56,7 +56,7 @@ public class BattleField extends HttpServlet {
 	static AI ai = new AI(2, "IA1", c4, c5, c6, true, 1);
 	static List<Card> deckH = h.deck();
 	static List<Card> deckAI = ai.deck();
-	// à changer
+	// ï¿½ changer
 	static int maxhp1 = deckH.get(0).getLife() + deckH.get(1).getLife() + deckH.get(2).getLife();
 	static int maxhp2 = deckAI.get(0).getLife() + deckAI.get(1).getLife() + deckAI.get(2).getLife();
 
@@ -93,7 +93,7 @@ public class BattleField extends HttpServlet {
 			deckAI.get(targetai).setProtection(true);
 			message="<p>Fight!!!</p>"+message;
 			tour = h.RNG(2);
-			if (tour==0) {message="<p>Saisir carte adverse à attaquer avec c1</p>"+message;def=0;}
+			if (tour==0) {message="<p>Saisir carte adverse ï¿½ attaquer avec c1</p>"+message;def=0;}
 			else if (tour==1) {message=msgDef+message;def=1;}
 			turn++;
 		}
@@ -155,7 +155,7 @@ public class BattleField extends HttpServlet {
 		}
 
 		if(ai.verifyEnd()) {
-			message="<p>Le joueur a gagné!!!</p>"+message;
+			message="<p>Le joueur a gagnï¿½!!!</p>"+message;
 			request.getSession().setAttribute("endGame", "win");
 			}
 		else if(h.verifyEnd()) {
@@ -181,11 +181,11 @@ public class BattleField extends HttpServlet {
 	public static void nextTurn() {
 		if(!end) {
 		turn++;
-		message="<p>Round n°"+Integer.toString(turn)+message;
+		message="<p>Round nï¿½"+Integer.toString(turn)+message;
 		tour = h.RNG(2);
 		if (i<2) {i++;}
 		else{i=0;}
-		if(tour==0 && deckH.get(i).getLife()>0) {message="<p>Saisir carte adverse à attaquer avec c"+Integer.toString(i+1)+"</p>"+message;def=0;}
+		if(tour==0 && deckH.get(i).getLife()>0) {message="<p>Saisir carte adverse ï¿½ attaquer avec c"+Integer.toString(i+1)+"</p>"+message;def=0;}
 		else {message=msgDef+message;def=1;System.out.println("indef=1");}				
 		}
 	}
