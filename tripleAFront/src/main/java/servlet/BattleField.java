@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import dao.IDAOCard;
 import dao.IDAOHistory;
 import dao.IDAOPlayer;
-import dao.jdbc.DAOPlayerJDBC;
 import dao.jpa.DAOCardJPA;
 import dao.jpa.DAOHistoryJPA;
 import dao.jpa.DAOPlayerJPA;
@@ -38,29 +37,19 @@ public class BattleField extends HttpServlet {
 	static int def=0;
 	static Boolean catt;
 	static Boolean end=false;
-	// static Human h = null;
-	// static AI ai = null;
 
-
-	// � changer
-	static Card c1 = new Card(137, 33, 25);
-	static Card c2 = new Card(150, 20, 25);
-	static Card c3 = new Card(124, 34, 37);
-	static Card c4 = new Card(126, 26, 43);
-	static Card c5 = new Card(148, 22, 25);
-	static Card c6 = new Card(136, 30, 29);
+	static Human h = Game.getInstance().getHuman();
+	static AI ai = Game.getInstance().getAI();
 	
-	//static Human h = Game().getInstance().getHumain();
-	//static Human ai = Game().getInstance().getAI();
-	static Human h = new Human(1, "Coco", c1, c2, c3, true, 2);
-	static AI ai = new AI(2, "IA1", c4, c5, c6, true, 1);
 	static List<Card> deckH = h.deck();
 	static List<Card> deckAI = ai.deck();
-	// � changer
 	static int maxhp1 = deckH.get(0).getLife() + deckH.get(1).getLife() + deckH.get(2).getLife();
 	static int maxhp2 = deckAI.get(0).getLife() + deckAI.get(1).getLife() + deckAI.get(2).getLife();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		System.out.println(deckH);
+		
 		request.getSession().setAttribute("endGame", "start");
 		request.getSession().setAttribute("namec1", "Legolas");
 		request.getSession().setAttribute("classc1", "Codeur");
@@ -83,10 +72,7 @@ public class BattleField extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int card = Integer.parseInt(request.getParameter("card"));
-
 		if (turn == 0) {
-			c1.setPosition(true);
-			c6.setPosition(true);
 			int targeth=h.RNG(3);
 			deckH.get(targeth).setProtection(true);
 			int targetai=h.RNG(3);
@@ -155,14 +141,14 @@ public class BattleField extends HttpServlet {
 		}
 
 		if(ai.verifyEnd()) {
-			message="<p>Le joueur a gagn�!!!</p>"+message;
+			message="<p>Le joueur a gagne!!!</p>"+message;
 			request.getSession().setAttribute("endGame", "win");
 			}
 		else if(h.verifyEnd()) {
 			message="<p>Le joueur a perdu...</p>"+message;
 			
 			
-			History history = new History(Game.getInstance().getHuman(), 3, false, 2569, 3256);
+			History history = new History(Game.getInstance().getHuman(), 3, false);
             daoHistory.insert(history);
             List<History> listh = daoHistory.selectAll();
             for (History h : listh) {
@@ -217,17 +203,17 @@ public class BattleField extends HttpServlet {
 		request.getSession().setAttribute("deckH", deckH);
 		request.getSession().setAttribute("deckAI", deckAI);
 		
-		if(c1.getLife()>0) {request.getSession().setAttribute("disc1", "visible");}
+		if(deckH.get(0).getLife()>0) {request.getSession().setAttribute("disc1", "visible");}
 		else {request.getSession().setAttribute("disc1", "hidden");}
-		if(c2.getLife()>0) {request.setAttribute("disc2", "visible");}
+		if(deckH.get(1).getLife()>0) {request.setAttribute("disc2", "visible");}
 		else {request.getSession().setAttribute("disc2", "hidden");}
-		if(c3.getLife()>0) {request.getSession().setAttribute("disc3", "visible");}
+		if(deckH.get(2).getLife()>0) {request.getSession().setAttribute("disc3", "visible");}
 		else {request.getSession().setAttribute("disc3", "hidden");}
-		if(c4.getLife()>0) {request.getSession().setAttribute("disc4", "visible");}
+		if(deckAI.get(0).getLife()>0) {request.getSession().setAttribute("disc4", "visible");}
 		else {request.getSession().setAttribute("disc4", "hidden");}
-		if(c5.getLife()>0) {request.getSession().setAttribute("disc5", "visible");}
+		if(deckAI.get(1).getLife()>0) {request.getSession().setAttribute("disc5", "visible");}
 		else {request.getSession().setAttribute("disc5", "hidden");}
-		if(c6.getLife()>0) {request.getSession().setAttribute("disc6", "visible");}
+		if(deckAI.get(2).getLife()>0) {request.getSession().setAttribute("disc6", "visible");}
 		else {request.getSession().setAttribute("disc6", "hidden");}
 		
 		if(def==1) {request.setAttribute("cursor", "img/cursor/shield.ico");

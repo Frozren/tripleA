@@ -257,6 +257,9 @@
 					</div>
 				</div>
 			</div>
+			<div class="col-2">
+				<input type="text" id="endGame" value="${endGame}" style="visibility: hidden;"></input>
+			</div>
 		</div>
 	</form>
 </body>
@@ -292,6 +295,10 @@
 					
 					$('#field').parent().html(
 						container.find('#field').html()
+					)
+					
+					$('#endGame').parent().html(
+						container.find('#endGame').html()
 					)
 				
 					console.log(resp);
@@ -331,18 +338,18 @@
 
 	function setVolume() {
 		var sound = document.getElementById("music");
-		sound.volume = 0.1;
+		sound.volume = 0.05;
 	}
 	
 	function soundDef() {
 		var sound = document.getElementById("sDef");
-		sDef.volume = 0.2;
+		sDef.volume = 0.1;
 		sound.play();
 	}
 
 	function soundAtt() {
 		var sound = document.getElementById("sAtt");
-		sAtt.volume = 0.2;
+		sAtt.volume = 0.1;
 		sound.play();
 	}
 	
@@ -357,18 +364,21 @@
 	}); */
 	
 	function endGame() {
-		if ("${endGame}"=="win") {
+		var endGame = document.getElementById("endGame");
+		var end = endGame.value;
+		//alert(end);
+		if (end=="win") {
 			document.getElementById('win').style.visibility='visible';
 			var sound = document.getElementById("victory");
-			gameOver.volume = 0.2;
+			gameOver.volume = 0.05;
 			sound.play();
-			setTimeout(function(){window.location.href = "${pageContext.request.contextPath}/nextRound";}, 6000);
+			setTimeout(function(){window.location.href = "${pageContext.request.contextPath}/home";}, 6000);
 			
 		}
-		else if ("${endGame}"=="lose") {
+		else if (end=="lose") {
 			document.getElementById('lose').style.visibility='visible';
 			var sound = document.getElementById("gameOver");
-			gameOver.volume = 0.1;
+			gameOver.volume = 0.05;
 			sound.play();
 			setTimeout(function(){window.location.href = "${pageContext.request.contextPath}/home";}, 6000);
 		}

@@ -189,3 +189,7 @@
 		</div>
 	</div>
 </div>
+
+<div id="endGame">
+	<input type="text"  id="endGame"  value="${endGame}" style="visibility: hidden;"></input>
+</div>
