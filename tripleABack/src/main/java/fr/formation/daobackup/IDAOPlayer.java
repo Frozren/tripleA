@@ -1,6 +1,6 @@
-package dao;
+package fr.formation.daobackup;
 
-import model.Player;
+import fr.formation.model.Player;
 
 public interface IDAOPlayer extends DAO<Player, Integer> {
 

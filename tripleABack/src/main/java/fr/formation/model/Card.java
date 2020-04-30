@@ -1,4 +1,4 @@
-package model;
+package fr.formation.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -122,13 +122,13 @@ public class Card {
 			this.life -= dmg;}
 			else {this.life=0;}
 			
-			System.out.println("Cardatt" + c.getAtk() + " inflige " + dmg + "dgt à cardatt" + this.getAtk());
+			System.out.println("Cardatt" + c.getAtk() + " inflige " + dmg + "dgt ï¿½ cardatt" + this.getAtk());
 		} else {
 			dmg=(c.getAtk() - (c.getAtk() * this.def) / 100);
 			if(this.life>dmg) {
 			this.life -= dmg;}
 			else {this.life=0;}
-			System.out.println("Cardatt" + c.getAtk() + " inflige " + dmg + "dgt à cardatt" + this.getAtk());
+			System.out.println("Cardatt" + c.getAtk() + " inflige " + dmg + "dgt ï¿½ cardatt" + this.getAtk());
 		}
 		return dmg;
 	}

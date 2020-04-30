@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.IDAOPlayer;
-import model.Game;
-import model.Human;
+import fr.formation.model.Game;
+import fr.formation.model.Human;
 
 @WebServlet("/newGame")
 public class NewGame extends HttpServlet {

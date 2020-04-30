@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.IDAOCard;
 import dao.IDAOPlayer;
-import model.AI;
-import model.Card;
-import model.Game;
-import model.Human;
+import fr.formation.model.AI;
+import fr.formation.model.Card;
+import fr.formation.model.Game;
+import fr.formation.model.Human;
 
 @WebServlet("/choice")
 public class Choice extends HttpServlet {
@@ -58,30 +58,30 @@ public class Choice extends HttpServlet {
 		c2.setId(0);
 		c3.setId(0);
 		
-		daoCard.insert(c1);
-		daoCard.insert(c2);
-		daoCard.insert(c3);
+		daoCard.save(c1);
+		daoCard.save(c2);
+		daoCard.save(c3);
 				
 		h.setCard1(c1);
 		h.setCard2(c2);
 		h.setCard3(c3);
 		
-		daoPlayer.insert(h);
+		daoPlayer.save(h);
 		
 		int pts = 50;
 		Card c4 = ai.createCardRNG(pts);
 		Card c5 = ai.createCardRNG(pts);
 		Card c6 = ai.createCardRNG(pts);
 		
-		daoCard.insert(c4);
-		daoCard.insert(c5);
-		daoCard.insert(c6);
+		daoCard.save(c4);
+		daoCard.save(c5);
+		daoCard.save(c6);
 		
 		ai.setCard1(c4);
 		ai.setCard2(c5);
 		ai.setCard3(c6);
 		
-		daoPlayer.insert(ai);
+		daoPlayer.save(ai);
 		
 		h.setIdOpponent(ai.getId());
 		ai.setIdOpponent(h.getId());

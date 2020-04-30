@@ -1,14 +1,14 @@
-package dao.jpa;
+package fr.formation.daobackup.jpa;
 
 import java.util.List;
 
-import dao.IDAOHistory;
-import model.History;
+import fr.formation.daobackup.IDAOHistory;
+import fr.formation.model.History;
 
 public class DAOHistoryJPA extends DAOJPA implements IDAOHistory {
 
 	@Override
-	public void insert(History entity) {
+	public void save(History entity) {
 		this.em.getTransaction().begin();
 		
 		try {
@@ -21,12 +21,12 @@ public class DAOHistoryJPA extends DAOJPA implements IDAOHistory {
 	}
 
 	@Override
-	public History selectById(Integer id) {
+	public History findById(Integer id) {
 		return this.em.find(History.class, id);
 	}
 
 	@Override
-	public List<History> selectAll() {
+	public List<History> findAll() {
 		return this.em
 				.createQuery("select h from History h order by dateEnd desc", History.class) // order by date_end desc
 				.getResultList();
@@ -46,7 +46,7 @@ public class DAOHistoryJPA extends DAOJPA implements IDAOHistory {
 	}
 
 	@Override
-	public void delete(Integer id) {
+	public void deleteById(Integer id) {
 		this.em.getTransaction().begin();
 		
 		try {

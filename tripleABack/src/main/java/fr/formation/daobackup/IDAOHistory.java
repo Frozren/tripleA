@@ -1,9 +1,9 @@
-package dao;
+package fr.formation.daobackup;
 
 
 import java.util.List;
 
-import model.History;
+import fr.formation.model.History;
 
 public interface IDAOHistory extends DAO<History, Integer> {
 

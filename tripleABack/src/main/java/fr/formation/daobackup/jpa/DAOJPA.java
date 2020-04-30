@@ -1,4 +1,4 @@
-package dao.jpa;
+package fr.formation.daobackup.jpa;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

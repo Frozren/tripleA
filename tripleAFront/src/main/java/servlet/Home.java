@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.IDAOHistory;
-import model.Game;
-import model.History;
+import fr.formation.model.Game;
+import fr.formation.model.History;
 
 @WebServlet("/home")
 public class Home extends HttpServlet {
@@ -24,7 +24,7 @@ public class Home extends HttpServlet {
 		request.getSession().setAttribute("blockRefresh", blockRefresh);
 		request.getSession().setAttribute("erreur", "N");
 		
-		List<History> history = daoHistory.selectAll();
+		List<History> history = daoHistory.findAll();
 		
 		if (history.size() < 3) {
 			request.setAttribute("emptyHistory", true);

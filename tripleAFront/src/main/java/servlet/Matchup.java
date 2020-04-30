@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.AI;
-import model.Card;
-import model.Game;
-import model.Human;
+import fr.formation.model.AI;
+import fr.formation.model.Card;
+import fr.formation.model.Game;
+import fr.formation.model.Human;
 
 @WebServlet("/matchup")
 public class Matchup extends HttpServlet {

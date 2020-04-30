@@ -3,10 +3,10 @@ package app;
 import dao.IDAOCard;
 import dao.IDAOHistory;
 import dao.IDAOPlayer;
-import model.Card;
-import model.Game;
-import model.History;
-import model.Human;
+import fr.formation.model.Card;
+import fr.formation.model.Game;
+import fr.formation.model.History;
+import fr.formation.model.Human;
 
 public class test {
 
@@ -119,9 +119,9 @@ public class test {
 			Card c2 = new Card(1, 120, 50, 25);
 			Card c3 = new Card(2, 120, 50, 25);
 			
-			daoCard.insert(c1);
-			daoCard.insert(c2);
-			daoCard.insert(c3);
+			daoCard.save(c1);
+			daoCard.save(c2);
+			daoCard.save(c3);
 			
 			Human h = new Human("KIKI");
 			
@@ -131,7 +131,7 @@ public class test {
 			
 			System.out.println(h);
 			
-			daoPlayer.insert(h);
+			daoPlayer.save(h);
 			
 			System.out.println(h);
 			

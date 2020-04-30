@@ -1,18 +1,18 @@
-package dao.jdbc;
+package fr.formation.daobackup.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
 
-import dao.IDAOCard;
-import model.Card;
-import model.Game;
+import fr.formation.daobackup.IDAOCard;
+import fr.formation.model.Card;
+import fr.formation.model.Game;
 
 public class DAOCardJDBC implements IDAOCard {
 
     @Override
-    public void insert(Card c) {
+    public void save(Card c) {
     	long key = -1L;
         try (Connection connect = Game.getInstance().getConnection();
              PreparedStatement ps = connect.prepareStatement("INSERT INTO card (life,atk,def) VALUES (?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS)
@@ -56,7 +56,7 @@ public class DAOCardJDBC implements IDAOCard {
     }
 
     @Override
-	public Card selectById(Integer id) {
+	public Card findById(Integer id) {
 		Card c = null;
         try (Connection connect = Game.getInstance().getConnection();
                 PreparedStatement ps = connect.prepareStatement("SELECT * from card where id=?");) {
@@ -72,7 +72,7 @@ public class DAOCardJDBC implements IDAOCard {
 	}
 
     @Override
-    public List<Card> selectAll() {
+    public List<Card> findAll() {
         // TODO Auto-generated method stub
         return null;
     }
@@ -84,7 +84,7 @@ public class DAOCardJDBC implements IDAOCard {
     }
 
     @Override
-    public void delete(Integer id) {
+    public void deleteById(Integer id) {
         // TODO Auto-generated method stub
 
     }

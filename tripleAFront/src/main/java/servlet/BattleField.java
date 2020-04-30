@@ -15,12 +15,12 @@ import dao.IDAOPlayer;
 import dao.jpa.DAOCardJPA;
 import dao.jpa.DAOHistoryJPA;
 import dao.jpa.DAOPlayerJPA;
-import model.AI;
-import model.Card;
-import model.Game;
-import model.History;
-import model.Human;
-import model.Player;
+import fr.formation.model.AI;
+import fr.formation.model.Card;
+import fr.formation.model.Game;
+import fr.formation.model.History;
+import fr.formation.model.Human;
+import fr.formation.model.Player;
 
 @WebServlet("/battleField")
 public class BattleField extends HttpServlet {
@@ -149,8 +149,8 @@ public class BattleField extends HttpServlet {
 			
 			
 			History history = new History(Game.getInstance().getHuman(), 3, false);
-            daoHistory.insert(history);
-            List<History> listh = daoHistory.selectAll();
+            daoHistory.save(history);
+            List<History> listh = daoHistory.findAll();
             for (History h : listh) {
                 h.setNbWin(daoHistory.countWin(h.getName()));
                 daoHistory.update(h);
@@ -228,10 +228,10 @@ public class BattleField extends HttpServlet {
         Card c1 = player.getCard1();
         Card c2 = player.getCard2();
         Card c3 = player.getCard3();
-        daoPlayer.delete(player.getId());
-        daoCard.delete(c1.getId());
-        daoCard.delete(c2.getId());
-        daoCard.delete(c3.getId());
+        daoPlayer.deleteById(player.getId());
+        daoCard.deleteById(c1.getId());
+        daoCard.deleteById(c2.getId());
+        daoCard.deleteById(c3.getId());
 	}
 	
 }

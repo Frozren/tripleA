@@ -1,14 +1,14 @@
-package dao.jpa;
+package fr.formation.daobackup.jpa;
 
 import java.util.List;
 
-import dao.IDAOCard;
-import model.Card;
+import fr.formation.daobackup.IDAOCard;
+import fr.formation.model.Card;
 
 public class DAOCardJPA extends DAOJPA implements IDAOCard {
 
 	@Override
-	public void insert(Card entity) {
+	public void save(Card entity) {
 		this.em.getTransaction().begin();
 		
 		try {
@@ -21,13 +21,13 @@ public class DAOCardJPA extends DAOJPA implements IDAOCard {
 	}
 
 	@Override
-	public Card selectById(Integer id) {
+	public Card findById(Integer id) {
 		
 		return this.em.find(Card.class, id);
 	}
 
 	@Override
-	public List<Card> selectAll() {
+	public List<Card> findAll() {
 		return null;
 	}
 
@@ -45,7 +45,7 @@ public class DAOCardJPA extends DAOJPA implements IDAOCard {
 	}
 
 	@Override
-	public void delete(Integer id) {
+	public void deleteById(Integer id) {
 		this.em.getTransaction().begin();
 		
 		try {

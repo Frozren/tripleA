@@ -1,16 +1,16 @@
-package dao.jpa;
+package fr.formation.daobackup.jpa;
 
 import java.util.List;
 
-import dao.IDAOPlayer;
-import model.AI;
-import model.Human;
-import model.Player;
+import fr.formation.daobackup.IDAOPlayer;
+import fr.formation.model.AI;
+import fr.formation.model.Human;
+import fr.formation.model.Player;
 
 public class DAOPlayerJPA extends DAOJPA implements IDAOPlayer {
 
 	@Override
-	public void insert(Player entity) {
+	public void save(Player entity) {
 		this.em.getTransaction().begin();
 		
 		try {
@@ -23,13 +23,13 @@ public class DAOPlayerJPA extends DAOJPA implements IDAOPlayer {
 	}
 
 	@Override
-	public Player selectById(Integer id) {
+	public Player findById(Integer id) {
 		
 		return this.em.find(Player.class, id);
 	}
 
 	@Override
-	public List<Player> selectAll() {
+	public List<Player> findAll() {
 		return this.em
 				.createQuery("select p from Player p where p.typePlayer = 1", Player.class)
 				.getResultList();
@@ -49,7 +49,7 @@ public class DAOPlayerJPA extends DAOJPA implements IDAOPlayer {
 	}
 
 	@Override
-	public void delete(Integer id) {
+	public void deleteById(Integer id) {
 		this.em.getTransaction().begin();
 		
 		try {

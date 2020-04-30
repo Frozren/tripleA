@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.IDAOPlayer;
-import model.AI;
-import model.Game;
-import model.Human;
-import model.Player;
+import fr.formation.model.AI;
+import fr.formation.model.Game;
+import fr.formation.model.Human;
+import fr.formation.model.Player;
 
 @WebServlet("/save")
 public class Save extends HttpServlet {
@@ -21,7 +21,7 @@ public class Save extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		IDAOPlayer daoPlayer = Game.getInstance().getDaoPlayer();
 		
-		List<Player> list = daoPlayer.selectAll();
+		List<Player> list = daoPlayer.findAll();
 		
 		if (list.isEmpty()) {
 			request.setAttribute("emptyList", true);
@@ -45,7 +45,7 @@ public class Save extends HttpServlet {
 		
 		Human h = Game.getInstance().getHuman();
 		
-		Game.getInstance().setAI((AI) daoPlayer.selectById(h.getIdOpponent()));
+		Game.getInstance().setAI((AI) daoPlayer.findById(h.getIdOpponent()));
 		
 		response.sendRedirect("matchup");
 	}
