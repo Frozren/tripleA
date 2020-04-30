@@ -5,19 +5,16 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.IDAOCard;
-import dao.IDAOPlayer;
 import fr.formation.model.AI;
 import fr.formation.model.Card;
 import fr.formation.model.Game;
 import fr.formation.model.Human;
 
 @WebServlet("/choice")
-public class Choice extends HttpServlet {
+public class Choice extends SpringServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		boolean block = (boolean) request.getSession().getAttribute("blockRefresh");
@@ -39,10 +36,7 @@ public class Choice extends HttpServlet {
 		}
 	}
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		IDAOPlayer daoPlayer = Game.getInstance().getDaoPlayer();
-		IDAOCard daoCard = Game.getInstance().getDaoCard();
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		String choiceStats = request.getParameter("choiceStats");
 		List<Card> listChoice = (List<Card>) request.getSession().getAttribute("listChoice");
 		
@@ -87,8 +81,8 @@ public class Choice extends HttpServlet {
 		ai.setIdOpponent(h.getId());
 		ai.setName("AI" + ai.getId());
 		
-		daoPlayer.update(h);
-		daoPlayer.update(ai);
+		daoPlayer.save(h);
+		daoPlayer.save(ai);
 		
 		response.sendRedirect("matchup");
 	}

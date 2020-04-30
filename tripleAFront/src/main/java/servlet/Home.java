@@ -11,15 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.IDAOHistory;
+import fr.formation.dao.IDAOHistory;
 import fr.formation.model.Game;
 import fr.formation.model.History;
 
 @WebServlet("/home")
-public class Home extends HttpServlet {
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		IDAOHistory daoHistory = Game.getInstance().getDaoHistory();
-		
+public class Home extends SpringServlet {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		boolean blockRefresh = false;
 		request.getSession().setAttribute("blockRefresh", blockRefresh);
 		request.getSession().setAttribute("erreur", "N");

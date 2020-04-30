@@ -37,15 +37,15 @@ public abstract class Player {
 	@Column(name="typeplayer", insertable = false, updatable = false)
 	protected boolean typePlayer;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne
 	@JoinColumn(name="idcard1")
 	protected Card card1;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne
 	@JoinColumn(name="idcard2")
 	protected Card card2;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne
 	@JoinColumn(name="idcard3")
 	protected Card card3;
 	
