@@ -4,12 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import dao.IDAOCard;
-import dao.IDAOHistory;
-import dao.IDAOPlayer;
-import dao.jpa.DAOCardJPA;
-import dao.jpa.DAOHistoryJPA;
-import dao.jpa.DAOPlayerJPA;
+import fr.formation.dao.IDAOCard;
+import fr.formation.dao.IDAOHistory;
+import fr.formation.dao.IDAOPlayer;
 
 public class Game {
 	// ATTRIBUTS
@@ -18,9 +15,6 @@ public class Game {
 	private boolean difficulty = false;
 	private Connection connection = null;
 	private static Game _instance = null;
-	private IDAOCard daoCard;
-	private IDAOPlayer daoPlayer;
-	private IDAOHistory daoHistory;
 	private Human h = new Human();
 	private AI ai = new AI();
 
@@ -33,27 +27,6 @@ public class Game {
 			_instance = new Game();
 		}
 		return _instance;
-	}
-
-	public IDAOCard getDaoCard() {
-		if (daoCard == null) {
-			daoCard = new DAOCardJPA();
-		}
-		return daoCard;
-	}
-	
-	public IDAOPlayer getDaoPlayer() {
-		if (daoPlayer == null) {
-			daoPlayer = new DAOPlayerJPA();
-		}
-		return daoPlayer;
-	}
-	
-	public IDAOHistory getDaoHistory() {
-		if (daoHistory == null) {
-			daoHistory = new DAOHistoryJPA();
-		}
-		return daoHistory;
 	}
 	
 	public int getPassivePoints() {
