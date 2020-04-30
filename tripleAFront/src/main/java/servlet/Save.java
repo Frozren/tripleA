@@ -21,6 +21,11 @@ public class Save extends SpringServlet {
 		
 		List<Player> list = daoPlayer.findAll();
 		
+		
+		
+		//DELETE AI DANS LA LISTE
+		//REGARDER LIMITE CURSEUR CREATION PLAYER
+		
 		if (list.isEmpty()) {
 			request.setAttribute("emptyList", true);
 		} else {
