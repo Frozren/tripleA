@@ -9,12 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.IDAOCard;
-import dao.IDAOHistory;
-import dao.IDAOPlayer;
-import dao.jpa.DAOCardJPA;
-import dao.jpa.DAOHistoryJPA;
-import dao.jpa.DAOPlayerJPA;
+import fr.formation.dao.IDAOCard;
+import fr.formation.dao.IDAOHistory;
+import fr.formation.dao.IDAOPlayer;
 import fr.formation.model.AI;
 import fr.formation.model.Card;
 import fr.formation.model.Game;
@@ -23,11 +20,11 @@ import fr.formation.model.Human;
 import fr.formation.model.Player;
 
 @WebServlet("/battleField")
-public class BattleField extends HttpServlet {
+public class BattleField extends SpringServlet {
 	//test: http://localhost:8181/tripleAFront/
-	static IDAOPlayer daoPlayer = new DAOPlayerJPA();
-	static IDAOHistory daoHistory =new DAOHistoryJPA();
-	static IDAOCard daoCard = new DAOCardJPA();
+	static IDAOPlayer daoPlayer;
+	static IDAOHistory daoHistory;
+	static IDAOCard daoCard;
 	String card = "0";
 	static String message = "<p>Cliquez sur une carte pour commencer</p>";
 	static String msgDef = "<p>Saisir carte � prot�ger</p>";
@@ -153,7 +150,7 @@ public class BattleField extends HttpServlet {
             List<History> listh = daoHistory.findAll();
             for (History h : listh) {
                 h.setNbWin(daoHistory.countWin(h.getName()));
-                daoHistory.update(h);
+                daoHistory.save(h);
             }
             deletePlayer(h);
             deletePlayer(ai);
