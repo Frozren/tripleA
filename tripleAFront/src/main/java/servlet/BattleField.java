@@ -41,6 +41,7 @@ public class BattleField extends SpringServlet {
 			def=0;
 			end=false;
 			h = Game.getInstance().getHuman();
+			System.out.println(h);
 			ai = Game.getInstance().getAI();
 			deckH = h.deck();
 			deckAI = ai.deck();

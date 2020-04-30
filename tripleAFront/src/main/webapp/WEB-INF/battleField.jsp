@@ -6,14 +6,15 @@
 <html translate="no">
 
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8" />
+<link rel="icon" href="img/vignette.png">
+<title>tripleA</title>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<title>BattleField</title>
 </head>
 <body id="battle">
 	<form method="POST" action="BattleField">
@@ -366,17 +367,20 @@
 	function endGame() {
 		var endGame = document.getElementById("endGame");
 		var end = endGame.value;
+		var sBat = document.getElementById("music");
 		//alert(end);
 		if (end=="win") {
 			document.getElementById('win').style.visibility='visible';
+			sBat.pause();
 			var sound = document.getElementById("victory");
 			gameOver.volume = 0.05;
 			sound.play();
-			setTimeout(function(){window.location.href = "${pageContext.request.contextPath}/home";}, 6000);
+			setTimeout(function(){window.location.href = "${pageContext.request.contextPath}/nextRound";}, 6000);
 			
 		}
 		else if (end=="lose") {
 			document.getElementById('lose').style.visibility='visible';
+			sBat.pause();
 			var sound = document.getElementById("gameOver");
 			gameOver.volume = 0.05;
 			sound.play();
