@@ -1,6 +1,8 @@
 package fr.formation;
 
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -32,6 +34,15 @@ public class Test {
 		
 //		System.out.println(daoPlayer.findByName("JEREMY"));	// OK
 		
+//		for (int i = listP.size(); i > 0; i--) {
+//			
+//		}
+		
+		List<Player> listH = daoPlayer.findAll().stream().filter(player -> player.isTypePlayer()).collect(Collectors.toList());
+		
+		for (Player p : listH) {
+			System.out.println(p);
+		}
 		
 	}
 	

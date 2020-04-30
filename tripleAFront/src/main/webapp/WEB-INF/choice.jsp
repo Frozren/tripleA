@@ -19,17 +19,17 @@
 				<tr>
 					<td class="c1"><h2>HP :</h2></td>
 					<td class="c2"><h3 id="texthp">100</h3></td>
-					<td class="c3"><input type="range" class="sliderperso" id="hp" value="0" min="0" max="${sessionScope.pts}" step="1"></td>
+					<td class="c3"><input type="range" class="sliderperso" id="hp" value="0" min="0" max="${pts}" step="1"></td>
 				</tr>
 				<tr>
 					<td class="c1"><h2>ATK :</h2></td>
 					<td class="c2"><h3 id="textatk">20</h3></td>
-					<td class="c3"><input type="range" class="sliderperso" id="atk" value="0" min="0" max="${sessionScope.pts}" step="1"></td>
+					<td class="c3"><input type="range" class="sliderperso" id="atk" value="0" min="0" max="${pts}" step="1"></td>
 				</tr>
 				<tr>
 					<td class="c1"><h2>DEF :</h2></td>
 					<td class="c2"><h3 id="textdef">25</h3></td>
-					<td class="c3"><input type="range" class="sliderperso" id="def" value="0" min="0" max="${sessionScope.pts}" step="1"></td>
+					<td class="c3"><input type="range" class="sliderperso" id="def" value="0" min="0" max="${pts}" step="1"></td>
 				</tr>
 			</table>
 			<div id="inter"></div>

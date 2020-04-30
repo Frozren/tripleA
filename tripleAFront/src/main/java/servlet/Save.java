@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,12 +20,7 @@ public class Save extends SpringServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		List<Player> list = daoPlayer.findAll();
-		
-		
-		
-		//DELETE AI DANS LA LISTE
-		//REGARDER LIMITE CURSEUR CREATION PLAYER
+		List<Player> list = daoPlayer.findAll().stream().filter(player -> player.isTypePlayer()).collect(Collectors.toList());
 		
 		if (list.isEmpty()) {
 			request.setAttribute("emptyList", true);

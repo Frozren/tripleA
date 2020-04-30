@@ -23,8 +23,6 @@ public class Matchup extends SpringServlet {
 		
 		int stats = h.getCard1().getAtk() + h.getCard1().getDef() + h.getCard1().getLife();
 		
-		
-		
 		List<Card> cardH = h.deck();
 		List<Card> cardAI = ai.deck();
 		
@@ -51,10 +49,6 @@ public class Matchup extends SpringServlet {
 		
 		ai.choiceDistance();
 		
-		System.out.println("Je suis là");
-		
 		response.sendRedirect("battleField");
-		
-		System.out.println("et ici !");
 	}
 }

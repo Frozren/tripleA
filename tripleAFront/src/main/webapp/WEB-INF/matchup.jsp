@@ -69,20 +69,51 @@
 			</div>
 			<img id="vs" src="img/vs.png">
 		</div>
+		<div id = "decompte">
+			<img id="explo" src="img/explo.gif" style="width:500px;position:absolute;top:10%;left:35%"/>
+			<h1 id="decText"></h1>
+		</div>
+		<audio id="Audio3" style="display: none;">
+			<source src="sound/SECountdown3.mp3" type="audio/mp3">
+		</audio>
+		<audio id="Audio2" style="display: none;">
+			<source src="sound/SECountdown2.mp3" type="audio/mp3">
+		</audio>
+		<audio id="Audio1" style="display: none;">
+			<source src="sound/SECountdown1.mp3" type="audio/mp3">
+		</audio>
+		<audio id="Audio0" style="display: none;">
+			<source src="sound/SEFight.mp3" type="audio/mp3">
+		</audio>
 	</body>
 
 	<script type="text/javascript">
+		var matchup = document.getElementById("matchup");
+		var decompte = document.getElementById("decompte");
+		var decText = document.getElementById("decText");
+		var explo = document.getElementById("explo");
 		var card1 = document.getElementById("card1");
 		var card2 = document.getElementById("card2");
 		var card3 = document.getElementById("card3");
 		var choicePos = document.getElementById("choicePos");
+		var audio0 = document.getElementById("Audio0");
+		var audio1 = document.getElementById("Audio1");
+		var audio2 = document.getElementById("Audio2");
+		var audio3 = document.getElementById("Audio3");
 		var card = 0;
+		var i = 3;
 	
 		window.onload = smoothOpening;
 		window.onclick = select;
 		
 		
 		function smoothOpening() {
+			decompte.style.display = "none";
+			explo.style.display = "none";
+			audio0.volume = 0.1;
+			audio1.volume = 0.1;
+			audio2.volume = 0.1;
+			audio3.volume = 0.1;
 			bodyOp(0);
 			bodyOpTimer(0);
 		}
@@ -121,10 +152,55 @@
 				if (card == 0){
 					alert("Choisir votre carte à distance !");
 				} else {
-					choicePos.value = card;
-					document.forms["myform"].submit();
+					decText.style.transition = "all 1.5s";
+					matchup.style.display = "none";
+					decText.innerHTML = i;
+					decompte.style.display = "block";
+					window.setTimeout(countDown, 100);
 				}
 			}
+		}
+		
+		function countDown(){
+			decText.style.transition = "all 1.5s";
+			decText.style.fontSize = "20vw";
+			if (i != 0){
+				if (i == 3){
+					audio3.play();
+				} else if (i == 2){
+					audio2.play();
+				} else {
+					audio1.play();
+				}
+				window.setTimeout(displayOFF, 2000);
+			} else {
+				audio0.play();
+				window.setTimeout(explosion, 840);
+			}
+		}
+		
+		function explosion(){
+			explo.style.display = "none";
+			window.setTimeout(function(){choicePos.value = card; document.forms["myform"].submit();}, 1000);
+		}
+		
+		function displayON(){
+			decompte.style.visibility = "visible";
+			window.setTimeout(countDown, 100);
+		}
+		
+		function displayOFF(){
+			decText.style.transition = "all 0s";
+			decompte.style.visibility = "hidden";
+			i--;
+			if (i != 0){
+				decText.innerHTML = i;
+			} else {
+				decText.innerHTML = "¡ FIGHT !";
+				explo.style.display = "block";
+			}
+			decText.style.fontSize = "1vw";
+			displayON();
 		}
 	</script>
 </html>

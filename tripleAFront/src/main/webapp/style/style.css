@@ -867,6 +867,14 @@ body
 	left: 10px;
 }
 
+#decompte h1
+{
+	margin-top: 10%;
+	color: #c8c8c8;
+	font-size: 1vw;
+	text-shadow: 0 0 100px #b00000;
+}
+
 /*--------------
 -----PAGE 6-----
 --------------*/

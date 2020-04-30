@@ -269,8 +269,6 @@
 		}
 		
 		function histo(){
-			console.log(b%6);
-			
 			if (b%6 != 0){
 				points();
 				b++;
