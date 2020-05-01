@@ -60,6 +60,8 @@ public class Human extends Player {
 		}
 		
 		int dmg=deckAI.get(target-1).isAttackedBy(deckH.get(att));
+		Human h = Game.getInstance().getHuman();
+		h.setDmgDealt(dmg+h.getDmgDealt());
 		System.out.println("hCard" + att + " attaque aicard" + (target-1));
 		String msg="<p>c"+(att+1)+" inflige "+dmg+" dégâts à c"+(target+3)+"</p>";
 		
@@ -78,6 +80,14 @@ public class Human extends Player {
 		System.out.println("L'homme protege card" + (choix-1));
 		
 		return true;
+	}
+	
+	public int getPhase(Card c1) {
+		int passivePoints = Game.getInstance().getPassivePoints();
+		int hp = c1.getLife(), atk = c1.getAtk(), def = c1.getDef();
+		int phase = (hp+atk+def-100-20-25)/passivePoints;
+		System.out.println("phase = "+phase);
+		return phase;
 	}
 
 	@Override

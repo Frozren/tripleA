@@ -94,11 +94,10 @@ public class NextRound extends SpringServlet {
 		System.out.println(h);
 		System.out.println("debut humain-----------------------");
 		
-		
-		
 		daoPlayer.save(h);
 		
-		int pts = 75;
+		int phase = h.getPhase(c1);
+		int pts = Game.getInstance().getPassivePoints()*phase;
 		Card c4 = ai.createCardRNG(pts);
 		Card c5 = ai.createCardRNG(pts);
 		Card c6 = ai.createCardRNG(pts);

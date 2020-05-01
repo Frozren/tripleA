@@ -50,8 +50,10 @@ public class AI extends Player {
 		while (deckH.get(target=ai.RNG(3)).getLife() <= 0) {}
 		
 		int dmg=deckH.get(target).isAttackedBy(deckAI.get(att));
+		Human h = Game.getInstance().getHuman();
+		h.setDmgTaken(dmg+h.getDmgTaken());
 		System.out.println("aicard" + (att+3) + " attaque hcard" + target);
-		String msg="<p>c"+(att+4)+" inflige "+dmg+" d�gats � c"+(target+1)+"</p>";
+		String msg="<p>c"+(att+4)+" inflige "+dmg+" dégats à c"+(target+1)+"</p>";
 		
 		return msg;
 	}

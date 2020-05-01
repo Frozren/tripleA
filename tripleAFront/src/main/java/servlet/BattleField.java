@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,6 +23,7 @@ public class BattleField extends SpringServlet {
 	static String message;
 	static String msgDef = "<p>Saisir la carte à protéger</p>";
 	static int turn=0;
+	static int card;
 	static int i;
 	static int tour;
 	static int def;
@@ -34,6 +36,7 @@ public class BattleField extends SpringServlet {
 	static int maxhp2;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		if(turn==0) {
 			message = "<p>Cliquez sur une carte pour commencer</p>";
 			i=0;
@@ -47,31 +50,31 @@ public class BattleField extends SpringServlet {
 			deckAI = ai.deck();
 			maxhp1 = deckH.get(0).getLife() + deckH.get(1).getLife() + deckH.get(2).getLife();
 			maxhp2 = deckAI.get(0).getLife() + deckAI.get(1).getLife() + deckAI.get(2).getLife();
-		}
-		System.out.println(deckH);
 
-		request.getSession().setAttribute("endGame", "start");
-		request.getSession().setAttribute("namec1", "Legolas");
-		request.getSession().setAttribute("classc1", "Codeur");
-		request.getSession().setAttribute("namec2", "Aragorn");
-		request.getSession().setAttribute("classc2", "Hacker");
-		request.getSession().setAttribute("namec3", "Gimli");
-		request.getSession().setAttribute("classc3", "Debugeur");
-		request.getSession().setAttribute("namec4", "Smaug");
-		request.getSession().setAttribute("classc4", "Omniscient");
-		request.getSession().setAttribute("namec5", "Sauron");
-		request.getSession().setAttribute("classc5", "Maitre du jeu");
-		request.getSession().setAttribute("namec6", "Saroumane");
-		request.getSession().setAttribute("classc6", "Mentaliste");
+			System.out.println(deckH);
 
-		refresh(request);		
+			request.getSession().setAttribute("endGame", "start");
+			request.getSession().setAttribute("namec1", "Legolas");
+			request.getSession().setAttribute("classc1", "Codeur");
+			request.getSession().setAttribute("namec2", "Aragorn");
+			request.getSession().setAttribute("classc2", "Hacker");
+			request.getSession().setAttribute("namec3", "Gimli");
+			request.getSession().setAttribute("classc3", "Debugeur");
+			request.getSession().setAttribute("namec4", "Smaug");
+			request.getSession().setAttribute("classc4", "Omniscient");
+			request.getSession().setAttribute("namec5", "Sauron");
+			request.getSession().setAttribute("classc5", "Maitre du jeu");
+			request.getSession().setAttribute("namec6", "Saroumane");
+			request.getSession().setAttribute("classc6", "Mentaliste");
 
-		this.getServletContext().getRequestDispatcher("/WEB-INF/battleField.jsp").forward(request, response);
+			refresh(request);		
+			//}
+			this.getServletContext().getRequestDispatcher("/WEB-INF/battleField.jsp").forward(request, response);}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int card = Integer.parseInt(request.getParameter("card"));
+		card = Integer.parseInt(request.getParameter("card"));
 		if (turn == 0) {
 			int targeth=h.RNG(3);
 			deckH.get(targeth).setProtection(true);
@@ -79,63 +82,44 @@ public class BattleField extends SpringServlet {
 			deckAI.get(targetai).setProtection(true);
 			message="<p>Fight!!!</p>"+message;
 			tour = h.RNG(2);
-			if (tour==0) {message="<p>Saisir la carte adverse à attaquer avec c1</p>"+message;def=0;}
-			else if (tour==1) {message=msgDef+message;def=1;}
+			if (tour==0) {msgAtk();def=0;}
+			else if (tour==1) {msgDef();def=1;}
 			turn++;
 		}
 
 		else {
 			if (!end) {
-				if (i >= 0 && i < 3) {
-					if(tour == 0) {
-
-						if (testCard(card) && def==0 && !end) {
-							if(deckH.get(i).getLife()>0) {
-								message=h.attack(deckH, deckAI, ai, i, (card)-3)+message;
-								end=ai.verifyEnd();}
-							else {message="<p>La carte c"+Integer.toString(i+1)+" est morte"+message;}
-
-							if(deckAI.get(i).getLife()>0) {message=msgDef+message;def=1;}
-							else {nextTurn();}
-						}
-						else if(!testCard(card) && def==1 && ((card)!=h.getCardProtected(deckH) || h.deck().size() == 1) && !end) {
-
-							if (h.deck().size() != 1) {
-								h.protection(deckH,(card));
-							}
+				if(tour == 0) {
+					if (testCard() && def==0) {
+						hAttaque();
+						if(deckAI.get(i).getLife()>0) {
+							if(h.deck().size() != 1) {msgDef();}
 							else {
 								h.deck().get(0).setProtection(false);
-								message="<p>Pas de protection avec une carte</p>"+message;
+								iaAttaque();
+								nextTurn();
 							}
-							if(deckAI.get(i).getLife() > 0) {message=ai.attack(deckH, deckAI, ai, i)+message;}
-							end=h.verifyEnd();
-							nextTurn();
 						}
+						else {nextTurn();}
 					}
-					else {
-						System.out.println("intour="+tour);
-						if (!testCard(card) && def==1 && ((card)!=h.getCardProtected(deckH) || h.deck().size() == 1) && !end) {
-							System.out.println("def=1");
-							if (h.deck().size() != 1) {
-								h.protection(deckH,(card));
-							}
-							else {
-								h.deck().get(0).setProtection(false);
-								message="<p>Pas de protection avec une carte</p>"+message;
-							}
-							if(deckAI.get(i).getLife() > 0) {message=ai.attack(deckH, deckAI, ai, i)+message;
-							end=h.verifyEnd();}
-							if(deckH.get(i).getLife()>0) {
-								message="<p>Saisir la carte adverse à attaquer avec c"+Integer.toString(i+1)+"</p>"+message;
-								def=0;}
-							else {nextTurn();}
-						}
-						else if(testCard(card) && def==0 && !end) {
-							message=h.attack(deckH, deckAI, ai, i, (card)-3)+message;
-							end=ai.verifyEnd();
-							nextTurn();	
-						}
-					}				
+					else if(!testCard() && def==1) {
+						h.protection(deckH,(card));
+						iaAttaque();
+						nextTurn();
+					}
+				}
+				else {
+					if (!testCard() && def==1) {
+						h.protection(deckH,(card));
+						iaAttaque();
+
+						if(deckH.get(i).getLife()>0) {msgAtk();}
+						else {nextTurn();}
+					}
+					else if(testCard() && def==0) {
+						hAttaque();
+						nextTurn();	
+					}
 				}
 			}
 		}
@@ -148,8 +132,10 @@ public class BattleField extends SpringServlet {
 		else if(h.verifyEnd()) {
 			message="<p>Le joueur a perdu...</p>"+message;
 			turn=0;
-
-			History history = new History(Game.getInstance().getHuman(), 3, false);
+			Optional<Card> c1 =  daoCard.findById(h.getCard1().getId());
+			int phase = h.getPhase(c1.get());
+			System.out.println(phase);
+			History history = new History(Game.getInstance().getHuman(), phase, false);
 			daoHistory.save(history);
 			List<History> listh = daoHistory.findAll();
 			for (History h : listh) {
@@ -162,35 +148,86 @@ public class BattleField extends SpringServlet {
 		}
 		refresh(request);
 		this.getServletContext().getRequestDispatcher("/WEB-INF/fieldAjax.jsp").forward(request, response);
-
 	}
 
 	public void nextTurn() {
 		if(!end) {
 			turn++;
+			System.out.println("turn="+turn);
 			message="<p>Round n°"+Integer.toString(turn)+message;
 			tour = h.RNG(2);
+			System.out.println("tour="+tour);
 			if (i<2) {i++;}
 			else{i=0;}
-			if(tour==0 && deckH.get(i).getLife()>0) {message="<p>Saisir la carte adverse à attaquer avec c"+Integer.toString(i+1)+"</p>"+message;def=0;}
-			else {message=msgDef+message;def=1;System.out.println("indef=1");}				
+			if(tour==0) {
+				if(deckH.get(i).getLife()>0) {
+					msgAtk();
+				}
+				else {
+					if(deckAI.get(i).getLife()>0) {
+						if(h.deck().size() != 1) {msgDef();}
+						else {h.deck().get(0).setProtection(false); iaAttaque();
+						nextTurn();}
+					}
+					else {nextTurn();}
+				}
+			}
+			else if(tour==1) {
+				if(deckAI.get(i).getLife()>0) {
+					if(h.deck().size() != 1) {msgDef();}
+					else {h.deck().get(0).setProtection(false); iaAttaque();
+					if (deckH.get(i).getLife()>0) {
+						msgAtk();
+					}
+					else {nextTurn();}
+					}
+				}
+				else {
+					if (deckH.get(i).getLife()>0) {
+						msgAtk();
+					}
+					else {nextTurn();}
+				}
+			}
 		}
 	}
 
-	public Boolean testCard(int card) {
+	public void iaAttaque() {
+		message=ai.attack(deckH, deckAI, ai, i)+message;
+		end=h.verifyEnd();
+	}
+
+	public void hAttaque() {
+		message=h.attack(deckH, deckAI, ai, i, (card)-3)+message;
+		end=ai.verifyEnd();
+	}
+	
+	public void msgAtk() {
+		message="<p>Saisir la carte adverse à attaquer avec c"+Integer.toString(i+1)+"</p>"+message;
+		def=0;
+	}
+	
+	public void msgDef() {
+		message="<p>Saisir la carte à protéger</p>"+message;
+		def=1;
+	}
+
+	public Boolean testCard() {
 		Boolean catt=false;
-		if(tour==0) {
-			catt=false;
-			if(i!=0) {
-				if((deckAI.get(0).getLife()>0 || deckAI.get(1).getLife()>0) && (card==4 || card==5)) {catt=true;}
-				else if(deckAI.get(0).getLife()<=0 && deckAI.get(1).getLife()<=0 && (card==4 || card==5 || card==6)) {catt=true;}
+		if(def==0) {
+			if (card==4 || card==5 || card==6) {
+				if(i!=h.getCardDistance()-1) {
+					if((deckAI.get(0).getLife()>0 || deckAI.get(1).getLife()>0) && card!=6) {catt=true;}
+					else if(deckAI.get(0).getLife()<=0 && deckAI.get(1).getLife()<=0) {catt=true;}
+					else {catt=false;}
+				}
+				else {catt=true;}
 			}
-			else if(i==0 && (card==4 || card==5 || card==6)) {catt=true;}
+			else {catt=false;}
 		}
 		else {
-			catt=true;
-			if(card==1 || card==2 || card==3) {catt=false;}
-			else {System.out.println("Erreur de saisie");}
+			if((card==1 || card==2 || card==3) && (card)!=h.getCardProtected(deckH)) {catt=false;}
+			else {catt=true;System.out.println("Erreur de saisie");}
 		}
 		return catt;
 	}
