@@ -230,6 +230,9 @@
 				<div id="tri"> Dégâts infligés </div>
 			</div>
 		</div>
+		<audio id="Audio" loop autoplay style="display: none;">
+			<source src="sound/menu_theme.mp3" type="audio/mp3">
+		</audio>
 	</body>
 	
 	<script type="text/javascript">
@@ -239,17 +242,21 @@
 		var secondData = document.getElementById("secondData");
 		var troisiemeNom = document.getElementById("troisiemeNom");
 		var troisiemeData = document.getElementById("troisiemeData");
+		var audio = document.getElementById("Audio");
 		var tri = document.getElementById("tri");
 		var empty = ${emptyHistory};
 		var nc = ${nc};
 		var scores = [" Dégâts infligés ", " Dégâts reçus ", " Nombre de victoires "];
 		var a = 1;
 		var b = 1;
+		var i = 0;
 		
 		window.onload = smoothOpening;
 		window.onclick = menu;
+		window.onkeydown = musique;
 		
 		function smoothOpening() {
+			audio.volume = 0.1;
 			bodyOp(0);
 			bodyOpTimer(0);
 			if (nc){
@@ -266,6 +273,19 @@
 			secondData.innerHTML = "nc";
 			troisiemeNom.innerHTML = "NC";
 			troisiemeData.innerHTML = "nc";
+		}
+		
+		function musique(event){
+			var key = event.keyCode;
+			if (key == 32){
+				if (i == 0){
+					audio.pause();
+					i = 1;
+				} else {
+					audio.play();
+					i = 0;
+				}
+			}
 		}
 		
 		function histo(){
@@ -325,9 +345,7 @@
 			if (e.target.id == "newGame" || e.target.id == "save" || e.target.id == "options"){
 				window.location.href = ("${pageContext.request.contextPath}/" + e.target.id);
 			} else if (e.target.id == "leave"){
-				if (confirm("Voulez-vous vraiment quitter ?")){
-					window.location.href = "https://www.google.com";
-				}
+				alert("Pour quitter:\n\n     • Utiliser la petite croix en haut de la fenêtre !\n     • Utiliser le raccourci CTRL+W !\n     • Utiliser le raccourci ALT+F4 !");
 			}
 		}
 	</script>
