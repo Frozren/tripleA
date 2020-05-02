@@ -68,14 +68,14 @@
 						<div class="row" id="hcard">
 							<div class="col-8">
 								<div id="card">
-									<input type="image" class="imgcard" idCard="1" id="c1"
+									<input type="image" class="imgcard" idCard="${idCard1}" id="c1"
 										src="img/card/cardAP.png"
 										style="visibility: ${disc1}; cursor: url('${cursorch}'), not-allowed;">
 									<div class="divname" style="visibility: ${disc1}">
 										<p class="name">${namec1}</p>
 									</div>
 									<div class="divclass" style="visibility: ${disc1}">
-										<p class="class">Carte C1: ${classc1}</p>
+										<p class="class">Carte C${idCard1}: ${classc1}</p>
 									</div>
 									<div class="def" style="visibility: ${disc1}">
 										<p class="stat">${deckH[0].def}</p>
@@ -96,14 +96,14 @@
 							<div class="col-1" id="ltcard"></div>
 							<div class="col-2">
 								<div id="card">
-									<input type="image" class="imgcard" idCard="2" id="c2"
+									<input type="image" class="imgcard" idCard="${idCard2}" id="c2"
 										src="img/card/cardAB.png"
 										style="visibility: ${disc2}; cursor: url('${cursorch}'), not-allowed;">
 									<div class="divname" style="visibility: ${disc2}">
 										<p class="name">${namec2}</p>
 									</div>
 									<div class="divclass" style="visibility: ${disc2}">
-										<p class="class">Carte C2: ${classc2}</p>
+										<p class="class">Carte C${idCard2}: ${classc2}</p>
 									</div>
 									<div class="def" style="visibility: ${disc2}">
 										<p class="stat">${deckH[1].def}</p>
@@ -148,14 +148,14 @@
 							<div class="col-1" id="ltcard"></div>
 							<div class="col-2">
 								<div id="card">
-									<input type="image" class="imgcard" idCard="3" id="c3"
+									<input type="image" class="imgcard" idCard="${idCard3}" id="c3"
 										src="img/card/cardAV.png"
 										style="visibility: ${disc3}; cursor: url('${cursorch}'), not-allowed;">
 									<div class="divname" style="visibility: ${disc3}">
 										<p class="name">${namec3}</p>
 									</div>
 									<div class="divclass" style="visibility: ${disc3}">
-										<p class="class">Carte C3: ${classc3}</p>
+										<p class="class">Carte C${idCard3}: ${classc3}</p>
 									</div>
 									<div class="def" style="visibility: ${disc3}">
 										<p class="stat">${deckH[2].def}</p>

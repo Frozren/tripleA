@@ -34,6 +34,10 @@ public class BattleField extends SpringServlet {
 	static List<Card> deckAI = new ArrayList<>();
 	static int maxhp1;
 	static int maxhp2;
+	static List<Card> deckHAff = new ArrayList<>();
+	static String c1;
+	static String c2;
+	static String c3;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -52,6 +56,25 @@ public class BattleField extends SpringServlet {
 			maxhp2 = deckAI.get(0).getLife() + deckAI.get(1).getLife() + deckAI.get(2).getLife();
 
 			System.out.println(deckH);
+			
+			int pos = h.getCardDistance();
+			if (pos==1) {
+				deckHAff = deckH; c1="1"; c2="2"; c3="3";
+			}
+			else if (pos==2) {
+				deckHAff = new ArrayList<>();
+				deckHAff.add(deckH.get(1));
+				deckHAff.add(deckH.get(2));
+				deckHAff.add(deckH.get(0));
+				c1="2"; c2="3"; c3="1";
+			}
+			else if (pos==3) {
+				deckHAff = new ArrayList<>();
+				deckHAff.add(deckH.get(2));
+				deckHAff.add(deckH.get(0));
+				deckHAff.add(deckH.get(1));
+				c1="3"; c2="1"; c3="2";
+			}
 
 			request.getSession().setAttribute("endGame", "start");
 			request.getSession().setAttribute("namec1", "Legolas");
@@ -237,29 +260,38 @@ public class BattleField extends SpringServlet {
 		request.getSession().setAttribute("message", message);
 		request.getSession().setAttribute("hpb1", (deckH.get(0).getLife() + deckH.get(1).getLife() + deckH.get(2).getLife()) * 100 / maxhp1);
 		request.getSession().setAttribute("hpb2", (deckAI.get(0).getLife() + deckAI.get(1).getLife() + deckAI.get(2).getLife()) * 100 / maxhp2);
-
-		request.getSession().setAttribute("deckH", deckH);
-		request.getSession().setAttribute("deckAI", deckAI);
-
-		if(deckH.get(0).getLife()>0) {request.getSession().setAttribute("disc1", "visible");}
-		else {request.getSession().setAttribute("disc1", "hidden");}
-		if(deckH.get(1).getLife()>0) {request.setAttribute("disc2", "visible");}
-		else {request.getSession().setAttribute("disc2", "hidden");}
-		if(deckH.get(2).getLife()>0) {request.getSession().setAttribute("disc3", "visible");}
-		else {request.getSession().setAttribute("disc3", "hidden");}
-		if(deckAI.get(0).getLife()>0) {request.getSession().setAttribute("disc4", "visible");}
-		else {request.getSession().setAttribute("disc4", "hidden");}
-		if(deckAI.get(1).getLife()>0) {request.getSession().setAttribute("disc5", "visible");}
-		else {request.getSession().setAttribute("disc5", "hidden");}
-		if(deckAI.get(2).getLife()>0) {request.getSession().setAttribute("disc6", "visible");}
-		else {request.getSession().setAttribute("disc6", "hidden");}
-
+		
 		if(def==1) {request.setAttribute("cursor", "img/cursor/shield.ico");
 		request.getSession().setAttribute("cursorai", "");
 		request.getSession().setAttribute("cursorch", "img/cursor/shield.ico");}
 		else if(def==0) {request.getSession().setAttribute("cursor", "img/cursor/epeg.ico");
 		request.getSession().setAttribute("cursorai", "img/cursor/eped.ico");
 		request.getSession().setAttribute("cursorch", "");}
+		
+		request.getSession().setAttribute("deckAI", deckAI);
+		
+		if(deckAI.get(0).getLife()>0) {request.getSession().setAttribute("disc4", "visible");}
+		else {request.getSession().setAttribute("disc4", "hidden");}
+		if(deckAI.get(1).getLife()>0) {request.getSession().setAttribute("disc5", "visible");}
+		else {request.getSession().setAttribute("disc5", "hidden");}
+		if(deckAI.get(2).getLife()>0) {request.getSession().setAttribute("disc6", "visible");}
+		else {request.getSession().setAttribute("disc6", "hidden");}
+		
+		request.getSession().setAttribute("idCard1", c1);
+		request.getSession().setAttribute("idCard2", c2);
+		request.getSession().setAttribute("idCard3", c3);
+		
+		request.getSession().setAttribute("deckH", deckHAff);
+		
+		if(deckH.get(0).getLife()>0) {request.getSession().setAttribute("disc"+c1, "visible");}
+		else {request.getSession().setAttribute("disc"+c1, "hidden");}
+		if(deckH.get(1).getLife()>0) {request.setAttribute("disc"+c2, "visible");}
+		else {request.getSession().setAttribute("disc"+c2, "hidden");}
+		if(deckH.get(2).getLife()>0) {request.getSession().setAttribute("disc"+c3, "visible");}
+		else {request.getSession().setAttribute("disc"+c3, "hidden");}
+		
+
+		
 	}
 
 	public void deletePlayer(Player player) {
