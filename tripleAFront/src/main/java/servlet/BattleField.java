@@ -35,9 +35,14 @@ public class BattleField extends SpringServlet {
 	static int maxhp1;
 	static int maxhp2;
 	static List<Card> deckHAff = new ArrayList<>();
+	static List<Card> deckAIAff = new ArrayList<>();
 	static String c1;
 	static String c2;
 	static String c3;
+	static String c4;
+	static String c5;
+	static String c6;
+	
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -48,47 +53,66 @@ public class BattleField extends SpringServlet {
 			def=0;
 			end=false;
 			h = Game.getInstance().getHuman();
-			System.out.println(h);
+			
 			ai = Game.getInstance().getAI();
 			deckH = h.deck();
 			deckAI = ai.deck();
 			maxhp1 = deckH.get(0).getLife() + deckH.get(1).getLife() + deckH.get(2).getLife();
 			maxhp2 = deckAI.get(0).getLife() + deckAI.get(1).getLife() + deckAI.get(2).getLife();
-
-			System.out.println(deckH);
+			System.out.println(h);
+			System.out.println(ai);
 			
-			int pos = h.getCardDistance();
-			if (pos==1) {
+			int posh = h.getCardDistance(deckH);
+			int posai = ai.getCardDistance(deckAI);
+			if (posh==1) {
 				deckHAff = deckH; c1="1"; c2="2"; c3="3";
 			}
-			else if (pos==2) {
+			else if (posh==2) {
 				deckHAff = new ArrayList<>();
 				deckHAff.add(deckH.get(1));
 				deckHAff.add(deckH.get(2));
 				deckHAff.add(deckH.get(0));
 				c1="2"; c2="3"; c3="1";
 			}
-			else if (pos==3) {
+			else if (posh==3) {
 				deckHAff = new ArrayList<>();
 				deckHAff.add(deckH.get(2));
 				deckHAff.add(deckH.get(0));
 				deckHAff.add(deckH.get(1));
 				c1="3"; c2="1"; c3="2";
 			}
+			
+			if (posai==3) {
+				deckAIAff = deckAI; c4="4"; c5="5"; c6="6";
+			}
+			else if (posai==1) {
+				deckAIAff = new ArrayList<>();
+				deckAIAff.add(deckAI.get(1));
+				deckAIAff.add(deckAI.get(2));
+				deckAIAff.add(deckAI.get(0));
+				c4="5"; c5="6"; c6="4";
+			}
+			else if (posai==2) {
+				deckAIAff = new ArrayList<>();
+				deckAIAff.add(deckAI.get(2));
+				deckAIAff.add(deckAI.get(0));
+				deckAIAff.add(deckAI.get(1));
+				c4="6"; c5="4"; c6="5";
+			}
 
 			request.getSession().setAttribute("endGame", "start");
-			request.getSession().setAttribute("namec1", "Legolas");
-			request.getSession().setAttribute("classc1", "Codeur");
-			request.getSession().setAttribute("namec2", "Aragorn");
-			request.getSession().setAttribute("classc2", "Hacker");
-			request.getSession().setAttribute("namec3", "Gimli");
-			request.getSession().setAttribute("classc3", "Debugeur");
-			request.getSession().setAttribute("namec4", "Smaug");
-			request.getSession().setAttribute("classc4", "Omniscient");
-			request.getSession().setAttribute("namec5", "Sauron");
-			request.getSession().setAttribute("classc5", "Maitre du jeu");
-			request.getSession().setAttribute("namec6", "Saroumane");
-			request.getSession().setAttribute("classc6", "Mentaliste");
+			request.getSession().setAttribute("namec"+c1, "Legolas");
+			request.getSession().setAttribute("classc"+c1, "Codeur");
+			request.getSession().setAttribute("namec"+c2, "Aragorn");
+			request.getSession().setAttribute("classc"+c2, "Hacker");
+			request.getSession().setAttribute("namec"+c3, "Gimli");
+			request.getSession().setAttribute("classc"+c3, "Debugeur");
+			request.getSession().setAttribute("namec"+c4, "Smaug");
+			request.getSession().setAttribute("classc"+c4, "Omniscient");
+			request.getSession().setAttribute("namec"+c5, "Sauron");
+			request.getSession().setAttribute("classc"+c5, "Maitre du jeu");
+			request.getSession().setAttribute("namec"+c6, "Saroumane");
+			request.getSession().setAttribute("classc"+c6, "Mentaliste");
 
 			refresh(request);		
 			//}
@@ -216,7 +240,7 @@ public class BattleField extends SpringServlet {
 	}
 
 	public void iaAttaque() {
-		message=ai.attack(deckH, deckAI, ai, i)+message;
+		message=ai.attack(deckH, deckAI, h, ai, i)+message;
 		end=h.verifyEnd();
 	}
 
@@ -239,9 +263,9 @@ public class BattleField extends SpringServlet {
 		Boolean catt=false;
 		if(def==0) {
 			if (card==4 || card==5 || card==6) {
-				if(i!=h.getCardDistance()-1) {
-					if((deckAI.get(0).getLife()>0 || deckAI.get(1).getLife()>0) && card!=6) {catt=true;}
-					else if(deckAI.get(0).getLife()<=0 && deckAI.get(1).getLife()<=0) {catt=true;}
+				if(i!=h.getCardDistance(deckH)-1) {
+					if((deckAIAff.get(0).getLife()>0 || deckAIAff.get(1).getLife()>0) && card!=(ai.getCardDistance(deckAI)+3)) {catt=true;}
+					else if(deckAIAff.get(0).getLife()<=0 && deckAIAff.get(1).getLife()<=0) {catt=true;}
 					else {catt=false;}
 				}
 				else {catt=true;}
@@ -268,28 +292,28 @@ public class BattleField extends SpringServlet {
 		request.getSession().setAttribute("cursorai", "img/cursor/eped.ico");
 		request.getSession().setAttribute("cursorch", "");}
 		
-		request.getSession().setAttribute("deckAI", deckAI);
-		
-		if(deckAI.get(0).getLife()>0) {request.getSession().setAttribute("disc4", "visible");}
-		else {request.getSession().setAttribute("disc4", "hidden");}
-		if(deckAI.get(1).getLife()>0) {request.getSession().setAttribute("disc5", "visible");}
-		else {request.getSession().setAttribute("disc5", "hidden");}
-		if(deckAI.get(2).getLife()>0) {request.getSession().setAttribute("disc6", "visible");}
-		else {request.getSession().setAttribute("disc6", "hidden");}
-		
+		request.getSession().setAttribute("deckH", deckHAff);
+		request.getSession().setAttribute("deckAI", deckAIAff);
+
 		request.getSession().setAttribute("idCard1", c1);
 		request.getSession().setAttribute("idCard2", c2);
 		request.getSession().setAttribute("idCard3", c3);
+		request.getSession().setAttribute("idCard4", c4);
+		request.getSession().setAttribute("idCard5", c5);
+		request.getSession().setAttribute("idCard6", c6);
 		
-		request.getSession().setAttribute("deckH", deckHAff);
-		
-		if(deckH.get(0).getLife()>0) {request.getSession().setAttribute("disc"+c1, "visible");}
-		else {request.getSession().setAttribute("disc"+c1, "hidden");}
-		if(deckH.get(1).getLife()>0) {request.setAttribute("disc"+c2, "visible");}
-		else {request.getSession().setAttribute("disc"+c2, "hidden");}
-		if(deckH.get(2).getLife()>0) {request.getSession().setAttribute("disc"+c3, "visible");}
-		else {request.getSession().setAttribute("disc"+c3, "hidden");}
-		
+		if(deckHAff.get(0).getLife()>0) {request.getSession().setAttribute("disc1", "visible");}
+		else {request.getSession().setAttribute("disc1", "hidden");}
+		if(deckHAff.get(1).getLife()>0) {request.setAttribute("disc2", "visible");}
+		else {request.getSession().setAttribute("disc2", "hidden");}
+		if(deckHAff.get(2).getLife()>0) {request.getSession().setAttribute("disc3", "visible");}
+		else {request.getSession().setAttribute("disc3", "hidden");}
+		if(deckAIAff.get(0).getLife()>0) {request.getSession().setAttribute("disc4", "visible");}
+		else {request.getSession().setAttribute("disc4", "hidden");}
+		if(deckAIAff.get(1).getLife()>0) {request.getSession().setAttribute("disc5", "visible");}
+		else {request.getSession().setAttribute("disc5", "hidden");}
+		if(deckAIAff.get(2).getLife()>0) {request.getSession().setAttribute("disc6", "visible");}
+		else {request.getSession().setAttribute("disc6", "hidden");}
 
 		
 	}
