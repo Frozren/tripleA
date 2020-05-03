@@ -7,6 +7,7 @@
 		<meta charset="UTF-8">
 		<link rel="icon" href="img/vignette.png">
 		<title>tripleA</title>
+		<script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
 	</head>
 
 	<body>
@@ -25,6 +26,7 @@
 							<a href="#"><div id="text">Partie de ${player[0].name}</div></a>
 						</form>
 						<div id="index">1/x</div>
+						<div id="delete">Supprimer</div>
 					</td>
 					<td id="c2"><a href="#"><img id="imgNext" src="img/next.png"></a></td>
 				</tr>
@@ -36,6 +38,7 @@
 		var text = document.getElementById("text");
 		var index = document.getElementById("index");
 		var saveId = document.getElementById("saveId");
+		var suppr = document.getElementById("delete");
 		var k = 0;
         var i = 0;
 		var arr = new Array();
@@ -46,10 +49,12 @@
 		
 		function smoothOpening() {
 			if (empty){
+				suppr.style.visibility = "hidden";
 				text.innerHTML = "Aucune partie enregistrée !";
 				index.innerHTML = "";
 			} else {
 				setInitialState();
+				suppr.style.visibility = "visible";
 				text.innerHTML = "Partie de " + arr[k];
 				index.innerHTML = (k+1) + "/" + i;
 			}
@@ -103,5 +108,32 @@
 	        </c:forEach>
 	    }
 		
+		$("#delete").click(function() {
+			if (confirm("Êtes-vous sûr de vouloir supprimer la partie de " + arr[k])){
+				$.ajax({
+					type : 'POST',
+					data : {
+						saveId : k,
+						suppression : "true"
+						},
+					success : function(){
+						arr.splice(k,1);
+						i--;
+						k = 0;
+						
+						if (i == 0){
+							text.innerHTML = "Aucune partie enregistrée !";
+							index.innerHTML = "";
+							suppr.style.visibility = "hidden";
+							empty = true;
+						} else {
+							suppr.style.visibility = "visible";
+							text.innerHTML = "Partie de " + arr[k];
+							index.innerHTML = (k+1) + "/" + i;
+						}
+					}
+				});
+			}
+		});
 	</script>
 </html>

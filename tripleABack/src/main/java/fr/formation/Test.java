@@ -1,7 +1,10 @@
 package fr.formation;
 
+import static java.util.Collections.reverseOrder;
+import static java.util.Comparator.comparing;
+
+import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -10,7 +13,7 @@ import fr.formation.config.AppConfig;
 import fr.formation.dao.IDAOCard;
 import fr.formation.dao.IDAOHistory;
 import fr.formation.dao.IDAOPlayer;
-import fr.formation.model.Player;
+import fr.formation.model.History;
 
 public class Test {
 	
@@ -20,7 +23,7 @@ public class Test {
 		
 		IDAOPlayer daoPlayer = myContext.getBean(IDAOPlayer.class);
 		IDAOCard daoCard = myContext.getBean(IDAOCard.class);
-		IDAOHistory daoHistory = myContext.getBean(IDAOHistory.class);		
+		IDAOHistory daoHistory = myContext.getBean(IDAOHistory.class);
 		
 //		System.out.println(daoCard.findById(370));	//OK
 		
@@ -38,12 +41,33 @@ public class Test {
 //			
 //		}
 		
-		List<Player> listH = daoPlayer.findAll().stream().filter(player -> player.isTypePlayer()).collect(Collectors.toList());
+//		List<Player> listH = daoPlayer.findAll().stream().filter(player -> player.isTypePlayer()).collect(Collectors.toList());
+//		
+//		for (Player p : listH) {
+//			System.out.println(p);
+//		}
 		
-		for (Player p : listH) {
-			System.out.println(p);
+		List<History> list = daoHistory.findAll();
+		
+		list = list.stream().sorted(
+                comparing(History::getName)
+                .thenComparing(History::getDateEnd).reversed())
+               .collect(Collectors.toList());		//TRI PAR NOM
+		
+		//SUPPRIMER LES DOUBLONS POUR QU'IL N'Y AI QU'UNE SEULE FOIS LE MÊME
+		for (int i = list.size() - 1; i > 0; i--) {
+			if (list.get(i).getName().contentEquals(list.get(i - 1).getName())) {
+				list.remove(i);
+			}
 		}
 		
+		list = list.stream().sorted(
+                comparing(History::getNbWin).reversed())
+               .collect(Collectors.toList());	
+		
+		
+		
+		list.forEach(l -> System.out.println(l));
 	}
 	
 }

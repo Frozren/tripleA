@@ -245,7 +245,6 @@
 		var audio = document.getElementById("Audio");
 		var tri = document.getElementById("tri");
 		var empty = ${emptyHistory};
-		var nc = ${nc};
 		var scores = [" Dégâts infligés ", " Dégâts reçus ", " Nombre de victoires "];
 		var a = 1;
 		var b = 1;
@@ -259,7 +258,7 @@
 			audio.volume = 0.1;
 			bodyOp(0);
 			bodyOpTimer(0);
-			if (nc){
+			if (empty){
 				nonCom();
 			} else {
 				histo();

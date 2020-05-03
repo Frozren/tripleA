@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.formation.model.AI;
+import fr.formation.model.Card;
 import fr.formation.model.Game;
 import fr.formation.model.Human;
 import fr.formation.model.Player;
@@ -19,8 +20,9 @@ import fr.formation.model.Player;
 public class Save extends SpringServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		List<Player> list = daoPlayer.findAll().stream().filter(player -> player.isTypePlayer()).collect(Collectors.toList());
+		List<Player> list = daoPlayer.findAll().stream()
+				.filter(player -> player.isTypePlayer())
+				.collect(Collectors.toList());
 		
 		if (list.isEmpty()) {
 			request.setAttribute("emptyList", true);
@@ -33,19 +35,43 @@ public class Save extends SpringServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		String saveId = request.getParameter("saveId");
+		int saveId = Integer.parseInt(request.getParameter("saveId"));
+		Boolean suppression = Boolean.parseBoolean(request.getParameter("suppression"));
+		
 		List<Player> list = (List<Player>) request.getSession().getAttribute("player");
 		
-		String name = list.get(Integer.parseInt(saveId)).getName();
-		
-		Game.getInstance().setHuman((Human) daoPlayer.findByName(name));
-		
-		Human h = Game.getInstance().getHuman();
-		
-		Optional<Player> op = daoPlayer.findById(h.getIdOpponent());
-		
-		Game.getInstance().setAI((AI) op.get());
-		
-		response.sendRedirect("matchup");
+		if (suppression) {
+			Player p1 = list.get(saveId);
+			Optional<Player> optionalPlayer = daoPlayer.findById(list.get(saveId).getIdOpponent());
+			Player p2 = optionalPlayer.get();
+			
+			deletePlayer(p1);
+			deletePlayer(p2);
+			
+			list.remove(saveId);
+		} else {
+			System.out.println("On va sur matchup");
+			String name = list.get(saveId).getName();
+			
+			Game.getInstance().setHuman((Human) daoPlayer.findByName(name));
+			
+			Human h = Game.getInstance().getHuman();
+			
+			Optional<Player> op = daoPlayer.findById(h.getIdOpponent());
+			
+			Game.getInstance().setAI((AI) op.get());
+			
+			response.sendRedirect("matchup");
+		}
+	}
+	
+	protected void deletePlayer(Player p) {
+		Card c1 = p.getCard1();
+		Card c2 = p.getCard2();
+		Card c3 = p.getCard3();
+		daoPlayer.deleteById(p.getId());
+		daoCard.deleteById(c1.getId());
+		daoCard.deleteById(c2.getId());
+		daoCard.deleteById(c3.getId());
 	}
 }

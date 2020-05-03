@@ -774,6 +774,7 @@ body
 	margin-top: 8%;
 }
 
+
 #save table #imgPrev
 {
 	filter: drop-shadow(0 0 10px white);
@@ -824,11 +825,10 @@ body
 	width: 100%;
 }
 
-#save table #show #text
+#save table #show #myform a
 {
 	position: relative;
 	bottom: 55px;
-
 	color: #dddddd;
 	font-size: 2vw;
 	font-weight: bold;
@@ -837,7 +837,6 @@ body
 
 #save table #show #text:hover
 {
-
   	-webkit-transform: perspective(1px) translateZ(0);
 	-webkit-animation-name: pulse;
 	-webkit-animation-duration: 1s;
@@ -859,11 +858,21 @@ body
 	position: relative;
 	bottom: 220px;
 	left: 210px;
-
 	color: #dddddd;
 	font-size: 1vw;
 	font-weight: bold;
 	text-shadow: 0 0 10px #b30000;
+}
+
+#save table #show #delete
+{
+	position: relative;
+	bottom: 240px;
+	right: 190px;
+	color: #b30000;
+	font-size: 1vw;
+	text-decoration: underline;
+	cursor: pointer;
 }
 
 /*--------------

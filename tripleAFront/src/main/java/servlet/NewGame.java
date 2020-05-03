@@ -21,16 +21,17 @@ public class NewGame extends SpringServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		String name = request.getParameter("pseudo").toUpperCase();
-		Human h = Game.getInstance().getHuman();
-		h = (Human) daoPlayer.findByName(name);
+		Boolean checkPseudo = Boolean.parseBoolean(request.getParameter("checkPseudo"));
 		
-		if (h instanceof Human) {
-			request.getSession().setAttribute("erreur", "Y");
-			doGet(request, response);
+		if (checkPseudo) {
+			Human h = (Human) daoPlayer.findByName(name);
+			if (h instanceof Human) {
+				response.setContentType("text/plain");
+				response.getWriter().write("Y");
+			}
 		} else {
-			h = Game.getInstance().getHuman();
+			Human h = Game.getInstance().getHuman();
 			h.setName(name);
-			request.getSession().setAttribute("name", name);
 			response.sendRedirect("choice");
 		}
 	}

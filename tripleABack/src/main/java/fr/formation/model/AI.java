@@ -26,7 +26,8 @@ public class AI extends Player {
 		this.name = "AI";
 	}
 
-	public void choiceDistance() {
+	public int choiceDistance() {
+		int card = 0;
 		List<Integer> l = new ArrayList<>();
 
 		l.add(this.getCard1().getAtk());
@@ -37,11 +38,16 @@ public class AI extends Player {
 
 		if (l.get(0) == this.getCard1().getAtk()) {
 			this.getCard1().setPosition(true);
+			card = 1;
 		} else if (l.get(0) == this.getCard2().getAtk()) {
 			this.getCard2().setPosition(true);
+			card = 2;
 		} else if (l.get(0) == this.getCard3().getAtk()){
 			this.getCard3().setPosition(true);
+			card = 3;
 		}
+		
+		return card;
 	}
 
 	public String attack(List<Card> deckH, List<Card> deckAI, Human h, AI ai, int att) {

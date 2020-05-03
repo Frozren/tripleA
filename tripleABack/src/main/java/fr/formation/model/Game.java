@@ -9,7 +9,7 @@ import fr.formation.dao.IDAOHistory;
 import fr.formation.dao.IDAOPlayer;
 
 public class Game {
-	// ATTRIBUTS
+
 	private int passivePoints = 50;
 	private int cardChoice = 5;
 	private boolean difficulty = false;
@@ -18,7 +18,6 @@ public class Game {
 	private Human h = new Human();
 	private AI ai = new AI();
 
-	// CONSTRUCTOR
 	private Game() {
 	}
 
@@ -69,7 +68,6 @@ public class Game {
 		this.ai = ai;
 	}
 
-	// METHODS
 	public Connection getConnection() throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.jdbc.Driver");
 		connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/triple_a", "root", "");

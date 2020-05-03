@@ -21,13 +21,13 @@ public class Choice extends SpringServlet {
 		Human h = Game.getInstance().getHuman();
 		
 		if (!block) {
-			int pts = Game.getInstance().getPassivePoints(), n = Game.getInstance().getCardChoice();
+			int passivePoints = Game.getInstance().getPassivePoints(), nbCardChoice = Game.getInstance().getCardChoice();
 			request.getSession().setAttribute("blockRefresh", true);
 
-			List<Card> listChoice = h.createChoice(n, pts);
+			List<Card> listChoice = h.createChoice(nbCardChoice, passivePoints);
 			
-			request.setAttribute("pts", pts);
-			request.setAttribute("nbCards", n);
+			request.setAttribute("pts", passivePoints);
+			request.setAttribute("nbCards", nbCardChoice);
 			request.getSession().setAttribute("listChoice", listChoice);
 			
 			this.getServletContext().getRequestDispatcher("/WEB-INF/choice.jsp").forward(request, response);

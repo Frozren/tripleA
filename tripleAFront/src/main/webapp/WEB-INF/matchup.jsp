@@ -102,14 +102,16 @@
 		var audio3 = document.getElementById("Audio3");
 		var card = 0;
 		var i = 3;
+		var echap = false;
 	
 		window.onload = smoothOpening;
 		window.onclick = select;
-		
+		window.onkeydown = skip;
 		
 		function smoothOpening() {
 			decompte.style.display = "none";
 			explo.style.display = "none";
+			document.getElementById("cAI" + "${cardDistanceAI}").style.setProperty("-webkit-filter", "drop-shadow(0px 0px 10px #00e4ff)");
 			audio0.volume = 0.1;
 			audio1.volume = 0.1;
 			audio2.volume = 0.1;
@@ -151,6 +153,8 @@
 			} else if (e.target.id == "continue"){
 				if (card == 0){
 					alert("Choisir votre carte à distance !");
+				} else if (echap){
+					explosion();
 				} else {
 					decText.style.transition = "all 1.5s";
 					matchup.style.display = "none";
@@ -158,6 +162,13 @@
 					decompte.style.display = "block";
 					window.setTimeout(countDown, 100);
 				}
+			}
+		}
+		
+		function skip(event){
+			var key = event.keyCode;
+			if (key == 27){
+				echap = true;
 			}
 		}
 		
