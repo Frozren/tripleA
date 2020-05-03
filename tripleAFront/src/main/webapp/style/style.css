@@ -1087,17 +1087,28 @@ body
 	background-color: transparent;
 }
 
+ #battle .row
+ {
+	margin-right: 0px !important;
+	margin-left: 0px !important;
+ }
+#battle .col, .col-1, .col-10, .col-11, .col-12, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-auto, .col-lg, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-auto, .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-auto, .col-sm, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto
+{
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
+
 #battle #logo
 {
 	position: absolute;
-	width: 70%;
-	top: 15%;
-	left: 15%;
+	width: 50%;
+	top: 5%;
+	left: 5%;
 }
 
 #battle #top
 {
-	height: 10%;
+	height: 6%;
 }
 
 #battle #hp
@@ -1131,21 +1142,21 @@ body
 
 #battle #mid
 {
-	height: 70%;
+	height: 78%;
 }
 
 #battle #divconsole
 {
-	width: 15%;
+	width: 10%;
 }
 
 #battle #console
 {
 	position: absolute;
-	top: 35%;
+	top: 25%;
 	left: 1%;
-	height: 40%;
-	width: 13%;
+	height: 50%;
+	width: 8%;
 	border: solid 1px white;
 	background-color: #330000;
 	font-size: 0.8vw;
@@ -1175,16 +1186,15 @@ body
 {
 	overflow-x: hidden;
 	overflow-x: auto;
-	text-align: justify;
+	text-align: left;
 }
 
 #battle #field
 {
-	background-image: url("../img/field/forestField.jpg");
 	background-position: bottom;
 	background-size: cover;
 	background-repeat: no-repeat;
-	width: 70%;
+	width: 80%;
 	height: 100%;
 }
 
@@ -1195,7 +1205,7 @@ body
 
 #battle #field #tleft
 {
-	height: 45%;
+	height: 40%;
 }
 
 #battle #field #hfield
@@ -1205,7 +1215,7 @@ body
 
 #battle #field #topField
 {
-	height: 30%;
+	height: 25%;
 }
 
 #battle #field #midField
@@ -1215,7 +1225,7 @@ body
 
 #battle #field #hcard
 {
-	heigh:30%;
+
 }
 
 #battle #field .imgcard
@@ -1230,14 +1240,14 @@ body
 	position: absolute;
 	text-align: center;
 	top: 47%;
-	left: 35%;
+	left: 38%;
 	width: 70%;
 	transform: rotate(-5deg);
 }
 
 #battle #field .name
 {
-	font-size: 0.8vw;
+	font-size: 1vw;
 	font-weight: bold;
 	color: white;
 	text-shadow: 0 0 10px #cc9900;
@@ -1247,14 +1257,14 @@ body
 {
 	position: absolute;
 	text-align: center;
-	top: 62%;
-	left: 35%;
-	width: 63%;
+	top: 63%;
+	left: 36%;
+	width: 70%;
 }
 
 #battle #field .class
 {
-	font-size: 0.7vw;
+	font-size: 0.9vw;
 	font-weight: bold;
 	color: white;
 	text-shadow: 0 0 10px #cc9900;
@@ -1264,8 +1274,8 @@ body
 {
 	position: absolute;
 	text-align: center;
-	top: 5%;
-	left: 25%;
+	top: 6%;
+	left: 22%;
 	width: 25%;
 }
 
@@ -1273,8 +1283,8 @@ body
 {
 	position: absolute;
 	text-align: center;
-	top: 83%;
-	left: 25%;
+	top: 86%;
+	left: 22%;
 	width: 25%;
 }
 
@@ -1282,8 +1292,8 @@ body
 {
 	position: absolute;
 	text-align: center;
-	top: 84%;
-	left: 83%;
+	top: 86%;
+	left: 96%;
 	width: 25%;
 }
 
@@ -1297,7 +1307,7 @@ body
 
 #battle #field .stat
 {
-	font-size: 0.8vw;
+	font-size: 0.9vw;
 	font-weight: bold;
 	color: white;
 	text-shadow: 0 0 10px #b30000;

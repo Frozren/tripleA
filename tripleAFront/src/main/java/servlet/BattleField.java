@@ -36,12 +36,12 @@ public class BattleField extends SpringServlet {
 	static int maxhp2;
 	static List<Card> deckHAff = new ArrayList<>();
 	static List<Card> deckAIAff = new ArrayList<>();
-	static String c1;
-	static String c2;
-	static String c3;
-	static String c4;
-	static String c5;
-	static String c6;
+	static String c1, id1;
+	static String c2, id2;
+	static String c3, id3;
+	static String c4, id4;
+	static String c5, id5;
+	static String c6, id6;
 	
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -65,54 +65,65 @@ public class BattleField extends SpringServlet {
 			int posh = h.getCardDistance(deckH);
 			int posai = ai.getCardDistance(deckAI);
 			if (posh==1) {
-				deckHAff = deckH; c1="1"; c2="2"; c3="3";
+				deckHAff = deckH; c1=id1="1"; c2=id2="2"; c3=id3="3";
 			}
+			
 			else if (posh==2) {
 				deckHAff = new ArrayList<>();
 				deckHAff.add(deckH.get(1));
 				deckHAff.add(deckH.get(2));
 				deckHAff.add(deckH.get(0));
-				c1="2"; c2="3"; c3="1";
+				c1="3"; id3="1"; c2="1"; id1="2"; c3="2"; id2="3"; 
 			}
+			
 			else if (posh==3) {
 				deckHAff = new ArrayList<>();
 				deckHAff.add(deckH.get(2));
 				deckHAff.add(deckH.get(0));
 				deckHAff.add(deckH.get(1));
-				c1="3"; c2="1"; c3="2";
+				c1="2"; id2="1"; c2="3"; id3="2"; c3="1"; id1="3";
 			}
 			
 			if (posai==3) {
-				deckAIAff = deckAI; c4="4"; c5="5"; c6="6";
+				deckAIAff = deckAI; c4=id4="4"; c5=id5="5"; c6=id6="6";
 			}
+			
 			else if (posai==1) {
 				deckAIAff = new ArrayList<>();
 				deckAIAff.add(deckAI.get(1));
 				deckAIAff.add(deckAI.get(2));
 				deckAIAff.add(deckAI.get(0));
-				c4="5"; c5="6"; c6="4";
+				c4="6"; id6="4"; c5="4"; id4="5"; c6="5"; id5="6";
 			}
+			
 			else if (posai==2) {
 				deckAIAff = new ArrayList<>();
 				deckAIAff.add(deckAI.get(2));
 				deckAIAff.add(deckAI.get(0));
 				deckAIAff.add(deckAI.get(1));
-				c4="6"; c5="4"; c6="5";
+				c4="5"; id5="4"; c5="6"; id6="5"; c6="4"; id4="6";
 			}
 
 			request.getSession().setAttribute("endGame", "start");
-			request.getSession().setAttribute("namec"+c1, "Legolas");
+			request.getSession().setAttribute("imgField", "img/field/swampField.jpg");
+			request.getSession().setAttribute("namec"+c1, "LEGOLAS");
 			request.getSession().setAttribute("classc"+c1, "Codeur");
-			request.getSession().setAttribute("namec"+c2, "Aragorn");
+			request.getSession().setAttribute("img"+c1, "img/card/cardAP.png");
+			request.getSession().setAttribute("namec"+c2, "ARAGORN");
 			request.getSession().setAttribute("classc"+c2, "Hacker");
-			request.getSession().setAttribute("namec"+c3, "Gimli");
+			request.getSession().setAttribute("img"+c2, "img/card/cardAB.png");
+			request.getSession().setAttribute("namec"+c3, "GIMLI");
 			request.getSession().setAttribute("classc"+c3, "Debugeur");
-			request.getSession().setAttribute("namec"+c4, "Smaug");
+			request.getSession().setAttribute("img"+c3, "img/card/cardAV.png");
+			request.getSession().setAttribute("namec"+c4, "SMAUG");
 			request.getSession().setAttribute("classc"+c4, "Omniscient");
-			request.getSession().setAttribute("namec"+c5, "Sauron");
+			request.getSession().setAttribute("img"+c4, "img/card/cardTG.png");
+			request.getSession().setAttribute("namec"+c5, "SAURON");
 			request.getSession().setAttribute("classc"+c5, "Maitre du jeu");
-			request.getSession().setAttribute("namec"+c6, "Saroumane");
+			request.getSession().setAttribute("img"+c5, "img/card/cardJR.png");
+			request.getSession().setAttribute("namec"+c6, "SAROUMANE");
 			request.getSession().setAttribute("classc"+c6, "Mentaliste");
+			request.getSession().setAttribute("img"+c6, "img/card/cardJA.png");
 
 			refresh(request);		
 			//}
@@ -201,7 +212,7 @@ public class BattleField extends SpringServlet {
 		if(!end) {
 			turn++;
 			System.out.println("turn="+turn);
-			message="<p>Round n°"+Integer.toString(turn)+message;
+			message="<p><u><font color='#FFD700'>Round n°"+Integer.toString(turn)+"</font></u></p>"+message;
 			tour = h.RNG(2);
 			System.out.println("tour="+tour);
 			if (i<2) {i++;}
@@ -295,12 +306,12 @@ public class BattleField extends SpringServlet {
 		request.getSession().setAttribute("deckH", deckHAff);
 		request.getSession().setAttribute("deckAI", deckAIAff);
 
-		request.getSession().setAttribute("idCard1", c1);
-		request.getSession().setAttribute("idCard2", c2);
-		request.getSession().setAttribute("idCard3", c3);
-		request.getSession().setAttribute("idCard4", c4);
-		request.getSession().setAttribute("idCard5", c5);
-		request.getSession().setAttribute("idCard6", c6);
+		request.getSession().setAttribute("idCard1", id1);
+		request.getSession().setAttribute("idCard2", id2);
+		request.getSession().setAttribute("idCard3", id3);
+		request.getSession().setAttribute("idCard4", id4);
+		request.getSession().setAttribute("idCard5", id5);
+		request.getSession().setAttribute("idCard6", id6);
 		
 		if(deckHAff.get(0).getLife()>0) {request.getSession().setAttribute("disc1", "visible");}
 		else {request.getSession().setAttribute("disc1", "hidden");}
@@ -314,7 +325,9 @@ public class BattleField extends SpringServlet {
 		else {request.getSession().setAttribute("disc5", "hidden");}
 		if(deckAIAff.get(2).getLife()>0) {request.getSession().setAttribute("disc6", "visible");}
 		else {request.getSession().setAttribute("disc6", "hidden");}
-
+		
+		String idCardDef = Integer.toString(h.getCardProtected(deckH));
+		request.getSession().setAttribute("idCardDef", idCardDef);
 		
 	}
 
