@@ -98,13 +98,22 @@ public class NextRound extends SpringServlet {
 		
 		int phase = h.getPhase(c1);
 		int pts = Game.getInstance().getPassivePoints()*phase;
-		Card c4 = ai.createCardRNG(pts);
-		Card c5 = ai.createCardRNG(pts);
-		Card c6 = ai.createCardRNG(pts);
+		Card c4 = new Card();
+		Card c5 = new Card();
+		Card c6 = new Card();
+		if (phase<2) {
+		c4 = ai.createCardRNG(pts,idai1);
+		c5 = ai.createCardRNG(pts,idai2);
+		c6 = ai.createCardRNG(pts,idai3);
+		}
+		else {
+			c4.addLife(-100);
+			c5.addLife(-100);
+			c6.addLife(300-100);
+			c6.addAtk(150-20);
+			c6.addDef(90-25);
+		}
 		
-		c4.setId(idai1);
-		c5.setId(idai2);
-		c6.setId(idai3);
 		System.out.println("debut cates IA-----------------------");
 		System.out.println(c4);
 		System.out.println(c5);

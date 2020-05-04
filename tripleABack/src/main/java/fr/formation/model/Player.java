@@ -146,6 +146,7 @@ public abstract class Player {
 		n = RNG(pts+1);
 		c.addAtk(n);
 		pts -= n;
+		if (pts>90) {pts=90;}
 		c.addDef(pts);
 		
 		c.setId(i);
@@ -163,6 +164,7 @@ public abstract class Player {
 		n = RNG(pts+1);
 		c.addAtk(n);
 		pts -= n;
+		if (pts>90) {pts=90;}
 		c.addDef(pts);
 
 		return c;

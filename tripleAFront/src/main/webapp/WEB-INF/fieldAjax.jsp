@@ -192,4 +192,5 @@
 	<input type="text" id="endGame" value="${endGame}"
 		style="visibility: hidden;"></input>
 	<input type="text" id="idCardDef" value="${idCardDef}" style="visibility: hidden;"></input>
+	<input type="text" id="boss" value="${boss}" style="visibility: hidden;"></input>
 </div>

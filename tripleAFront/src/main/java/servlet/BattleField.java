@@ -42,18 +42,30 @@ public class BattleField extends SpringServlet {
 	static String c4, id4;
 	static String c5, id5;
 	static String c6, id6;
+	static int phase;
+	static Boolean boss;
 	
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
+		
+		
 		if(turn==0) {
+			
 			message = "<p>Cliquez sur une carte pour commencer</p>";
 			i=0;
 			tour=0;
 			def=0;
 			end=false;
 			h = Game.getInstance().getHuman();
-			
+			Optional<Card> card1 =  daoCard.findById(h.getCard1().getId());
+			phase = h.getPhase(card1.get());
+			System.out.println("phase="+phase);
+			if (phase == 2) {
+				boss = true;
+				request.getSession().setAttribute("boss", "1");}
+			else {boss = false;
+			request.getSession().setAttribute("boss", "0");}
 			ai = Game.getInstance().getAI();
 			deckH = h.deck();
 			deckAI = ai.deck();
@@ -190,9 +202,6 @@ public class BattleField extends SpringServlet {
 		else if(h.verifyEnd()) {
 			message="<p>Le joueur a perdu...</p>"+message;
 			turn=0;
-			Optional<Card> c1 =  daoCard.findById(h.getCard1().getId());
-			int phase = h.getPhase(c1.get());
-			System.out.println(phase);
 			History history = new History(Game.getInstance().getHuman(), phase, false);
 			daoHistory.save(history);
 			List<History> listh = daoHistory.findAll();
@@ -319,16 +328,18 @@ public class BattleField extends SpringServlet {
 		else {request.getSession().setAttribute("disc2", "hidden");}
 		if(deckHAff.get(2).getLife()>0) {request.getSession().setAttribute("disc3", "visible");}
 		else {request.getSession().setAttribute("disc3", "hidden");}
-		if(deckAIAff.get(0).getLife()>0) {request.getSession().setAttribute("disc4", "visible");}
+		if(deckAIAff.get(0).getLife()>0 && !boss) {request.getSession().setAttribute("disc4", "visible");}
 		else {request.getSession().setAttribute("disc4", "hidden");}
-		if(deckAIAff.get(1).getLife()>0) {request.getSession().setAttribute("disc5", "visible");}
+		if(deckAIAff.get(1).getLife()>0 && !boss) {request.getSession().setAttribute("disc5", "visible");}
 		else {request.getSession().setAttribute("disc5", "hidden");}
-		if(deckAIAff.get(2).getLife()>0) {request.getSession().setAttribute("disc6", "visible");}
+		if(deckAIAff.get(2).getLife()>0 && !boss) {request.getSession().setAttribute("disc6", "visible");}
 		else {request.getSession().setAttribute("disc6", "hidden");}
+		if(boss) {request.getSession().setAttribute("discBoss", "visible");}
+		else {request.getSession().setAttribute("discBoss", "hidden");}
 		
 		String idCardDef = Integer.toString(h.getCardProtected(deckH));
+		if (h.deck().size()==1) {idCardDef="0";}
 		request.getSession().setAttribute("idCardDef", idCardDef);
-		
 	}
 
 	public void deletePlayer(Player player) {

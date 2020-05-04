@@ -261,6 +261,7 @@
 			<div class="col-2" id="variables">
 				<input type="text" id="endGame" value="${endGame}" style="visibility: hidden;"></input>
 				<input type="text" id="idCardDef" value="${idCardDef}" style="visibility: hidden;"></input>
+				<input type="text" id="boss" value="${boss}" style="visibility: hidden;"></input>
 			</div>
 		</div>
 	</form>
@@ -380,6 +381,11 @@
 			c1.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #00e4ff)");
 			c2.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #00e4ff)");
 			c3.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 10px #00e4ff)");
+			}
+		else if (cardDef=="0") {
+			c1.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #00e4ff)");
+			c2.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #00e4ff)");
+			c3.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #00e4ff)");
 			}
 	}
 	
