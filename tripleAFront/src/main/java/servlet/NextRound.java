@@ -96,7 +96,7 @@ public class NextRound extends SpringServlet {
 		
 		daoPlayer.save(h);
 		
-		int phase = h.getPhase(c1);
+		int phase = h.getPhase() + 1;
 		int pts = Game.getInstance().getPassivePoints()*phase;
 		Card c4 = new Card();
 		Card c5 = new Card();

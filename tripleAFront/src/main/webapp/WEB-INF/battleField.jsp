@@ -399,7 +399,7 @@
 			var sound = document.getElementById("victory");
 			gameOver.volume = 0.05;
 			sound.play();
-			setTimeout(function(){window.location.href = "${pageContext.request.contextPath}/nextRound";}, 6000);
+			setTimeout(function(){window.location.href = "${pageContext.request.contextPath}/choice";}, 6000);
 			
 		}
 		else if (end=="lose") {

@@ -17,8 +17,14 @@ import fr.formation.model.Human;
 public class Matchup extends SpringServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getSession().setAttribute("blockRefresh", false);
+		
 		Human h = Game.getInstance().getHuman();
 		AI ai = Game.getInstance().getAI();
+		
+		int phase = h.getPhase() + 1;
+		
+		h.setPhase(phase);
 		
 		int cardDistanceAI = ai.choiceDistance();
 		
@@ -29,6 +35,7 @@ public class Matchup extends SpringServlet {
 		
 		request.setAttribute("cardH", cardH);
 		request.setAttribute("cardAI", cardAI);
+		request.setAttribute("phase", phase);
 		
 		this.getServletContext().getRequestDispatcher("/WEB-INF/matchup.jsp").forward(request, response);
 	}

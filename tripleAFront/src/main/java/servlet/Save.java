@@ -50,7 +50,6 @@ public class Save extends SpringServlet {
 			
 			list.remove(saveId);
 		} else {
-			System.out.println("On va sur matchup");
 			String name = list.get(saveId).getName();
 			
 			Game.getInstance().setHuman((Human) daoPlayer.findByName(name));

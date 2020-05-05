@@ -32,7 +32,7 @@
 						<tr id="tableTitles">
 							<th>Date</th>
 							<th>Joueur</th>
-							<th>Phase</th>
+							<th>Étage</th>
 							<th>Dgts infligés</th>
 							<th>Dgts reçus</th>
 						</tr>

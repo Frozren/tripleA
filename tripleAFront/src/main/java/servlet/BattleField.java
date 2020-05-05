@@ -59,9 +59,9 @@ public class BattleField extends SpringServlet {
 			end=false;
 			h = Game.getInstance().getHuman();
 			Optional<Card> card1 =  daoCard.findById(h.getCard1().getId());
-			phase = h.getPhase(card1.get());
+			phase = h.getPhase();
 			System.out.println("phase="+phase);
-			if (phase == 2) {
+			if (phase == 3) {
 				boss = true;
 				request.getSession().setAttribute("boss", "1");}
 			else {boss = false;
@@ -119,23 +119,29 @@ public class BattleField extends SpringServlet {
 			request.getSession().setAttribute("endGame", "start");
 			request.getSession().setAttribute("imgField", "img/field/swampField.jpg");
 			request.getSession().setAttribute("namec"+c1, "LEGOLAS");
-			request.getSession().setAttribute("classc"+c1, "Codeur");
+			request.getSession().setAttribute("classc"+c1, "Le Codeur");
 			request.getSession().setAttribute("img"+c1, "img/card/cardAP.png");
 			request.getSession().setAttribute("namec"+c2, "ARAGORN");
-			request.getSession().setAttribute("classc"+c2, "Hacker");
+			request.getSession().setAttribute("classc"+c2, "L'Hacker");
 			request.getSession().setAttribute("img"+c2, "img/card/cardAB.png");
 			request.getSession().setAttribute("namec"+c3, "GIMLI");
-			request.getSession().setAttribute("classc"+c3, "Debugeur");
+			request.getSession().setAttribute("classc"+c3, "Le Debugeur");
 			request.getSession().setAttribute("img"+c3, "img/card/cardAV.png");
-			request.getSession().setAttribute("namec"+c4, "SMAUG");
-			request.getSession().setAttribute("classc"+c4, "Omniscient");
-			request.getSession().setAttribute("img"+c4, "img/card/cardTG.png");
-			request.getSession().setAttribute("namec"+c5, "SAURON");
-			request.getSession().setAttribute("classc"+c5, "Maitre du jeu");
-			request.getSession().setAttribute("img"+c5, "img/card/cardJR.png");
-			request.getSession().setAttribute("namec"+c6, "SAROUMANE");
-			request.getSession().setAttribute("classc"+c6, "Mentaliste");
-			request.getSession().setAttribute("img"+c6, "img/card/cardJA.png");
+			request.getSession().setAttribute("namec4", "SMAUG");
+			request.getSession().setAttribute("classc4", "Le Majestueux");
+			request.getSession().setAttribute("img4", "img/card/cardTG.png");
+			request.getSession().setAttribute("namec5", "GOLUM");
+			request.getSession().setAttribute("classc5", "Le Maitre du jeu");
+			request.getSession().setAttribute("img5", "img/card/cardJR.png");
+			if (phase == 1) {
+				request.getSession().setAttribute("namec6", "SAROUMANE");
+				request.getSession().setAttribute("classc6", "Le Magicien");
+				request.getSession().setAttribute("img6", "img/card/cardJA.png");
+			} else {
+				request.getSession().setAttribute("namec6", "SAURON");
+				request.getSession().setAttribute("classc6", "L'Omniscient");
+				request.getSession().setAttribute("img6", "img/card/cardJP.png");
+			}
 
 			refresh(request);		
 			//}

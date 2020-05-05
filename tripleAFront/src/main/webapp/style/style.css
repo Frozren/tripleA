@@ -1007,6 +1007,66 @@ body
 	left: 10px;
 }
 
+#danger
+{
+	display: none;
+}
+
+#danger img
+{
+	width: 20%;
+}
+
+#danger0
+{
+	position: absolute;
+	font-size: 10vw !important;
+	font-family: 'Cooper Black';
+	color: black;
+	text-shadow: 0 0 50px #b00000;
+	bottom: -175px;
+	left: 30%;
+	animation: 2s linear infinite blink0;
+	z-index: -1;
+}
+
+@keyframes blink0 {
+  0% {
+    visibility: visible;
+  }
+  50% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: hidden;
+  }
+}
+
+#danger1
+{
+	position: absolute;
+	bottom: 3%;
+	left: 12%;
+    text-shadow: 0 0 5px black;
+	filter: drop-shadow(0 0 5rem white);
+	color: #b00000;
+	font-size: 2em;
+	font-weight: bold;
+	animation: 2s linear infinite blink1;
+}
+
+@keyframes blink1 {
+  0% {
+    visibility: hidden;
+  }
+  50% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: visible;
+  }
+}
+
 #decompte h1
 {
 	margin-top: 10%;

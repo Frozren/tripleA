@@ -12,6 +12,7 @@ public class Game {
 
 	private int passivePoints = 50;
 	private int cardChoice = 5;
+	private int bonusPts = 10;
 	private boolean difficulty = false;
 	private Connection connection = null;
 	private static Game _instance = null;
@@ -66,6 +67,14 @@ public class Game {
 
 	public void setAI(AI ai) {
 		this.ai = ai;
+	}
+
+	public int getBonusPts() {
+		return bonusPts;
+	}
+
+	public void setBonusPts(int bonusPts) {
+		this.bonusPts = bonusPts;
 	}
 
 	public Connection getConnection() throws ClassNotFoundException, SQLException {

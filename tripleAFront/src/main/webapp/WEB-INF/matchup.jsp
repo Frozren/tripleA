@@ -69,6 +69,10 @@
 			</div>
 			<img id="vs" src="img/vs.png">
 		</div>
+		<div id="danger">
+			<div id="danger0"><h2>BOSS</h2></div>
+			<div id="danger1"><div><img src="img/danger.png"></div><div>DANGER</div></div>
+		</div>
 		<div id = "decompte">
 			<img id="explo" src="img/explo.gif" style="width:500px;position:absolute;top:10%;left:35%"/>
 			<h1 id="decText"></h1>
@@ -100,6 +104,9 @@
 		var audio1 = document.getElementById("Audio1");
 		var audio2 = document.getElementById("Audio2");
 		var audio3 = document.getElementById("Audio3");
+		var ai = document.getElementById("row2");
+		var danger = document.getElementById("danger");
+		var phase = ${phase};
 		var card = 0;
 		var i = 3;
 		var echap = false;
@@ -109,6 +116,11 @@
 		window.onkeydown = skip;
 		
 		function smoothOpening() {
+			if (phase == 3){
+				ai.style.visibility = "hidden";
+				danger.style.display = "block";
+			}
+			
 			decompte.style.display = "none";
 			explo.style.display = "none";
 			document.getElementById("cAI" + "${cardDistanceAI}").style.setProperty("-webkit-filter", "drop-shadow(0px 0px 10px #00e4ff)");

@@ -16,6 +16,9 @@ public class Human extends Player {
 	@Column(name="dmgTaken")
 	private int dmgTaken;
 	
+	@Column(name="phase")
+	private int phase = 0;
+	
 	public Human(int id, String name, Card carte1, Card carte2, Card carte3, boolean typePlayer, int idOpponent) {
 		super(id, name, carte1, carte2, carte3, typePlayer, idOpponent);
 	}
@@ -50,6 +53,14 @@ public class Human extends Player {
 	public void setDmgTaken(int dmgTaken) {
 		this.dmgTaken = dmgTaken;
 	}
+	
+	public int getPhase() {
+		return phase;
+	}
+
+	public void setPhase(int phase) {
+		this.phase = phase;
+	}
 
 	public String attack(List<Card> deckH, List<Card> deckAI, AI ai, int att, int target) {
 		
@@ -82,13 +93,13 @@ public class Human extends Player {
 		return true;
 	}
 	
-	public int getPhase(Card c1) {
-		int passivePoints = Game.getInstance().getPassivePoints();
-		int hp = c1.getLife(), atk = c1.getAtk(), def = c1.getDef();
-		int phase = (hp+atk+def-100-20-25)/passivePoints;
-		System.out.println("phase = "+phase);
-		return phase;
-	}
+//	public int getPhase(Card c1) {
+//		int passivePoints = Game.getInstance().getPassivePoints();
+//		int hp = c1.getLife(), atk = c1.getAtk(), def = c1.getDef();
+//		int phase = (hp+atk+def-100-20-25)/passivePoints;
+//		System.out.println("phase = "+phase);
+//		return phase;
+//	}
 
 	@Override
 	public String toString() {

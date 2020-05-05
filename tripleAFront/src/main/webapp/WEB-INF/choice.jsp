@@ -18,17 +18,17 @@
 			<table>
 				<tr>
 					<td class="c1"><h2>HP :</h2></td>
-					<td class="c2"><h3 id="texthp">100</h3></td>
+					<td class="c2"><h3 id="texthp">${hp}</h3></td>
 					<td class="c3"><input type="range" class="sliderperso" id="hp" value="0" min="0" max="${pts}" step="1"></td>
 				</tr>
 				<tr>
 					<td class="c1"><h2>ATK :</h2></td>
-					<td class="c2"><h3 id="textatk">20</h3></td>
+					<td class="c2"><h3 id="textatk">${atk}</h3></td>
 					<td class="c3"><input type="range" class="sliderperso" id="atk" value="0" min="0" max="${pts}" step="1"></td>
 				</tr>
 				<tr>
 					<td class="c1"><h2>DEF :</h2></td>
-					<td class="c2"><h3 id="textdef">25</h3></td>
+					<td class="c2"><h3 id="textdef">${def}</h3></td>
 					<td class="c3"><input type="range" class="sliderperso" id="def" value="0" min="0" max="${pts}" step="1"></td>
 				</tr>
 			</table>
@@ -92,21 +92,21 @@
 		def.oninput = deflink;
 		
 		function hplink(){
-			var s = parseInt(hp.value) + 100;
+			var s = parseInt(hp.value) + ${hp};
 			texthp.innerHTML = s;
 			atk.max = pts - hp.value - def.value;
 			def.max = pts - hp.value - atk.value;
 		}
 
 		function atklink(){
-			var s = parseInt(atk.value) + 20;
+			var s = parseInt(atk.value) + ${atk};
 			textatk.innerHTML = s;
 			hp.max = pts - atk.value - def.value;
 			def.max = pts - atk.value - hp.value;
 		}
 
 		function deflink(){
-			var s = parseInt(def.value) + 25;
+			var s = parseInt(def.value) + ${def};
 			textdef.innerHTML = s;
 			hp.max = pts - def.value - atk.value;
 			atk.max = pts - def.value - hp.value;
@@ -127,13 +127,13 @@
 			} else if (e.target.id == "continue"){
 				var s = parseInt(hp.value) + parseInt(atk.value) + parseInt(def.value);
 				
-				if (s != 50 && numberCard != 2){
+				if (s != pts && numberCard != 2){
 					alert("Attribuer tous les points de stats et choisir deux cartes !");
-				} else if (s != 50 && numberCard == 2){
+				} else if (s != pts && numberCard == 2){
 					alert("Attribuer tous les points de stats !");
-				} else if (s == 50 && numberCard != 2){
+				} else if (s == pts && numberCard != 2){
 					alert("Choisir deux cartes !");
-				} else if (s == 50 && numberCard == 2) {
+				} else if (s == pts && numberCard == 2) {
 					setTimeout(getAll, 2000);
 				}
 			} else if (e.target.id == "logoHome"){
@@ -143,12 +143,13 @@
 		
 		function getAll(){
 			var a="";
-			for (var i = 0; i < "${nbCards}"; i++) {
+			var id = ${listChoice[0].id};
+			for (var i = id; i < id + 5; i++) {
 				if (getMargin("card" + i) == "0px"){
 					if (a == ""){
-						a += (i+1).toString() + "|";
+						a += (i-id+1).toString() + "|";
 					} else {
-						a += (i+1).toString();
+						a += (i-id+1).toString();
 					}
 				}
 			}
