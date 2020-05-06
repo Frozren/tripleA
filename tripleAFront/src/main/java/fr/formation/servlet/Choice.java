@@ -1,4 +1,4 @@
-package servlet;
+package fr.formation.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import fr.formation.model.Game;
 import fr.formation.model.Human;
 import fr.formation.model.Player;
 
-@WebServlet("/choice")
+//@WebServlet("/choice")
 public class Choice extends SpringServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

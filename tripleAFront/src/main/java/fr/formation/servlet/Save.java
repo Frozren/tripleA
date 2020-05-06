@@ -1,4 +1,4 @@
-package servlet;
+package fr.formation.servlet;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,7 +16,7 @@ import fr.formation.model.Game;
 import fr.formation.model.Human;
 import fr.formation.model.Player;
 
-@WebServlet("/save")
+//@WebServlet("/save")
 public class Save extends SpringServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

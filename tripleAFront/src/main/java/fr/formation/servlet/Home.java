@@ -1,4 +1,4 @@
-package servlet;
+package fr.formation.servlet;
 
 import static java.util.Collections.reverseOrder;
 import static java.util.Comparator.comparing;
@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.formation.model.History;
 
-@WebServlet("/home")
+//@WebServlet("/home")
 public class Home extends SpringServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		

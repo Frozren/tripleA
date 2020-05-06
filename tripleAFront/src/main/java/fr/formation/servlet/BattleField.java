@@ -1,4 +1,4 @@
-package servlet;
+package fr.formation.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import fr.formation.model.History;
 import fr.formation.model.Human;
 import fr.formation.model.Player;
 
-@WebServlet("/battleField")
+//@WebServlet("/battleField")
 public class BattleField extends SpringServlet {
 	//test: http://localhost:8181/tripleAFront/
 	static String message;

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html	xmlns:th="http://www.thymeleaf.org"
+		th:fragment="layout(title, content)">
+
+	<head>
+		<title>[[ ${ title } ]]</title>
+		<meta charset="UTF-8" />
+
+		<base href="/tripleAFront/" />
+		<link rel="stylesheet" type="text/css" href="assets/style/style.css" />		
+	</head>
+
+	<body th:replace="${content}"></body>
+</html>

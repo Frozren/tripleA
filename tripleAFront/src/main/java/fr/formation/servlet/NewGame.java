@@ -1,4 +1,4 @@
-package servlet;
+package fr.formation.servlet;
 
 import java.io.IOException;
 
@@ -12,7 +12,7 @@ import fr.formation.dao.IDAOPlayer;
 import fr.formation.model.Game;
 import fr.formation.model.Human;
 
-@WebServlet("/newGame")
+//@WebServlet("/newGame")
 public class NewGame extends SpringServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

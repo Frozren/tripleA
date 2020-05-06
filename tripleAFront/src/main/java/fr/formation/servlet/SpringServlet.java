@@ -1,4 +1,4 @@
-package servlet;
+package fr.formation.servlet;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -12,7 +12,7 @@ import fr.formation.dao.IDAOCard;
 import fr.formation.dao.IDAOHistory;
 import fr.formation.dao.IDAOPlayer;
 
-@WebServlet("/SpringServlet")
+//@WebServlet("/SpringServlet")
 public class SpringServlet extends HttpServlet{
 
 	@Autowired

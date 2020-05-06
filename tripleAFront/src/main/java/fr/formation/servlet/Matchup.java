@@ -1,4 +1,4 @@
-package servlet;
+package fr.formation.servlet;
 
 import java.io.IOException;
 import java.util.List;
@@ -13,7 +13,7 @@ import fr.formation.model.Card;
 import fr.formation.model.Game;
 import fr.formation.model.Human;
 
-@WebServlet("/matchup")
+//@WebServlet("/matchup")
 public class Matchup extends SpringServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
