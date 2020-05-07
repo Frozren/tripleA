@@ -1,18 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<link rel="icon" href="assets/img/vignette.png">
-		<title>tripleA</title>
-		<script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
-	</head>
-
+<html th:replace="~{ layout.html :: layout(~{ ::body }, ~{ ::script }, ~{ ::bootstrap }) }">
+	
+	<bootstrap></bootstrap>
+	
 	<body>
 		<div id="newGame">
-			<div><a href="#"><img id="logoHome" src="assets/img/logo.png"/></a></div>
+			<div><a><img id="logoHome" src="assets/img/logo.png"/></a></div>
 			<div><h1 id="titre">NOM DE VOTRE HÉROS</h1></div>
 			<div>
 				<form id="myform" method="POST" action="newGameNext">
@@ -80,7 +72,7 @@
 		}
 	
 		function retour() {
-			window.location.href = "${pageContext.request.contextPath}/home";
+			window.location.href = "home";
 		}
 		
 		function verifPseudo(){
@@ -111,5 +103,4 @@
 			return false;
 		});
 	</script>
-	
 </html>

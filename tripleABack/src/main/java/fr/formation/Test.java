@@ -1,11 +1,6 @@
 package fr.formation;
 
-import static java.util.Collections.reverseOrder;
-import static java.util.Comparator.comparing;
-
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -13,7 +8,7 @@ import fr.formation.config.AppConfig;
 import fr.formation.dao.IDAOCard;
 import fr.formation.dao.IDAOHistory;
 import fr.formation.dao.IDAOPlayer;
-import fr.formation.model.History;
+import fr.formation.model.Player;
 
 public class Test {
 	
@@ -47,27 +42,33 @@ public class Test {
 //			System.out.println(p);
 //		}
 		
-		List<History> list = daoHistory.findAll();
+//		List<History> list = daoHistory.findAll();
+//		
+//		list = list.stream().sorted(
+//                comparing(History::getName)
+//                .thenComparing(History::getDateEnd).reversed())
+//               .collect(Collectors.toList());		//TRI PAR NOM
+//		
+//		//SUPPRIMER LES DOUBLONS POUR QU'IL N'Y AI QU'UNE SEULE FOIS LE MÊME
+//		for (int i = list.size() - 1; i > 0; i--) {
+//			if (list.get(i).getName().contentEquals(list.get(i - 1).getName())) {
+//				list.remove(i);
+//			}
+//		}
+//		
+//		list = list.stream().sorted(
+//                comparing(History::getNbWin).reversed())
+//               .collect(Collectors.toList());	
+//		
+//		
+//		
+//		list.forEach(l -> System.out.println(l));
 		
-		list = list.stream().sorted(
-                comparing(History::getName)
-                .thenComparing(History::getDateEnd).reversed())
-               .collect(Collectors.toList());		//TRI PAR NOM
-		
-		//SUPPRIMER LES DOUBLONS POUR QU'IL N'Y AI QU'UNE SEULE FOIS LE MÊME
-		for (int i = list.size() - 1; i > 0; i--) {
-			if (list.get(i).getName().contentEquals(list.get(i - 1).getName())) {
-				list.remove(i);
-			}
-		}
-		
-		list = list.stream().sorted(
-                comparing(History::getNbWin).reversed())
-               .collect(Collectors.toList());	
-		
-		
+		List<Player> list = daoPlayer.findByTypePlayer(false);
 		
 		list.forEach(l -> System.out.println(l));
+		
+		
 	}
 	
 }

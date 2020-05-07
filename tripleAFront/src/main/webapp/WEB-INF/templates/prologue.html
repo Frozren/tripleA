@@ -1,16 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<!DOCTYPE html>
-<html id="prologue">
-	<head>
-		<meta charset="UTF-8">
-		<link rel="icon" href="img/vignette.png">
-		<title>tripleA</title>
-	</head>
-
-	<body>
-		<div id="avant"><a href="#"><img id="play" src="assets/img/home/logoPlay1.png"/></a></div>
+<html th:replace="~{ layout.html :: layout(~{ ::body }, ~{ ::script }, ~{ ::bootstrap }) }">
+	
+	<bootstrap></bootstrap>
+	
+	<body id="prologue">
+		<div id="avant"><img id="play" src="assets/img/home/logoPlay1.png"/></div>
 		<div id="apres">
 			<div class="fade"></div>
 			<div><img id="logoHome" src="assets/img/logo.png"/></div>
@@ -36,6 +29,7 @@
 			<source src="assets/sound/prologue.mp3" type="audio/mp3">
 		</audio>
 	</body>
+	
 	<script type="text/javascript">
 		var playButton = document.getElementById("play");
 		var avant = document.getElementById("avant");
@@ -47,12 +41,18 @@
 		var i = 0;
 		var j = 0;
 		var k = 0;
-	
+		
+		window.onload = load;
 		window.onkeydown = echap;
 		audio.onended = timer;
 		playButton.onmouseover = changeImg;
 		playButton.onmouseout = changeImg;
 		playButton.onclick = next;
+		
+		function load(){
+			document.documentElement.style.background = "none";
+			document.documentElement.style.backgroundColor = "black";
+		}
 		
 		function changeImg(){
 			if (k == 0){
@@ -87,7 +87,7 @@
 		}
 	
 		function timer(){
-			window.setTimeout(function(){window.location.href = ("${pageContext.request.contextPath}/home")}, 3000);
+			window.setTimeout(function(){window.location.href = ("home")}, 3000);
 		}
 		
 		function echap(event){
@@ -97,7 +97,7 @@
 					echapDisp.style.visibility = "visible";
 					i = 1;
 				} else {
-					window.location.href = "${pageContext.request.contextPath}/home";
+					window.location.href = "home";
 					return false;
 				}
 			} else if (key == 32){

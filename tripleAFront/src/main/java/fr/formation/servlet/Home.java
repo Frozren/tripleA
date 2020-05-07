@@ -55,6 +55,10 @@ public class Home extends SpringServlet {
 				}
 			}
 			
+//			https://www.baeldung.com/java-streams-distinct-by
+			
+			
+			
 			histoWin = histoWin.stream().sorted(
 	                comparing(History::getNbWin).reversed())
 	               .collect(Collectors.toList());

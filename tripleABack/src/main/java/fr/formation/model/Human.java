@@ -96,8 +96,9 @@ public class Human extends Player {
 
 	@Override
 	public String toString() {
-		return "Human [dmgDealt=" + dmgDealt + ", dmgTaken=" + dmgTaken + ", id=" + id + ", idOpponent=" + idOpponent
-				+ ", name=" + name + ", typePlayer=" + typePlayer + ", card1=" + card1 + ", card2=" + card2 + ", card3="
-				+ card3 + "]";
+		return "Human [dmgDealt=" + dmgDealt + ", dmgTaken=" + dmgTaken + ", phase=" + phase + ", id=" + id
+				+ ", idOpponent=" + idOpponent + ", name=" + name + ", typePlayer=" + typePlayer + ", card1=" + card1
+				+ ", card2=" + card2 + ", card3=" + card3 + "]";
 	}
+	
 }

@@ -1,24 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<link rel="icon" href="assets/img/vignette.png">
-		<title>tripleA</title>
-	</head>
-
+<html th:replace="~{ layout.html :: layout(~{ ::body }, ~{ ::script }, ~{ ::bootstrap }) }">
+	
+	<bootstrap></bootstrap>
+	
 	<body>
 		<div id="home">
 			<div id="logo1"><img src="assets/img/home/logoHaut.png"></div>
 			<div id="menu">
 				<div id="nav">
 					<ul>
-						<li><a id="newGame" href="#">NOUVELLE PARTIE</a></li>
-						<li><a id="save" href="#">CHARGER UNE PARTIE</a></li>
-						<li><a id="options" href="#">OPTIONS</a></li>
-						<li><a id="leave" href="#">QUITTER</a></li>
+						<li><a id="newGame">NOUVELLE PARTIE</a></li>
+						<li><a id="save">CHARGER UNE PARTIE</a></li>
+						<li><a id="options">OPTIONS</a></li>
+						<li><a id="leave">QUITTER</a></li>
 					</ul>
 				</div>
 				<div id="logo2"><img src="assets/img/home/logoBas.png"></div>
@@ -38,26 +31,14 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${history}" var="h">
-							<c:if test = "${h.etat == true}">
-								<tr style="color: green">
-									<td>${h.dateEnd}</td>
-									<td>${h.name}</td>
-									<td>${h.phase}</td>
-									<td>${h.dmgDealt}</td>
-									<td>${h.dmgTaken}</td>
-								</tr>
-							</c:if>
-							<c:if test = "${h.etat == false}">
-								<tr style="color: darkred">
-									<td>${h.dateEnd}</td>
-									<td>${h.name}</td>
-									<td>${h.phase}</td>
-									<td>${h.dmgDealt}</td>
-									<td>${h.dmgTaken}</td>
-								</tr>
-							</c:if>
-						</c:forEach>
+						<tr th:each="h : ${history}"
+							th:style="${ 'color: ' + (h.etat == true ? 'green' : 'darkred') }">
+							<td>[[${h.dateEnd}]]</td>
+							<td>[[${h.name}]]</td>
+							<td>[[${h.phase}]]</td>
+							<td>[[${h.dmgDealt}]]</td>
+							<td>[[${h.dmgTaken}]]</td>
+						</tr>
 						<tr style="color: darkred">
 							<td>2020.02.28</td>
 							<td>MERLIN</td>
@@ -224,9 +205,9 @@
 			</div>
 			<div id="toptier">
 				<img src="assets/img/home/podium.png">
-				<div id="first" style="color: gold"><strong id="premierNom">${histoD[0].name}</strong><br /><span id="premierData">${histoD[0].dmgDealt}</span></div>
-				<div id="second" style="color: silver"><strong id="secondNom">${histoD[1].name}</strong><br /><span id="secondData">${histoD[1].dmgDealt}</span></div>
-				<div id="third" style="color: brown"><strong id="troisiemeNom">${histoD[2].name}</strong><br /><span id="troisiemeData">${histoD[2].dmgDealt}</span></div>
+				<div id="first" style="color: gold"><strong id="premierNom">[[${histoD[0].name}]]</strong><br /><span id="premierData">[[${histoD[0].dmgDealt}]]</span></div>
+				<div id="second" style="color: silver"><strong id="secondNom">[[${histoD[1].name}]]</strong><br /><span id="secondData">[[${histoD[1].dmgDealt}]]</span></div>
+				<div id="third" style="color: brown"><strong id="troisiemeNom">[[${histoD[2].name}]]</strong><br /><span id="troisiemeData">[[${histoD[2].dmgDealt}]]</span></div>
 				<div id="tri"> Dégâts infligés </div>
 			</div>
 		</div>
@@ -244,7 +225,7 @@
 		var troisiemeData = document.getElementById("troisiemeData");
 		var audio = document.getElementById("Audio");
 		var tri = document.getElementById("tri");
-		var empty = ${emptyHistory};
+		var empty = [[${emptyHistory}]];
 		var scores = [" Dégâts infligés ", " Dégâts reçus ", " Nombre de victoires "];
 		var a = 1;
 		var b = 1;
@@ -295,28 +276,28 @@
 				tri.innerHTML = scores[a];
 				
 				if (a == 0){
-					premierNom.innerHTML = "${histoD[0].name}";
-					premierData.innerHTML = "${histoD[0].dmgDealt}";
-					secondNom.innerHTML = "${histoD[1].name}";
-					secondData.innerHTML = "${histoD[1].dmgDealt}";
-					troisiemeNom.innerHTML = "${histoD[2].name}";
-					troisiemeData.innerHTML = "${histoD[2].dmgDealt}";
+					premierNom.innerHTML = "[[${histoD[0].name}]]";
+					premierData.innerHTML = "[[${histoD[0].dmgDealt}]]";
+					secondNom.innerHTML = "[[${histoD[1].name}]]";
+					secondData.innerHTML = "[[${histoD[1].dmgDealt}]]";
+					troisiemeNom.innerHTML = "[[${histoD[2].name}]]";
+					troisiemeData.innerHTML = "[[${histoD[2].dmgDealt}]]";
 					a++;
 				} else if (a == 1){
-					premierNom.innerHTML = "${histoT[0].name}";
-					premierData.innerHTML = "${histoT[0].dmgTaken}";
-					secondNom.innerHTML = "${histoT[1].name}";
-					secondData.innerHTML = "${histoT[1].dmgTaken}";
-					troisiemeNom.innerHTML = "${histoT[2].name}";
-					troisiemeData.innerHTML = "${histoT[2].dmgTaken}";
+					premierNom.innerHTML = "[[${histoT[0].name}]]";
+					premierData.innerHTML = "[[${histoT[0].dmgTaken}]]";
+					secondNom.innerHTML = "[[${histoT[1].name}]]";
+					secondData.innerHTML = "[[${histoT[1].dmgTaken}]]";
+					troisiemeNom.innerHTML = "[[${histoT[2].name}]]";
+					troisiemeData.innerHTML = "[[${histoT[2].dmgTaken}]]";
 					a++;
 				} else if (a == 2){
-					premierNom.innerHTML = "${histoWin[0].name}";
-					premierData.innerHTML = "${histoWin[0].nbWin}";
-					secondNom.innerHTML = "${histoWin[1].name}";
-					secondData.innerHTML = "${histoWin[1].nbWin}";
-					troisiemeNom.innerHTML = "${histoWin[2].name}";
-					troisiemeData.innerHTML = "${histoWin[2].nbWin}";
+					premierNom.innerHTML = "[[${histoWin[0].name}]]";
+					premierData.innerHTML = "[[${histoWin[0].nbWin}]]";
+					secondNom.innerHTML = "[[${histoWin[1].name}]]";
+					secondData.innerHTML = "[[${histoWin[1].nbWin}]]";
+					troisiemeNom.innerHTML = "[[${histoWin[2].name}]]";
+					troisiemeData.innerHTML = "[[${histoWin[2].nbWin}]]";
 					a = 0;
 				}
 				b = 1;
@@ -342,11 +323,10 @@
 	
 		function menu(e) {
 			if (e.target.id == "newGame" || e.target.id == "save" || e.target.id == "options"){
-				window.location.href = ("${pageContext.request.contextPath}/" + e.target.id);
+				window.location.href = e.target.id;
 			} else if (e.target.id == "leave"){
-				alert("Pour quitter:\n\n     • Utiliser la petite croix en haut de la fenêtre !\n     • Utiliser le raccourci CTRL+W !\n     • Utiliser le raccourci ALT+F4 !");
+				window.location.href = "https://www.google.com/";
 			}
 		}
 	</script>
-	
 </html>

@@ -23,11 +23,6 @@ input:focus, textarea:focus {
 ---------------*/
 #prologue
 {
-	background: none;
-	background-color: black;
-}
-
-#prologue body {
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
@@ -40,6 +35,7 @@ input:focus, textarea:focus {
 	top: 30%;
 	left: 30%;
 	width: 40%;
+	cursor: pointer;
 }
 
 #prologue #apres
@@ -189,6 +185,7 @@ input:focus, textarea:focus {
 	text-align: left;
 	min-width: 100px;
 	width: 100%;
+	cursor: pointer;
 }
 
 #home #nav ul li a
@@ -394,6 +391,7 @@ input:focus, textarea:focus {
 	width: 10%;
 	top: 10px;
 	left: 10px;
+	cursor: pointer;
 }
 
 #newGame #logoHome:hover
@@ -464,6 +462,7 @@ input:focus, textarea:focus {
 	width: 10%;
 	top: 10px;
 	left: 10px;
+	cursor: pointer;
 }
 
 #choice #logoHome:hover
@@ -661,6 +660,7 @@ input:focus, textarea:focus {
 	opacity: 1;
 	width: 184px;
 	margin: 125px 15px 0 15px;
+	cursor: pointer;
 }
 
 #choice .cardhp
@@ -724,6 +724,7 @@ input:focus, textarea:focus {
 	color: #a30000;
 	font-size: 2vw;
 	font-weight: bold;
+	cursor: pointer;
   	-webkit-transform: perspective(1px) translateZ(0);
 	-webkit-animation-name: hvr-pulse;
 	-webkit-animation-duration: 1s;
@@ -749,6 +750,7 @@ input:focus, textarea:focus {
 	width: 10%;
 	top: 10px;
 	left: 10px;
+	cursor: pointer;
 }
 
 #save #logoHome:hover
@@ -783,6 +785,7 @@ input:focus, textarea:focus {
 {
 	filter: drop-shadow(0 0 10px white);
 	padding-right: 20px;
+	cursor: pointer;
   	-webkit-transform: translate(0);
 	-webkit-animation-name: pulseleft;
 	-webkit-animation-duration: 1s;
@@ -794,6 +797,7 @@ input:focus, textarea:focus {
 {
 	filter: drop-shadow(0 0 10px white);
 	padding-left: 20px;
+	cursor: pointer;
   	-webkit-transform: translate(0);
 	-webkit-animation-name: pulseright;
 	-webkit-animation-duration: 1s;
@@ -836,6 +840,7 @@ input:focus, textarea:focus {
 	color: #dddddd;
 	font-size: 2vw;
 	font-weight: bold;
+	cursor: pointer;
 	text-shadow: 0 0 10px #b30000;
 }
 
@@ -888,6 +893,7 @@ input:focus, textarea:focus {
 	width: 10%;
 	top: 10px;
 	left: 10px;
+	cursor: pointer;
 }
 
 #matchup #logoHome:hover
@@ -912,6 +918,11 @@ input:focus, textarea:focus {
 #matchup .cards
 {
 	width: 184px;
+}
+
+#matchup .human
+{
+	cursor: pointer;
 }
 
 #matchup .cardhp
@@ -982,6 +993,7 @@ input:focus, textarea:focus {
 	color: #a30000;
 	font-size: 2vw;
 	font-weight: bold;
+	cursor: pointer;
   	-webkit-transform: perspective(1px) translateZ(0);
 	-webkit-animation-name: hvr-pulse;
 	-webkit-animation-duration: 1s;

@@ -1,61 +1,57 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8"/>
-		<link rel="icon" href="img/vignette.png">
-		<title>tripleA</title>
-	</head>
-
+<html th:replace="~{ layout.html :: layout(~{ ::body }, ~{ ::script }, ~{ ::bootstrap }) }">
+	
+	<bootstrap></bootstrap>
+	
 	<body>
 		<div id="matchup">
-			<div><a href="#"><img id="logoHome" src="assets/img/logo.png"/></a></div>
+			<div><a><img id="logoHome" src="assets/img/logo.png"/></a></div>
 			<div>
 				<h1>MATCHUP</h1>
 			</div>
 			<table>
 				<tr id="row1">
 					<td id="c11">
-						<a href="#"><img id="card1" src="assets/img/choice/emptyCard.png" class="cards"></a>
-						<div class="cardhp" id="c1hp">${cardH[0].life}</div>
-						<div class="cardatk" id="c1atk">${cardH[0].atk}</div>
-						<div class="carddef" id="c1def">${cardH[0].def}</div>
+						<a><img id="card1" src="assets/img/choice/emptyCard.png" class="cards human"></a>
+						<div class="cardhp" id="c1hp">[[${cardH[0].life}]]</div>
+						<div class="cardatk" id="c1atk">[[${cardH[0].atk}]]</div>
+						<div class="carddef" id="c1def">[[${cardH[0].def}]]</div>
 						<div class="titre">SHINSETSU</div>
 					</td>
 					<td id="c12">
-						<a href="#"><img id="card2" src="assets/img/choice/emptyCard.png" class="cards"></a>
-						<div class="cardhp" id="c1hp">${cardH[1].life}</div>
-						<div class="cardatk" id="c1atk">${cardH[1].atk}</div>
-						<div class="carddef" id="c1def">${cardH[1].def}</div>
+						<a><img id="card2" src="assets/img/choice/emptyCard.png" class="cards human"></a>
+						<div class="cardhp" id="c1hp">[[${cardH[1].life}]]</div>
+						<div class="cardatk" id="c1atk">[[${cardH[1].atk}]]</div>
+						<div class="carddef" id="c1def">[[${cardH[1].def}]]</div>
 						<div class="titre">SHINSETSU</div>
 					</td>
 					<td id="c13">
-						<a href="#"><img id="card3" src="assets/img/choice/emptyCard.png" class="cards"></a>
-						<div class="cardhp" id="c1hp">${cardH[2].life}</div>
-						<div class="cardatk" id="c1atk">${cardH[2].atk}</div>
-						<div class="carddef" id="c1def">${cardH[2].def}</div>
+						<a><img id="card3" src="assets/img/choice/emptyCard.png" class="cards human"></a>
+						<div class="cardhp" id="c1hp">[[${cardH[2].life}]]</div>
+						<div class="cardatk" id="c1atk">[[${cardH[2].atk}]]</div>
+						<div class="carddef" id="c1def">[[${cardH[2].def}]]</div>
 						<div class="titre">SHINSETSU</div>
 					</td>
 				</tr>
 				<tr id="row2">
 					<td id="c21">
 						<img id="cAI1" src="assets/img/choice/emptyCard.png" class="cards">
-						<div class="cardhp" id="c1hp">${cardAI[0].life}</div>
-						<div class="cardatk" id="c1atk">${cardAI[0].atk}</div>
-						<div class="carddef" id="c1def">${cardAI[0].def}</div>
+						<div class="cardhp" id="c1hp">[[${cardAI[0].life}]]</div>
+						<div class="cardatk" id="c1atk">[[${cardAI[0].atk}]]</div>
+						<div class="carddef" id="c1def">[[${cardAI[0].def}]]</div>
 						<div class="titre">ITAZURA</div>
 					</td>
 					<td id="c22">
 						<img id="cAI2" src="assets/img/choice/emptyCard.png" class="cards">
-						<div class="cardhp" id="c1hp">${cardAI[1].life}</div>
-						<div class="cardatk" id="c1atk">${cardAI[1].atk}</div>
-						<div class="carddef" id="c1def">${cardAI[1].def}</div>
+						<div class="cardhp" id="c1hp">[[${cardAI[1].life}]]</div>
+						<div class="cardatk" id="c1atk">[[${cardAI[1].atk}]]</div>
+						<div class="carddef" id="c1def">[[${cardAI[1].def}]]</div>
 						<div class="titre">ITAZURA</div>
 					</td>
 					<td id="c23">
 						<img id="cAI3" src="assets/img/choice/emptyCard.png" class="cards">
-						<div class="cardhp" id="c1hp">${cardAI[2].life}</div>
-						<div class="cardatk" id="c1atk">${cardAI[2].atk}</div>
-						<div class="carddef" id="c1def">${cardAI[2].def}</div>
+						<div class="cardhp" id="c1hp">[[${cardAI[2].life}]]</div>
+						<div class="cardatk" id="c1atk">[[${cardAI[2].atk}]]</div>
+						<div class="carddef" id="c1def">[[${cardAI[2].def}]]</div>
 						<div class="titre">ITAZURA</div>
 					</td>
 				</tr>
@@ -64,7 +60,7 @@
 			<div>
 				<form id="myform" method="POST" action="matchup">
 					<input type="hidden" value="" id="choicePos" name="choicePos"/>
-					<a href="#" id="continue">FIGHT<br>>></a>
+					<a id="continue">FIGHT<br>>></a>
 				</form>
 			</div>
 			<img id="vs" src="assets/img/vs.png">
@@ -106,7 +102,7 @@
 		var audio3 = document.getElementById("Audio3");
 		var ai = document.getElementById("row2");
 		var danger = document.getElementById("danger");
-		var phase = ${phase};
+		var phase = [[${phase}]];
 		var card = 0;
 		var i = 3;
 		var echap = false;
@@ -116,14 +112,14 @@
 		window.onkeydown = skip;
 		
 		function smoothOpening() {
-			if (phase == 3){
+			if (phase == 2){
 				ai.style.visibility = "hidden";
 				danger.style.display = "block";
 			}
 			
 			decompte.style.display = "none";
 			explo.style.display = "none";
-			document.getElementById("cAI" + "${cardDistanceAI}").style.setProperty("-webkit-filter", "drop-shadow(0px 0px 10px #00e4ff)");
+			document.getElementById("cAI" + "[[${cardDistanceAI}]]").style.setProperty("-webkit-filter", "drop-shadow(0px 0px 10px #00e4ff)");
 			audio0.volume = 0.1;
 			audio1.volume = 0.1;
 			audio2.volume = 0.1;
@@ -146,7 +142,7 @@
 		
 		function select(e){
 			if (e.target.id == "logoHome"){
-				window.location.href = "${pageContext.request.contextPath}/home";
+				window.location.href = "home";
 			} else if (e.target.id == "card1"){
 				card1.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 10px #00e4ff)");
 				card2.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #00e4ff)");
@@ -164,7 +160,7 @@
 				card = 3;
 			} else if (e.target.id == "continue"){
 				if (card == 0){
-					alert("Choisir votre carte เ distance !");
+					alert("Choisir votre carte ร  distance !");
 				} else if (echap){
 					explosion();
 				} else {
@@ -219,7 +215,7 @@
 			if (i != 0){
 				decText.innerHTML = i;
 			} else {
-				decText.innerHTML = "ก FIGHT !";
+				decText.innerHTML = "ยก FIGHT !";
 				explo.style.display = "block";
 			}
 			decText.style.fontSize = "1vw";
