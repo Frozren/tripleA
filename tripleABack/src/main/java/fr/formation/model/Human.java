@@ -70,7 +70,7 @@ public class Human extends Player {
 			ai.deck().get(0).setProtection(false);
 		}
 		
-		int dmg=deckAI.get(target-1).isAttackedBy(deckH.get(att));
+		int dmg=deckAI.get(target-1).isAttackedBy(deckH.get(att),1);
 		Human h = Game.getInstance().getHuman();
 		h.setDmgDealt(dmg+h.getDmgDealt());
 		System.out.println("hCard" + att + " attaque aicard" + (target-1));
@@ -79,18 +79,11 @@ public class Human extends Player {
 		return msg;
 	}
 	
-	public boolean protection(List<Card> deckH, int choix) {
+	public void protection(List<Card> deckH, int choix) {
 		int p = this.getCardProtected(deckH);
-		
-		if (choix == p) {
-			return false;
-		}
-		
-		deckH.get(p-1).setProtection(false);
+		if (p!=0) {deckH.get(p-1).setProtection(false);}
 		deckH.get(choix-1).setProtection(true);
 		System.out.println("L'homme protege card" + (choix-1));
-		
-		return true;
 	}
 	
 //	public int getPhase(Card c1) {

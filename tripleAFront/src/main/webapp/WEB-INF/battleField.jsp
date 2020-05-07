@@ -7,7 +7,7 @@
 
 <head>
 <meta charset="utf-8" />
-<link rel="icon" href="img/vignette.png">
+<link rel="icon" href="assets/img/battlefield/vignette.png">
 <title>tripleA</title>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -21,7 +21,7 @@
 
 		<div class="row" id="top">
 			<div class="col-2">
-				<img id="logo" src="img/logo.png" />
+				<img id="logo" src="assets/img/logo.png" />
 			</div>
 		</div>
 		<div class="row" id="hp">
@@ -41,7 +41,7 @@
 				</div>
 			</div>
 			<div class="col-2">
-				<img id="vs" src="img/field/vs.png">
+				<img id="vs" src="assets/img/battlefield/field/vs.png">
 			</div>
 			<div class="col-3">
 				<div id="hp2">
@@ -141,8 +141,8 @@
 							</div>
 						</div>
 						<div class="row" id="midField">
-							<img src="img/youWin.png" id="win">
-							<img src="img/gameOver.gif" id="lose">
+							<img src="assets/img/battlefield/youWin.png" id="win">
+							<img src="assets/img/battlefield/gameOver.gif" id="lose">
 						</div>
 						<div class="row" id="hcard">
 							<div class="col-1" id="ltcard"></div>
@@ -227,17 +227,17 @@
 		<div class="row" id="bottom">
 			<div class="col-2">
 				<audio controls="controls" id="music" loop="loop" autoplay="autoplay">
-					<source id="sBat" src="sound/ff7-boss-theme-remake.mp3" type="audio/mp3"/>
+					<source id="sBat" src="assets/sound/ff7-boss-theme-remake.mp3" type="audio/mp3"/>
 				</audio>
 			</div>
 			<div class="col-3">
-				<audio id="sDef" src="sound/def.mp3"></audio>
-				<audio id="sAtt" src="sound/att.mp3"></audio>
-				<audio id="gameOver" src="sound/gameOver.mp3"></audio>
-				<audio id="victory" src="sound/victory.mp3"></audio>
+				<audio id="sDef" src="assets/sound/def.mp3"></audio>
+				<audio id="sAtt" src="assets/sound/att.mp3"></audio>
+				<audio id="gameOver" src="assets/sound/gameOver.mp3"></audio>
+				<audio id="victory" src="assets/sound/victory.mp3"></audio>
 			</div>
 			<div class="col-2">
-				<img src="img/field/exit.png" id="exit" type="button" data-toggle="modal"  data-target="#modalClose">
+				<img src="assets/img/battlefield/field/exit.png" id="exit" type="button" data-toggle="modal"  data-target="#modalClose">
 				<div class="modal fade" id="modalClose" tabindex="-1" role="dialog" aria-labelledby="closeModalLabel" aria-hidden="true">
 					<div class="modal-dialog" role="document" id="modal">
 						<div class="modal-content">
@@ -281,7 +281,7 @@
 				type : 'POST',
 				processData : false,
 				contentType : false,
-				url : "battleField?card=" + idCard,
+				url : "battleField?c=" + idCard,
 				success : function(resp) {
 					
 					let container = $('<div />');

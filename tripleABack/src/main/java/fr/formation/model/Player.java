@@ -199,25 +199,31 @@ public abstract class Player {
 	
 	public int getCardDistance(List<Card> deck) {
 		int i = 0;
+		int j = 0;
 		
 		for(Card c : deck) {
 			i++;
 			if (c.getPosition()) {
+				j=1;
 				break;
 			}
 		}
+		if(j==0) {i=0;}
 		return i;
 	}
 	
 	public int getCardProtected(List<Card> deck) {
 		int i = 0;
+		int j = 0;
 		
 		for(Card c : deck) {
 			i++;
 			if (c.isProtection()) {
+				j=1;
 				break;
 			}
 		}
+		if(j==0) {i=0;}
 		return i;
 	}
 	

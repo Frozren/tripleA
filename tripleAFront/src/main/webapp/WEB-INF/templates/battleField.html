@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
+
+<bootstrap>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</bootstrap>
+
+<body id="battle">
+	<form method="POST" action="BattleField" id="form">
+
+		<div class="row" id="top">
+			<div class="col-2">
+				<img id="logo" src="assets/img/logo.png"/>
+			</div>
+		</div>
+		<div class="row" id="hp">
+			<div class="col-2"></div>
+			<div class="col-3">
+				<div id="hp1">
+					<div class="progress">
+						<div
+							class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
+							role="progressbar" th:style="${ 'width: ' + hpb1 + '%' }"
+							th:aria-valuenow="${hpb1}" aria-valuemin="0"
+							aria-valuemax="100"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-2">
+				<img id="vs" src="assets/img/battlefield/field/vs.png">
+			</div>
+			<div class="col-3">
+				<div id="hp2">
+					<div class="progress">
+						<div
+							class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
+							role="progressbar" th:style="${ 'width: ' + hpb2 + '%' }"
+							th:aria-valuenow="${hpb2}" aria-valuemin="0"
+							aria-valuemax="100"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row" id="mid">
+			<div id="divconsole">
+				<div class="scroll" id="console" th:utext="${message}"></div>
+			</div>
+
+			<div id="field" th:style="${'cursor: url('+cursor+'), crosshair; background-image: url('+session.imgField+');'}">
+				<div class="row" id="hfield">
+					<div class="col-2" id="left">
+						<div class="row" id="tleft"></div>
+						<div class="row" id="hcard">
+							<div class="col-8">
+								<div id="card" th:style="${'visibility: '+disc1}">
+									<input type="image" class="imgcard" th:idCard="${session.idCard1}" th:id="${'c'+session.idCard1}"
+										th:src="${session.img1}"
+										th:style="${'cursor: url('+cursorch+'), not-allowed;'}">
+									<div class="divname">
+										<p class="name">[[${session.namec1}]]</p>
+									</div>
+									<div class="divclass">
+										<p class="class">Carte C[[${session.idCard1}]]: [[${session.classc1}]]</p>
+									</div>
+									<div class="def">
+										<p class="stat">[[${deckH[0].def}]]</p>
+										<img class="cdef" th:id="${'def'+session.idCard1}" src="assets/img/battlefield/cursor/shield.ico">
+									</div>
+									<div class="atk">
+										<p class="stat">[[${deckH[0].atk}]]</p>
+									</div>
+									<div class="life">
+										<p class="stat">[[${deckH[0].life}]]</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-8">
+						<div class="row" id="topField"></div>
+						<div class="row" id="hcard">
+							<div class="col-1" id="ltcard"></div>
+							<div class="col-2">
+								<div id="card" th:style="${'visibility: '+disc2}">
+									<input type="image" class="imgcard" th:idCard="${session.idCard2}" th:id="${'c'+session.idCard2}"
+										th:src="${session.img2}"
+										th:style="${'cursor: url('+cursorch+'), not-allowed;'}">
+									<div class="divname">
+										<p class="name">[[${session.namec2}]]</p>
+									</div>
+									<div class="divclass">
+										<p class="class">Carte C[[${session.idCard2}]]: [[${session.classc2}]]</p>
+									</div>
+									<div class="def">
+										<p class="stat">[[${deckH[1].def}]]</p>
+										<img class="cdef" th:id="${'def'+session.idCard2}" src="assets/img/battlefield/cursor/shield.ico">
+									</div>
+									<div class="atk">
+										<p class="stat">[[${deckH[1].atk}]]</p>
+									</div>
+									<div class="life">
+										<p class="stat">[[${deckH[1].life}]]</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-5" id="mtcard"></div>
+							<div class="col-2">
+								<div id="card" th:style="${'visibility: '+disc4}">
+									<input type="image" class="imgcard" th:idCard="${session.idCard4}" th:id="${'c'+session.idCard4}"
+										th:src="${session.img4}"
+										th:style="${'cursor: url('+cursorai+'), not-allowed;'}">
+									<div class="divname">
+										<p class="name">[[${session.namec4}]]</p>
+									</div>
+									<div class="divclass">
+										<p class="class">Carte C[[${session.idCard4}]]: [[${session.classc4}]]</p>
+									</div>
+									<div class="def">
+										<p class="stat">[[${deckAI[0].def}]]</p>
+									</div>
+									<div class="atk">
+										<p class="stat">[[${deckAI[0].atk}]]</p>
+									</div>
+									<div class="life">
+										<p class="stat">[[${deckAI[0].life}]]</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row" id="midField">
+							<img src="assets/img/battlefield/youWin.png" id="win">
+							<img src="assets/img/battlefield/gameOver.gif" id="lose">
+						</div>
+						<div class="row" id="hcard">
+							<div class="col-1" id="ltcard"></div>
+							<div class="col-2">
+								<div id="card" th:style="${'visibility: '+disc3}">
+									<input type="image" class="imgcard" th:idCard="${session.idCard3}" th:id="${'c'+session.idCard3}"
+										th:src="${session.img3}"
+										th:style="${'cursor: url('+cursorch+'), not-allowed;'}">
+									<div class="divname">
+										<p class="name">[[${session.namec3}]]</p>
+									</div>
+									<div class="divclass">
+										<p class="class">Carte C[[${session.idCard3}]]: [[${session.classc3}]]</p>
+									</div>
+									<div class="def">
+										<p class="stat">[[${deckH[2].def}]]</p>
+										<img class="cdef" th:id="${'def'+session.idCard3}" src="assets/img/battlefield/cursor/shield.ico">
+									</div>
+									<div class="atk">
+										<p class="stat">[[${deckH[2].atk}]]</p>
+									</div>
+									<div class="life">
+										<p class="stat">[[${deckH[2].life}]]</p>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-5" id="mtcard"></div>
+							<div class="col-2">
+								<div id="card" th:style="${'visibility: '+disc5}">
+									<input type="image" class="imgcard" th:idCard="${session.idCard5}" th:id="${'c'+session.idCard5}"
+										th:src="${session.img5}"
+										th:style="${'cursor: url('+cursorai+'), not-allowed;'}">
+									<div class="divname">
+										<p class="name">[[${session.namec5}]]</p>
+									</div>
+									<div class="divclass">
+										<p class="class">Carte C[[${session.idCard5}]]: [[${session.classc5}]]</p>
+									</div>
+									<div class="def">
+										<p class="stat">[[${deckAI[1].def}]]</p>
+									</div>
+									<div class="atk">
+										<p class="stat">[[${deckAI[1].atk}]]</p>
+									</div>
+									<div class="life">
+										<p class="stat">[[${deckAI[1].life}]]</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-2" id="left">
+						<div class="row" id="tleft"></div>
+						<div class="row" id="hcard">
+							<div class="col-8">
+								<div id="card" th:style="${'visibility: '+disc6}">
+									<input type="image" class="imgcard" th:idCard="${session.idCard6}" th:id="${'c'+session.idCard6}"
+										th:src="${session.img6}"
+										th:style="${'cursor: url('+cursorai+'), not-allowed;'}">
+									<div class="divname" >
+										<p class="name">[[${session.namec6}]]</p>
+									</div>
+									<div class="divclass">
+										<p class="class">Carte C[[${session.idCard6}]]: [[${session.classc6}]]</p>
+									</div>
+									<div class="def">
+										<p class="stat">[[${deckAI[2].def}]]</p>
+									</div>
+									<div class="atk">
+										<p class="stat">[[${deckAI[2].atk}]]</p>
+									</div>
+									<div class="life">
+										<p class="stat">[[${deckAI[2].life}]]</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row" id="divBoss">
+							
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<div class="row" id="bottom">
+			<div class="col-2">
+				<audio controls="controls" id="music" loop="loop" autoplay="autoplay">
+					<source id="sBat" th:src="${session.musicBattle}" type="audio/mp3"/>
+				</audio>
+			</div>
+			<div class="col-3">
+				<audio id="sDef" src="assets/sound/def.mp3"></audio>
+				<audio id="sAtt" src="assets/sound/att.mp3"></audio>
+				<audio id="gameOver" src="assets/sound/gameOver.mp3"></audio>
+				<audio id="victory" src="assets/sound/victory.mp3"></audio>
+			</div>
+			<div class="col-2">
+				<img src="assets/img/battlefield/field/exit.png" id="exit" type="button" data-toggle="modal"  data-target="#modalClose">
+				<div class="modal fade" id="modalClose" tabindex="-1" role="dialog" aria-labelledby="closeModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document" id="modal">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="closeModalLabel">Quitter</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								Voullez vous quitter la partie?
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal" id="annuler">Annuler</button>
+								<button type="button" class="btn btn-primary" id="fermer">Confirmer</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-2" id="variables">
+				<input type="text" id="endGame" th:value="${endGame}" style="visibility: hidden;"></input>
+				<input type="text" id="idCardDef" th:value="${idCardDef}" style="visibility: hidden;"></input>
+				<input type="text" id="idCardAtk" th:value="${idCardAtk}" style="visibility: hidden;"></input>
+				<input type="text" id="boss" th:value="${boss}" style="visibility: hidden;"></input>
+			</div>
+		</div>
+		<div id="divBoss">
+			<input type="image" class="boss" th:idCard="${session.idCard6}" th:id="${'c'+session.idCard6}"
+					src="assets/img/battlefield/BOSS.png"
+					th:style="${'visibility: '+discBoss+'; cursor: url('+cursorai+'), not-allowed;'}">
+		</div>
+	</form>
+</body>
+
+<script>
+	var buttonClose=document.getElementById("fermer");
+	buttonClose.onclick=fermer;
+	
+	function initCard(){
+		$('input[type="image"]').on('click', function() {
+			let idCard = $(this).attr('idCard');
+			$('#c').val(idCard);
+			console.log(idCard)
+			
+			$.ajax({
+				type : 'POST',
+				processData : false,
+				contentType : false,
+				url : "battleField?c=" + idCard,
+				success : function(resp) {
+					
+					let container = $('<div />');
+					container.html(resp);
+					console.log(container);
+					
+					$('#hp1').parent().html(
+						container.find('#hp1').html()
+					)
+						
+					$('#hp2').parent().html(
+						container.find('#hp2').html()
+					)
+					
+					$('#field').parent().html(
+						container.find('#field').html()
+					)
+					
+					$('#variables').html(
+						container.find('#variables').html()
+					)
+					
+					$('#divBoss').html(
+						container.find('#divBoss').html()
+					)
+				
+					console.log(resp);
+					console.log("OK");
+					cardEffect()
+					endGame()
+					initCard()
+					setVar()
+				}
+			})
+			return false;
+		});
+	}
+	
+	
+	$("form").submit(function(e){
+		console.log('form submit')
+		e.preventDefault();
+		return false;
+	});
+	
+	function setVar(){
+		var c1=document.getElementById("c1");
+		var c2=document.getElementById("c2");
+		var c3=document.getElementById("c3");
+		var c4=document.getElementById("c4");
+		var c5=document.getElementById("c5");
+		var c6=document.getElementById("c6");
+		var sound = document.getElementById("music");
+		c1.onmouseover=soundDef;
+		c2.onmouseover=soundDef;
+		c3.onmouseover=soundDef;
+		c4.onmouseover=soundAtt;
+		c5.onmouseover=soundAtt;
+		c6.onmouseover=soundAtt;
+
+	}
+
+	function setVolume() {
+		var sound = document.getElementById("music");
+		sound.volume = 0.05;
+	}
+	
+	function soundDef() {
+		var sound = document.getElementById("sDef");
+		sDef.volume = 0.1;
+		sound.play();
+	}
+
+	function soundAtt() {
+		var sound = document.getElementById("sAtt");
+		sAtt.volume = 0.1;
+		sound.play();
+	}
+	
+	function fermer() {
+		window.location.href = "home";
+	}
+
+	function cardEffect() {
+		var cdef1=document.getElementById("def1");
+		var cdef2=document.getElementById("def2");
+		var cdef3=document.getElementById("def3");
+		var catk1=document.getElementById("c1");
+		var catk2=document.getElementById("c2");
+		var catk3=document.getElementById("c3");
+		var idCardDef = document.getElementById("idCardDef");
+		var cardDef = idCardDef.value;
+		var idCardAtk = document.getElementById("idCardAtk");
+		var cardAtk = idCardAtk.value;
+		
+		cdef1.style.visibility="hidden";
+		cdef2.style.visibility="hidden";
+		cdef3.style.visibility="hidden";
+		catk1.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #000000)");
+		catk2.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #000000)");
+		catk3.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #000000)");
+		
+		if (cardDef=="1") {
+			cdef1.style.visibility="visible";
+		}
+		else if (cardDef=="2") {
+			cdef2.style.visibility="visible";
+		}
+		else if (cardDef=="3") {
+			cdef3.style.visibility="visible";
+			}
+		if (cardAtk=="1") {
+			catk1.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 10px #ff0000)");
+		}
+		else if (cardAtk=="2") {
+			catk2.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 10px #ff0000)");
+		}
+		else if (cardAtk=="3") {
+			catk3.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 10px #ff0000)");
+			}
+	}
+	
+	function endGame() {
+		var endGame = document.getElementById("endGame");
+		var end = endGame.value;
+		var sBat = document.getElementById("music");
+		if (end=="win") {
+			document.getElementById('win').style.visibility='visible';
+			sBat.pause();
+			var sound = document.getElementById("victory");
+			gameOver.volume = 0.05;
+			sound.play();
+			setTimeout(function(){window.location.href = "choice";}, 6000);
+			
+		}
+		else if (end=="lose") {
+			document.getElementById('lose').style.visibility='visible';
+			sBat.pause();
+			var sound = document.getElementById("gameOver");
+			gameOver.volume = 0.05;
+			sound.play();
+			setTimeout(function(){window.location.href = "home";}, 6000);
+		}
+		else{
+			console.log("rien");}
+	}
+	
+	
+	initCard()
+	setVar()
+	setVolume()
+</script>
+
+</html>

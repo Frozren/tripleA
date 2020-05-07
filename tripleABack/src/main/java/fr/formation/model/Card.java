@@ -114,18 +114,18 @@ public class Card {
 	}
 
 	//METHODS
-	public int isAttackedBy(Card c) {
+	public int isAttackedBy(Card c, double coef) {
 		int dmg=0;
+		int def=0;
 		if(this.getDef()>99) {dmg=1;}
 		else {
 			if (this.isProtection()) {
-				dmg=(c.getAtk() - (c.getAtk() * 90) / 100);
-				System.out.println("Cardatt" + c.getAtk() + " inflige " + dmg + "dgt à cardatt" + this.getAtk());
+				def= 90;
 			}
 			else {
-				dmg=(c.getAtk() - (c.getAtk() * this.def) / 100);
-				System.out.println("Cardatt" + c.getAtk() + " inflige " + dmg + "dgt à cardatt" + this.getAtk());
+				def= this.def;
 			}
+			dmg=(int) Math.round(c.getAtk()*(1 - ( def) / 100)*coef);
 		}
 		if(this.life>dmg) {
 			this.life -= dmg;}

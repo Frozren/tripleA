@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html	xmlns:th="http://www.thymeleaf.org"
-		th:fragment="layout(title, content)">
+		th:fragment="layout(content, script, bootstrap)">
 
-	<head>
-		<title>[[ ${ title } ]]</title>
+	<head >
+		<title>TripleA</title>
 		<meta charset="UTF-8" />
+		<link rel="icon" href="assets/img/vignette.png">
 
 		<base href="/tripleAFront/" />
-		<link rel="stylesheet" type="text/css" href="assets/style/style.css" />		
+		<link rel="stylesheet" type="text/css" href="assets/style/style.css" />
+		<script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+		<th:block th:include="${ bootstrap }"></th:block>
 	</head>
 
 	<body th:replace="${content}"></body>
+	<script th:include="${script}"></script>
 </html>

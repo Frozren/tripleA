@@ -104,8 +104,8 @@
 					</div>
 				</div>
 				<div class="row" id="midField">
-					<img src="img/youWin.png" id="win"> <img
-						src="img/gameOver.gif" id="lose">
+					<img src="assets/img/battlefield/youWin.png" id="win"> <img
+						src="assets/img/battlefield/gameOver.gif" id="lose">
 				</div>
 				<div class="row" id="hcard">
 					<div class="col-1" id="ltcard"></div>
