@@ -91,20 +91,19 @@ public class BattleFieldController {
 			tour=0;
 			def=0;
 			end=false;
-			//h = Game.getInstance().getHuman();
-			//phase = h.getPhase();
+//			h = Game.getInstance().getHuman();
+//			phase = h.getPhase();
 			System.out.println("phase="+phase);
-			if (phase == 3) {
-				boss = true;
+			if (phase == 3) {boss = true;
 				model.addAttribute("boss", "1");}
 			else {boss = false;
 			model.addAttribute("boss", "0");}
-			//ai = Game.getInstance().getAI();
+//			ai = Game.getInstance().getAI();
 			deckH = h.deck();
 			deckAI = ai.deck();
 			if (phase==3) {
-				deckAI.add(h.getCard2());
-				deckAI.add(h.getCard3());
+				deckAI.add(ai.getCard2());
+				deckAI.add(ai.getCard3());
 				}
 			
 			maxhp1 = deckH.get(0).getLife() + deckH.get(1).getLife() + deckH.get(2).getLife();
@@ -212,7 +211,7 @@ public class BattleFieldController {
 		if (turn == 0) {
 			int targetai=h.RNG(3);
 			deckAI.get(targetai).setProtection(true);
-			message="<p>Fight!!!</p>"+message;
+			message="<p><u><font color='#FFD700'>Round n°1</font></u></p><p><u><font color='#FFD700'>Fight!!!</font></u></p>"+message;
 			tour = h.RNG(2);
 			if (tour==0) {msgAtk();def=0;}
 			else if (tour==1) {msgDef();def=1;}
@@ -228,6 +227,7 @@ public class BattleFieldController {
 							if(h.deck().size() != 1) {msgDef();}
 							else {
 								h.deck().get(0).setProtection(false);
+								System.out.println("cas1: BJ attaque!! i="+i+" vie="+deckAI.get(i).getLife());
 								iaAttaque();
 								nextTurn();
 							}
@@ -236,6 +236,7 @@ public class BattleFieldController {
 					}
 					else if(!testCard() && def==1) {
 						h.protection(deckH,(card));
+						System.out.println("cas2: BJ attaque!! i="+i+" vie="+deckAI.get(i).getLife());
 						iaAttaque();
 						nextTurn();
 					}
@@ -243,6 +244,7 @@ public class BattleFieldController {
 				else {
 					if (!testCard() && def==1) {
 						h.protection(deckH,(card));
+						System.out.println("cas3: BJ attaque!! i="+i+" vie="+deckAI.get(i).getLife());
 						iaAttaque();
 
 						if(deckH.get(i).getLife()>0) {msgAtk();}

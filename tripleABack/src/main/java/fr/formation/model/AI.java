@@ -86,7 +86,7 @@ public class AI extends Player {
 
 	public String bossAttack(List<Card> deckH, List<Card> deckAI, Human h, AI ai, int turn) {
 		String msg="";
-		int tour=(turn-1)/3;
+		double tour=(turn+2)/3;
 		int target = 0;
 		Boolean result;
 		int hdist = h.getCardDistance(deckH);
@@ -94,8 +94,10 @@ public class AI extends Player {
 		if(hdist==1) {hndist1=1;hndist2=2;}
 		else if(hdist==2) {hndist1=2;hndist2=0;}
 		else {hndist1=0;hndist2=1;}
+		int dmg1=0, dmg2=0, dmg3=0;
+		String msg1="", msg2="", msg3="";
 
-		if(tour%3==0) {
+		if((tour+2)%3==0) {
 			do {target = ai.RNG(3);
 			result = false;
 			if (deckH.get(target).getLife() > 0) {
@@ -103,23 +105,40 @@ public class AI extends Player {
 				else if(hdist!=(target+1)) {result=true;}}
 			else {result=false;}
 			}while(!result);
-			int dmg=deckH.get(target).isAttackedBy(deckAI.get(0),1);
-			h.setDmgTaken(dmg+h.getDmgTaken());
-			msg="<p>Black Jordan inflige "+dmg+" dégats à c"+(target+1)+"</p>";
+			dmg1=deckH.get(target).isAttackedBy(deckAI.get(0),1);
+			h.setDmgTaken(dmg1+h.getDmgTaken());
+			msg1="<p>Black Jordan inflige <span style='color:#FF0000'>"+dmg1+"</span> dégats à c"+(target+1)+"</p>";
+			msg=msg1+"<p>Black Jordan donne un <span style='color:#7F00FF'>Coup de poing ordinnaire</span></p>";
 		}
 		else if((tour+1)%3==0) {
 			if(deckH.get(hndist1).getLife() <= 0 && deckH.get(hndist2).getLife() <= 0) {
-				int dmg=deckH.get(hdist-1).isAttackedBy(deckAI.get(0),1);
-				h.setDmgTaken(dmg+h.getDmgTaken());
-				msg="<p>Black Jordan inflige "+dmg+" dégats à c"+(hdist)+"</p>";
+				dmg1=deckH.get(hdist-1).isAttackedBy(deckAI.get(0),1);
+				msg1="<p>Black Jordan inflige <span style='color:#FF0000'>"+dmg1+"</span> dégats à c"+(hdist)+"</p>";
 			}
 			else {
-				
+				if(deckH.get(hndist1).getLife() > 0) {
+					dmg1=deckH.get(hndist1).isAttackedBy(deckAI.get(0),0.66);
+					msg1="<p>Black Jordan inflige <span style='color:#FF0000'>"+dmg1+"</span> dégats à c"+(hndist1+1)+"</p>";}
+				if(deckH.get(hndist2).getLife() > 0) {
+					dmg2=deckH.get(hndist2).isAttackedBy(deckAI.get(0),0.66);
+					msg2="<p>Black Jordan inflige <span style='color:#FF0000'>"+dmg2+"</span> dégats à c"+(hndist2+1)+"</p>";}
 			}
-
+			h.setDmgTaken(dmg1+dmg2+h.getDmgTaken());
+			msg=msg2+msg1+"<p>Black Jordan fait une <span style='color:#7F00FF'>Onde de choc</span></p>";
 		}
-		else if((tour+2)%3==0) {
-
+		else if((tour)%3==0) {
+			
+			if(deckH.get(hndist1).getLife() > 0) {
+				dmg1=deckH.get(hndist1).isAttackedBy(deckAI.get(0),0.5);
+				msg1="<p>Black Jordan inflige <span style='color:#FF0000'>"+dmg1+"</span> dégats à c"+(hndist1+1)+"</p>";}
+			if(deckH.get(hndist2).getLife() > 0) {
+				dmg2=deckH.get(hndist2).isAttackedBy(deckAI.get(0),0.5);
+				msg2="<p>Black Jordan inflige <span style='color:#FF0000'>"+dmg2+"</span> dégats à c"+(hndist2+1)+"</p>";}
+			if(deckH.get(hdist-1).getLife() > 0) {
+				dmg3=deckH.get(hdist-1).isAttackedBy(deckAI.get(0),0.5);
+				msg3="<p>Black Jordan inflige <span style='color:#FF0000'>"+dmg3+"</span> dégats à c"+(hdist)+"</p>";}
+			h.setDmgTaken(dmg1+dmg2+dmg3+h.getDmgTaken());
+			msg=msg3+msg2+msg1+"<p>Black Jordan lance <span style='color:#7F00FF'>Pluie de météors</font></p>";
 		}
 
 		return msg;

@@ -116,16 +116,19 @@ public class Card {
 	//METHODS
 	public int isAttackedBy(Card c, double coef) {
 		int dmg=0;
-		int def=0;
+		double defe=0;
 		if(this.getDef()>99) {dmg=1;}
 		else {
 			if (this.isProtection()) {
-				def= 90;
+				defe= 90;
 			}
 			else {
-				def= this.def;
+				defe= this.def;
 			}
-			dmg=(int) Math.round(c.getAtk()*(1 - ( def) / 100)*coef);
+			dmg=(int) Math.round(c.getAtk()*(1-(defe/100))*coef);
+			System.out.println("def/100"+defe/100);
+			System.out.println("1-(defe/100)"+(1-(defe/100)));
+			System.out.println("dmg="+dmg+", def="+defe);
 		}
 		if(this.life>dmg) {
 			this.life -= dmg;}

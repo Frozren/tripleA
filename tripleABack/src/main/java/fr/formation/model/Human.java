@@ -74,7 +74,7 @@ public class Human extends Player {
 		Human h = Game.getInstance().getHuman();
 		h.setDmgDealt(dmg+h.getDmgDealt());
 		System.out.println("hCard" + att + " attaque aicard" + (target-1));
-		String msg="<p>c"+(att+1)+" inflige "+dmg+" dégâts à c"+(target+3)+"</p>";
+		String msg="<p>c"+(att+1)+" inflige <span style='color:#990100'>"+dmg+"</span> dégâts à c"+(target+3)+"</p>";
 		
 		return msg;
 	}
