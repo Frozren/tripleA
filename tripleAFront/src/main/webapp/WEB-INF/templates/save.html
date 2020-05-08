@@ -31,6 +31,8 @@
 		var index = document.getElementById("index");
 		var saveId = document.getElementById("saveId");
 		var suppr = document.getElementById("delete");
+		var arr = new Array();
+		var i = 0;
 		var k = 0;
 		var empty = [[${emptyList}]];
 	
@@ -43,8 +45,8 @@
 				text.innerHTML = "Aucune partie enregistrée !";
 				index.innerHTML = "";
 			} else {
-				var arr = [[${player}]];
-				var i = arr.length;
+				arr = [[${player}]];
+				i = arr.length;
 				suppr.style.visibility = "visible";
 				text.innerHTML = "Partie de " + arr[k].name;
 				index.innerHTML = (k+1) + "/" + i;

@@ -6,7 +6,6 @@
 		<title>TripleA</title>
 		<meta charset="UTF-8" />
 		<link rel="icon" href="assets/img/vignette.png">
-
 		<base href="/tripleAFront/" />
 		<link rel="stylesheet" type="text/css" href="assets/style/style.css" />
 		<script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
@@ -14,5 +13,5 @@
 	</head>
 
 	<body th:replace="${content}"></body>
-	<script th:include="${script}"></script>
+	<script type="text/javascript" th:replace="${script}"></script>
 </html>
