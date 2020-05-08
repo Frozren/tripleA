@@ -1017,10 +1017,10 @@ input:focus, textarea:focus {
 
 #matchup #vs
 {
-	position: relative;
+	position: absolute;
 	width: 15%;
-	bottom: 455px;
-	left: 10px;
+	bottom: 38%;
+	left: 43%;
 }
 
 #danger

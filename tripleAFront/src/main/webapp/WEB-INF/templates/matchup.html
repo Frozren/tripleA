@@ -32,23 +32,23 @@
 						<div class="titre">SHINSETSU</div>
 					</td>
 				</tr>
-				<tr id="row2">
+				<tr id="row2" th:if="${phase != 2}">
 					<td id="c21">
-						<img id="cAI1" src="assets/img/choice/emptyCard.png" class="cards">
+						<img id="cAI1" src="assets/img/choice/emptyCard.png" class="cards" th:style="${ (cardDistanceAI == 1 ? 'filter: drop-shadow(0px 0px 10px #00e4ff);' : '') }">
 						<div class="cardhp" id="c1hp">[[${cardAI[0].life}]]</div>
 						<div class="cardatk" id="c1atk">[[${cardAI[0].atk}]]</div>
 						<div class="carddef" id="c1def">[[${cardAI[0].def}]]</div>
 						<div class="titre">ITAZURA</div>
 					</td>
 					<td id="c22">
-						<img id="cAI2" src="assets/img/choice/emptyCard.png" class="cards">
+						<img id="cAI2" src="assets/img/choice/emptyCard.png" class="cards" th:style="${ (cardDistanceAI == 2 ? 'filter: drop-shadow(0px 0px 10px #00e4ff);' : '') }">
 						<div class="cardhp" id="c1hp">[[${cardAI[1].life}]]</div>
 						<div class="cardatk" id="c1atk">[[${cardAI[1].atk}]]</div>
 						<div class="carddef" id="c1def">[[${cardAI[1].def}]]</div>
 						<div class="titre">ITAZURA</div>
 					</td>
 					<td id="c23">
-						<img id="cAI3" src="assets/img/choice/emptyCard.png" class="cards">
+						<img id="cAI3" src="assets/img/choice/emptyCard.png" class="cards" th:style="${ (cardDistanceAI == 3 ? 'filter: drop-shadow(0px 0px 10px #00e4ff);' : '') }">
 						<div class="cardhp" id="c1hp">[[${cardAI[2].life}]]</div>
 						<div class="cardatk" id="c1atk">[[${cardAI[2].atk}]]</div>
 						<div class="carddef" id="c1def">[[${cardAI[2].def}]]</div>
@@ -100,7 +100,6 @@
 		var audio1 = document.getElementById("Audio1");
 		var audio2 = document.getElementById("Audio2");
 		var audio3 = document.getElementById("Audio3");
-		var ai = document.getElementById("row2");
 		var danger = document.getElementById("danger");
 		var phase = [[${phase}]];
 		var card = 0;
@@ -113,13 +112,11 @@
 		
 		function smoothOpening() {
 			if (phase == 2){
-				ai.style.visibility = "hidden";
 				danger.style.display = "block";
 			}
 			
 			decompte.style.display = "none";
 			explo.style.display = "none";
-			document.getElementById("cAI" + "[[${cardDistanceAI}]]").style.setProperty("-webkit-filter", "drop-shadow(0px 0px 10px #00e4ff)");
 			audio0.volume = 0.1;
 			audio1.volume = 0.1;
 			audio2.volume = 0.1;
@@ -127,11 +124,11 @@
 			bodyOp(0);
 			bodyOpTimer(0);
 		}
-	
+
 		function bodyOp(num) {
 			document.body.style.opacity = num/100;
 		}
-	
+
 		function bodyOpTimer(num) {
 			if (num <= 100) {
 				bodyOp(num);
@@ -139,7 +136,7 @@
 				window.setTimeout("bodyOpTimer("+num+")", 100);
 			}
 		}
-		
+
 		function select(e){
 			if (e.target.id == "logoHome"){
 				window.location.href = "home";
