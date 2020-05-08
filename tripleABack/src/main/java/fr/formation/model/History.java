@@ -15,28 +15,28 @@ public class History {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	protected int id;
 	
 	@Column(name = "dmgTaken")
-	private int dmgTaken;
+	protected int dmgTaken;
 	
 	@Column(name = "dmgDealt")
-	private int dmgDealt;
+	protected int dmgDealt;
 
 	@Column(name = "phase")
-	private int phase;
+	protected int phase;
 
 	@Column(name = "etat")
-	private Boolean etat; //true = win
+	protected Boolean etat; //true = win
 
 	@Column(name = "dateEnd")
-	private LocalDate dateEnd;
+	protected LocalDate dateEnd;
 	
-	@Column(name = "name")
-	private String name;
+	@Column(name = "name", length=50, nullable = false)
+	protected String name;
 	
 	@Column(name = "nbWin")
-	private long nbWin;
+	protected long nbWin;
 	
 	public History() {}
 
@@ -46,11 +46,11 @@ public class History {
 		this.phase = phase;
 		this.etat = etat;
 		this.dateEnd = dateEnd;
-		this.name = human.getName();
+		this.name = human.getName().toString();
 	}
 	
 	public History(Human human, int phase, Boolean etat) {
-		this.name = human.getName();
+		this.name = human.getName().toString();
 		this.phase = phase;
 		this.etat = etat;
 		this.dmgDealt = human.getDmgDealt();
@@ -126,7 +126,7 @@ public class History {
 	@Override
 	public String toString() {
 		return "History [id=" + id + ", dmg_taken=" + dmgTaken + ", dmg_dealt=" + dmgDealt + ", phase=" + phase
-				+ ", etat=" + etat + ", dateEnd=" + dateEnd + ", name=" + name + ", nbWin=" + nbWin + "]";
+				+ ", etat=" + etat + ", dateEnd=" + dateEnd + ", name=" + name.toString() + ", nbWin=" + nbWin + "]";
 	}
 	
 	
