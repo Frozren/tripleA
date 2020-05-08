@@ -57,6 +57,7 @@ public class BattleFieldController {
 	static String c6, id6;
 	static int hp1, hp2, hp3, hp4, hp5, hp6;
 	static int phase;
+	static Boolean lose=true;
 	static Boolean boss;
 
 
@@ -91,6 +92,7 @@ public class BattleFieldController {
 			i=0;
 			tour=0;
 			def=0;
+			lose=true;
 			end=false;
 			h = Game.getInstance().getHuman();
 			phase = h.getPhase();
@@ -207,7 +209,7 @@ public class BattleFieldController {
 		return"battleField";
 	}
 
-	@PostMapping("/battleField")
+	@PostMapping("/battle")
 	public String fight(@RequestParam String c, Model model, HttpSession session) {
 		card = Integer.parseInt(c);
 		if (turn == 0) {
@@ -261,13 +263,13 @@ public class BattleFieldController {
 		}
 
 		if(ai.verifyEnd()) {
-			message="<p>Le joueur a gagne!!!</p>"+message;
 			turn=0;
+			message="<p>Le joueur a gagne!!!</p>"+message;
 			model.addAttribute("endGame", "win");
 		}
-		else if(h.verifyEnd()) {
-			message="<p>Le joueur a perdu...</p>"+message;
+		else if(h.verifyEnd() && lose) {
 			turn=0;
+			message="<p>Le joueur a perdu...</p>"+message;
 			History history = new History(Game.getInstance().getHuman(), phase, false);
 			daoHistory.save(history);
 			List<History> listh = daoHistory.findAll();
@@ -278,6 +280,7 @@ public class BattleFieldController {
 			deletePlayer(h);
 			deletePlayer(ai);
 			model.addAttribute("endGame", "lose");
+			lose=false;
 		}
 		refresh(model);
 		

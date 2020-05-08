@@ -62,7 +62,7 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 										th:src="${session.img1}"
 										th:style="${'cursor: url('+cursorch+'), not-allowed;'}">
 									<div class="divdmg">
-										<p class="dmg" th:id="${'dmg'+session.idCard1}">[[${dmg1}]]</p>
+										<p class="dmg" th:id="${'dmg'+session.idCard1}" style="visibility: hidden">[[${dmg1}]]</p>
 									</div>
 									<div class="divname">
 										<p class="name">[[${session.namec1}]]</p>
@@ -94,7 +94,7 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 										th:src="${session.img2}"
 										th:style="${'cursor: url('+cursorch+'), not-allowed;'}">
 									<div class="divdmg">
-										<p class="dmg" th:id="${'dmg'+session.idCard2}">[[${dmg2}]]</p>
+										<p class="dmg" th:id="${'dmg'+session.idCard2}" style="visibility: hidden">[[${dmg2}]]</p>
 									</div>
 									<div class="divname">
 										<p class="name">[[${session.namec2}]]</p>
@@ -120,6 +120,9 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 									<input type="image" class="imgcard" th:idCard="${session.idCard4}" th:id="${'c'+session.idCard4}"
 										th:src="${session.img4}"
 										th:style="${'cursor: url('+cursorai+'), not-allowed;'}">
+									<div class="divdmg">
+										<p class="dmg" th:id="${'dmg'+session.idCard4}">[[${dmg4}]]</p>
+									</div>
 									<div class="divname">
 										<p class="name">[[${session.namec4}]]</p>
 									</div>
@@ -149,6 +152,9 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 									<input type="image" class="imgcard" th:idCard="${session.idCard3}" th:id="${'c'+session.idCard3}"
 										th:src="${session.img3}"
 										th:style="${'cursor: url('+cursorch+'), not-allowed;'}">
+									<div class="divdmg">
+										<p class="dmg" th:id="${'dmg'+session.idCard3}" style="visibility: visible" th:value="${dmg3}">[[${dmg3}]]</p>
+									</div>
 									<div class="divname">
 										<p class="name">[[${session.namec3}]]</p>
 									</div>
@@ -174,6 +180,9 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 									<input type="image" class="imgcard" th:idCard="${session.idCard5}" th:id="${'c'+session.idCard5}"
 										th:src="${session.img5}"
 										th:style="${'cursor: url('+cursorai+'), not-allowed;'}">
+									<div class="divdmg">
+										<p class="dmg" th:id="${'dmg'+session.idCard5}">[[${dmg5}]]</p>
+									</div>
 									<div class="divname">
 										<p class="name">[[${session.namec5}]]</p>
 									</div>
@@ -201,6 +210,9 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 									<input type="image" class="imgcard" th:idCard="${session.idCard6}" th:id="${'c'+session.idCard6}"
 										th:src="${session.img6}"
 										th:style="${'cursor: url('+cursorai+'), not-allowed;'}">
+									<div class="divdmg">
+										<p class="dmg" th:id="${'dmg'+session.idCard6}">[[${dmg6}]]</p>
+									</div>
 									<div class="divname" >
 										<p class="name">[[${session.namec6}]]</p>
 									</div>
@@ -265,7 +277,8 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 				<input type="text" id="endGame" th:value="${endGame}" style="visibility: hidden;"></input>
 				<input type="text" id="idCardDef" th:value="${idCardDef}" style="visibility: hidden;"></input>
 				<input type="text" id="idCardAtk" th:value="${idCardAtk}" style="visibility: hidden;"></input>
-				<input type="text" id="boss" th:value="${boss}" style="visibility: hidden;"></input>
+				<input type="text" id="boss" th:value="${session.boss}" style="visibility: hidden;"></input>
+				<input type="text" id="idmg3" th:value="${dmg3}" style="visibility: hidden;"></input>
 			</div>
 		</div>
 		<div id="divBoss">
@@ -290,7 +303,7 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 				type : 'POST',
 				processData : false,
 				contentType : false,
-				url : "battleField?c=" + idCard,
+				url : "battle?c=" + idCard,
 				success : function(resp) {
 					
 					let container = $('<div />');
@@ -320,6 +333,7 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 					console.log(resp);
 					console.log("OK");
 					cardEffect()
+					affDmg()
 					endGame()
 					initCard()
 					setVar()
@@ -414,9 +428,47 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 	}
 	
 	function affDmg() {
-		var dmg1  = document.getElementById()
-		dmg1.style.transition = "all 1.5s";
-		dmg1.style.fontSize = "20vw";
+		var dmg1  = document.getElementById("dmg1");
+		var dmg2  = document.getElementById("dmg2");
+		var dmg3  = document.getElementById("dmg3");
+		var dg1 = dmg1.value;
+		var dg2 = dmg2.value;
+		var dg3 = dmg3.value;
+		//alert(dg1+" "+dg2+" "+dg3);
+		
+		if ([[${session.boss}]]==0){
+			var dmg4  = document.getElementById("dmg4");
+			var dmg5  = document.getElementById("dmg5");
+			var dmg6  = document.getElementById("dmg6");
+			var dg4 = dmg4.value;
+			var dg5 = dmg5.value;
+			var dg6 = dmg6.value;
+		}
+		else if ([[${session.boss}]]==1){
+			
+		}
+		
+		if (dg1>0) {
+			dmg1.style.visibility = "visible";
+			dmg1.style.transition = "all 1.5s";
+			dmg1.style.fontSize = "5vw";
+			dmg1.style.transition = "all 0s";
+			dmg1.style.visibility = "hidden";
+			}
+		if (dg2>0) {
+			dmg1.style.visibility = "visible";
+			dmg2.style.transition = "all 1.5s";
+			dmg2.style.fontSize = "5vw";
+			dmg2.style.transition = "all 0s";
+			dmg2.style.visibility = "hidden";
+			}
+		if (1>0) {
+			dmg3.style.visibility = "visible";
+			dmg3.style.transition = "all 1.5s";
+			dmg3.style.fontSize = "5vw";
+			dmg3.style.transition = "all 0s";
+			dmg3.style.visibility = "hidden";
+			}
 	}
 	
 	function endGame() {

@@ -38,7 +38,7 @@
 								th:src="${session.img1}"
 								th:style="${'cursor: url('+cursorch+'), not-allowed;'}">
 							<div class="divdmg">
-								<p class="dmg" th:id="${'dmg'+session.idCard1}">[[${dmg1}]]</p>
+								<p class="dmg" th:id="${'dmg'+session.idCard1}" style="visibility: hidden">[[${dmg1}]]</p>
 							</div>
 							<div class="divname">
 								<p class="name">[[${session.namec1}]]</p>
@@ -70,7 +70,7 @@
 								th:src="${session.img2}"
 								th:style="${'cursor: url('+cursorch+'), not-allowed;'}">
 							<div class="divdmg">
-								<p class="dmg" th:id="${'dmg'+session.idCard2}">[[${dmg2}]]</p>
+								<p class="dmg" th:id="${'dmg'+session.idCard2}" style="visibility: hidden">[[${dmg2}]]</p>
 							</div>
 							<div class="divname">
 								<p class="name">[[${session.namec2}]]</p>
@@ -96,6 +96,9 @@
 							<input type="image" class="imgcard" th:idCard="${session.idCard4}" th:id="${'c'+session.idCard4}"
 								th:src="${session.img4}"
 								th:style="${'cursor: url('+cursorai+'), not-allowed;'}">
+							<div class="divdmg">
+								<p class="dmg" th:id="${'dmg'+session.idCard4}">[[${dmg4}]]</p>
+							</div>
 							<div class="divname">
 								<p class="name">[[${session.namec4}]]</p>
 							</div>
@@ -125,6 +128,9 @@
 							<input type="image" class="imgcard" th:idCard="${session.idCard3}" th:id="${'c'+session.idCard3}"
 								th:src="${session.img3}"
 								th:style="${'cursor: url('+cursorch+'), not-allowed;'}">
+							<div class="divdmg">
+								<p class="dmg" th:id="${'dmg'+session.idCard3}" style="visibility: visible" th:value="${dmg3}">[[${dmg3}]]</p>
+							</div>
 							<div class="divname">
 								<p class="name">[[${session.namec3}]]</p>
 							</div>
@@ -150,6 +156,9 @@
 							<input type="image" class="imgcard" th:idCard="${session.idCard5}" th:id="${'c'+session.idCard5}"
 								th:src="${session.img5}"
 								th:style="${'cursor: url('+cursorai+'), not-allowed;'}">
+							<div class="divdmg">
+								<p class="dmg" th:id="${'dmg'+session.idCard5}">[[${dmg5}]]</p>
+							</div>
 							<div class="divname">
 								<p class="name">[[${session.namec5}]]</p>
 							</div>
@@ -177,6 +186,9 @@
 							<input type="image" class="imgcard" th:idCard="${session.idCard6}" th:id="${'c'+session.idCard6}"
 								th:src="${session.img6}"
 								th:style="${'cursor: url('+cursorai+'), not-allowed;'}">
+							<div class="divdmg">
+								<p class="dmg" th:id="${'dmg'+session.idCard6}">[[${dmg6}]]</p>
+							</div>
 							<div class="divname" >
 								<p class="name">[[${session.namec6}]]</p>
 							</div>
