@@ -37,6 +37,9 @@
 							<input type="image" class="imgcard" th:idCard="${session.idCard1}" th:id="${'c'+session.idCard1}"
 								th:src="${session.img1}"
 								th:style="${'cursor: url('+cursorch+'), not-allowed;'}">
+							<div class="divdmg">
+								<p class="dmg" th:id="${'dmg'+session.idCard1}">[[${dmg1}]]</p>
+							</div>
 							<div class="divname">
 								<p class="name">[[${session.namec1}]]</p>
 							</div>
@@ -66,6 +69,9 @@
 							<input type="image" class="imgcard" th:idCard="${session.idCard2}" th:id="${'c'+session.idCard2}"
 								th:src="${session.img2}"
 								th:style="${'cursor: url('+cursorch+'), not-allowed;'}">
+							<div class="divdmg">
+								<p class="dmg" th:id="${'dmg'+session.idCard2}">[[${dmg2}]]</p>
+							</div>
 							<div class="divname">
 								<p class="name">[[${session.namec2}]]</p>
 							</div>

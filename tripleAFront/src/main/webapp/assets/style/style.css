@@ -1421,6 +1421,22 @@ input:focus, textarea:focus {
 	right: 10%;
 }
 
+#battle #field .divdmg {
+	position: absolute;
+	text-align: center;
+	top: 0%;
+	left: 45%;
+	width: 25%;
+}
+
+#battle #field .dmg {
+	font-size: 1vw;
+	font-family: 'Showcard Gothic';
+	font-weight: bold;
+	color: red;
+	text-shadow: 0 0 10px #cc9900;
+}
+
 #battle #bottom
 {
 	height: 13%;

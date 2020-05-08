@@ -61,6 +61,9 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 									<input type="image" class="imgcard" th:idCard="${session.idCard1}" th:id="${'c'+session.idCard1}"
 										th:src="${session.img1}"
 										th:style="${'cursor: url('+cursorch+'), not-allowed;'}">
+									<div class="divdmg">
+										<p class="dmg" th:id="${'dmg'+session.idCard1}">[[${dmg1}]]</p>
+									</div>
 									<div class="divname">
 										<p class="name">[[${session.namec1}]]</p>
 									</div>
@@ -90,6 +93,9 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 									<input type="image" class="imgcard" th:idCard="${session.idCard2}" th:id="${'c'+session.idCard2}"
 										th:src="${session.img2}"
 										th:style="${'cursor: url('+cursorch+'), not-allowed;'}">
+									<div class="divdmg">
+										<p class="dmg" th:id="${'dmg'+session.idCard2}">[[${dmg2}]]</p>
+									</div>
 									<div class="divname">
 										<p class="name">[[${session.namec2}]]</p>
 									</div>
@@ -407,17 +413,32 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 			}
 	}
 	
+	function affDmg() {
+		var dmg1  = document.getElementById()
+		dmg1.style.transition = "all 1.5s";
+		dmg1.style.fontSize = "20vw";
+	}
+	
 	function endGame() {
 		var endGame = document.getElementById("endGame");
 		var end = endGame.value;
 		var sBat = document.getElementById("music");
 		if (end=="win") {
-			document.getElementById('win').style.visibility='visible';
 			sBat.pause();
-			var sound = document.getElementById("victory");
-			gameOver.volume = 0.05;
-			sound.play();
-			setTimeout(function(){window.location.href = "choice";}, 6000);
+			if ([[${session.boss}]]==0) {
+				document.getElementById('win').style.visibility='visible';
+				var sound = document.getElementById("victory");
+				gameOver.volume = 0.05;
+				sound.play();
+				setTimeout(function(){window.location.href = "choice";}, 6000);
+			}
+			else if ([[${session.boss}]]==1) {
+				document.getElementById('win').style.visibility='visible';
+				var sound = document.getElementById("victory");
+				gameOver.volume = 0.05;
+				sound.play();
+				setTimeout(function(){window.location.href = "home";}, 6000);
+			}
 			
 		}
 		else if (end=="lose") {

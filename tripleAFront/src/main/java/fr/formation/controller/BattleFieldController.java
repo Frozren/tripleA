@@ -55,6 +55,7 @@ public class BattleFieldController {
 	static String c4, id4;
 	static String c5, id5;
 	static String c6, id6;
+	static int hp1, hp2, hp3, hp4, hp5, hp6;
 	static int phase;
 	static Boolean boss;
 
@@ -65,23 +66,23 @@ public class BattleFieldController {
 		if (turn==0) {
 			
 			//a enlever
-			Card carte1 = new Card(100,90,25);
-			Card carte2 = new Card(130,35,50);
-			Card carte3 = new Card(130,35,50);
-			Card carte4 = new Card(1500,50,50);
-			Card carte5 = new Card(0,0,0);
-			Card carte6 = new Card(0,0,0);
-			h = Game.getInstance().getHuman();
-			ai = Game.getInstance().getAI();
-			h.setCard1(carte1);
-			h.setCard2(carte2);
-			h.setCard3(carte3);
-			ai.setCard1(carte4);
-			ai.setCard2(carte5);
-			ai.setCard3(carte6);
-			carte1.setPosition(true);
-			carte6.setPosition(true);
-			phase=3;
+//			Card carte1 = new Card(100,90,25);
+//			Card carte2 = new Card(130,35,50);
+//			Card carte3 = new Card(130,35,50);
+//			Card carte4 = new Card(1500,50,50);
+//			Card carte5 = new Card(0,0,0);
+//			Card carte6 = new Card(0,0,0);
+//			h = Game.getInstance().getHuman();
+//			ai = Game.getInstance().getAI();
+//			h.setCard1(carte1);
+//			h.setCard2(carte2);
+//			h.setCard3(carte3);
+//			ai.setCard1(carte4);
+//			ai.setCard2(carte5);
+//			ai.setCard3(carte6);
+//			carte1.setPosition(true);
+//			carte6.setPosition(true);
+//			phase=3;
 			//fin a enlever
 			
 			
@@ -91,21 +92,22 @@ public class BattleFieldController {
 			tour=0;
 			def=0;
 			end=false;
-//			h = Game.getInstance().getHuman();
-//			phase = h.getPhase();
+			h = Game.getInstance().getHuman();
+			phase = h.getPhase();
 			System.out.println("phase="+phase);
 			if (phase == 3) {boss = true;
-				model.addAttribute("boss", "1");}
+				session.setAttribute("boss", "1");}
 			else {boss = false;
-			model.addAttribute("boss", "0");}
-//			ai = Game.getInstance().getAI();
+				session.setAttribute("boss", "0");}
+			ai = Game.getInstance().getAI();
 			deckH = h.deck();
 			deckAI = ai.deck();
 			if (phase==3) {
 				deckAI.add(ai.getCard2());
 				deckAI.add(ai.getCard3());
 				}
-			
+			hp1=deckH.get(0).getLife(); hp2=deckH.get(1).getLife(); hp3=deckH.get(2).getLife();
+			hp4=deckAI.get(0).getLife(); hp5=deckAI.get(1).getLife(); hp6=deckAI.get(2).getLife();
 			maxhp1 = deckH.get(0).getLife() + deckH.get(1).getLife() + deckH.get(2).getLife();
 			maxhp2 = deckAI.get(0).getLife() + deckAI.get(1).getLife() + deckAI.get(2).getLife();
 			System.out.println(h);
@@ -403,6 +405,8 @@ public class BattleFieldController {
 		if (h.deck().size()==1) {idCardDef="0";}
 		model.addAttribute("idCardDef", idCardDef);
 		model.addAttribute("idCardAtk", idCardAtk);
+		
+		affDmg(model);
 	}
 
 	public void deletePlayer(Player player) {
@@ -413,6 +417,26 @@ public class BattleFieldController {
 		daoCard.deleteById(c1.getId());
 		daoCard.deleteById(c2.getId());
 		daoCard.deleteById(c3.getId());
+	}
+	
+	public void affDmg(Model model) {
+		int dmg1=hp1-deckH.get(0).getLife(); hp1=deckH.get(0).getLife();
+		int dmg2=hp2-deckH.get(1).getLife(); hp2=deckH.get(1).getLife();
+		int dmg3=hp3-deckH.get(2).getLife(); hp3=deckH.get(2).getLife();
+		int dmg4=hp4-deckAI.get(0).getLife(); hp4=deckAI.get(0).getLife();
+		model.addAttribute("dmg"+c1, dmg1);
+		model.addAttribute("dmg"+c2, dmg2);
+		model.addAttribute("dmg"+c3, dmg3);
+		if (phase!=3) {
+			int dmg5=hp5-deckAI.get(1).getLife(); hp5=deckAI.get(1).getLife();
+			int dmg6=hp6-deckAI.get(2).getLife(); hp6=deckAI.get(2).getLife();
+			model.addAttribute("dmg"+c4, dmg4);
+			model.addAttribute("dmg"+c5, dmg5);
+			model.addAttribute("dmg"+c6, dmg6);
+		}
+		else if (phase==3) {
+			model.addAttribute("dmgBoss", dmg4);
+		}
 	}
 
 }
