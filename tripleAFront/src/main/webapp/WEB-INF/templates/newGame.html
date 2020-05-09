@@ -9,10 +9,13 @@
 			<div>
 				<form id="myform" method="POST" action="newGameNext">
 					<input id="pseudo" autocomplete="off" autocorrect="off" autofocus type="text" name="pseudo" minlength=3 maxlength="14" placeholder="PIPPIN" required>
+					<input id="charge" type="hidden" name="charge" value="false"/>
 				</form>
 			</div>
 			<br>
 			<div id="erreur"></div>
+			<a class="button" id="charger">Charger</a>
+			<a class="button" id="supprimer">Supprimer</a>
 		</div>
 	</body>
 	
@@ -21,9 +24,15 @@
 		var titre = document.getElementById("titre");
 		var home = document.getElementById("logoHome");
 		var messErreur = document.getElementById("erreur");
+		var chargeText = document.getElementById("charge");
+		var buttonCharge = document.getElementById("charger");
+		var buttonSuppr = document.getElementById("supprimer");
 		var pseudoOK = false;
+		var suppression = false;
 	
 		home.onclick = retour;
+		buttonCharge.onclick = charger;
+		buttonSuppr.onclick = suppr;
 		onkeyup = flou;
 		onkeypress = alphaOnly;
 		
@@ -70,6 +79,16 @@
 			}
 		}
 	
+		function charger(){
+			charge.value = true;
+			document.forms["myform"].submit();
+		}
+		
+		function suppr(){
+			suppression = true;
+			verifPseudo();
+		}
+		
 		function retour() {
 			window.location.href = "home";
 		}
@@ -79,20 +98,33 @@
 				type : 'POST',
 				data : {
 					pseudo : $("#pseudo").val(),
-					checkPseudo : "true"
+					suppression : suppression
 					},
 				success : function(resp){
 					if (resp == "Y"){
 						input.style.color = "#b00000";
 						input.style.textShadow = "0 0 5px #ff4343";
 						messErreur.innerHTML = "Une partie est déjà enregistrée à ce nom !";
+						buttonCharge.style.transition = "all 4s";
+						buttonSuppr.style.transition = "all 4s";
+						buttonCharge.style.opacity = "1";
+						buttonSuppr.style.opacity = "1";
+						buttonCharge.style.visibility = "visible";
+						buttonSuppr.style.visibility = "visible";
 						pseudoOK = false;
 					} else {
 						input.style.color = "#00b000";
 						input.style.textShadow = "0 0 5px #43ff43";
 						messErreur.innerHTML = "";
+						buttonCharge.style.transition = "all 0s";
+						buttonSuppr.style.transition = "all 0s";
+						buttonCharge.style.opacity = "0";
+						buttonSuppr.style.opacity = "0";
+						buttonCharge.style.visibility = "hidden";
+						buttonSuppr.style.visibility = "hidden";
 						pseudoOK = true;
 					}
+					suppression = false;
 				}
 			});
 		}

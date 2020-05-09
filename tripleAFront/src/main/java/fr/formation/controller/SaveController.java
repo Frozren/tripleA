@@ -48,7 +48,7 @@ public class SaveController {
 		Player p1 = list.get(saveId);
 		Optional<Player> optionalPlayer = this.daoPlayer.findById(p1.getIdOpponent());
 		Player p2 = optionalPlayer.get();
-		
+
 		deletePlayer(p1);
 		deletePlayer(p2);
 	}

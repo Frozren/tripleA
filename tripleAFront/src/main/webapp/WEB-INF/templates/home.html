@@ -17,6 +17,7 @@
 				<div id="logo2"><img src="assets/img/home/logoBas.png"></div>
 			</div>
 			<div id="history">
+				<div id="reset" th:if="${emptyHistory == false}">reset</div>
 				<table>
 					<thead>
 						<tr>
@@ -73,12 +74,7 @@
 	</body>
 	
 	<script type="text/javascript">
-		var premierNom = document.getElementById("premierNom");
-		var premierData = document.getElementById("premierData");
-		var secondNom = document.getElementById("secondNom");
-		var secondData = document.getElementById("secondData");
-		var troisiemeNom = document.getElementById("troisiemeNom");
-		var troisiemeData = document.getElementById("troisiemeData");
+		var reset = document.getElementById("reset");
 		var audio = document.getElementById("Audio");
 		var tri = document.getElementById("tri");
 		var toptier1 = document.getElementById("toptier1");
@@ -165,6 +161,10 @@
 		function menu(e) {
 			if (e.target.id == "newGame" || e.target.id == "save" || e.target.id == "options"){
 				window.location.href = e.target.id;
+			} else if (e.target.id == "reset"){
+				if (confirm("Voulez-vous vraiment supprimer l'historique ?")){
+					window.location.href = "/tripleAFront/home/resetHisto";
+				}
 			} else if (e.target.id == "leave"){
 				if (confirm("Voulez-vous vraiment quitter ?")){
 					window.location.href = "https://www.google.com/";
