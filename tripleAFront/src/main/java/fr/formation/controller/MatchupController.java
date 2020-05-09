@@ -41,7 +41,7 @@ public class MatchupController {
 	}
 	
 	@PostMapping("/matchup")
-	public String getPosition(@RequestParam int choicePos) {
+	public String getPosition(@RequestParam int choicePos, HttpSession session) {
 		
 		Human h = Game.getInstance().getHuman();
 		AI ai = Game.getInstance().getAI();
@@ -56,7 +56,7 @@ public class MatchupController {
 		} else if (choicePos == 3) {
 			h.getCard3().setPosition(true);
 		}
-		
+		session.setAttribute("turn", "0");
 		return "redirect:/battleField";
 	}
 }

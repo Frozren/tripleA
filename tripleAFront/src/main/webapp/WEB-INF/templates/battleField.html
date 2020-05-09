@@ -14,11 +14,11 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 
 		<div class="row" id="top">
 			<div class="col-2">
-				<img id="logo" src="assets/img/logo.png"/>
+				<img id="logoHome" src="assets/img/logo.png"  type="button" data-toggle="modal"  data-target="#modalClose"/>
 			</div>
 		</div>
 		<div class="row" id="hp">
-			<div class="col-2"></div>
+			<div class="col-2" style="visibility: hidden"></div>
 			<div class="col-3">
 				<div id="hp1">
 					<div class="progress">
@@ -49,7 +49,9 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 		<div class="row" id="mid">
 			<div id="divconsole">
 				<div class="scroll" id="console" th:utext="${message}"></div>
+				
 			</div>
+			
 
 			<div id="field" th:style="${'cursor: url('+cursor+'), crosshair; background-image: url('+session.imgField+');'}">
 				<div class="row" id="hfield">
@@ -57,12 +59,12 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 						<div class="row" id="tleft"></div>
 						<div class="row" id="hcard">
 							<div class="col-8">
-								<div id="card" th:style="${'visibility: '+disc1}">
+								<div th:id="${'card'+session.idCard1}">
 									<input type="image" class="imgcard" th:idCard="${session.idCard1}" th:id="${'c'+session.idCard1}"
 										th:src="${session.img1}"
 										th:style="${'cursor: url('+cursorch+'), not-allowed;'}">
 									<div class="divdmg">
-										<p class="dmg" th:id="${'dmg'+session.idCard1}" style="visibility: hidden">[[${dmg1}]]</p>
+										<p class="dmg" th:id="${'dmg'+session.idCard1}">[[${dmg1}]]</p>
 									</div>
 									<div class="divname">
 										<p class="name">[[${session.namec1}]]</p>
@@ -81,6 +83,7 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 										<p class="stat">[[${deckH[0].life}]]</p>
 									</div>
 								</div>
+								<img class="sang" th:id="${'sang'+session.idCard1}" src="assets/img/battlefield/sang.png">
 							</div>
 						</div>
 					</div>
@@ -89,12 +92,12 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 						<div class="row" id="hcard">
 							<div class="col-1" id="ltcard"></div>
 							<div class="col-2">
-								<div id="card" th:style="${'visibility: '+disc2}">
+								<div th:id="${'card'+session.idCard2}">
 									<input type="image" class="imgcard" th:idCard="${session.idCard2}" th:id="${'c'+session.idCard2}"
 										th:src="${session.img2}"
 										th:style="${'cursor: url('+cursorch+'), not-allowed;'}">
 									<div class="divdmg">
-										<p class="dmg" th:id="${'dmg'+session.idCard2}" style="visibility: hidden">[[${dmg2}]]</p>
+										<p class="dmg" th:id="${'dmg'+session.idCard2}">[[${dmg2}]]</p>
 									</div>
 									<div class="divname">
 										<p class="name">[[${session.namec2}]]</p>
@@ -113,10 +116,11 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 										<p class="stat">[[${deckH[1].life}]]</p>
 									</div>
 								</div>
+								<img class="sang" th:id="${'sang'+session.idCard2}" src="assets/img/battlefield/sang.png">
 							</div>
 							<div class="col-5" id="mtcard"></div>
 							<div class="col-2">
-								<div id="card" th:style="${'visibility: '+disc4}">
+								<div th:id="${'card'+session.idCard4}">
 									<input type="image" class="imgcard" th:idCard="${session.idCard4}" th:id="${'c'+session.idCard4}"
 										th:src="${session.img4}"
 										th:style="${'cursor: url('+cursorai+'), not-allowed;'}">
@@ -139,6 +143,7 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 										<p class="stat">[[${deckAI[0].life}]]</p>
 									</div>
 								</div>
+								<img class="sang" th:id="${'sang'+session.idCard4}" src="assets/img/battlefield/sang.png">
 							</div>
 						</div>
 						<div class="row" id="midField">
@@ -148,12 +153,12 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 						<div class="row" id="hcard">
 							<div class="col-1" id="ltcard"></div>
 							<div class="col-2">
-								<div id="card" th:style="${'visibility: '+disc3}">
+								<div th:id="${'card'+session.idCard3}">
 									<input type="image" class="imgcard" th:idCard="${session.idCard3}" th:id="${'c'+session.idCard3}"
 										th:src="${session.img3}"
 										th:style="${'cursor: url('+cursorch+'), not-allowed;'}">
 									<div class="divdmg">
-										<p class="dmg" th:id="${'dmg'+session.idCard3}" style="visibility: visible" th:value="${dmg3}">[[${dmg3}]]</p>
+										<p class="dmg" th:id="${'dmg'+session.idCard3}">[[${dmg3}]]</p>
 									</div>
 									<div class="divname">
 										<p class="name">[[${session.namec3}]]</p>
@@ -172,11 +177,12 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 										<p class="stat">[[${deckH[2].life}]]</p>
 									</div>
 								</div>
+								<img class="sang" th:id="${'sang'+session.idCard3}" src="assets/img/battlefield/sang.png">
 							</div>
 
 							<div class="col-5" id="mtcard"></div>
 							<div class="col-2">
-								<div id="card" th:style="${'visibility: '+disc5}">
+								<div th:id="${'card'+session.idCard5}">
 									<input type="image" class="imgcard" th:idCard="${session.idCard5}" th:id="${'c'+session.idCard5}"
 										th:src="${session.img5}"
 										th:style="${'cursor: url('+cursorai+'), not-allowed;'}">
@@ -199,6 +205,7 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 										<p class="stat">[[${deckAI[1].life}]]</p>
 									</div>
 								</div>
+								<img class="sang" th:id="${'sang'+session.idCard5}" src="assets/img/battlefield/sang.png">
 							</div>
 						</div>
 					</div>
@@ -206,7 +213,7 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 						<div class="row" id="tleft"></div>
 						<div class="row" id="hcard">
 							<div class="col-8">
-								<div id="card" th:style="${'visibility: '+disc6}">
+								<div th:id="${'card'+session.idCard6}">
 									<input type="image" class="imgcard" th:idCard="${session.idCard6}" th:id="${'c'+session.idCard6}"
 										th:src="${session.img6}"
 										th:style="${'cursor: url('+cursorai+'), not-allowed;'}">
@@ -229,14 +236,14 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 										<p class="stat">[[${deckAI[2].life}]]</p>
 									</div>
 								</div>
+								<img class="sang" th:id="${'sang'+session.idCard6}" src="assets/img/battlefield/sang.png">
 							</div>
-						</div>
-						<div class="row" id="divBoss">
-							
 						</div>
 					</div>
 				</div>
-				
+				<div class="divdmgBoss">
+					<p class="dmgBoss" id="dmgBoss">[[${dmgBoss}]]</p>
+				</div>
 			</div>
 		</div>
 		<div class="row" id="bottom">
@@ -248,11 +255,9 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 			<div class="col-3">
 				<audio id="sDef" src="assets/sound/def.mp3"></audio>
 				<audio id="sAtt" src="assets/sound/att.mp3"></audio>
+				<audio id="cDJ" src="assets/sound/cardDeadJ.mp3"></audio>
 				<audio id="gameOver" src="assets/sound/gameOver.mp3"></audio>
 				<audio id="victory" src="assets/sound/victory.mp3"></audio>
-			</div>
-			<div class="col-2">
-				<img src="assets/img/battlefield/field/exit.png" id="exit" type="button" data-toggle="modal"  data-target="#modalClose">
 				<div class="modal fade" id="modalClose" tabindex="-1" role="dialog" aria-labelledby="closeModalLabel" aria-hidden="true">
 					<div class="modal-dialog" role="document" id="modal">
 						<div class="modal-content">
@@ -278,7 +283,21 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 				<input type="text" id="idCardDef" th:value="${idCardDef}" style="visibility: hidden;"></input>
 				<input type="text" id="idCardAtk" th:value="${idCardAtk}" style="visibility: hidden;"></input>
 				<input type="text" id="boss" th:value="${session.boss}" style="visibility: hidden;"></input>
-				<input type="text" id="idmg3" th:value="${dmg3}" style="visibility: hidden;"></input>
+				<input type="text" id="def" th:value="${def}" style="visibility: hidden;"></input>
+				<input type="text" id="phase" th:value="${phase}" style="visibility: hidden;"></input>
+				<input type="text" th:id="${'idmg'+session.idCard1}" th:value="${dmg1}" style="visibility: hidden;"></input>
+				<input type="text" th:id="${'idmg'+session.idCard2}" th:value="${dmg2}" style="visibility: hidden;"></input>
+				<input type="text" th:id="${'idmg'+session.idCard3}" th:value="${dmg3}" style="visibility: hidden;"></input>
+				<input type="text" th:id="${'idmg'+session.idCard4}" th:value="${dmg4}" style="visibility: hidden;"></input>
+				<input type="text" th:id="${'idmg'+session.idCard5}" th:value="${dmg5}" style="visibility: hidden;"></input>
+				<input type="text" th:id="${'idmg'+session.idCard6}" th:value="${dmg6}" style="visibility: hidden;"></input>
+				<input type="text" id="idmgBoss" th:value="${dmgBoss}" style="visibility: hidden;"></input>
+				<input type="text" th:id="${'ilife'+session.idCard1}" th:value="${disc1}" style="visibility: hidden;"></input>
+				<input type="text" th:id="${'ilife'+session.idCard2}" th:value="${disc2}" style="visibility: hidden;"></input>
+				<input type="text" th:id="${'ilife'+session.idCard3}" th:value="${disc3}" style="visibility: hidden;"></input>
+				<input type="text" th:id="${'ilife'+session.idCard4}" th:value="${disc4}" style="visibility: hidden;"></input>
+				<input type="text" th:id="${'ilife'+session.idCard5}" th:value="${disc5}" style="visibility: hidden;"></input>
+				<input type="text" th:id="${'ilife'+session.idCard6}" th:value="${disc6}" style="visibility: hidden;"></input>
 			</div>
 		</div>
 		<div id="divBoss">
@@ -290,82 +309,71 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 </body>
 
 <script>
-	var buttonClose=document.getElementById("fermer");
-	buttonClose.onclick=fermer;
-	
-	function initCard(){
-		$('input[type="image"]').on('click', function() {
-			let idCard = $(this).attr('idCard');
-			$('#c').val(idCard);
-			console.log(idCard)
-			
-			$.ajax({
-				type : 'POST',
-				processData : false,
-				contentType : false,
-				url : "battle?c=" + idCard,
-				success : function(resp) {
-					
-					let container = $('<div />');
-					container.html(resp);
-					console.log(container);
-					
-					$('#hp1').parent().html(
-						container.find('#hp1').html()
-					)
-						
-					$('#hp2').parent().html(
-						container.find('#hp2').html()
-					)
-					
-					$('#field').parent().html(
-						container.find('#field').html()
-					)
-					
-					$('#variables').html(
-						container.find('#variables').html()
-					)
-					
-					$('#divBoss').html(
-						container.find('#divBoss').html()
-					)
-				
-					console.log(resp);
-					console.log("OK");
-					cardEffect()
-					affDmg()
-					endGame()
-					initCard()
-					setVar()
-				}
-			})
-			return false;
-		});
+	var i1=0; var i2=0; var i3=0;
+	var i4=0; var i5=0; var i6=0;
+
+	var buttonFermer = document.getElementById("fermer");
+	buttonFermer.onclick=fermer;
+	function fermer() {
+		window.location.href = "home";
 	}
-	
-	
+
+	function initCard(){
+		var endG = document.getElementById("endGame");
+		var end = endG.value;
+		if(end!="win" && end!="lose") {
+			$('input[type="image"]').on('click', function() {
+				let idCard = $(this).attr('idCard');
+				$('#c').val(idCard);
+				console.log(idCard)
+				
+				$.ajax({
+					type : 'POST',
+					processData : false,
+					contentType : false,
+					url : "battle?c=" + idCard,
+					success : function(resp) {
+						
+						let container = $('<div />');
+						container.html(resp);
+						console.log(container);
+						
+						$('#hp1').parent().html(
+							container.find('#hp1').html()
+						)
+							
+						$('#hp2').parent().html(
+							container.find('#hp2').html()
+						)
+						
+						$('#field').parent().html(
+							container.find('#field').html()
+						)
+						
+						$('#variables').html(
+							container.find('#variables').html()
+						)
+						
+						$('#divBoss').html(
+							container.find('#divBoss').html()
+						)
+						
+						affDmg()
+						cardEffect()
+						endGame()
+						initCard()
+					}
+				})
+				return false;
+			});
+		}
+	}
 	$("form").submit(function(e){
 		console.log('form submit')
 		e.preventDefault();
 		return false;
 	});
-	
-	function setVar(){
-		var c1=document.getElementById("c1");
-		var c2=document.getElementById("c2");
-		var c3=document.getElementById("c3");
-		var c4=document.getElementById("c4");
-		var c5=document.getElementById("c5");
-		var c6=document.getElementById("c6");
-		var sound = document.getElementById("music");
-		c1.onmouseover=soundDef;
-		c2.onmouseover=soundDef;
-		c3.onmouseover=soundDef;
-		c4.onmouseover=soundAtt;
-		c5.onmouseover=soundAtt;
-		c6.onmouseover=soundAtt;
 
-	}
 
 	function setVolume() {
 		var sound = document.getElementById("music");
@@ -373,107 +381,197 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 	}
 	
 	function soundDef() {
-		var sound = document.getElementById("sDef");
+		var sDef = document.getElementById("sDef");
 		sDef.volume = 0.1;
-		sound.play();
+		sDef.play();
 	}
 
 	function soundAtt() {
-		var sound = document.getElementById("sAtt");
+		var sAtt = document.getElementById("sAtt");
 		sAtt.volume = 0.1;
-		sound.play();
+		sAtt.play();
 	}
 	
-	function fermer() {
-		window.location.href = "home";
+	function soundcDJ() {
+		var cDJ = document.getElementById("cDJ");
+		cDJ.volume = 0.4;
+		cDJ.play();
 	}
+	
+	function animSang(sang) {
+		sang.style.transition = "all 0.5s linear 0.01s";
+		sang.style.transform = "scale(0.5) translateY(-100%)";
+		sang.style.visibility="visible";
+		}
 
 	function cardEffect() {
-		var cdef1=document.getElementById("def1");
-		var cdef2=document.getElementById("def2");
-		var cdef3=document.getElementById("def3");
-		var catk1=document.getElementById("c1");
-		var catk2=document.getElementById("c2");
-		var catk3=document.getElementById("c3");
-		var idCardDef = document.getElementById("idCardDef");
-		var cardDef = idCardDef.value;
-		var idCardAtk = document.getElementById("idCardAtk");
-		var cardAtk = idCardAtk.value;
+		let iphase = document.getElementById("phase");
+		let phase = iphase.value;
+		let cdef1=document.getElementById("def1");
+		let cdef2=document.getElementById("def2");
+		let cdef3=document.getElementById("def3");
+		let c1=document.getElementById("c1");
+		let c2=document.getElementById("c2");
+		let c3=document.getElementById("c3");
+		let c4=document.getElementById("c4");
+		let c5=document.getElementById("c5");
+		let c6=document.getElementById("c6");
+		let idCardDef = document.getElementById("idCardDef");
+		let cardDef = idCardDef.value;
+		let idCardAtk = document.getElementById("idCardAtk");
+		let cardAtk = idCardAtk.value;
+		
+		let card1=document.getElementById("card1");
+		let card2=document.getElementById("card2");
+		let card3=document.getElementById("card3");
+		let card4=document.getElementById("card4");
+		let card5=document.getElementById("card5");
+		let card6=document.getElementById("card6");
+		let sang1=document.getElementById("sang1");
+		let sang2=document.getElementById("sang2");
+		let sang3=document.getElementById("sang3");
+		let sang4=document.getElementById("sang4");
+		let sang5=document.getElementById("sang5");
+		let sang6=document.getElementById("sang6");
+		let ilife1=document.getElementById("ilife1");
+		let life1 = ilife1.value;
+		let ilife2=document.getElementById("ilife2");
+		let life2 = ilife2.value;
+		let ilife3=document.getElementById("ilife3");
+		let life3 = ilife3.value;
+		let ilife4=document.getElementById("ilife4");
+		let life4 = ilife4.value;
+		let ilife5=document.getElementById("ilife5");
+		let life5 = ilife5.value;
+		let ilife6=document.getElementById("ilife6");
+		let life6 = ilife6.value;
 		
 		cdef1.style.visibility="hidden";
 		cdef2.style.visibility="hidden";
 		cdef3.style.visibility="hidden";
-		catk1.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #000000)");
-		catk2.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #000000)");
-		catk3.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #000000)");
+		c1.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #000000)");
+		c2.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #000000)");
+		c3.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #000000)");
+		if ([[${session.boss}]]==0) {
+			c4.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #000000)");
+			c5.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #000000)");
+			c6.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #000000)");
+		}
 		
-		if (cardDef=="1") {
-			cdef1.style.visibility="visible";
-		}
-		else if (cardDef=="2") {
-			cdef2.style.visibility="visible";
-		}
-		else if (cardDef=="3") {
-			cdef3.style.visibility="visible";
-			}
+		if (cardDef=="1" && life1=="alive") {
+			cdef1.style.visibility="visible";}
+		else if (cardDef=="2" && life1=="alive") {
+			cdef2.style.visibility="visible";}
+		else if (cardDef=="3" && life1=="alive") {
+			cdef3.style.visibility="visible";}
+		
 		if (cardAtk=="1") {
-			catk1.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 10px #ff0000)");
+			if(life1=="alive"){c1.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 10px #ff0000)");}
+			if ([[${session.boss}]]==0 && life4=="alive") {c4.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 10px #ff0000)");}
 		}
 		else if (cardAtk=="2") {
-			catk2.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 10px #ff0000)");
+			if(life2=="alive"){c2.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 10px #ff0000)");}
+			if ([[${session.boss}]]==0 && life5=="alive") {c5.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 10px #ff0000)");}
 		}
 		else if (cardAtk=="3") {
-			catk3.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 10px #ff0000)");
+			if(life3=="alive"){c3.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 10px #ff0000)");}
+			if ([[${session.boss}]]==0 && life6=="alive") {c6.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 10px #ff0000)");}
 			}
+		
+		if(life1=="dead") {card1.style.filter = "grayscale(100%)";
+			card1.style.pointerEvents = "none"; sang1.style.visibility = "visible";
+			if (i1==0) {i1=1; soundAtt();}}
+		if(life2=="dead") {card2.style.filter = "grayscale(100%)";
+			card2.style.pointerEvents = "none"; sang2.style.visibility = "visible";
+			if (i2==0) {i2=1; soundAtt();}}
+		if(life3=="dead") {card3.style.filter = "grayscale(100%)";
+			card3.style.pointerEvents = "none"; sang3.style.visibility = "visible";
+			if (i3==0) {i3=1; soundAtt();}}
+		if([[${session.boss}]]==0) {
+			if(life4=="dead") {card4.style.filter = "grayscale(100%)";
+				card4.style.pointerEvents = "none"; sang4.style.visibility = "visible";
+				if(phase==1 && i4==0) {i4=1; soundcDJ();} else if(phase==2 && i4==0) {i4=1; soundAtt();}}
+			if(life5=="dead") {card5.style.filter = "grayscale(100%)";
+				card5.style.pointerEvents = "none"; sang5.style.visibility = "visible";
+				if (i5==0) {i5=1; soundAtt();}}
+			if(life6=="dead") {card6.style.filter = "grayscale(100%)";
+				card6.style.pointerEvents = "none"; sang6.style.visibility = "visible";
+				if (i6==0) {i6=1; soundAtt();}}
+		}
+		else {
+			card4.style.visibility ="hidden";
+			card5.style.visibility ="hidden";
+			card6.style.visibility ="hidden";
+		}
 	}
 	
-	function affDmg() {
-		var dmg1  = document.getElementById("dmg1");
-		var dmg2  = document.getElementById("dmg2");
-		var dmg3  = document.getElementById("dmg3");
-		var dg1 = dmg1.value;
-		var dg2 = dmg2.value;
-		var dg3 = dmg3.value;
-		//alert(dg1+" "+dg2+" "+dg3);
+	function animDmg(dmg) {
+		dmg.style.transition = "all 0.5s linear 0.01s";
+		dmg.style.transform = "scale(0.5) translateY(-100%)";
+		dmg.style.opacity="0.5";
+		dmg.style.visibility="hidden";
+		}
+	
+	function affDmg() {		
+		let dmg1  = document.getElementById("dmg1");
+		let dmg2  = document.getElementById("dmg2");
+		let dmg3  = document.getElementById("dmg3");
+		let idmg1 = document.getElementById("idmg1");
+		let dg1 = idmg1.value;
+		let idmg2 = document.getElementById("idmg2");
+		let dg2 = idmg2.value;
+		let idmg3 = document.getElementById("idmg3");
+		let dg3 = idmg3.value;
 		
-		if ([[${session.boss}]]==0){
-			var dmg4  = document.getElementById("dmg4");
-			var dmg5  = document.getElementById("dmg5");
-			var dmg6  = document.getElementById("dmg6");
-			var dg4 = dmg4.value;
-			var dg5 = dmg5.value;
-			var dg6 = dmg6.value;
-		}
-		else if ([[${session.boss}]]==1){
-			
-		}
+		let dmg4  = document.getElementById("dmg4");
+		let dmg5  = document.getElementById("dmg5");
+		let dmg6  = document.getElementById("dmg6");
+		let idmg4 = document.getElementById("idmg4");
+		let dg4 = idmg4.value;
+		let idmg5 = document.getElementById("idmg5");
+		let dg5 = idmg5.value;
+		let idmg6 = document.getElementById("idmg6");
+		let dg6 = idmg6.value;
+		
+		let dmgBoss  = document.getElementById("dmgBoss");
+		let idmgBoss = document.getElementById("idmgBoss");
+		let dgBoss = idmgBoss.value;
 		
 		if (dg1>0) {
-			dmg1.style.visibility = "visible";
-			dmg1.style.transition = "all 1.5s";
-			dmg1.style.fontSize = "5vw";
-			dmg1.style.transition = "all 0s";
-			dmg1.style.visibility = "hidden";
+			setTimeout(() => {  dmg1.style.visibility="visible"; }, 50);
+			setTimeout(() => {  animDmg(dmg1); }, 100);
 			}
 		if (dg2>0) {
-			dmg1.style.visibility = "visible";
-			dmg2.style.transition = "all 1.5s";
-			dmg2.style.fontSize = "5vw";
-			dmg2.style.transition = "all 0s";
-			dmg2.style.visibility = "hidden";
+			setTimeout(() => {  dmg2.style.visibility="visible"; }, 50);
+			setTimeout(() => {  animDmg(dmg2); }, 100);
 			}
-		if (1>0) {
-			dmg3.style.visibility = "visible";
-			dmg3.style.transition = "all 1.5s";
-			dmg3.style.fontSize = "5vw";
-			dmg3.style.transition = "all 0s";
-			dmg3.style.visibility = "hidden";
+		if (dg3>0) {
+			setTimeout(() => {  dmg3.style.visibility="visible"; }, 50);
+			setTimeout(() => {  animDmg(dmg3); }, 100);
 			}
+		if (dg4>0 && [[${session.boss}]]==0) {
+			setTimeout(() => {  dmg4.style.visibility="visible"; }, 50);
+			setTimeout(() => {  animDmg(dmg4); }, 100);
+			}
+		if (dg5>0 && [[${session.boss}]]==0) {
+			setTimeout(() => {  dmg5.style.visibility="visible"; }, 50);
+			setTimeout(() => {  animDmg(dmg5); }, 100);
+			}
+		if (dg6>0 && [[${session.boss}]]==0) {
+			setTimeout(() => {  dmg6.style.visibility="visible"; }, 50);
+			setTimeout(() => {  animDmg(dmg6); }, 100);
+			}
+		
+		if (dgBoss>0 && [[${session.boss}]]==1) {
+			setTimeout(() => {  dmgBoss.style.visibility="visible"; }, 50);
+			setTimeout(() => {  animDmg(dmgBoss); }, 100);
+			}
+		
 	}
 	
 	function endGame() {
-		var endGame = document.getElementById("endGame");
-		var end = endGame.value;
+		var endG = document.getElementById("endGame");
+		var end = endG.value;
 		var sBat = document.getElementById("music");
 		if (end=="win") {
 			sBat.pause();
@@ -505,9 +603,9 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 			console.log("rien");}
 	}
 	
-	
+	cardEffect()
+	endGame()
 	initCard()
-	setVar()
 	setVolume()
 </script>
 

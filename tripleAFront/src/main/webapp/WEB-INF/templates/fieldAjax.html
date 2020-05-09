@@ -33,12 +33,12 @@
 				<div class="row" id="tleft"></div>
 				<div class="row" id="hcard">
 					<div class="col-8">
-						<div id="card" th:style="${'visibility: '+disc1}">
+						<div th:id="${'card'+session.idCard1}">
 							<input type="image" class="imgcard" th:idCard="${session.idCard1}" th:id="${'c'+session.idCard1}"
 								th:src="${session.img1}"
 								th:style="${'cursor: url('+cursorch+'), not-allowed;'}">
 							<div class="divdmg">
-								<p class="dmg" th:id="${'dmg'+session.idCard1}" style="visibility: hidden">[[${dmg1}]]</p>
+								<p class="dmg" th:id="${'dmg'+session.idCard1}">[[${dmg1}]]</p>
 							</div>
 							<div class="divname">
 								<p class="name">[[${session.namec1}]]</p>
@@ -57,6 +57,7 @@
 								<p class="stat">[[${deckH[0].life}]]</p>
 							</div>
 						</div>
+						<img class="sang" th:id="${'sang'+session.idCard1}" src="assets/img/battlefield/sang.png">
 					</div>
 				</div>
 			</div>
@@ -65,12 +66,12 @@
 				<div class="row" id="hcard">
 					<div class="col-1" id="ltcard"></div>
 					<div class="col-2">
-						<div id="card" th:style="${'visibility: '+disc2}">
+						<div th:id="${'card'+session.idCard2}">
 							<input type="image" class="imgcard" th:idCard="${session.idCard2}" th:id="${'c'+session.idCard2}"
 								th:src="${session.img2}"
 								th:style="${'cursor: url('+cursorch+'), not-allowed;'}">
 							<div class="divdmg">
-								<p class="dmg" th:id="${'dmg'+session.idCard2}" style="visibility: hidden">[[${dmg2}]]</p>
+								<p class="dmg" th:id="${'dmg'+session.idCard2}">[[${dmg2}]]</p>
 							</div>
 							<div class="divname">
 								<p class="name">[[${session.namec2}]]</p>
@@ -89,10 +90,11 @@
 								<p class="stat">[[${deckH[1].life}]]</p>
 							</div>
 						</div>
+						<img class="sang" th:id="${'sang'+session.idCard2}" src="assets/img/battlefield/sang.png">
 					</div>
 					<div class="col-5" id="mtcard"></div>
 					<div class="col-2">
-						<div id="card" th:style="${'visibility: '+disc4}">
+						<div th:id="${'card'+session.idCard4}">
 							<input type="image" class="imgcard" th:idCard="${session.idCard4}" th:id="${'c'+session.idCard4}"
 								th:src="${session.img4}"
 								th:style="${'cursor: url('+cursorai+'), not-allowed;'}">
@@ -115,6 +117,7 @@
 								<p class="stat">[[${deckAI[0].life}]]</p>
 							</div>
 						</div>
+						<img class="sang" th:id="${'sang'+session.idCard4}" src="assets/img/battlefield/sang.png">
 					</div>
 				</div>
 				<div class="row" id="midField">
@@ -124,12 +127,12 @@
 				<div class="row" id="hcard">
 					<div class="col-1" id="ltcard"></div>
 					<div class="col-2">
-						<div id="card" th:style="${'visibility: '+disc3}">
+						<div th:id="${'card'+session.idCard3}">
 							<input type="image" class="imgcard" th:idCard="${session.idCard3}" th:id="${'c'+session.idCard3}"
 								th:src="${session.img3}"
 								th:style="${'cursor: url('+cursorch+'), not-allowed;'}">
 							<div class="divdmg">
-								<p class="dmg" th:id="${'dmg'+session.idCard3}" style="visibility: visible" th:value="${dmg3}">[[${dmg3}]]</p>
+								<p class="dmg" th:id="${'dmg'+session.idCard3}">[[${dmg3}]]</p>
 							</div>
 							<div class="divname">
 								<p class="name">[[${session.namec3}]]</p>
@@ -148,11 +151,12 @@
 								<p class="stat">[[${deckH[2].life}]]</p>
 							</div>
 						</div>
+						<img class="sang" th:id="${'sang'+session.idCard3}" src="assets/img/battlefield/sang.png">
 					</div>
 
 					<div class="col-5" id="mtcard"></div>
 					<div class="col-2">
-						<div id="card" th:style="${'visibility: '+disc5}">
+						<div th:id="${'card'+session.idCard5}">
 							<input type="image" class="imgcard" th:idCard="${session.idCard5}" th:id="${'c'+session.idCard5}"
 								th:src="${session.img5}"
 								th:style="${'cursor: url('+cursorai+'), not-allowed;'}">
@@ -175,6 +179,7 @@
 								<p class="stat">[[${deckAI[1].life}]]</p>
 							</div>
 						</div>
+						<img class="sang" th:id="${'sang'+session.idCard5}" src="assets/img/battlefield/sang.png">
 					</div>
 				</div>
 			</div>
@@ -182,7 +187,7 @@
 				<div class="row" id="tleft"></div>
 				<div class="row" id="hcard">
 					<div class="col-8">
-						<div id="card" th:style="${'visibility: '+disc6}">
+						<div th:id="${'card'+session.idCard6}">
 							<input type="image" class="imgcard" th:idCard="${session.idCard6}" th:id="${'c'+session.idCard6}"
 								th:src="${session.img6}"
 								th:style="${'cursor: url('+cursorai+'), not-allowed;'}">
@@ -205,9 +210,13 @@
 								<p class="stat">[[${deckAI[2].life}]]</p>
 							</div>
 						</div>
+						<img class="sang" th:id="${'sang'+session.idCard6}" src="assets/img/battlefield/sang.png">
 					</div>
 				</div>
 			</div>
+		</div>
+		<div class="divdmgBoss">
+			<p class="dmgBoss" id="dmgBoss">[[${dmgBoss}]]</p>
 		</div>
 	</div>
 </div>
@@ -217,6 +226,21 @@
 	<input type="text" id="idCardDef" th:value="${idCardDef}" style="visibility: hidden;"></input>
 	<input type="text" id="idCardAtk" th:value="${idCardAtk}" style="visibility: hidden;"></input>
 	<input type="text" id="boss" th:value="${boss}" style="visibility: hidden;"></input>
+	<input type="text" id="def" th:value="${def}" style="visibility: hidden;"></input>
+	<input type="text" id="phase" th:value="${phase}" style="visibility: hidden;"></input>
+	<input type="text" th:id="${'idmg'+session.idCard1}" th:value="${dmg1}" style="visibility: hidden;"></input>
+	<input type="text" th:id="${'idmg'+session.idCard2}" th:value="${dmg2}" style="visibility: hidden;"></input>
+	<input type="text" th:id="${'idmg'+session.idCard3}" th:value="${dmg3}" style="visibility: hidden;"></input>
+	<input type="text" th:id="${'idmg'+session.idCard4}" th:value="${dmg4}" style="visibility: hidden;"></input>
+	<input type="text" th:id="${'idmg'+session.idCard5}" th:value="${dmg5}" style="visibility: hidden;"></input>
+	<input type="text" th:id="${'idmg'+session.idCard6}" th:value="${dmg6}" style="visibility: hidden;"></input>
+	<input type="text" id="idmgBoss" th:value="${dmgBoss}" style="visibility: hidden;"></input>
+	<input type="text" th:id="${'ilife'+session.idCard1}" th:value="${disc1}" style="visibility: hidden;"></input>
+	<input type="text" th:id="${'ilife'+session.idCard2}" th:value="${disc2}" style="visibility: hidden;"></input>
+	<input type="text" th:id="${'ilife'+session.idCard3}" th:value="${disc3}" style="visibility: hidden;"></input>
+	<input type="text" th:id="${'ilife'+session.idCard4}" th:value="${disc4}" style="visibility: hidden;"></input>
+	<input type="text" th:id="${'ilife'+session.idCard5}" th:value="${disc5}" style="visibility: hidden;"></input>
+	<input type="text" th:id="${'ilife'+session.idCard6}" th:value="${disc6}" style="visibility: hidden;"></input>
 </div>
 
 <div id=divBoss>

@@ -57,14 +57,14 @@ public class BattleFieldController {
 	static String c6, id6;
 	static int hp1, hp2, hp3, hp4, hp5, hp6;
 	static int phase;
-	static Boolean lose=true;
+	static Boolean saveHist=true;
 	static Boolean boss;
 
 
 	@GetMapping("/battleField")
 	public String startFight(HttpSession session, Model model) {
-
-		if (turn==0) {
+		
+		if (turn==0 || session.getAttribute("turn").equals("0")) {
 			
 			//a enlever
 //			Card carte1 = new Card(100,90,25);
@@ -92,7 +92,7 @@ public class BattleFieldController {
 			i=0;
 			tour=0;
 			def=0;
-			lose=true;
+			saveHist=true;
 			end=false;
 			h = Game.getInstance().getHuman();
 			phase = h.getPhase();
@@ -164,7 +164,7 @@ public class BattleFieldController {
 		}
 			
 			model.addAttribute("endGame", "start");
-			session.setAttribute("imgField", "assets/img/battlefield/field/swampField.jpg");
+			
 			session.setAttribute("namec"+c1, "LEGOLAS");
 			session.setAttribute("classc"+c1, "Le Codeur");
 			session.setAttribute("img"+c1, "assets/img/battlefield/card/cardAP.png");
@@ -181,15 +181,18 @@ public class BattleFieldController {
 			session.setAttribute("classc5", "Le Maitre du jeu");
 			session.setAttribute("img5", "assets/img/battlefield/card/cardJR.png");
 			if (phase == 1) {
+				session.setAttribute("imgField", "assets/img/battlefield/field/battle_tree.jpeg");
 				session.setAttribute("namec6", "SAROUMANE");
 				session.setAttribute("classc6", "Le Magicien");
 				session.setAttribute("img6", "assets/img/battlefield/card/cardJA.png");
 			} else {
+				session.setAttribute("imgField", "assets/img/battlefield/field/battle_tree.jpeg");
 				session.setAttribute("namec6", "SAURON");
 				session.setAttribute("classc6", "L'Omniscient");
 				session.setAttribute("img6", "assets/img/battlefield/card/cardJP.png");
 			}
 			if (phase == 3) {
+				session.setAttribute("imgField", "assets/img/battlefield/field/lava_castle.jpg");
 				session.setAttribute("musicBattle", "assets/sound/one_winged_angel_rebirth_ff7.mp3");
 			}
 			else {
@@ -220,6 +223,8 @@ public class BattleFieldController {
 			if (tour==0) {msgAtk();def=0;}
 			else if (tour==1) {msgDef();def=1;}
 			turn++;
+			session.setAttribute("turn", "1");
+			
 		}
 
 		else {
@@ -231,7 +236,6 @@ public class BattleFieldController {
 							if(h.deck().size() != 1) {msgDef();}
 							else {
 								h.deck().get(0).setProtection(false);
-								System.out.println("cas1: BJ attaque!! i="+i+" vie="+deckAI.get(i).getLife());
 								iaAttaque();
 								nextTurn();
 							}
@@ -240,7 +244,6 @@ public class BattleFieldController {
 					}
 					else if(!testCard() && def==1) {
 						h.protection(deckH,(card));
-						System.out.println("cas2: BJ attaque!! i="+i+" vie="+deckAI.get(i).getLife());
 						iaAttaque();
 						nextTurn();
 					}
@@ -248,9 +251,7 @@ public class BattleFieldController {
 				else {
 					if (!testCard() && def==1) {
 						h.protection(deckH,(card));
-						System.out.println("cas3: BJ attaque!! i="+i+" vie="+deckAI.get(i).getLife());
 						iaAttaque();
-
 						if(deckH.get(i).getLife()>0) {msgAtk();}
 						else {nextTurn();}
 					}
@@ -262,25 +263,22 @@ public class BattleFieldController {
 			}
 		}
 
-		if(ai.verifyEnd()) {
+		if(ai.verifyEnd() && saveHist) {
 			turn=0;
+			session.setAttribute("turn", "0");
 			message="<p>Le joueur a gagne!!!</p>"+message;
+			if (boss) {
+				saveHistory(true);
+			}
 			model.addAttribute("endGame", "win");
 		}
-		else if(h.verifyEnd() && lose) {
+		else if(h.verifyEnd() && saveHist) {
 			turn=0;
+			session.setAttribute("turn", "0");
 			message="<p>Le joueur a perdu...</p>"+message;
-			History history = new History(Game.getInstance().getHuman(), phase, false);
-			daoHistory.save(history);
-			List<History> listh = daoHistory.findAll();
-			for (History h : listh) {
-				h.setNbWin(daoHistory.countWin(h.getName()));
-				daoHistory.save(h);
-			}
-			deletePlayer(h);
-			deletePlayer(ai);
+			saveHistory(false);
 			model.addAttribute("endGame", "lose");
-			lose=false;
+			saveHist=false;
 		}
 		refresh(model);
 		
@@ -338,7 +336,7 @@ public class BattleFieldController {
 	}
 
 	public void hAttaque() {
-		message=h.attack(deckH, deckAI, ai, i, (card)-3)+message;
+		message=h.attack(deckH, deckAI, ai, i, (card)-3, phase)+message;
 		end=ai.verifyEnd();
 	}
 
@@ -388,18 +386,18 @@ public class BattleFieldController {
 		model.addAttribute("deckH", deckHAff);
 		model.addAttribute("deckAI", deckAIAff);
 
-		if(deckHAff.get(0).getLife()>0) {model.addAttribute("disc1", "visible");}
-		else {model.addAttribute("disc1", "hidden");}
-		if(deckHAff.get(1).getLife()>0) {model.addAttribute("disc2", "visible");}
-		else {model.addAttribute("disc2", "hidden");}
-		if(deckHAff.get(2).getLife()>0) {model.addAttribute("disc3", "visible");}
-		else {model.addAttribute("disc3", "hidden");}
-		if(deckAIAff.get(0).getLife()>0 && !boss) {model.addAttribute("disc4", "visible");}
-		else {model.addAttribute("disc4", "hidden");}
-		if(deckAIAff.get(1).getLife()>0 && !boss) {model.addAttribute("disc5", "visible");}
-		else {model.addAttribute("disc5", "hidden");}
-		if(deckAIAff.get(2).getLife()>0 && !boss) {model.addAttribute("disc6", "visible");}
-		else {model.addAttribute("disc6", "hidden");}
+		if(deckHAff.get(0).getLife()>0) {model.addAttribute("disc1", "alive");}
+		else {model.addAttribute("disc1", "dead");}
+		if(deckHAff.get(1).getLife()>0) {model.addAttribute("disc2", "alive");}
+		else {model.addAttribute("disc2", "dead");}
+		if(deckHAff.get(2).getLife()>0) {model.addAttribute("disc3", "alive");}
+		else {model.addAttribute("disc3", "dead");}
+		if(deckAIAff.get(0).getLife()>0 && !boss) {model.addAttribute("disc4", "alive");}
+		else {model.addAttribute("disc4", "dead");}
+		if(deckAIAff.get(1).getLife()>0 && !boss) {model.addAttribute("disc5", "alive");}
+		else {model.addAttribute("disc5", "dead");}
+		if(deckAIAff.get(2).getLife()>0 && !boss) {model.addAttribute("disc6", "alive");}
+		else {model.addAttribute("disc6", "dead");}
 		if(boss) {model.addAttribute("discBoss", "visible");}
 		else {model.addAttribute("discBoss", "hidden");}
 
@@ -408,20 +406,12 @@ public class BattleFieldController {
 		if (h.deck().size()==1) {idCardDef="0";}
 		model.addAttribute("idCardDef", idCardDef);
 		model.addAttribute("idCardAtk", idCardAtk);
+		model.addAttribute("def", def);
+		model.addAttribute("phase", phase);
 		
 		affDmg(model);
 	}
 
-	public void deletePlayer(Player player) {
-		Card c1 = player.getCard1();
-		Card c2 = player.getCard2();
-		Card c3 = player.getCard3();
-		daoPlayer.deleteById(player.getId());
-		daoCard.deleteById(c1.getId());
-		daoCard.deleteById(c2.getId());
-		daoCard.deleteById(c3.getId());
-	}
-	
 	public void affDmg(Model model) {
 		int dmg1=hp1-deckH.get(0).getLife(); hp1=deckH.get(0).getLife();
 		int dmg2=hp2-deckH.get(1).getLife(); hp2=deckH.get(1).getLife();
@@ -438,8 +428,33 @@ public class BattleFieldController {
 			model.addAttribute("dmg"+c6, dmg6);
 		}
 		else if (phase==3) {
+			int dmg5=0, dmg6=0;
 			model.addAttribute("dmgBoss", dmg4);
+			model.addAttribute("dmg5", dmg5);
+			model.addAttribute("dmg6", dmg6);
 		}
+	}
+	
+	public void deletePlayer(Player player) {
+		Card c1 = player.getCard1();
+		Card c2 = player.getCard2();
+		Card c3 = player.getCard3();
+		daoPlayer.deleteById(player.getId());
+		daoCard.deleteById(c1.getId());
+		daoCard.deleteById(c2.getId());
+		daoCard.deleteById(c3.getId());
+	}
+	
+	public void saveHistory (Boolean win) {
+		History history = new History(Game.getInstance().getHuman(), phase, win);
+		daoHistory.save(history);
+		List<History> listh = daoHistory.findAll();
+		for (History h : listh) {
+			h.setNbWin(daoHistory.countWin(h.getName()));
+			daoHistory.save(h);
+		}
+		deletePlayer(h);
+		deletePlayer(ai);
 	}
 
 }

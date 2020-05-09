@@ -65,12 +65,9 @@ public class AI extends Player {
 		System.out.println("target du rng=c"+(target+1));
 		result = false;
 		if (deckH.get(target).getLife() > 0) {
-			if(aidist!=(att+1) && deckH.get(hndist1).getLife() <= 0 && deckH.get(hndist2).getLife() <= 0) {result=true;
-			System.out.println("cas1");}
-			else if(aidist==(att+1)) {result=true;
-			System.out.println("ai attaque cas2=>dist ai=c"+aidist+", ai =c"+(att+1)+", target=c"+(target+1));}
-			else if(aidist!=(att+1) && hdist!=(target+1)) {result=true;
-			System.out.println("ai attaque cas3=>dist hum=c"+hdist+", dist ai=c"+aidist+", ai ="+(att+1)+", card=c"+(target+1));}
+			if(aidist!=(att+1) && deckH.get(hndist1).getLife() <= 0 && deckH.get(hndist2).getLife() <= 0) {result=true;}
+			else if(aidist==(att+1)) {result=true;}
+			else if(aidist!=(att+1) && hdist!=(target+1)) {result=true;}
 		}
 		else {result=false;}
 		}while(!result);
@@ -79,7 +76,8 @@ public class AI extends Player {
 		int dmg=deckH.get(target).isAttackedBy(deckAI.get(att),1);
 		h.setDmgTaken(dmg+h.getDmgTaken());
 		System.out.println("aicard" + (att+4) + " attaque hcard" + (target+1));
-		String msg="<p>c"+(att+4)+" inflige "+dmg+" dégats à c"+(target+1)+"</p>";
+		
+		String msg="<p>c"+(att+4)+" inflige <span style='color:#FF0000'>"+dmg+"</span> dégats à c"+(target+1)+"</p>";
 
 		return msg;
 	}

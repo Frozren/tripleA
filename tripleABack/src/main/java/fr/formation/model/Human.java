@@ -62,8 +62,8 @@ public class Human extends Player {
 		this.phase = phase;
 	}
 
-	public String attack(List<Card> deckH, List<Card> deckAI, AI ai, int att, int target) {
-		
+	public String attack(List<Card> deckH, List<Card> deckAI, AI ai, int att, int target, int iphase) {
+		String msg="";
 		if (ai.deck().size() != 1) {
 			ai.protection();
 		} else {
@@ -73,8 +73,11 @@ public class Human extends Player {
 		int dmg=deckAI.get(target-1).isAttackedBy(deckH.get(att),1);
 		Human h = Game.getInstance().getHuman();
 		h.setDmgDealt(dmg+h.getDmgDealt());
-		System.out.println("hCard" + att + " attaque aicard" + (target-1));
-		String msg="<p>c"+(att+1)+" inflige <span style='color:#990100'>"+dmg+"</span> dégâts à c"+(target+3)+"</p>";
+		
+		if (iphase!=3) {
+			msg="<p>c"+(att+1)+" inflige <span style='color:#990100'>"+dmg+"</span> dégâts à c"+(target+3)+"</p>";}
+		else if (iphase==3) {
+			msg="<p>c"+(att+1)+" inflige <span style='color:#990100'>"+dmg+"</span> dégats à Black Jordan</p>";}
 		
 		return msg;
 	}
