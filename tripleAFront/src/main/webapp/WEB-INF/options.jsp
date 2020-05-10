@@ -72,7 +72,6 @@
 					</table>
 				</form>
 			</div>
-			<img id="wip" src="img/workip.png">
 		</div>
 	</body>
 	
