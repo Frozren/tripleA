@@ -335,7 +335,7 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 					Souhaitez vous répondre à notre questionnaire?
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal" id="annuler">Non</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal" id="non">Non</button>
 					<button type="button" class="btn btn-primary" id="oui" data-dismiss="modal" data-toggle="modal"  data-target="#modalSurvey">Oui</button>
 				</div>
 			</div>
@@ -351,106 +351,112 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<form method="POST" action="valideSurvey" id="formSurvey">
-					<div class="modal-body">
-						<div class="form-row">
-							<div class="custom-control custom-radio custom-control-inline">
-								<input class="custom-control-input" name="genre" type="radio" value="femme" id="femme">
-								<label class="custom-control-label" for="femme">Femme</label>
+				<div class="modal-body">
+					<form method="POST" action="valideSurvey" id="formSurvey">
+						<fieldset>
+						<legend>Informations personnelles</legend>
+							<div class="form-row">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="genre" type="radio" value="femme" id="femme">
+									<label class="custom-control-label" for="femme">Femme</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="genre" type="radio" value="homme" id="homme">
+									<label class="custom-control-label" for="homme">Homme</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="genre" type="radio" value="nonBinaire" id="nonBinaire">
+									<label class="custom-control-label" for="nonBinaire">Non binaire</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="genre" type="radio"  checked="checked" value="jeNeSaisPas" id="jeNeSaisPas">
+									<label class="custom-control-label" for=jeNeSaisPas>Je ne sais pas</label>
+								</div>
 							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input class="custom-control-input" name="genre" type="radio" value="homme" id="homme">
-								<label class="custom-control-label" for="homme">Homme</label>
+							<div class="form-row">	
+								<div class="col">	
+									<label for="age">Age</label>
+									<input class="form-control" name="age" id="age" placeholder="saisir age" type="number" min="5" max="110" step="1"/>
+								</div>
+								<div class="col">
+									<label for="support">Support</label>
+									<select name="support" id="support" class="custom-select">
+										<option selected value="ordinateur">Ordinateur</option>
+										<option value="console">Console</option>
+										<option value="smartphone">Smartphone</option>
+									</select>
+								</div>
 							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input class="custom-control-input" name="genre" type="radio" value="nonBinaire" id="nonBinaire">
-								<label class="custom-control-label" for="nonBinaire">Non binaire</label>
+							<div class="form-row">
+								<div class="col">
+									<label for="ville">Ville</label>
+									<input class="form-control" type="text" name="ville" id="ville" placeholder="saisir ville">
+								</div>
+								<div class="col">
+									<label for="pays">Pays</label>
+									<input class="form-control" type="text" name="pays" id="pays" placeholder="saisir pays">
+								</div>
 							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input class="custom-control-input" name="genre" type="radio"  checked="checked" value="jeNeSaisPas" id="jeNeSaisPas">
-								<label class="custom-control-label" for=jeNeSaisPas>Je ne sais pas</label>
+						</fieldset>
+						<fieldset>
+						<legend>Evaluation</legend>
+							<div class="form-row">
+								<label>Note sur 5</label>
 							</div>
-						</div>
-						<div class="form-row">	
-							<div class="col">	
-								<label for="age">Age</label>
-								<input class="form-control" name="age" id="age" placeholder="saisir age" type="number" min="5" max="110" step="1"/>
+							<div class="form-row">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="note" type="radio" value="1" id="note1">
+									<label class="custom-control-label" for="note1">1</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="note" type="radio" value="2" id="note2">
+									<label class="custom-control-label" for="note2">2</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="note" type="radio" value="3" id="note3">
+									<label class="custom-control-label" for="note3">3</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="note" type="radio" value="4" id="note4">
+									<label class="custom-control-label" for="note4">4</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="note" type="radio"  checked="checked" value="5" id="note5">
+									<label class="custom-control-label" for="note5">5</label>
+								</div>
 							</div>
-							<div class="col">
-								<label for="support">Support</label>
-								<select name="support" id="support" class="custom-select">
-									<option selected value="ordinateur">Ordinateur</option>
-									<option value="console">Console</option>
-									<option value="smartphone">Smartphone</option>
-								</select>
+							<div class="form-row">
+								<label>Ressenti de la dificulté</label>
 							</div>
-						</div>
-						<div class="form-row">
-							<div class="col">
-								<label for="ville">Ville</label>
-								<input class="form-control" type="text" name="ville" id="ville" placeholder="saisir ville">
+							<div class="form-row">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="ressenti" type="radio" value="tropFacile"  id="tropFacile">
+									<label class="custom-control-label" for="tropFacile">Trop facile</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="ressenti" type="radio" value="facile" id="facile">
+									<label class="custom-control-label" for="facile">Facile</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="ressenti" type="radio"  checked="checked" value="equilibree" id="equilibree">
+									<label class="custom-control-label" for="equilibree">Equilibrée</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="ressenti" type="radio" value="difficile" id="difficile">
+									<label class="custom-control-label" for="difficile">Difficile</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="ressenti" type="radio" value="hardcore" id="hardcore">
+									<label class="custom-control-label" for="hardcore">Hardcore</label>
+								</div>
 							</div>
-							<div class="col">
-								<label for="pays">Pays</label>
-								<input class="form-control" type="text" name="pays" id="pays" placeholder="saisir pays">
-							</div>
-						</div>
-						<div class="form-row">
-							<label>Note sur 5</label>
-						</div>
-						<div class="form-row">
-							<div class="custom-control custom-radio custom-control-inline">
-								<input class="custom-control-input" name="note" type="radio" value="1" id="note1">
-								<label class="custom-control-label" for="note1">1</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input class="custom-control-input" name="note" type="radio" value="2" id="note2">
-								<label class="custom-control-label" for="note2">2</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input class="custom-control-input" name="note" type="radio" value="3" id="note3">
-								<label class="custom-control-label" for="note3">3</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input class="custom-control-input" name="note" type="radio" value="4" id="note4">
-								<label class="custom-control-label" for="note4">4</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input class="custom-control-input" name="note" type="radio"  checked="checked" value="5" id="note5">
-								<label class="custom-control-label" for="note5">5</label>
-							</div>
-						</div>
-						<div class="form-row">
-							<label>Ressenti de la dificulté</label>
-						</div>
-						<div class="form-row">
-							<div class="custom-control custom-radio custom-control-inline">
-								<input class="custom-control-input" name="ressenti" type="radio" value="tropFacile"  id="tropFacile">
-								<label class="custom-control-label" for="tropFacile">Trop facile</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input class="custom-control-input" name="ressenti" type="radio" value="facile" id="facile">
-								<label class="custom-control-label" for="facile">Facile</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input class="custom-control-input" name="ressenti" type="radio"  checked="checked" value="equilibree" id="equilibree">
-								<label class="custom-control-label" for="equilibree">Equilibrée</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input class="custom-control-input" name="ressenti" type="radio" value="difficile" id="difficile">
-								<label class="custom-control-label" for="difficile">Difficile</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input class="custom-control-input" name="ressenti" type="radio" value="hardcore" id="hardcore">
-								<label class="custom-control-label" for="hardcore">Hardcore</label>
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal" id="annuler">Annuler</button>
-						<input type="button" class="btn btn-primary" id="validSurvey"  value="valider">
-					</div>
-				</form>
+						</fieldset>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal" id="annulerSurvey">Annuler</button>
+					<input type="button" class="btn btn-primary" id="validSurvey"  value="valider">
+				</div>
 			</div>
 		</div>
 	</div>
@@ -459,14 +465,14 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 <script>
 	//test
 	var buttonTest = document.getElementById("test");
-	buttonTest.onclick=bossEntrance;
+	buttonTest.onclick=lauchSurvey;
 	
 	function bossEntrance() {
 		if([[${session.turn}]]==0 && [[${session.boss}]]==1) {
 			let bJ=document.getElementById("cBoss");
 			let tele=document.getElementById("teleport");
 			let src = 'assets/img/battlefield/essai2.gif';
-			let t=4000;
+			let t=2500;
 			
 			bJ.style.display="none";
 			
@@ -486,9 +492,14 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 
 	var i1=0; var i2=0; var i3=0;
 	var i4=0; var i5=0; var i6=0;
-
+	
 	var buttonFermer = document.getElementById("fermer");
 	buttonFermer.onclick=fermer;
+	var buttonNon = document.getElementById("non");
+	buttonNon.onclick=fermer;
+	var buttonAnSurvey = document.getElementById("annulerSurvey");
+	buttonAnSurvey.onclick=fermer;
+	
 	function fermer() {
 		window.location.href = "home";
 	}
@@ -570,7 +581,7 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 	
 	function soundcDJ() {
 		var cDJ = document.getElementById("cDJ");
-		cDJ.volume = [[${session.musicVol}]];
+		cDJ.volume = [[${session.musicVol}]]*2;
 		cDJ.play();
 	}
 	
@@ -681,13 +692,13 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 		if([[${session.boss}]]==0) {
 			if(life4=="dead") {card4.style.filter = "grayscale(100%)";
 				card4.style.pointerEvents = "none"; sang4.style.visibility = "visible";
-				if(phase==1 && i4==0) {i4=1; soundcDJ();} else if(phase==2 && i4==0) {i4=1; soundAtt();}}
+				if(phase==1 && [[${session.idCard4}]]==4 && i4==0) {i4=1; soundcDJ();} else if(i4==0) {i4=1; soundAtt();}}
 			if(life5=="dead") {card5.style.filter = "grayscale(100%)";
 				card5.style.pointerEvents = "none"; sang5.style.visibility = "visible";
-				if (i5==0) {i5=1; soundAtt();}}
+				if(phase==1 && [[${session.idCard5}]]==4 && i5==0) {i5=1; soundcDJ();} else if(i5==0) {i5=1; soundAtt();}}
 			if(life6=="dead") {card6.style.filter = "grayscale(100%)";
 				card6.style.pointerEvents = "none"; sang6.style.visibility = "visible";
-				if (i6==0) {i6=1; soundAtt();}}
+				if(phase==1 && [[${session.idCard6}]]==4 && i6==0) {i6=1; soundcDJ();} else if(pi6==0) {i6=1; soundAtt();}}
 		}
 		else {
 			card4.style.visibility ="hidden";
@@ -697,7 +708,7 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 	}
 	
 	function animDmg(dmg) {
-		dmg.style.transition = "all 0.5s linear 0.01s";
+		dmg.style.transition = "all 0.7s linear 0.01s";
 		dmg.style.transform = "scale(0.5) translateY(-100%)";
 		dmg.style.opacity="0.5";
 		dmg.style.visibility="hidden";
@@ -729,33 +740,33 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 		let dgBoss = idmgBoss.value;
 		
 		if (dg1>0) {
-			setTimeout(() => {  dmg1.style.visibility="visible"; }, 50);
-			setTimeout(() => {  animDmg(dmg1); }, 100);
+			setTimeout(() => {  dmg1.style.visibility="visible"; }, 100);
+			setTimeout(() => {  animDmg(dmg1); }, 150);
 			}
 		if (dg2>0) {
-			setTimeout(() => {  dmg2.style.visibility="visible"; }, 50);
-			setTimeout(() => {  animDmg(dmg2); }, 100);
+			setTimeout(() => {  dmg2.style.visibility="visible"; }, 100);
+			setTimeout(() => {  animDmg(dmg2); }, 150);
 			}
 		if (dg3>0) {
-			setTimeout(() => {  dmg3.style.visibility="visible"; }, 50);
-			setTimeout(() => {  animDmg(dmg3); }, 100);
+			setTimeout(() => {  dmg3.style.visibility="visible"; }, 100);
+			setTimeout(() => {  animDmg(dmg3); }, 150);
 			}
 		if (dg4>0 && [[${session.boss}]]==0) {
-			setTimeout(() => {  dmg4.style.visibility="visible"; }, 50);
-			setTimeout(() => {  animDmg(dmg4); }, 100);
+			setTimeout(() => {  dmg4.style.visibility="visible"; }, 100);
+			setTimeout(() => {  animDmg(dmg4); }, 150);
 			}
 		if (dg5>0 && [[${session.boss}]]==0) {
-			setTimeout(() => {  dmg5.style.visibility="visible"; }, 50);
-			setTimeout(() => {  animDmg(dmg5); }, 100);
+			setTimeout(() => {  dmg5.style.visibility="visible"; }, 100);
+			setTimeout(() => {  animDmg(dmg5); }, 150);
 			}
 		if (dg6>0 && [[${session.boss}]]==0) {
-			setTimeout(() => {  dmg6.style.visibility="visible"; }, 50);
-			setTimeout(() => {  animDmg(dmg6); }, 100);
+			setTimeout(() => {  dmg6.style.visibility="visible"; }, 100);
+			setTimeout(() => {  animDmg(dmg6); }, 150);
 			}
 		
 		if (dgBoss>0 && [[${session.boss}]]==1) {
-			setTimeout(() => {  dmgBoss.style.visibility="visible"; }, 50);
-			setTimeout(() => {  animDmg(dmgBoss); }, 100);
+			setTimeout(() => {  dmgBoss.style.visibility="visible"; }, 100);
+			setTimeout(() => {  animDmg(dmgBoss); }, 150);
 			}
 		
 	}
@@ -840,27 +851,32 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 			sBat.pause();
 			if ([[${session.boss}]]==0) {
 				document.getElementById('win').style.visibility='visible';
-				var sound = document.getElementById("victory");
-				gameOver.volume = 0.05;
-				sound.play();
+				var sVic = document.getElementById("victory");
+				sVic.volume = [[${session.musicVol}]]*2;
+				sVic.play();
 				setTimeout(function(){window.location.href = "choice";}, 6000);
 			}
 			else if ([[${session.boss}]]==1) {
 				document.getElementById('win').style.visibility='visible';
-				var sound = document.getElementById("victory");
-				gameOver.volume = 0.05;
-				sound.play();
+				var sVic = document.getElementById("victory");
+				sVic.volume = [[${session.musicVol}]]*2;
+				sVic.play();
 				setTimeout(function(){lauchSurvey();}, 6000);
 			}
 			
 		}
 		else if (end=="lose") {
-			document.getElementById('lose').style.visibility='visible';
 			sBat.pause();
-			var sound = document.getElementById("gameOver");
-			gameOver.volume = 0.05;
-			sound.play();
-			setTimeout(function(){window.location.href = "home";}, 6000);
+			document.getElementById('lose').style.visibility='visible';
+			var sGO = document.getElementById("gameOver");
+			sGO.volume = [[${session.musicVol}]]*2;
+			sGO.play();
+			if ([[${session.boss}]]==0) {
+				setTimeout(function(){window.location.href = "home";}, 6000);
+			}
+			else if ([[${session.boss}]]==1) {
+				setTimeout(function(){lauchSurvey();}, 6000);
+			}
 		}
 		else{
 			console.log("rien");}

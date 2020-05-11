@@ -198,7 +198,7 @@ public class BattleFieldController {
 			}
 			if (phase == 3) {
 				session.setAttribute("imgField", "assets/img/battlefield/field/bg2.jpg");
-				session.setAttribute("musicBattle", "assets/sound/one_winged_angel_rebirth_ff7.mp3");
+				session.setAttribute("musicBattle", "assets/sound/music6.mp3");
 			}
 			else {
 				session.setAttribute("musicBattle", session.getAttribute("musicUrl"));
