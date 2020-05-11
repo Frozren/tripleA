@@ -698,7 +698,7 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 				if(phase==1 && [[${session.idCard5}]]==4 && i5==0) {i5=1; soundcDJ();} else if(i5==0) {i5=1; soundAtt();}}
 			if(life6=="dead") {card6.style.filter = "grayscale(100%)";
 				card6.style.pointerEvents = "none"; sang6.style.visibility = "visible";
-				if(phase==1 && [[${session.idCard6}]]==4 && i6==0) {i6=1; soundcDJ();} else if(pi6==0) {i6=1; soundAtt();}}
+				if(phase==1 && [[${session.idCard6}]]==4 && i6==0) {i6=1; soundcDJ();} else if(i6==0) {i6=1; soundAtt();}}
 		}
 		else {
 			card4.style.visibility ="hidden";
