@@ -26,12 +26,6 @@ public class HomeController {
 	@Autowired
 	private IDAOHistory daoHistory;
 	
-	@GetMapping({"/","/prologue"})
-	public String afficher(HttpSession session) {
-		session.setAttribute("firstLoad", true);
-		return "prologue";
-	}
-	
 	@GetMapping("/home")
 	public String findAllHistory(Model model, HttpSession session) {
 		session.setAttribute("blockRefresh", false);
@@ -77,14 +71,6 @@ public class HomeController {
 		model.addAttribute("histoD", histoD);
 		model.addAttribute("histoWin", histoWin);
 		model.addAttribute("history", history);
-		
-		if ((Boolean) session.getAttribute("firstLoad") == true) {
-			session.setAttribute("difficulte", 2);
-			session.setAttribute("sceneNum", 6);
-			session.setAttribute("musicNum", 0);
-			session.setAttribute("musicVol", 0.05);
-			session.setAttribute("firstLoad", false);
-		}
 		
 		return "home";
 	}

@@ -1622,23 +1622,25 @@ input:focus, textarea:focus {
 	top:1px;
 }
 
-#options #menu4 div
+#options #menu4 .luminosite
 {
-	margin-top: 20%;
-	font-size: 5em;
-	color: #c8c8c8;
-	font-style: bold;
-	font-variant: small-caps;
+	margin-top: 10%;
+	width: 60%;
 }
 
-#options #menu5 div
+#options #menu5 .graph
 {
-	margin-top: 20%;
-	font-size: 5em;
-	color: #c8c8c8;
-	font-style: bold;
-	font-variant: small-caps;
+	margin: 5% 1% 5% 1%;
+	width: 30%;
+	transition: 0.2s;
 }
+
+#options #menu5 .graph:hover
+{
+	-webkit-transform: scale(1.5);
+}
+
+
 /*
 #options #logoHome
 {
