@@ -44,7 +44,7 @@
 		
 		function alphaOnly(event) {
 			var key = event.keyCode;
-			return ((key >= 65 && key <= 90) || (key >= 95 && key <= 122) || key == 13);
+			return ((key >= 65 && key <= 90) || (key >= 95 && key <= 122) || key == 13 || key == 8);
 		}
 	
 		function bodyOp(num) {
@@ -72,6 +72,7 @@
 					titre.style.filter = "blur(0px)";
 					input.style.color = "#b00000";
 					input.style.textShadow = "0 0 5px #ff4343";
+					pseudoOK = false;
 				}
 			} else if (pseudoOK) {
 				document.forms["myform"].submit();
