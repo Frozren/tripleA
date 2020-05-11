@@ -58,6 +58,8 @@
 							</div>
 						</div>
 						<img class="sang" th:id="${'sang'+session.idCard1}" src="assets/img/battlefield/sang.png">
+						<img class="meteor" id="meteor1" src="assets/img/battlefield/meteor.gif">
+						<img class="exploMeteor" id="exploMeteor1" src="assets/img/battlefield/exploMeteor.gif">
 					</div>
 				</div>
 			</div>
@@ -91,6 +93,8 @@
 							</div>
 						</div>
 						<img class="sang" th:id="${'sang'+session.idCard2}" src="assets/img/battlefield/sang.png">
+						<img class="meteor" id="meteor2" src="assets/img/battlefield/meteor.gif">
+						<img class="exploMeteor" id="exploMeteor2" src="assets/img/battlefield/exploMeteor.gif">
 					</div>
 					<div class="col-5" id="mtcard"></div>
 					<div class="col-2">
@@ -152,6 +156,8 @@
 							</div>
 						</div>
 						<img class="sang" th:id="${'sang'+session.idCard3}" src="assets/img/battlefield/sang.png">
+						<img class="meteor" id="meteor3" src="assets/img/battlefield/meteor.gif">
+						<img class="exploMeteor" id="exploMeteor3" src="assets/img/battlefield/exploMeteor.gif">
 					</div>
 
 					<div class="col-5" id="mtcard"></div>
@@ -228,6 +234,7 @@
 	<input type="text" id="boss" th:value="${boss}" style="visibility: hidden;"></input>
 	<input type="text" id="def" th:value="${def}" style="visibility: hidden;"></input>
 	<input type="text" id="phase" th:value="${phase}" style="visibility: hidden;"></input>
+	<input type="text" id="bossAtk" th:value="${bossAtk}" style="visibility: hidden;"></input>
 	<input type="text" th:id="${'idmg'+session.idCard1}" th:value="${dmg1}" style="visibility: hidden;"></input>
 	<input type="text" th:id="${'idmg'+session.idCard2}" th:value="${dmg2}" style="visibility: hidden;"></input>
 	<input type="text" th:id="${'idmg'+session.idCard3}" th:value="${dmg3}" style="visibility: hidden;"></input>

@@ -271,7 +271,7 @@ public class BattleField extends SpringServlet {
 	}
 
 	public void hAttaque() {
-		message=h.attack(deckH, deckAI, ai, i, (card)-3)+message;
+		message=h.attack(deckH, deckAI, ai, i, (card)-3,1)+message;
 		end=ai.verifyEnd();
 	}
 	

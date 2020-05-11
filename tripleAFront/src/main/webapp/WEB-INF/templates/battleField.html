@@ -16,6 +16,7 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 			<div class="col-2">
 				<img id="logoHome" src="assets/img/logo.png"  type="button" data-toggle="modal"  data-target="#modalClose"/>
 			</div>
+			<button id="test" style="position: absolute; right: 3%;">test</button>
 		</div>
 		<div class="row" id="hp">
 			<div class="col-2" style="visibility: hidden"></div>
@@ -84,6 +85,8 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 									</div>
 								</div>
 								<img class="sang" th:id="${'sang'+session.idCard1}" src="assets/img/battlefield/sang.png">
+								<img class="meteor" id="meteor1" src="assets/img/battlefield/meteor.gif">
+								<img class="exploMeteor" id="exploMeteor1" src="assets/img/battlefield/exploMeteor.gif">
 							</div>
 						</div>
 					</div>
@@ -117,6 +120,8 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 									</div>
 								</div>
 								<img class="sang" th:id="${'sang'+session.idCard2}" src="assets/img/battlefield/sang.png">
+								<img class="meteor" id="meteor2" src="assets/img/battlefield/meteor.gif">
+								<img class="exploMeteor" id="exploMeteor2" src="assets/img/battlefield/exploMeteor.gif">
 							</div>
 							<div class="col-5" id="mtcard"></div>
 							<div class="col-2">
@@ -178,8 +183,9 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 									</div>
 								</div>
 								<img class="sang" th:id="${'sang'+session.idCard3}" src="assets/img/battlefield/sang.png">
+								<img class="meteor" id="meteor3" src="assets/img/battlefield/meteor.gif">
+								<img class="exploMeteor" id="exploMeteor3" src="assets/img/battlefield/exploMeteor.gif">
 							</div>
-
 							<div class="col-5" id="mtcard"></div>
 							<div class="col-2">
 								<div th:id="${'card'+session.idCard5}">
@@ -253,30 +259,17 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 				</audio>
 			</div>
 			<div class="col-3">
+			
 				<audio id="sDef" src="assets/sound/def.mp3"></audio>
 				<audio id="sAtt" src="assets/sound/att.mp3"></audio>
 				<audio id="cDJ" src="assets/sound/cardDeadJ.mp3"></audio>
 				<audio id="gameOver" src="assets/sound/gameOver.mp3"></audio>
 				<audio id="victory" src="assets/sound/victory.mp3"></audio>
-				<div class="modal fade" id="modalClose" tabindex="-1" role="dialog" aria-labelledby="closeModalLabel" aria-hidden="true">
-					<div class="modal-dialog" role="document" id="modal">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="closeModalLabel">Quitter</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="modal-body">
-								Voullez vous quitter la partie?
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary" data-dismiss="modal" id="annuler">Annuler</button>
-								<button type="button" class="btn btn-primary" id="fermer">Confirmer</button>
-							</div>
-						</div>
-					</div>
-				</div>
+				<audio id="sEM1" src="assets/sound/explosionMeteor.mp3"></audio>
+				<audio id="sEM2" src="assets/sound/explosionMeteor.mp3"></audio>
+				<audio id="sEM3" src="assets/sound/explosionMeteor.mp3"></audio>
+				<audio id="sCW" src="assets/sound/shockWave.mp3"></audio>
+				
 			</div>
 			<div class="col-2" id="variables">
 				<input type="text" id="endGame" th:value="${endGame}" style="visibility: hidden;"></input>
@@ -285,6 +278,7 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 				<input type="text" id="boss" th:value="${session.boss}" style="visibility: hidden;"></input>
 				<input type="text" id="def" th:value="${def}" style="visibility: hidden;"></input>
 				<input type="text" id="phase" th:value="${phase}" style="visibility: hidden;"></input>
+				<input type="text" id="bossAtk" th:value="${bossAtk}" style="visibility: hidden;"></input>
 				<input type="text" th:id="${'idmg'+session.idCard1}" th:value="${dmg1}" style="visibility: hidden;"></input>
 				<input type="text" th:id="${'idmg'+session.idCard2}" th:value="${dmg2}" style="visibility: hidden;"></input>
 				<input type="text" th:id="${'idmg'+session.idCard3}" th:value="${dmg3}" style="visibility: hidden;"></input>
@@ -301,14 +295,195 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 			</div>
 		</div>
 		<div id="divBoss">
-			<input type="image" class="boss" th:idCard="${session.idCard6}" th:id="${'c'+session.idCard6}"
+			<input type="image" class="boss" th:idCard="${session.idCard4}" id="cBoss"
 					src="assets/img/battlefield/BOSS.png"
 					th:style="${'visibility: '+discBoss+'; cursor: url('+cursorai+'), not-allowed;'}">
 		</div>
+		<img class="shockWave" id="shockWave" src="assets/img/battlefield/shockWave.gif">
+		<img class="teleport" id="teleport" src="assets/img/battlefield/essai2.gif">
 	</form>
+	<div class="modal fade" id="modalClose" tabindex="-1" role="dialog" aria-labelledby="closeModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document" id="modal">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="closeModalLabel">Quitter</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					Voullez vous quitter la partie?
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal" id="annuler">Annuler</button>
+					<button type="button" class="btn btn-primary" id="fermer">Confirmer</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="modalEndBoss" tabindex="-1" role="dialog" aria-labelledby="endBossModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document" id="modal">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="closeModalLabel">Questionnaire</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					Souhaitez vous répondre à notre questionnaire?
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal" id="annuler">Non</button>
+					<button type="button" class="btn btn-primary" id="oui" data-dismiss="modal" data-toggle="modal"  data-target="#modalSurvey">Oui</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="modalSurvey" tabindex="-1" role="dialog" aria-labelledby="surveyModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document" id="modal">
+			<div class="modal-content" id="modalSurv">
+				<div class="modal-header">
+					<h5 class="modal-title" id="closeModalLabel">Questionnaire</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<form method="POST" action="valideSurvey" id="formSurvey">
+					<div class="modal-body">
+						<div class="form-row">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input class="custom-control-input" name="genre" type="radio" value="femme" id="femme">
+								<label class="custom-control-label" for="femme">Femme</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input class="custom-control-input" name="genre" type="radio" value="homme" id="homme">
+								<label class="custom-control-label" for="homme">Homme</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input class="custom-control-input" name="genre" type="radio" value="nonBinaire" id="nonBinaire">
+								<label class="custom-control-label" for="nonBinaire">Non binaire</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input class="custom-control-input" name="genre" type="radio"  checked="checked" value="jeNeSaisPas" id="jeNeSaisPas">
+								<label class="custom-control-label" for=jeNeSaisPas>Je ne sais pas</label>
+							</div>
+						</div>
+						<div class="form-row">	
+							<div class="col">	
+								<label for="age">Age</label>
+								<input class="form-control" name="age" id="age" placeholder="saisir age" type="number" min="5" max="110" step="1"/>
+							</div>
+							<div class="col">
+								<label for="support">Support</label>
+								<select name="support" id="support" class="custom-select">
+									<option selected value="ordinateur">Ordinateur</option>
+									<option value="console">Console</option>
+									<option value="smartphone">Smartphone</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="col">
+								<label for="ville">Ville</label>
+								<input class="form-control" type="text" name="ville" id="ville" placeholder="saisir ville">
+							</div>
+							<div class="col">
+								<label for="pays">Pays</label>
+								<input class="form-control" type="text" name="pays" id="pays" placeholder="saisir pays">
+							</div>
+						</div>
+						<div class="form-row">
+							<label>Note sur 5</label>
+						</div>
+						<div class="form-row">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input class="custom-control-input" name="note" type="radio" value="1" id="note1">
+								<label class="custom-control-label" for="note1">1</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input class="custom-control-input" name="note" type="radio" value="2" id="note2">
+								<label class="custom-control-label" for="note2">2</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input class="custom-control-input" name="note" type="radio" value="3" id="note3">
+								<label class="custom-control-label" for="note3">3</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input class="custom-control-input" name="note" type="radio" value="4" id="note4">
+								<label class="custom-control-label" for="note4">4</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input class="custom-control-input" name="note" type="radio"  checked="checked" value="5" id="note5">
+								<label class="custom-control-label" for="note5">5</label>
+							</div>
+						</div>
+						<div class="form-row">
+							<label>Ressenti de la dificulté</label>
+						</div>
+						<div class="form-row">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input class="custom-control-input" name="ressenti" type="radio" value="tropFacile"  id="tropFacile">
+								<label class="custom-control-label" for="tropFacile">Trop facile</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input class="custom-control-input" name="ressenti" type="radio" value="facile" id="facile">
+								<label class="custom-control-label" for="facile">Facile</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input class="custom-control-input" name="ressenti" type="radio"  checked="checked" value="equilibree" id="equilibree">
+								<label class="custom-control-label" for="equilibree">Equilibrée</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input class="custom-control-input" name="ressenti" type="radio" value="difficile" id="difficile">
+								<label class="custom-control-label" for="difficile">Difficile</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input class="custom-control-input" name="ressenti" type="radio" value="hardcore" id="hardcore">
+								<label class="custom-control-label" for="hardcore">Hardcore</label>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal" id="annuler">Annuler</button>
+						<input type="button" class="btn btn-primary" id="validSurvey"  value="valider">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </body>
 
 <script>
+	//test
+	var buttonTest = document.getElementById("test");
+	buttonTest.onclick=bossEntrance;
+	
+	function bossEntrance() {
+		if([[${session.turn}]]==0 && [[${session.boss}]]==1) {
+			let bJ=document.getElementById("cBoss");
+			let tele=document.getElementById("teleport");
+			let src = 'assets/img/battlefield/essai2.gif';
+			let t=4000;
+			
+			bJ.style.display="none";
+			
+			setTimeout(() => { initGif('#teleport', src); teleport.style.visibility="visible"; soundCW(); },0+t);
+			setTimeout(() => { tele.style.visibility="hidden"; },1400+t);
+			setTimeout(() => { bJ.style.display="inline"; },500+t);
+			
+		}
+	}
+	
+	//fin test
+
+	function lauchSurvey() {$('#modalEndBoss').modal('show')}
+	var buttonValidSurvey = document.getElementById("validSurvey");
+	buttonValidSurvey.onclick=submitSurvey;
+	function submitSurvey() {document.forms["formSurvey"].submit();}
+
 	var i1=0; var i2=0; var i3=0;
 	var i4=0; var i5=0; var i6=0;
 
@@ -358,6 +533,7 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 							container.find('#divBoss').html()
 						)
 						
+						effetAtk()
 						affDmg()
 						cardEffect()
 						endGame()
@@ -377,26 +553,41 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 
 	function setVolume() {
 		var sound = document.getElementById("music");
-		sound.volume = 0.05;
+		sound.volume = [[${session.musicVol}]];
 	}
 	
 	function soundDef() {
 		var sDef = document.getElementById("sDef");
-		sDef.volume = 0.1;
+		sDef.volume = [[${session.musicVol}]];
 		sDef.play();
 	}
 
 	function soundAtt() {
 		var sAtt = document.getElementById("sAtt");
-		sAtt.volume = 0.1;
+		sAtt.volume = [[${session.musicVol}]];
 		sAtt.play();
 	}
 	
 	function soundcDJ() {
 		var cDJ = document.getElementById("cDJ");
-		cDJ.volume = 0.4;
+		cDJ.volume = [[${session.musicVol}]];
 		cDJ.play();
 	}
+	
+	function soundEM(x, t) {
+		if(x==1){var sEM = document.getElementById("sEM1");}
+		else if(x==2){var sEM = document.getElementById("sEM2");}
+		else if(x==3){var sEM = document.getElementById("sEM3");}
+		sEM.volume = [[${session.musicVol}]];
+		setTimeout(() => {  sEM.play(); }, t);
+	}
+	
+	function soundCW() {
+		var sCW = document.getElementById("sCW");
+		sCW.volume = [[${session.musicVol}]];
+		sCW.play();
+	}
+	
 	
 	function animSang(sang) {
 		sang.style.transition = "all 0.5s linear 0.01s";
@@ -569,6 +760,78 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 		
 	}
 	
+	function meteorRain() {
+		let meteor1=document.getElementById("meteor1");
+		let meteor2=document.getElementById("meteor2");
+		let meteor3=document.getElementById("meteor3");
+		let exploMeteor1=document.getElementById("exploMeteor1");
+		let exploMeteor2=document.getElementById("exploMeteor2");
+		let exploMeteor3=document.getElementById("exploMeteor3");
+		let x1=-470; let y1=330;
+		let x2=-315; let y2=280;
+		let x3=-315; let y3=410;
+		let t=1;
+		let src = 'assets/img/battlefield/exploMeteor.gif';
+		
+		meteor1.style.visibility="visible";
+		meteor2.style.visibility="visible";
+		meteor3.style.visibility="visible";
+		setTimeout(() => { meteor(meteor1, x1, y1); }, 0+t);
+		setTimeout(() => { meteor(meteor2, x2, y2); }, 200+t);
+		setTimeout(() => { meteor(meteor3, x3, y3);  }, 400+t);
+		
+		
+		setTimeout(() => { initGif('#exploMeteor1', src); exploMeteor1.style.visibility="visible"; }, 450+t);
+		setTimeout(() => { exploMeteor1.style.visibility="hidden"; }, 1500+t);
+		soundEM(1, 100);
+		
+		setTimeout(() => { initGif('#exploMeteor2', src); exploMeteor2.style.visibility="visible"; }, 650+t);
+		setTimeout(() => { exploMeteor2.style.visibility="hidden"; }, 1700+t);
+		soundEM(2, 300);
+		
+		setTimeout(() => { initGif('#exploMeteor3', src); exploMeteor3.style.visibility="visible"; }, 850+t);
+		setTimeout(() => { exploMeteor3.style.visibility="hidden"; }, 1900+t);
+		soundEM(3, 500);
+	}
+	
+	function meteor(meteor, x, y) {
+		meteor.style.transition = "all 0.5s linear 0.01s";
+		meteor.style.transform = "translateX("+x+"%)  translateY("+y+"%)";
+		meteor.style.visibility="hidden";
+	}
+	
+	function shockWave() {
+		let shockWave=document.getElementById("shockWave");
+		let src = 'assets/img/battlefield/shockWave1.gif';
+		initGif('#shockWave', src);
+		shockWave.style.visibility="visible";
+		soundCW();
+		setTimeout(() => { shockWave.style.visibility="hidden"; },1190);
+	}
+	
+	function initGif(name, src) {
+	        $(name).show().each(function() {
+	            this.offsetHeight;
+	        }).prop('src', src);
+	    }
+	
+	function effetAtk() {
+		let ibossAtk=document.getElementById("bossAtk");
+		let bossAtk=ibossAtk.value;
+		if([[${session.boss}]]==1){
+			if(bossAtk==1) {
+				
+			}
+			if(bossAtk==2) {
+				shockWave();
+			}
+			if(bossAtk==3) {
+				meteorRain();
+			}
+			
+		}
+	}
+	
 	function endGame() {
 		var endG = document.getElementById("endGame");
 		var end = endG.value;
@@ -587,7 +850,7 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 				var sound = document.getElementById("victory");
 				gameOver.volume = 0.05;
 				sound.play();
-				setTimeout(function(){window.location.href = "home";}, 6000);
+				setTimeout(function(){lauchSurvey();}, 6000);
 			}
 			
 		}
@@ -603,6 +866,7 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 			console.log("rien");}
 	}
 	
+	bossEntrance()
 	cardEffect()
 	endGame()
 	initCard()

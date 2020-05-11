@@ -5,10 +5,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,12 +16,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import fr.formation.dao.IDAOCard;
 import fr.formation.dao.IDAOHistory;
 import fr.formation.dao.IDAOPlayer;
+import fr.formation.dao.IDAOSurvey;
 import fr.formation.model.AI;
 import fr.formation.model.Card;
 import fr.formation.model.Game;
 import fr.formation.model.History;
 import fr.formation.model.Human;
 import fr.formation.model.Player;
+import fr.formation.model.Survey;
 
 @Controller
 public class BattleFieldController {
@@ -31,6 +33,8 @@ public class BattleFieldController {
 	private IDAOCard daoCard;
 	@Autowired
 	private IDAOHistory daoHistory;
+	@Autowired
+	private IDAOSurvey daoSurvey;
 	
 	//test: http://localhost:8181/tripleAFront/
 	static String message;
@@ -40,6 +44,7 @@ public class BattleFieldController {
 	static int i;
 	static int tour;
 	static int def;
+	static int bossAtk;
 	static Boolean end;
 	static Human h = new Human();
 	static AI ai = new AI();
@@ -63,8 +68,8 @@ public class BattleFieldController {
 
 	@GetMapping("/battleField")
 	public String startFight(HttpSession session, Model model) {
-		
-		if (turn==0 || session.getAttribute("turn").equals("0")) {
+		turn=Integer.parseInt((String) session.getAttribute("turn"));
+		if (turn==0) {
 			
 			//a enlever
 //			Card carte1 = new Card(100,90,25);
@@ -92,6 +97,7 @@ public class BattleFieldController {
 			i=0;
 			tour=0;
 			def=0;
+			bossAtk=0;
 			saveHist=true;
 			end=false;
 			h = Game.getInstance().getHuman();
@@ -180,13 +186,12 @@ public class BattleFieldController {
 			session.setAttribute("namec5", "GOLUM");
 			session.setAttribute("classc5", "Le Maitre du jeu");
 			session.setAttribute("img5", "assets/img/battlefield/card/cardJR.png");
+			session.setAttribute("imgField", session.getAttribute("sceneUrl"));
 			if (phase == 1) {
-				session.setAttribute("imgField", "assets/img/battlefield/field/battle_tree.jpeg");
 				session.setAttribute("namec6", "SAROUMANE");
 				session.setAttribute("classc6", "Le Magicien");
 				session.setAttribute("img6", "assets/img/battlefield/card/cardJA.png");
 			} else {
-				session.setAttribute("imgField", "assets/img/battlefield/field/battle_tree.jpeg");
 				session.setAttribute("namec6", "SAURON");
 				session.setAttribute("classc6", "L'Omniscient");
 				session.setAttribute("img6", "assets/img/battlefield/card/cardJP.png");
@@ -196,7 +201,7 @@ public class BattleFieldController {
 				session.setAttribute("musicBattle", "assets/sound/one_winged_angel_rebirth_ff7.mp3");
 			}
 			else {
-				session.setAttribute("musicBattle", "assets/sound/ff7-boss-theme-remake.mp3");
+				session.setAttribute("musicBattle", session.getAttribute("musicUrl"));
 			}
 			
 			session.setAttribute("idCard1", id1);
@@ -209,7 +214,7 @@ public class BattleFieldController {
 			refresh(model);
 			
 		
-		return"battleField";
+		return "battleField";
 	}
 
 	@PostMapping("/battle")
@@ -228,6 +233,7 @@ public class BattleFieldController {
 		}
 
 		else {
+			if(!testCard()) {effetBoss(model);}
 			if (!end) {
 				if(tour == 0) {
 					if (testCard() && def==0) {
@@ -285,6 +291,17 @@ public class BattleFieldController {
 		
 		return"fieldAjax";
 	}
+	
+	@PostMapping("/valideSurvey")
+	public String survey(Survey survey, BindingResult result ) {
+		System.out.println(survey);
+		if (result.hasErrors()) {
+			return("redirect:/home");
+		}
+		daoSurvey.save(survey);
+		System.out.println(survey);
+		return("redirect:/home");
+	}
 
 	public void nextTurn() {
 		if(!end) {
@@ -326,6 +343,7 @@ public class BattleFieldController {
 				}
 			}
 		}
+		System.out.println("vie boss="+deckAI.get(0).getLife());
 	}
 
 	public void iaAttaque() {
@@ -433,6 +451,22 @@ public class BattleFieldController {
 			model.addAttribute("dmg5", dmg5);
 			model.addAttribute("dmg6", dmg6);
 		}
+	}
+	
+	public void effetBoss(Model model) {
+		double tour=(turn+2)/3;
+		System.out.println("Def="+def);
+		if((tour+2)%3==0 && def==1) {
+			bossAtk=1;
+		}
+		else if((tour+1)%3==0 && def==1) {
+			bossAtk=2;
+		}
+		else if((tour)%3==0 && def==1) {
+			bossAtk=3;
+		}
+		else {bossAtk=0;}
+		model.addAttribute("bossAtk", bossAtk);
 	}
 	
 	public void deletePlayer(Player player) {

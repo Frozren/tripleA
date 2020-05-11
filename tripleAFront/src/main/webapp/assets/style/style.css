@@ -1428,12 +1428,26 @@ input:focus, textarea:focus {
 #battle .boss {
 	z-index : 1;
 	position: absolute;
-	transform:rotateY(180deg);
-	height:90%;
+	filter: drop-shadow(0 0 20px gold);
+	height: 100%;
 	width: auto;
-	bottom: 11%;
+	bottom: -5%;
 	right: 10%;
+	-webkit-animation-name: boss-pulse;
+	-webkit-animation-duration: 3s;
+	-webkit-animation-timing-function: ease-out;
+	-webkit-animation-iteration-count: infinite;
 }
+
+@-webkit-keyframes boss-pulse {
+  25% {
+    -webkit-transform: scaleY(1.005) translateY(-0.2%);
+  }
+  75% {
+    -webkit-transform: scaleY(0.995) translateY(0.2%);
+  }
+}
+
 
 #battle #field .divdmg {
 	visibility: hidden;
@@ -1489,25 +1503,53 @@ input:focus, textarea:focus {
 
 #battle #exit
 {
+	z-index : 2;
 	position: absolute;
 	height: 70%;
 }
 
-#battl .modal-content {
-	background-image: url("../img/background.jpg");
-	background-size: cover;
-	color: white;
-	text-shadow: 0 0 10px #b30000;
+#battle #field .meteor {
+	z-index : 2;
+	visibility: hidden;
+	position: absolute;
+	width: 130%;
+}
+#battle #field #meteor1 {transform: rotate(-8deg);
+	bottom: 285%; left: 650%;}
+#battle #field #meteor2 {transform: rotate(-15deg);
+	bottom: 240%; left: 450%;}
+#battle #field #meteor3 {transform: rotate(-23deg);
+	bottom: 360%; left: 450%;}
+
+
+#battle #field .exploMeteor {
+	visibility: hidden;
+	z-index : 3;
+	position: absolute;
+	width: 130%;
+	bottom: 5%;
+	left: 5%;
 }
 
-#battl #annuler {
-	color: white;
-	text-shadow: 0 0 10px #b30000;
+#battle #shockWave {
+	display: none;
+	position: absolute;
+	width: 36%;
+	height: 70%;
+	top: 11%;
+	left: 30%;
 }
 
-#battl #fermer {
-	background-color: #800000;
-	border: solid black 1px;
-	color: white;
-	text-shadow: 0 0 10px #b30000;
+#modalSurv {
+	width: 120%;
+	left: -10%;
+}
+
+#teleport {
+	z-index : 3;
+	position: absolute;
+	visibility: hidden;
+	height: 150%;
+	bottom: -15%;
+	right: -30%;
 }
