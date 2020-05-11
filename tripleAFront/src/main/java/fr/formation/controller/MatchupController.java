@@ -14,6 +14,7 @@ import fr.formation.model.AI;
 import fr.formation.model.Card;
 import fr.formation.model.Game;
 import fr.formation.model.Human;
+import fr.formation.model.Player;
 
 @Controller
 public class MatchupController {
@@ -36,6 +37,23 @@ public class MatchupController {
 		model.addAttribute("cardH", cardH);
 		model.addAttribute("cardAI", cardAI);
 		model.addAttribute("phase", phase);
+		
+		int sceneNum = (int) session.getAttribute("sceneNum");
+		int musicNum = (int) session.getAttribute("musicNum");
+		
+		if (sceneNum == 6) {
+			int i = h.RNG(5) + 1;
+			session.setAttribute("sceneUrl", "assets/img/battlefield/field/bg" + i + ".jpg");
+		} else {
+			session.setAttribute("sceneUrl", "assets/img/battlefield/field/bg" + sceneNum + ".jpg");
+		}
+		
+		if (musicNum == 0) {
+			int i = h.RNG(6) + 1;
+			session.setAttribute("musicUrl", "assets/sound/music" + i + ".mp3");
+		} else {
+			session.setAttribute("musicUrl", "assets/sound/music" + musicNum + ".mp3");
+		}
 		
 		return "matchup";
 	}

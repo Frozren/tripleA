@@ -196,19 +196,18 @@ input:focus, textarea:focus {
 	font-size: 1.5vw;
 	text-decoration: none;
 	border-radius: 10px;
-	color: #ffffff;
-	-webkit-transition-property: color, box-shadow, text-shadow, transform;
-	-webkit-transition-duration: .5s, .5s, .5s, .5s;
-	-webkit-transition-timing-function: ease-out, ease-out, ease-out, ease-out;
+	color: #b00000;
+	-webkit-transition-property: color, text-shadow, transform;
+	-webkit-transition-duration: .5s, .5s, .5s;
+	-webkit-transition-timing-function: ease-out, ease-out, ease-out;
 }
 
 #home #nav ul li a:hover
 {
-	color: #ff0000 !important;
-	box-shadow: 0 0 20px #ff0000;
-	text-shadow: 0 0 10px #ff0000;
+	color: #ffffff !important;
+	background-color: #a00000;
 	-webkit-transform: translateX(8px);
-	-webkit-transition-property: color, box-shadow, text-shadow, transform;
+	-webkit-transition-property: color, background-color, text-shadow, transform;
 	-webkit-transition-duration: .5s, .5s, .5s, .5s;
 	-webkit-transition-timing-function: ease-out, ease-out, ease-out, ease-out;
 }
@@ -241,11 +240,32 @@ input:focus, textarea:focus {
 	right: 1%;
 }
 
+#home #history #reset
+{
+	position: absolute;
+	top: 15px;
+	right: 20px;
+	color: darkred;
+	font-size: 1vw;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
 #home #history tbody {
     display: block;
     max-height: 185px;
     overflow-y: scroll;
+    /*
+    scroll-snap-type: both mandatory;
+    scroll-padding: 1rem;
+    padding: 1rem;
+    */
 }
+/*
+#home #history tbody tr{
+    scroll-snap-align: start;
+}
+*/
 
 #home #history thead, #home #history tbody tr {
     display: table;
@@ -451,6 +471,46 @@ input:focus, textarea:focus {
 	color: red;
 	opacity: 0.8;
 	font-style: italic;
+}
+
+#newGame .button {
+	opacity: 0;
+	margin-top: 1%;
+	box-shadow:inset 0px 1px 0px 0px #c8c8c8;
+	background:linear-gradient(to bottom, #b00000 5%, #630000 100%);
+	background-color:#b00000;
+	border-radius:6px;
+	border:1px solid #ffffff;
+	display:inline-block;
+	cursor:pointer;
+	color:#c8c8c8;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 20px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #000000;
+}
+
+#newGame .button:hover {
+	background:linear-gradient(to bottom, #630000 5%, #b00000 100%);
+	background-color:#630000;
+	cursor: pointer;
+}
+
+#newGame .button:active {
+	position:relative;
+	top:1px;
+}
+
+#newGame #charger
+{
+	margin-right: 1%;
+}
+
+#newGame #supprimer
+{
+	margin-left: 1%;
 }
 
 /*--------------------
@@ -1096,6 +1156,492 @@ input:focus, textarea:focus {
 --------------*/
 #options #logoHome
 {
+	position: absolute;
+	width: 10%;
+	top: 10px;
+	left: 10px;
+	cursor: pointer;
+}
+
+#options #logoHome:hover
+{
+	filter: drop-shadow(0 0 0.75rem #762919);
+}
+
+#options nav
+{
+	margin-top: 20px;
+}
+
+#options nav .button
+{
+	font-variant: small-caps;
+	font-size: 2em;
+	color: #c8c8c8;
+	border: solid 1px rgba(0, 0, 0, 0);
+	border-bottom: solid 1px #c8c8c8;
+	background-color: rgba(200, 200, 200, 0.1); /*160 0 0*/
+	margin: 0 0 0 0;
+	padding: 5px 10px 5px 10px;
+	cursor: pointer;
+	-webkit-transition-property: color, background-color, border-bottom;
+	-webkit-transition-duration: .5s, .5s, .1s;
+	-webkit-transition-timing-function: ease-out, ease-out, ease-out;
+}
+
+#options nav .button:hover
+{
+	background-color: rgba(160, 0, 0, 0.2);
+	color: #b30000;
+	border: solid 1px rgba(160, 0, 0, 0.5);
+	-webkit-transition-property: color, background-color, border-bottom;
+	-webkit-transition-duration: .5s, .5s, .1s;
+	-webkit-transition-timing-function: ease-out, ease-out, ease-out;
+}
+
+#options .menu
+{
+	margin-top: 1% !important;
+	border: solid 1px rgba(160, 0, 0, 0.5);
+	height: 565px;
+	width: 934px;
+	margin: auto;
+	background-color: rgba(160, 0, 0, 0.1);
+	display: none;
+}
+
+/*------------------
+--------MENU1-------
+------------------*/
+#options #menu1 ul
+{
+	width: 35%;
+    margin: auto;
+    list-style: none;
+    padding: 2% 0 0 0;
+}
+
+#options #menu1 .titre
+{
+	font-size: 1.5em;
+	color: #c8c8c8;
+	margin: 30px 0 30px 0;
+	padding: 5px 0 5px 0;
+	cursor: pointer;
+	border-bottom: solid 1px rgba(0,0,0,0);
+}
+
+#options #menu1 .titre:hover
+{
+	border-bottom: solid 1px #c8c8c8;
+	color: #b30000;
+}
+
+#options #menu1 #descriptif
+{
+	width: 55%;
+	margin: auto;
+	margin-top: 10% !important;
+	color: #c8c8c8;
+	border: 10px ridge rgba(160, 0, 0, 0.5);
+}
+
+#options #menu1 .redText
+{
+	color: #b30000;
+}
+
+#options #menu1 p
+{
+	margin: 35px 0 35px 0;
+}
+
+#options #menu1 #citation
+{
+	font-style: italic;
+	font-size: 1.2em;
+}
+
+#options #menu1 #line
+{
+	margin-left: 40%;
+	width: 20%;
+	height: 1px;
+	border-bottom: dashed 1px #c8c8c8;
+}
+
+#options #menu1 .arrow
+{
+	position: absolute;
+	top: 27%;
+	left: 35%;
+	width: 2%;
+	cursor: auto;
+	visibility: hidden;
+}
+
+#options #menu1 #arrow1
+{
+	top: 17.5%;
+}
+
+#options #menu1 #arrow3
+{
+	top: 36.5%;
+}
+
+/*------------------
+--------MENU2-------
+------------------*/
+#options #menu2 #images img
+{
+	margin-top: 1%;
+	width: 15%;
+	border: ridge 5px rgba(0, 0, 0, 0);
+	cursor: pointer;
+}
+
+#options #menu2 #image img
+{
+	margin-top: 1%;
+	width: 82%;
+	border: solid 2px #c8c8c8;
+}
+
+/*------------------
+--------MENU3-------
+------------------*/
+#options #menu3 #musics
+{
+	width: 300px;
+	height: 300px;
+	margin: auto;
+	margin-top: 8%;
+	perspective: 600px;
+}
+
+#options #menu3 #cube
+{
+	width: 300px;
+	height: 300px;
+	position: relative;
+	transform-style: preserve-3d;
+	transform: translateZ(-150px);
+	transition: transform 1s;
+}
+
+#options #menu3 .face
+{
+	position: absolute;
+	width: 300px;
+	height: 300px;
+	line-height: 300px;
+	border: solid 1px #c8c8c8;
+	box-shadow: 0 0 4px #ffffff, 0 0 10px #ffff00, 0 0 20px #ff8000, 0 0 40px #ff0000;
+	
+}
+
+#options #menu3 #auteur
+{
+	position: relative;
+	top: -40%;
+	font-size: 1.5em;
+	color: #c8c8c8;
+}
+
+#options #menu3 #titre
+{
+	position: relative;
+	top:-80%;
+	font-size: 1em;
+	color: #c8c8c8;
+	font-style: italic;
+}
+
+#options #menu3 #face1
+{
+	transform: rotateY(0deg) translateZ(150px);
+	background-image: url("../img/options/music1.jpg");
+	background-size: cover;
+}
+
+#options #menu3 #face2
+{
+	transform: rotateX(-90deg) translateZ(150px);
+	background-image: url("../img/options/music2.jpg");
+	background-size: cover;
+}
+
+#options #menu3 #face3
+{
+	transform: rotateY(90deg) translateZ(150px);
+	background-image: url("../img/options/music3.jpg");
+	background-size: cover;
+}
+
+#options #menu3 #face4
+{
+	transform: rotateY(180deg) translateZ(150px);
+	background-image: url("../img/options/music4.jpg");
+	background-size: cover;
+}
+
+#options #menu3 #face5
+{
+	transform: rotateX(90deg) translateZ(150px);
+	background-image: url("../img/options/music5.jpg");
+	background-size: cover;
+}
+
+#options #menu3 #face6
+{
+	transform: rotateY(-90deg) translateZ(150px);
+	background-image: url("../img/options/music6.jpg");
+	background-size: cover;
+}
+
+#options #menu3 #check
+{
+	position: absolute;
+	bottom: 12.2%;
+	left: 20.1%;
+	width: 17%;
+	height: auto;
+	padding: 1.5% 0 1% 0;
+	border-radius: 20px;
+	border: solid 1px black;
+	background: rgba(0, 0, 0, 0.8);
+}
+
+#options #menu3 #check #switch {
+	position: relative;
+	bottom: 11px;
+	display: inline-block;
+	width: 30px;
+	height: 17px;
+	cursor: pointer;
+}
+
+#options #menu3 #check #switch input { 
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+#options #menu3 #check #slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	-webkit-transition: .4s;
+	transition: .4s;
+}
+
+#options #menu3 #check #slider:before {
+	position: absolute;
+	content: "";
+	height: 13px;
+	width: 13px;
+	left: 2px;
+	bottom: 2px;
+	background-color: rgba(0, 0, 0, 0.5);
+	-webkit-transition: .4s;
+	transition: .4s;
+}
+
+#options #menu3 #check input:checked + #slider:before {
+	transform: translateX(13px);
+}
+
+#options #menu3 #check #slider {
+	border-radius: 17px;
+}
+
+#options #menu3 #check #slider:before {
+	border-radius: 50%;
+}
+
+#options #menu3 #check #musicAlText
+{
+	color: #c8c8c8;
+	cursor: pointer;
+}
+
+#options #menu3 #controls
+{
+	border: solid 1px black;
+	background: rgba(0, 0, 0, 0.8);
+	width: 40%;
+	margin: auto;
+	margin-top: 5%;
+	padding: 1.5% 0 1% 0;
+	border-radius: 20px;
+	
+}
+
+#options #menu3 #controls .controlButton
+{
+	width: 10%;
+	margin: 0 8% 0 8%;
+	filter: drop-shadow(0 0 5px #c8c8c8);
+	cursor: pointer;
+}
+
+#options #menu3 #controls .controlButton:active
+{
+	transform: scale(0.8);
+}
+
+#options #menu3 #controls .controlButton:hover
+{
+	filter: drop-shadow(0 0 5px #b30000);
+}
+
+#options #menu3 #controls #audioBars
+{
+	width: 50%;
+	margin: 5% 8% 0 8%;
+}
+
+#options #menu3 #son
+{
+	position: absolute;
+	display: inline-block;
+	top: 57.6%;
+	right: 20.1%;
+	height: 30%;
+	width: 17%;
+	border-radius: 20px;
+	border: solid 1px black;
+	background: rgba(0, 0, 0, 0.8);
+}
+
+#options #menu3 #volume
+{
+	position: absolute;
+	top: 28%;
+	left: 10%;
+	width: 100px;
+	height: 100px;
+	filter: drop-shadow(0 0 5px #c8c8c8);
+}
+
+#options #menu3 #volume #rotateable
+{
+	width: 100px;
+	height: 100px;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto auto;
+	position: absolute;
+	border-radius: 50%;
+	background: linear-gradient(90deg, #000, #222, #000);
+}
+
+#options #menu3 #volume #rotate
+{
+	position: absolute;
+	width: 20px;
+	height: 5px;
+	right: 10px;
+	top: 48px;
+	background: #c8c8c8;
+	filter: drop-shadow(0 0 5px #c8c8c8);
+}
+
+#options #menu3 #barVolume
+{
+	position: absolute;
+	top: 45%;
+	left: 40%;
+	height: 10%;
+	width: 70%;
+	background: rgba(200, 200, 200, 0.2);
+	border-radius: 25px;
+	box-shadow: inset 0 -1px 1px rgba(200, 200, 200, 0.3);
+	transform: rotate(-90deg);
+	overflow: hidden;
+}
+
+#options #menu3 #barVolume span {
+	display: block;
+	height: 100%;
+	border-top-right-radius: 20px;
+	border-bottom-right-radius: 20px;
+	border-top-left-radius: 20px;
+	border-bottom-left-radius: 20px;
+	background-color: #cc3500;
+	box-shadow: inset 0 2px 9px rgba(255, 255, 255, 0.3), inset 0 -2px 6px rgba(0, 0, 0, 0.4);
+	position: relative;
+	overflow: hidden;
+	transition: background-color .5s;
+}
+
+#options #menu3 #graduations
+{
+	position: absolute;
+	bottom: 5%;
+	right: 5%;
+	height: 105%;
+	width: 15%;
+	color: #c8c8c8;
+	line-height: 5.4em;
+	text-align: left;
+}
+
+#options .buttonForm {
+	margin: 1.75% 2% 0 2%;
+	box-shadow:inset 0px 1px 0px 0px #c8c8c8;
+	background:linear-gradient(to bottom, #b00000 5%, #630000 100%);
+	background-color:#b00000;
+	border-radius:6px;
+	border:1px solid #ffffff;
+	display:inline-block;
+	cursor:pointer;
+	color:#c8c8c8;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 20px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #000000;
+}
+
+#options .buttonForm:hover {
+	background:linear-gradient(to bottom, #630000 5%, #b00000 100%);
+	background-color:#630000;
+	cursor: pointer;
+}
+
+#options .buttonForm:active {
+	position:relative;
+	top:1px;
+}
+
+#options #menu4 div
+{
+	margin-top: 20%;
+	font-size: 5em;
+	color: #c8c8c8;
+	font-style: bold;
+	font-variant: small-caps;
+}
+
+#options #menu5 div
+{
+	margin-top: 20%;
+	font-size: 5em;
+	color: #c8c8c8;
+	font-style: bold;
+	font-variant: small-caps;
+}
+/*
+#options #logoHome
+{
     position: absolute;
     width: 10%;
     top: 10px;
@@ -1160,9 +1706,8 @@ input:focus, textarea:focus {
 	width: 20%;
 }
 
-
+*/
 /* ----------------Battle Field---------------- */
-
 #battle
 {
 	text-align: center;

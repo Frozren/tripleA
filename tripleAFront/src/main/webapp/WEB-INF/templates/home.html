@@ -91,7 +91,7 @@
 		window.onkeydown = musique;
 		
 		function smoothOpening() {
-			audio.volume = 0.1;
+			audio.volume = [[${session.musicVol}]];
 			bodyOp(0);
 			bodyOpTimer(0);
 			if (!empty){

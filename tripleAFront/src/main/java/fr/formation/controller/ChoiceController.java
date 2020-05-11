@@ -44,6 +44,7 @@ public class ChoiceController {
 
 				model.addAttribute("phase", h.getPhase());
 				model.addAttribute("pts", passivePoints);
+				model.addAttribute("nbCard", nbCardChoice);
 				model.addAttribute("hp", 100);
 				model.addAttribute("atk", 20);
 				model.addAttribute("def", 25);
@@ -69,6 +70,7 @@ public class ChoiceController {
 			
 			model.addAttribute("phase", h.getPhase());
 			model.addAttribute("pts", passivePoints);
+			model.addAttribute("nbCard", 5);
 			model.addAttribute("hp", h.getCard1().getLife());
 			model.addAttribute("atk", h.getCard1().getAtk());
 			model.addAttribute("def", h.getCard1().getDef());
@@ -118,16 +120,16 @@ public class ChoiceController {
 		
 		if (h.getPhase() == 0) {
 			pts = Game.getInstance().getPassivePoints();
-			c4 = ai.createCardRNG(pts);
-			c5 = ai.createCardRNG(pts);
-			c6 = ai.createCardRNG(pts);
+			c4 = ai.createCardRNG(50);
+			c5 = ai.createCardRNG(50);
+			c6 = ai.createCardRNG(50);
 		} else if (h.getPhase() == 1) {
 			pts = Game.getInstance().getPassivePoints() + Game.getInstance().getBonusPts();
-			c4 = ai.createCardRNG(pts, ai.getCard1().getId());
-			c5 = ai.createCardRNG(pts, ai.getCard2().getId());
-			c6 = ai.createCardRNG(pts, ai.getCard3().getId());
+			c4 = ai.createCardRNG(50, ai.getCard1().getId());
+			c5 = ai.createCardRNG(50, ai.getCard2().getId());
+			c6 = ai.createCardRNG(50, ai.getCard3().getId());
 		} else if (h.getPhase() == 2) {
-			c4 = new Card(1500, 50, 50);
+			c4 = new Card(1500, 50, 45);
 			c5 = new Card(0, 0, 0);
 			c6 = new Card(0, 0, 0);
 			c4.setId(ai.getCard1().getId());

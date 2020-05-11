@@ -136,7 +136,8 @@
 		function getAll(){
 			var a="";
 			var id = [[${session.listChoice[0].id}]];
-			for (var i = id; i < id + 5; i++) {
+			var nbCard = [[${nbCard}]];
+			for (var i = id; i < id + nbCard; i++) {
 				if (getMargin("card" + i) == "0px"){
 					if (a == ""){
 						a += (i-id+1).toString() + "|";
