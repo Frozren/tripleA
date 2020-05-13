@@ -1,0 +1,175 @@
+<html th:replace="~{ layout.html :: layout(~{ ::body }, ~{ ::script }, ~{ ::bootstrap }) }">
+	
+	<bootstrap></bootstrap>
+	
+	<body>
+		<div id="home">
+			<div id="logo1"><img src="assets/img/home/logoHaut.png"></div>
+			<div id="menu">
+				<div id="nav">
+					<ul>
+						<li><a id="newGame">NOUVELLE PARTIE</a></li>
+						<li><a id="save">CHARGER UNE PARTIE</a></li>
+						<li><a id="options">OPTIONS</a></li>
+						<li><a id="leave">QUITTER</a></li>
+					</ul>
+				</div>
+				<div id="logo2"><img src="assets/img/home/logoBas.png"></div>
+			</div>
+			<div id="history">
+				<div id="reset" th:if="${emptyHistory == false}">reset</div>
+				<table>
+					<thead>
+						<tr>
+							<th id="tableTitle" colspan="5">HISTORIQUE</th>
+						</tr>
+						<tr id="tableTitles">
+							<th>Date</th>
+							<th>Joueur</th>
+							<th>Étage</th>
+							<th>Dgts infligés</th>
+							<th>Dgts reçus</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="h : ${history}"
+							th:style="${ 'color: ' + (h.etat == true ? 'green' : 'darkred') }">
+							<td>[[${h.dateEnd}]]</td>
+							<td>[[${h.name}]]</td>
+							<td>[[${h.phase}]]</td>
+							<td>[[${h.dmgDealt}]]</td>
+							<td>[[${h.dmgTaken}]]</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div id="toptier">
+				<img src="assets/img/home/podium.png">
+				<div id="toptier1" th:if="${emptyHistory == false}">
+					<div id="first" style="color: gold"><strong id="premierNom">[[${histoD[0].name}]]</strong><br /><span id="premierData">[[${histoD[0].dmgDealt}]]</span></div>
+					<div id="second" style="color: silver"><strong id="secondNom">[[${histoD[1].name}]]</strong><br /><span id="secondData">[[${histoD[1].dmgDealt}]]</span></div>
+					<div id="third" style="color: brown"><strong id="troisiemeNom">[[${histoD[2].name}]]</strong><br /><span id="troisiemeData">[[${histoD[2].dmgDealt}]]</span></div>
+				</div>
+				<div id="toptier2" style="display : none;" th:if="${emptyHistory == false}">
+					<div id="first" style="color: gold"><strong id="premierNom">[[${histoT[0].name}]]</strong><br /><span id="premierData">[[${histoT[0].dmgTaken}]]</span></div>
+					<div id="second" style="color: silver"><strong id="secondNom">[[${histoT[1].name}]]</strong><br /><span id="secondData">[[${histoT[1].dmgTaken}]]</span></div>
+					<div id="third" style="color: brown"><strong id="troisiemeNom">[[${histoT[2].name}]]</strong><br /><span id="troisiemeData">[[${histoT[2].dmgTaken}]]</span></div>
+				</div>
+				<div id="toptier3" style="display : none;" th:if="${emptyHistory == false}">
+					<div id="first" style="color: gold"><strong id="premierNom">[[${histoWin[0].name}]]</strong><br /><span id="premierData">[[${histoWin[0].nbWin}]]</span></div>
+					<div id="second" style="color: silver"><strong id="secondNom">[[${histoWin[1].name}]]</strong><br /><span id="secondData">[[${histoWin[1].nbWin}]]</span></div>
+					<div id="third" style="color: brown"><strong id="troisiemeNom">[[${histoWin[2].name}]]</strong><br /><span id="troisiemeData">[[${histoWin[2].nbWin}]]</span></div>
+				</div>
+				<div id="toptier1" th:if="${emptyHistory == true}">
+					<div id="first" style="color: gold"><strong id="premierNom">NC</strong><br /><span id="premierData">nc</span></div>
+					<div id="second" style="color: silver"><strong id="secondNom">NC</strong><br /><span id="secondData">nc</span></div>
+					<div id="third" style="color: brown"><strong id="troisiemeNom">NC</strong><br /><span id="troisiemeData">nc</span></div>
+				</div>
+				<div id="tri"> Dégâts infligés </div>
+			</div>
+		</div>
+		<audio id="Audio" loop autoplay style="display: none;">
+			<source src="assets/sound/menu_theme.mp3" type="audio/mp3">
+		</audio>
+	</body>
+	
+	<script type="text/javascript">
+		var reset = document.getElementById("reset");
+		var audio = document.getElementById("Audio");
+		var tri = document.getElementById("tri");
+		var toptier1 = document.getElementById("toptier1");
+		var toptier2 = document.getElementById("toptier2");
+		var toptier3 = document.getElementById("toptier3");
+		var empty = [[${emptyHistory}]];
+		var scores = [" Dégâts infligés ", " Dégâts reçus ", " Nombre de victoires "];
+		var a = 1;
+		var b = 1;
+		var i = 0;
+		
+		window.onload = smoothOpening;
+		window.onclick = menu;
+		window.onkeydown = musique;
+		
+		function smoothOpening() {
+			audio.volume = [[${session.musicVol}]];
+			bodyOp(0);
+			bodyOpTimer(0);
+			if (!empty){
+				histo();
+			}
+		}
+		
+		function musique(event){
+			var key = event.keyCode;
+			if (key == 32){
+				if (i == 0){
+					audio.pause();
+					i = 1;
+				} else {
+					audio.play();
+					i = 0;
+				}
+			}
+		}
+		
+		function histo(){
+			if (b%6 != 0){
+				points();
+				b++;
+			} else {
+				tri.innerHTML = scores[a];
+				
+				if (a == 0){
+					if (!empty){
+						toptier2.style.display = "none";
+						toptier3.style.display = "none";
+						toptier1.style.display = "block";
+						a++;
+					}
+				} else if (a == 1){
+					toptier1.style.display = "none";
+					toptier3.style.display = "none";
+					toptier2.style.display = "block";
+					a++;
+				} else if (a == 2){
+					toptier1.style.display = "none";
+					toptier2.style.display = "none";
+					toptier3.style.display = "block";
+					a = 0;
+				}
+				b = 1;
+			}
+			window.setTimeout(histo, 1000);
+		}
+		
+		function points(){
+			tri.innerHTML = "•" + tri.textContent + "•";
+		}
+	
+		function bodyOp(num) {
+			document.body.style.opacity = num/100;
+		}
+	
+		function bodyOpTimer(num) {
+			if (num <= 100) {
+				bodyOp(num);
+				num += 4;
+				window.setTimeout("bodyOpTimer("+num+")", 100);
+			}
+		}
+	
+		function menu(e) {
+			if (e.target.id == "newGame" || e.target.id == "save" || e.target.id == "options"){
+				window.location.href = e.target.id;
+			} else if (e.target.id == "reset"){
+				if (confirm("Voulez-vous vraiment supprimer l'historique ?")){
+					window.location.href = "/tripleAFront/home/resetHisto";
+				}
+			} else if (e.target.id == "leave"){
+				if (confirm("Voulez-vous vraiment quitter ?")){
+					window.location.href = "https://www.google.com/";
+				}
+			}
+		}
+	</script>
+</html>

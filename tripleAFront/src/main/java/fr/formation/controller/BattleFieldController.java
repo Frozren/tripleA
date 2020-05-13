@@ -395,11 +395,11 @@ public class BattleFieldController {
 		model.addAttribute("hpb2", (deckAI.get(0).getLife() + deckAI.get(1).getLife() + deckAI.get(2).getLife()) * 100 / maxhp2);
 
 		if(def==1) {model.addAttribute("cursor", "'assets/img/battlefield/cursor/shield.ico'");
-		model.addAttribute("cursorai", "''");
-		model.addAttribute("cursorch", "'assets/img/battlefield/cursor/shield.ico'");}
+		model.addAttribute("cursorai", "not-allowed");
+		model.addAttribute("cursorch", "url('assets/img/battlefield/cursor/shield.ico')");}
 		else if(def==0) {model.addAttribute("cursor", "'assets/img/battlefield/cursor/epeg.ico'");
-		model.addAttribute("cursorai", "'assets/img/battlefield/cursor/eped.ico'");
-		model.addAttribute("cursorch", "''");}
+		model.addAttribute("cursorai", "url('assets/img/battlefield/cursor/eped.ico')");
+		model.addAttribute("cursorch", "not-allowed");}
 
 		model.addAttribute("deckH", deckHAff);
 		model.addAttribute("deckAI", deckAIAff);

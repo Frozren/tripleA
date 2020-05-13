@@ -1,0 +1,138 @@
+<html th:replace="~{ layout.html :: layout(~{ ::body }, ~{ ::script }, ~{ ::bootstrap }) }">
+	
+	<bootstrap></bootstrap>
+	
+	<body>
+		<div id="newGame">
+			<div><a><img id="logoHome" src="assets/img/logo.png"/></a></div>
+			<div><h1 id="titre">NOM DE VOTRE HÉROS</h1></div>
+			<div>
+				<form id="myform" method="POST" action="newGameNext">
+					<input id="pseudo" autocomplete="off" autocorrect="off" autofocus type="text" name="pseudo" minlength=3 maxlength="14" placeholder="PIPPIN" required>
+					<input id="charge" type="hidden" name="charge" value="false"/>
+				</form>
+			</div>
+			<br>
+			<div id="erreur"></div>
+			<a class="button" id="charger">Charger</a>
+			<a class="button" id="supprimer">Supprimer</a>
+		</div>
+	</body>
+	
+	<script type="text/javascript">
+		var input = document.getElementById("pseudo");
+		var titre = document.getElementById("titre");
+		var home = document.getElementById("logoHome");
+		var messErreur = document.getElementById("erreur");
+		var chargeText = document.getElementById("charge");
+		var buttonCharge = document.getElementById("charger");
+		var buttonSuppr = document.getElementById("supprimer");
+		var pseudoOK = false;
+		var suppression = false;
+	
+		home.onclick = retour;
+		buttonCharge.onclick = charger;
+		buttonSuppr.onclick = suppr;
+		onkeyup = flou;
+		onkeypress = alphaOnly;
+		
+		window.onload = function() {smoothOpening()}
+		
+		function smoothOpening() {
+			bodyOp(0);
+			bodyOpTimer(0);
+		}
+		
+		function alphaOnly(event) {
+			var key = event.keyCode;
+			return ((key >= 65 && key <= 90) || (key >= 95 && key <= 122) || key == 13);
+		}
+	
+		function bodyOp(num) {
+			document.body.style.opacity = num/100;
+		}
+	
+		function bodyOpTimer(num) {
+			if (num <= 100) {
+				bodyOp(num);
+				num += 4;
+				window.setTimeout("bodyOpTimer("+num+")", 100);
+			}
+		}
+	
+		function flou(e){
+			var key = e.keyCode;
+			if (key != 13){
+				if (input.value.length >= 3){
+					verifPseudo();
+					num = 1.278*Math.log(input.value.length)+0.9088;
+					titre.style.filter = "blur(" + num + "px)";
+					input.style.color = "#00b000";
+					input.style.textShadow = "0 0 5px #43ff43";
+				} else {
+					titre.style.filter = "blur(0px)";
+					input.style.color = "#b00000";
+					input.style.textShadow = "0 0 5px #ff4343";
+					pseudoOK = false;
+				}
+			} else if (pseudoOK) {
+				document.forms["myform"].submit();
+			}
+		}
+	
+		function charger(){
+			charge.value = true;
+			document.forms["myform"].submit();
+		}
+		
+		function suppr(){
+			suppression = true;
+			verifPseudo();
+		}
+		
+		function retour() {
+			window.location.href = "home";
+		}
+		
+		function verifPseudo(){
+			$.ajax({
+				type : 'POST',
+				data : {
+					pseudo : $("#pseudo").val(),
+					suppression : suppression
+					},
+				success : function(resp){
+					if (resp == "Y"){
+						input.style.color = "#b00000";
+						input.style.textShadow = "0 0 5px #ff4343";
+						messErreur.innerHTML = "Une partie est déjà enregistrée à ce nom !";
+						buttonCharge.style.transition = "all 4s";
+						buttonSuppr.style.transition = "all 4s";
+						buttonCharge.style.opacity = "1";
+						buttonSuppr.style.opacity = "1";
+						buttonCharge.style.visibility = "visible";
+						buttonSuppr.style.visibility = "visible";
+						pseudoOK = false;
+					} else {
+						input.style.color = "#00b000";
+						input.style.textShadow = "0 0 5px #43ff43";
+						messErreur.innerHTML = "";
+						buttonCharge.style.transition = "all 0s";
+						buttonSuppr.style.transition = "all 0s";
+						buttonCharge.style.opacity = "0";
+						buttonSuppr.style.opacity = "0";
+						buttonCharge.style.visibility = "hidden";
+						buttonSuppr.style.visibility = "hidden";
+						pseudoOK = true;
+					}
+					suppression = false;
+				}
+			});
+		}
+		
+		$("form").submit(function(e){
+			e.preventDefault();
+			return false;
+		});
+	</script>
+</html>

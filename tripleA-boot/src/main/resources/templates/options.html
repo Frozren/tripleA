@@ -1,0 +1,460 @@
+<html th:replace="~{ layout.html :: layout(~{ ::body }, ~{ ::script }, ~{ ::bootstrap }) }">
+	
+	<bootstrap></bootstrap>
+	
+	<body>
+		<div id="options">
+			<div><a><img id="logoHome" src="assets/img/logo.png"/></a></div>
+			<nav>
+				<span class="button" id="title1">Difficulté</span>
+				<span class="button" id="title2">Scène de combat</span>
+				<span class="button" id="title3">Musique</span>
+				<span class="button" id="title4">Luminosité</span>
+				<span class="button" id="title5">Statistiques</span>
+			</nav>
+			<div class="menu" id="menu1">
+				<ul>
+					<li class="titre" id="difficulte1"><img class="arrow" id="arrow1" src="assets/img/options/arrow.png"/>Juste l'histoire !</li>
+					<li class="titre" id="difficulte2"><img class="arrow" id="arrow2" src="assets/img/options/arrow.png"/>Du sang et des os brisés !</li>
+					<li class="titre" id="difficulte3"><img class="arrow" id="arrow3" src="assets/img/options/arrow.png"/>Histoire et épée !</li>
+				</ul>
+				<div id="descriptif">
+					<p id="citation">Vous êtes heureux d'être mis au défi</p><p id="line"></p><p>Choix de cartes : <span class="redText" id="nbCards">5</span> / Points de stats : <span class="redText" id="nbPts">50</span></p>
+				</div>
+			</div>
+			<div class="menu" id="menu2">
+				<div id="images">
+					<img id="bg1" src="assets/img/battlefield/field/bg1.jpg"/>
+					<img id="bg2" src="assets/img/battlefield/field/bg2.jpg"/>
+					<img id="bg3" src="assets/img/battlefield/field/bg3.jpg"/>
+					<img id="bg4" src="assets/img/battlefield/field/bg4.jpg"/>
+					<img id="bg5" src="assets/img/battlefield/field/bg5.jpg"/>
+					<img id="bg6" src="assets/img/battlefield/field/interro.png"/>
+				</div>
+				<div id="image">
+					<img id="apercu" src="assets/img/battlefield/field/bg1.jpg"/>
+				</div>
+			</div>
+			<div class="menu" id="menu3">
+				<div id="musics">
+					<div id="cube">
+						<div class="face" id="face1"><p id="auteur">Nobuo Uematsu</p><p id="titre">Still More Fighting</p></div>
+						<div class="face" id="face2"><p id="auteur">Yuka Kitamura</p><p id="titre">Abyss Watchers</p></div>
+						<div class="face" id="face3"><p id="auteur">Mick Gordon</p><p id="titre">Rip & Tear</p></div>
+						<div class="face" id="face4"><p id="auteur">Two Steps From Hell</p><p id="titre">Heart Of Courage</p></div>
+						<div class="face" id="face5"><p id="auteur">Pyrorca</p><p id="titre">Conqueror</p></div>
+						<div class="face" id="face6"><p id="auteur">Nobuo Uematsu</p><p id="titre">One-Winged Angel</p></div>
+					</div>
+				</div>
+				<div id="controls">
+					<img class="controlButton" id="prev" src="assets/img/options/prev.png"/>
+					<img class="controlButton" id="play" src="assets/img/options/play.png"/>
+					<img class="controlButton" id="next" src="assets/img/options/next.png"/>
+					<img id="audioBars" src="assets/img/options/audioBar.png"/>
+				</div>
+				<div id="check">
+					<label id="switch">
+						<input id="musical" name="musical" type="checkbox" checked>
+						<span id="slider"></span>
+					</label>
+					<label id="musicAlText" for="musical">&nbsp;&nbsp;Musique Aléatoire</label>
+				</div>
+				<div id="son">
+					<div id="volume">
+						<div id="rotateable">
+							<div id="rotate"></div>
+						</div>
+					</div>
+					<div id="barVolume">
+						<span id="volumeBar"></span>
+					</div>
+					<div id="graduations">
+						<div>- 100</div>
+						<div>- 50</div>
+						<div>- 0</div>
+					</div>
+				</div>
+				<audio id="Audio" loop style="display: none;">
+					<source src="assets/sound/music1.mp3" type="audio/mp3">
+				</audio>
+
+
+			</div>
+			<div class="menu" id="menu4">
+				<div id="lumi">
+					<img class="luminosite" id="graph1" src="assets/img/options/lum.png"/>
+				</div>
+			</div>
+			<div class="menu" id="menu5">
+				<div id="graphs">
+					<img class="graph" id="graph1" src="assets/img/options/graph1.png"/>
+					<img class="graph" src="assets/img/options/graph2.png"/>
+					<img class="graph" src="assets/img/options/graph3.png"/>
+					<img class="graph" src="assets/img/options/graph4.png"/>
+					<img class="graph" src="assets/img/options/graph5.png"/>
+				</div>
+			</div>
+			<a class="buttonForm" id="appliquer">Appliquer</a>
+			<a class="buttonForm" id="reinitialiser">Réinitialiser</a>
+			<form id="myform" method="POST" action="optionsApply">
+				<input id="formDifficulte" type="hidden" name="formDifficulte" value="2"/>
+				<input id="formScene" type="hidden" name="formScene" value="6"/>
+				<input id="formMusique" type="hidden" name="formMusique" value="0"/>
+				<input id="formVolume" type="hidden" name="formVolume" value="0.1"/>
+			</form>
+		</div>
+	</body>
+	
+	<script>
+		var difficulteTitle = document.getElementById("title1");
+		var normal = document.getElementById("difficulte" + [[${session.difficulte}]]);
+		var arrow2 = document.getElementById("arrow" + [[${session.difficulte}]]);
+		var menu1 = document.getElementById("menu1");
+		var nbCards = document.getElementById("nbCards");
+		var nbPts = document.getElementById("nbPts");
+		var apercu = document.getElementById("apercu");
+		var image1 = document.getElementById("bg" + [[${session.sceneNum}]]);
+		var cube = document.getElementById("cube");
+		var audio = document.getElementById("Audio");
+		var buttonPlay = document.getElementById("play");
+		var audioBars = document.getElementById("audioBars");
+		var check = document.getElementById("musical");
+		var slider = document.getElementById("slider");
+		var volumeBar = document.getElementById("volumeBar");
+		var appliquer = document.getElementById("appliquer");
+		var reinitialiser = document.getElementById("reinitialiser");
+		var testReset = false;
+		var memDegree = 190;
+		var sound = [[${session.musicVol}]];
+		var play = 0;
+		var image = [[${session.sceneNum}]];
+		var option = 1;
+		var difficulty = [[${session.difficulte}]];
+		var music = [[${session.musicNum}]];
+	
+		window.onclick = select;
+		window.onload = smoothOpening;
+		appliquer.onclick = send;
+		reinitialiser.onclick = reset;
+		
+		function smoothOpening() {
+			difficulteTitle.style.backgroundColor = "rgba(160, 0, 0, 0.2)";
+			difficulteTitle.style.color = "#b30000";
+			difficulteTitle.style.border = "solid 1px rgba(160, 0, 0, 0.5)";
+			difficulteTitle.style.borderBottom = "solid 10px rgba(50, 0, 0, 0.1)";
+			arrow2.style.visibility = "visible";
+			difficulte(difficulty);
+			menu1.style.display = "block";
+			image1.style.border =  "ridge 5px #c8c8c8";
+			slider.style.backgroundColor = "#cc3500";
+			
+			if (music == 0){
+				cube.style.transform = "translateZ(-150px) rotateY(0deg)";
+				volumeBar.style.backgroundColor = "#cc3500";
+				slider.style.backgroundColor = "#cc3500";
+				check.checked = false;
+				checkboxMusic();
+			} else {
+				musique(music, false);
+				check.checked = true;
+				checkboxMusic();
+			}
+			
+			audio.volume = sound;
+			volumeBar.style.width = sound*1000 + "%";
+			battlefield(image);
+			bodyOp(0);
+			bodyOpTimer(0);
+		}
+	
+		function bodyOp(num) {
+			document.body.style.opacity = num/100;
+		}
+	
+		function bodyOpTimer(num) {
+			if (num <= 100) {
+				bodyOp(num);
+				num += 4;
+				window.setTimeout("bodyOpTimer("+num+")", 100);
+			}
+		}
+		
+		function select(e){
+			var object = e.target.id;
+			
+			if (object.includes("title")){
+				menu(object.slice(-1));
+			} else if (object.includes("difficulte")){
+				difficulte(object.slice(-1));
+			} else if (object.includes("bg")){
+				battlefield(object.slice(-1));
+			} else if (object == "logoHome"){
+				leave(true);
+			} else if (object == "prev"){
+				musique(-1, true);
+				musiquePlay(1);
+				console.log(music);
+			} else if (object == "next"){
+				musique(1, true);
+				musiquePlay(1);
+			} else if (object == "play"){
+				musiquePlay(0);
+			} else if (object == "musicAlText" || object == "musical"){
+				checkboxMusic();
+				if (testReset){
+					testReset = false;
+				} else {
+					testReset = true;
+				}
+			}
+		}
+		
+		function menu(i){
+			var id = document.getElementById("title" + option);
+			var newId = document.getElementById("title" + i);
+			var page = document.getElementById("menu" + option);
+			var newpage = document.getElementById("menu" + i);
+			
+			page.style.display = "none";
+			newpage.style.display = "block";
+			
+			id.style.backgroundColor = "";
+			id.style.color = "";
+			id.style.border = "";
+			id.style.borderBottom = "";
+			newId.style.backgroundColor = "rgba(160, 0, 0, 0.2)";
+			newId.style.color = "#b30000";
+			newId.style.border = "solid 1px rgba(160, 0, 0, 0.5)";
+			newId.style.borderBottom = "solid 10px rgba(50, 0, 0, 0.1)";
+			option = i;
+		}
+		
+		function difficulte(i){
+			var id = document.getElementById("difficulte" + difficulty);
+			var newid = document.getElementById("difficulte" + i);
+			var fleche = document.getElementById("arrow" + difficulty);
+			var newfleche = document.getElementById("arrow" + i);
+			
+			if (i == 1){
+				citation.innerHTML = "Profitez d'une promenade en douceur à travers le monde";
+				nbCards.innerHTML = "7";
+				nbPts.innerHTML = "75";
+			} else if (i == 2){
+				citation.innerHTML = "Vous êtes heureux d'être mis au défi";
+				nbCards.innerHTML = "5";
+				nbPts.innerHTML = "50";
+			} else if (i == 3){
+				citation.innerHTML = "Vous êtes un joueur expérimenté et exigeant";
+				nbCards.innerHTML = "3";
+				nbPts.innerHTML = "25";
+			}
+			
+			fleche.style.visibility = "hidden";
+			newfleche.style.visibility = "visible";
+			id.style.borderBottom = "";
+			id.style.backgroundColor = "";
+			id.style.color = "";
+			newid.style.borderBottom = "solid 1px #c8c8c8";
+			newid.style.backgroundColor = "rgba(160, 0, 0, 0.1)";
+			newid.style.color = "#b30000";
+			difficulty = i;
+		}
+		
+		function battlefield(i){
+			var id = document.getElementById("bg" + image);
+			var newid = document.getElementById("bg" + i);
+			
+			id.style.border = "";
+			newid.style.border = "ridge 5px #c8c8c8";
+			
+			if (i != 6){
+				apercu.src = "assets/img/battlefield/field/bg" + i + ".jpg";
+			} else {
+				apercu.src = "assets/img/battlefield/field/aleatoire.png";
+			}
+			image = i;
+		}
+		
+		function musique(i, k){
+			
+			if (k){
+				if (i == 1 && music == 6){
+					music = 1;
+				} else if (i == -1 && music == 1){
+					music = 6;
+				} else {
+					music = music + i;
+				}
+			}
+			
+			audio.src = "assets/sound/music" + music + ".mp3";
+			
+			if (music == 1){
+				cube.style.transform = "translateZ(-150px) rotateY(0deg)";
+				volumeBar.style.backgroundColor = "#cc3500";
+			} else if (music == 2){
+				cube.style.transform = "translateZ(-150px) rotateX(90deg)";
+				volumeBar.style.backgroundColor = "#bd3fff";
+			} else if (music == 3){
+				cube.style.transform = "translateZ(-150px) rotateY(-90deg)";
+				volumeBar.style.backgroundColor = "#8eda00";
+			} else if (music == 4){
+				cube.style.transform = "translateZ(-150px) rotateY(180deg)";
+				volumeBar.style.backgroundColor = "#9dc9f0";
+			} else if (music == 5){
+				cube.style.transform = "translateZ(-150px) rotateX(-90deg)";
+				volumeBar.style.backgroundColor = "#c3c3c3";
+			} else if (music == 6){
+				cube.style.transform = "translateZ(-150px) rotateY(90deg)";
+				volumeBar.style.backgroundColor = "#e1b042";
+			}
+		}
+		
+		function musiquePlay(i){
+			check.checked = false;
+			slider.style.backgroundColor = "a3a3a3";
+			if (i == 0){
+				if (play == 0){
+					audio.play();
+					buttonPlay.src = "assets/img/options/pause.png";
+					audioBars.src = "assets/img/options/audioBar.gif";
+					play = 1;
+				} else {
+					audio.pause();
+					buttonPlay.src = "assets/img/options/play.png";
+					audioBars.src = "assets/img/options/audioBar.png";
+					play = 0;
+				}
+			} else if (i == 1){
+				if (play == 1){
+					audio.play();
+					buttonPlay.src = "assets/img/options/pause.png";
+					audioBars.src = "assets/img/options/audioBar.gif";
+				}
+			}
+		}
+		
+		function checkboxMusic(){
+			if (check.checked == true){
+				slider.style.backgroundColor = "#c8c8c8";
+				check.checked = false;
+			} else {
+				music = 1;
+				play = 1;
+				musiquePlay(0);
+				check.checked = true;
+				cube.style.transform = "translateZ(-150px) rotateY(0deg)";
+				audio.src = "assets/sound/music1.mp3";
+				volumeBar.style.backgroundColor = "#cc3500";
+				slider.style.backgroundColor = volumeBar.style.backgroundColor;
+			}
+		}
+
+		$('#rotateable').draggable({
+			handle : '#rotate',
+			opacity : 0.001,
+			helper : 'clone',
+			scroll: false,
+			drag : function(event) {
+				var
+				pw = document.getElementById('rotateable'),
+				pwBox = pw.getBoundingClientRect(),
+				center_x = (pwBox.left + pwBox.right) / 2,
+				center_y = (pwBox.top + pwBox.bottom) / 2,
+				mouse_x = event.pageX, mouse_y = event.pageY,
+				radians = Math.atan2(mouse_x - center_x, mouse_y - center_y),
+				degree = Math.round((radians * (180 / Math.PI) * -1) + 100);
+	
+				var rotateCSS = 'rotate(' + (degree) + 'deg)';
+				$('#rotateable').css({'-webkit-transform' : rotateCSS});
+				
+				if (degree > memDegree){
+					memDegree = degree;
+					if (sound < 100){
+						sound = sound + 0.0005;
+						$('#volumeBar').css({'width' : sound*1000 + '%'});
+						audio.volume = sound;
+					}
+				} else if (degree < memDegree){
+					memDegree = degree;
+					if (sound > 0){
+						sound = sound - 0.0005;
+						$('#volumeBar').css({'width' : sound*1000 + '%'});
+						audio.volume = sound;
+					}
+				}
+			}
+		});
+		
+		function send(){
+			var formDifficulte = document.getElementById("formDifficulte");
+			var formScene = document.getElementById("formScene");
+			var formMusique = document.getElementById("formMusique");
+			var formVolume = document.getElementById("formVolume");
+			
+			formDifficulte.value = difficulty;
+			formScene.value = image;
+			
+			if (check.checked == true){
+				formMusique.value = 0;
+			} else {
+				formMusique.value = music;
+			}
+
+			formVolume.value = Math.round((sound + Number.EPSILON) * 1000) / 1000;
+			document.forms["myform"].submit();
+		}
+		
+		function leave(i){
+			var textLeave = "";
+			var testMusique = music;
+			
+			if (difficulty != [[${session.difficulte}]]){
+				textLeave += "\n• Difficulté : " + difficulty + " (" + [[${session.difficulte}]] + ")";
+			}
+			
+			if (image != [[${session.sceneNum}]]){
+				textLeave += "\n• Image : " + image + " (" + [[${session.sceneNum}]] + ")";
+			}
+			
+			if (check.checked){
+				testMusique = 0;
+			}
+			
+			if (testMusique != [[${session.musicNum}]]){
+				if (testMusique == 0){
+					textLeave += "\n• Musique : RNG (" + [[${session.musicNum}]] + ")";
+				} else {
+					if ([[${session.musicNum}]] == 0){
+						textLeave += "\n• Musique : " + testMusique + " (RNG)";
+					} else {
+						textLeave += "\n• Musique : " + testMusique + " (" + [[${session.musicNum}]] + ")";
+					}
+				}
+			}
+			
+			if (sound != [[${session.musicVol}]]){
+				textLeave += "\n• Volume : " + (Math.round((sound + Number.EPSILON) * 1000) / 1000)*1000 + " (" + [[${session.musicVol}]]*1000 + ")";
+			}
+			
+			if (i){
+				if (textLeave != ""){
+					if (confirm("Voulez-vous abandonner les modifications et retourner à l'accueil ?\n\nModification(s) non enregistrée(s) :" + textLeave)){
+						window.location.href = "home";
+					}
+				} else {
+					window.location.href = "home";
+				}
+			}
+			return textLeave;
+		}
+		
+		function reset(){
+			var textLeave = leave(false);
+			if (textLeave != ""){
+				textLeave = "";
+				window.location.href = "/tripleAFront/optionsReset";
+			}
+		}
+	</script>
+</html>

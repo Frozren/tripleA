@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
+
+<bootstrap>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</bootstrap>
+
+<body id="battle">
+	<form method="POST" action="BattleField" id="form">
+
+		<div class="row" id="top">
+			<div class="col-2">
+				<img id="logoHome" src="assets/img/logo.png"  type="button" data-toggle="modal"  data-target="#modalClose"/>
+			</div>
+			<button id="test" style="position: absolute; right: 3%;">test</button>
+		</div>
+		<div class="row" id="hp">
+			<div class="col-2" style="visibility: hidden"></div>
+			<div class="col-3">
+				<div id="hp1">
+					<div class="progress">
+						<div
+							class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
+							role="progressbar" th:style="${ 'width: ' + hpb1 + '%' }"
+							th:aria-valuenow="${hpb1}" aria-valuemin="0"
+							aria-valuemax="100"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-2">
+				<img id="vs" src="assets/img/battlefield/field/vs.png">
+			</div>
+			<div class="col-3">
+				<div id="hp2">
+					<div class="progress">
+						<div
+							class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
+							role="progressbar" th:style="${ 'width: ' + hpb2 + '%' }"
+							th:aria-valuenow="${hpb2}" aria-valuemin="0"
+							aria-valuemax="100"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row" id="mid">
+			<div id="divconsole">
+				<div class="scroll" id="console" th:utext="${message}"></div>
+				
+			</div>
+			
+
+			<div id="field" th:style="${'cursor: url('+cursor+'), crosshair; background-image: url('+session.imgField+');'}">
+				<div class="row" id="hfield">
+					<div class="col-2" id="left">
+						<div class="row" id="tleft"></div>
+						<div class="row" id="hcard">
+							<div class="col-8">
+								<div th:id="${'card'+session.idCard1}">
+									<input type="image" class="imgcard" th:idCard="${session.idCard1}" th:id="${'c'+session.idCard1}"
+										th:src="${session.img1}"
+										th:style="${'cursor: ' + cursorch + ';'}">
+									<div class="divdmg">
+										<p class="dmg" th:id="${'dmg'+session.idCard1}">[[${dmg1}]]</p>
+									</div>
+									<div class="divname">
+										<p class="name">[[${session.namec1}]]</p>
+									</div>
+									<div class="divclass">
+										<p class="class">Carte C[[${session.idCard1}]]: [[${session.classc1}]]</p>
+									</div>
+									<div class="def">
+										<p class="stat">[[${deckH[0].def}]]</p>
+										<img class="cdef" th:id="${'def'+session.idCard1}" src="assets/img/battlefield/cursor/shield.ico">
+									</div>
+									<div class="atk">
+										<p class="stat">[[${deckH[0].atk}]]</p>
+									</div>
+									<div class="life">
+										<p class="stat">[[${deckH[0].life}]]</p>
+									</div>
+								</div>
+								<img class="sang" th:id="${'sang'+session.idCard1}" src="assets/img/battlefield/sang.png">
+								<img class="meteor" id="meteor1" src="assets/img/battlefield/meteor.gif">
+								<img class="exploMeteor" id="exploMeteor1" src="assets/img/battlefield/exploMeteor.gif">
+							</div>
+						</div>
+					</div>
+					<div class="col-8">
+						<div class="row" id="topField"></div>
+						<div class="row" id="hcard">
+							<div class="col-1" id="ltcard"></div>
+							<div class="col-2">
+								<div th:id="${'card'+session.idCard2}">
+									<input type="image" class="imgcard" th:idCard="${session.idCard2}" th:id="${'c'+session.idCard2}"
+										th:src="${session.img2}"
+										th:style="${'cursor: ' + cursorch + ';'}">
+									<div class="divdmg">
+										<p class="dmg" th:id="${'dmg'+session.idCard2}">[[${dmg2}]]</p>
+									</div>
+									<div class="divname">
+										<p class="name">[[${session.namec2}]]</p>
+									</div>
+									<div class="divclass">
+										<p class="class">Carte C[[${session.idCard2}]]: [[${session.classc2}]]</p>
+									</div>
+									<div class="def">
+										<p class="stat">[[${deckH[1].def}]]</p>
+										<img class="cdef" th:id="${'def'+session.idCard2}" src="assets/img/battlefield/cursor/shield.ico">
+									</div>
+									<div class="atk">
+										<p class="stat">[[${deckH[1].atk}]]</p>
+									</div>
+									<div class="life">
+										<p class="stat">[[${deckH[1].life}]]</p>
+									</div>
+								</div>
+								<img class="sang" th:id="${'sang'+session.idCard2}" src="assets/img/battlefield/sang.png">
+								<img class="meteor" id="meteor2" src="assets/img/battlefield/meteor.gif">
+								<img class="exploMeteor" id="exploMeteor2" src="assets/img/battlefield/exploMeteor.gif">
+							</div>
+							<div class="col-5" id="mtcard"></div>
+							<div class="col-2">
+								<div th:id="${'card'+session.idCard4}">
+									<input type="image" class="imgcard" th:idCard="${session.idCard4}" th:id="${'c'+session.idCard4}"
+										th:src="${session.img4}"
+										th:style="${'cursor: ' + cursorai + ';'}">
+									<div class="divdmg">
+										<p class="dmg" th:id="${'dmg'+session.idCard4}">[[${dmg4}]]</p>
+									</div>
+									<div class="divname">
+										<p class="name">[[${session.namec4}]]</p>
+									</div>
+									<div class="divclass">
+										<p class="class">Carte C[[${session.idCard4}]]: [[${session.classc4}]]</p>
+									</div>
+									<div class="def">
+										<p class="stat">[[${deckAI[0].def}]]</p>
+									</div>
+									<div class="atk">
+										<p class="stat">[[${deckAI[0].atk}]]</p>
+									</div>
+									<div class="life">
+										<p class="stat">[[${deckAI[0].life}]]</p>
+									</div>
+								</div>
+								<img class="sang" th:id="${'sang'+session.idCard4}" src="assets/img/battlefield/sang.png">
+							</div>
+						</div>
+						<div class="row" id="midField">
+							<img src="assets/img/battlefield/youWin.png" id="win">
+							<img src="assets/img/battlefield/gameOver.gif" id="lose">
+						</div>
+						<div class="row" id="hcard">
+							<div class="col-1" id="ltcard"></div>
+							<div class="col-2">
+								<div th:id="${'card'+session.idCard3}">
+									<input type="image" class="imgcard" th:idCard="${session.idCard3}" th:id="${'c'+session.idCard3}"
+										th:src="${session.img3}"
+										th:style="${'cursor: ' + cursorch + ';'}">
+									<div class="divdmg">
+										<p class="dmg" th:id="${'dmg'+session.idCard3}">[[${dmg3}]]</p>
+									</div>
+									<div class="divname">
+										<p class="name">[[${session.namec3}]]</p>
+									</div>
+									<div class="divclass">
+										<p class="class">Carte C[[${session.idCard3}]]: [[${session.classc3}]]</p>
+									</div>
+									<div class="def">
+										<p class="stat">[[${deckH[2].def}]]</p>
+										<img class="cdef" th:id="${'def'+session.idCard3}" src="assets/img/battlefield/cursor/shield.ico">
+									</div>
+									<div class="atk">
+										<p class="stat">[[${deckH[2].atk}]]</p>
+									</div>
+									<div class="life">
+										<p class="stat">[[${deckH[2].life}]]</p>
+									</div>
+								</div>
+								<img class="sang" th:id="${'sang'+session.idCard3}" src="assets/img/battlefield/sang.png">
+								<img class="meteor" id="meteor3" src="assets/img/battlefield/meteor.gif">
+								<img class="exploMeteor" id="exploMeteor3" src="assets/img/battlefield/exploMeteor.gif">
+							</div>
+							<div class="col-5" id="mtcard"></div>
+							<div class="col-2">
+								<div th:id="${'card'+session.idCard5}">
+									<input type="image" class="imgcard" th:idCard="${session.idCard5}" th:id="${'c'+session.idCard5}"
+										th:src="${session.img5}"
+										th:style="${'cursor: ' + cursorai + ';'}">
+									<div class="divdmg">
+										<p class="dmg" th:id="${'dmg'+session.idCard5}">[[${dmg5}]]</p>
+									</div>
+									<div class="divname">
+										<p class="name">[[${session.namec5}]]</p>
+									</div>
+									<div class="divclass">
+										<p class="class">Carte C[[${session.idCard5}]]: [[${session.classc5}]]</p>
+									</div>
+									<div class="def">
+										<p class="stat">[[${deckAI[1].def}]]</p>
+									</div>
+									<div class="atk">
+										<p class="stat">[[${deckAI[1].atk}]]</p>
+									</div>
+									<div class="life">
+										<p class="stat">[[${deckAI[1].life}]]</p>
+									</div>
+								</div>
+								<img class="sang" th:id="${'sang'+session.idCard5}" src="assets/img/battlefield/sang.png">
+							</div>
+						</div>
+					</div>
+					<div class="col-2" id="left">
+						<div class="row" id="tleft"></div>
+						<div class="row" id="hcard">
+							<div class="col-8">
+								<div th:id="${'card'+session.idCard6}">
+									<input type="image" class="imgcard" th:idCard="${session.idCard6}" th:id="${'c'+session.idCard6}"
+										th:src="${session.img6}"
+										th:style="${'cursor: ' + cursorai + ';'}">
+									<div class="divdmg">
+										<p class="dmg" th:id="${'dmg'+session.idCard6}">[[${dmg6}]]</p>
+									</div>
+									<div class="divname" >
+										<p class="name">[[${session.namec6}]]</p>
+									</div>
+									<div class="divclass">
+										<p class="class">Carte C[[${session.idCard6}]]: [[${session.classc6}]]</p>
+									</div>
+									<div class="def">
+										<p class="stat">[[${deckAI[2].def}]]</p>
+									</div>
+									<div class="atk">
+										<p class="stat">[[${deckAI[2].atk}]]</p>
+									</div>
+									<div class="life">
+										<p class="stat">[[${deckAI[2].life}]]</p>
+									</div>
+								</div>
+								<img class="sang" th:id="${'sang'+session.idCard6}" src="assets/img/battlefield/sang.png">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="divdmgBoss">
+					<p class="dmgBoss" id="dmgBoss">[[${dmgBoss}]]</p>
+				</div>
+			</div>
+		</div>
+		<div class="row" id="bottom">
+			<div class="col-2">
+				<audio controls="controls" id="music" loop="loop" autoplay="autoplay">
+					<source id="sBat" th:src="${session.musicBattle}" type="audio/mp3"/>
+				</audio>
+			</div>
+			<div class="col-3">
+			
+				<audio id="sDef" src="assets/sound/def.mp3"></audio>
+				<audio id="sAtt" src="assets/sound/att.mp3"></audio>
+				<audio id="cDJ" src="assets/sound/cardDeadJ.mp3"></audio>
+				<audio id="gameOver" src="assets/sound/gameOver.mp3"></audio>
+				<audio id="victory" src="assets/sound/victory.mp3"></audio>
+				<audio id="sEM1" src="assets/sound/explosionMeteor.mp3"></audio>
+				<audio id="sEM2" src="assets/sound/explosionMeteor.mp3"></audio>
+				<audio id="sEM3" src="assets/sound/explosionMeteor.mp3"></audio>
+				<audio id="sCW" src="assets/sound/shockWave.mp3"></audio>
+				
+			</div>
+			<div class="col-2" id="variables">
+				<input type="text" id="endGame" th:value="${endGame}" style="visibility: hidden;"></input>
+				<input type="text" id="idCardDef" th:value="${idCardDef}" style="visibility: hidden;"></input>
+				<input type="text" id="idCardAtk" th:value="${idCardAtk}" style="visibility: hidden;"></input>
+				<input type="text" id="boss" th:value="${session.boss}" style="visibility: hidden;"></input>
+				<input type="text" id="def" th:value="${def}" style="visibility: hidden;"></input>
+				<input type="text" id="phase" th:value="${phase}" style="visibility: hidden;"></input>
+				<input type="text" id="bossAtk" th:value="${bossAtk}" style="visibility: hidden;"></input>
+				<input type="text" th:id="${'idmg'+session.idCard1}" th:value="${dmg1}" style="visibility: hidden;"></input>
+				<input type="text" th:id="${'idmg'+session.idCard2}" th:value="${dmg2}" style="visibility: hidden;"></input>
+				<input type="text" th:id="${'idmg'+session.idCard3}" th:value="${dmg3}" style="visibility: hidden;"></input>
+				<input type="text" th:id="${'idmg'+session.idCard4}" th:value="${dmg4}" style="visibility: hidden;"></input>
+				<input type="text" th:id="${'idmg'+session.idCard5}" th:value="${dmg5}" style="visibility: hidden;"></input>
+				<input type="text" th:id="${'idmg'+session.idCard6}" th:value="${dmg6}" style="visibility: hidden;"></input>
+				<input type="text" id="idmgBoss" th:value="${dmgBoss}" style="visibility: hidden;"></input>
+				<input type="text" th:id="${'ilife'+session.idCard1}" th:value="${disc1}" style="visibility: hidden;"></input>
+				<input type="text" th:id="${'ilife'+session.idCard2}" th:value="${disc2}" style="visibility: hidden;"></input>
+				<input type="text" th:id="${'ilife'+session.idCard3}" th:value="${disc3}" style="visibility: hidden;"></input>
+				<input type="text" th:id="${'ilife'+session.idCard4}" th:value="${disc4}" style="visibility: hidden;"></input>
+				<input type="text" th:id="${'ilife'+session.idCard5}" th:value="${disc5}" style="visibility: hidden;"></input>
+				<input type="text" th:id="${'ilife'+session.idCard6}" th:value="${disc6}" style="visibility: hidden;"></input>
+			</div>
+		</div>
+		<div id="divBoss">
+			<input type="image" class="boss" th:idCard="${session.idCard4}" id="cBoss"
+					src="assets/img/battlefield/BOSS.png"
+					th:style="${'visibility: '+discBoss+'; cursor: '+cursorai+';'}">
+		</div>
+		<img class="shockWave" id="shockWave" src="assets/img/battlefield/shockWave.gif">
+		<img class="teleport" id="teleport" src="assets/img/battlefield/essai2.gif">
+	</form>
+	<div class="modal fade" id="modalClose" tabindex="-1" role="dialog" aria-labelledby="closeModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document" id="modal">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="closeModalLabel">Quitter</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					Voullez vous quitter la partie?
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal" id="annuler">Annuler</button>
+					<button type="button" class="btn btn-primary" id="fermer">Confirmer</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="modalEndBoss" tabindex="-1" role="dialog" aria-labelledby="endBossModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document" id="modal">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="closeModalLabel">Questionnaire</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					Souhaitez vous répondre à notre questionnaire?
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal" id="non">Non</button>
+					<button type="button" class="btn btn-primary" id="oui" data-dismiss="modal" data-toggle="modal"  data-target="#modalSurvey">Oui</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="modalSurvey" tabindex="-1" role="dialog" aria-labelledby="surveyModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document" id="modal">
+			<div class="modal-content" id="modalSurv">
+				<div class="modal-header">
+					<h5 class="modal-title" id="closeModalLabel">Questionnaire</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form method="POST" action="valideSurvey" id="formSurvey">
+						<fieldset>
+						<legend>Informations personnelles</legend>
+							<div class="form-row">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="genre" type="radio" value="femme" id="femme">
+									<label class="custom-control-label" for="femme">Femme</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="genre" type="radio" value="homme" id="homme">
+									<label class="custom-control-label" for="homme">Homme</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="genre" type="radio" value="nonBinaire" id="nonBinaire">
+									<label class="custom-control-label" for="nonBinaire">Non binaire</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="genre" type="radio"  checked="checked" value="jeNeSaisPas" id="jeNeSaisPas">
+									<label class="custom-control-label" for=jeNeSaisPas>Je ne sais pas</label>
+								</div>
+							</div>
+							<div class="form-row">	
+								<div class="col">	
+									<label for="age">Age</label>
+									<input class="form-control" name="age" id="age" placeholder="saisir age" type="number" min="5" max="110" step="1"/>
+								</div>
+								<div class="col">
+									<label for="support">Support</label>
+									<select name="support" id="support" class="custom-select">
+										<option selected value="ordinateur">Ordinateur</option>
+										<option value="console">Console</option>
+										<option value="smartphone">Smartphone</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="col">
+									<label for="ville">Ville</label>
+									<input class="form-control" type="text" name="ville" id="ville" placeholder="saisir ville">
+								</div>
+								<div class="col">
+									<label for="pays">Pays</label>
+									<input class="form-control" type="text" name="pays" id="pays" placeholder="saisir pays">
+								</div>
+							</div>
+						</fieldset>
+						<fieldset>
+						<legend>Evaluation</legend>
+							<div class="form-row">
+								<label>Note sur 5</label>
+							</div>
+							<div class="form-row">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="note" type="radio" value="1" id="note1">
+									<label class="custom-control-label" for="note1">1</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="note" type="radio" value="2" id="note2">
+									<label class="custom-control-label" for="note2">2</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="note" type="radio" value="3" id="note3">
+									<label class="custom-control-label" for="note3">3</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="note" type="radio" value="4" id="note4">
+									<label class="custom-control-label" for="note4">4</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="note" type="radio"  checked="checked" value="5" id="note5">
+									<label class="custom-control-label" for="note5">5</label>
+								</div>
+							</div>
+							<div class="form-row">
+								<label>Ressenti de la difficulté</label>
+							</div>
+							<div class="form-row">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="ressenti" type="radio" value="tropFacile"  id="tropFacile">
+									<label class="custom-control-label" for="tropFacile">Trop facile</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="ressenti" type="radio" value="facile" id="facile">
+									<label class="custom-control-label" for="facile">Facile</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="ressenti" type="radio"  checked="checked" value="equilibree" id="equilibree">
+									<label class="custom-control-label" for="equilibree">Equilibrée</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="ressenti" type="radio" value="difficile" id="difficile">
+									<label class="custom-control-label" for="difficile">Difficile</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="ressenti" type="radio" value="hardcore" id="hardcore">
+									<label class="custom-control-label" for="hardcore">Hardcore</label>
+								</div>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal" id="annulerSurvey">Annuler</button>
+					<input type="button" class="btn btn-primary" id="validSurvey"  value="valider">
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<script>
+	//test
+	var buttonTest = document.getElementById("test");
+	buttonTest.onclick=lauchSurvey;
+	
+	function bossEntrance() {
+		if([[${session.turn}]]==0 && [[${session.boss}]]==1) {
+			let bJ=document.getElementById("cBoss");
+			let tele=document.getElementById("teleport");
+			let src = 'assets/img/battlefield/essai2.gif';
+			let t=2500;
+			
+			bJ.style.display="none";
+			
+			setTimeout(() => { initGif('#teleport', src); teleport.style.visibility="visible"; soundCW(); },0+t);
+			setTimeout(() => { tele.style.visibility="hidden"; },1400+t);
+			setTimeout(() => { bJ.style.display="inline"; },500+t);
+			
+		}
+	}
+	
+	//fin test
+
+	function lauchSurvey() {$('#modalEndBoss').modal('show')}
+	var buttonValidSurvey = document.getElementById("validSurvey");
+	buttonValidSurvey.onclick=submitSurvey;
+	function submitSurvey() {document.forms["formSurvey"].submit();}
+
+	var i1=0; var i2=0; var i3=0;
+	var i4=0; var i5=0; var i6=0;
+	
+	var buttonFermer = document.getElementById("fermer");
+	buttonFermer.onclick=fermer;
+	var buttonNon = document.getElementById("non");
+	buttonNon.onclick=fermer;
+	var buttonAnSurvey = document.getElementById("annulerSurvey");
+	buttonAnSurvey.onclick=fermer;
+	
+	function fermer() {
+		window.location.href = "home";
+	}
+
+	function initCard(){
+		var endG = document.getElementById("endGame");
+		var end = endG.value;
+		if(end!="win" && end!="lose") {
+			$('input[type="image"]').on('click', function() {
+				let idCard = $(this).attr('idCard');
+				$('#c').val(idCard);
+				console.log(idCard)
+				
+				$.ajax({
+					type : 'POST',
+					processData : false,
+					contentType : false,
+					url : "battle?c=" + idCard,
+					success : function(resp) {
+						
+						let container = $('<div />');
+						container.html(resp);
+						console.log(container);
+						
+						$('#hp1').parent().html(
+							container.find('#hp1').html()
+						)
+							
+						$('#hp2').parent().html(
+							container.find('#hp2').html()
+						)
+						
+						$('#field').parent().html(
+							container.find('#field').html()
+						)
+						
+						$('#variables').html(
+							container.find('#variables').html()
+						)
+						
+						$('#divBoss').html(
+							container.find('#divBoss').html()
+						)
+						
+						effetAtk()
+						affDmg()
+						cardEffect()
+						endGame()
+						initCard()
+					}
+				})
+				return false;
+			});
+		}
+	}
+	$("form").submit(function(e){
+		console.log('form submit')
+		e.preventDefault();
+		return false;
+	});
+
+
+	function setVolume() {
+		var sound = document.getElementById("music");
+		sound.volume = [[${session.musicVol}]];
+	}
+	
+	function soundDef() {
+		var sDef = document.getElementById("sDef");
+		sDef.volume = [[${session.musicVol}]];
+		sDef.play();
+	}
+
+	function soundAtt() {
+		var sAtt = document.getElementById("sAtt");
+		sAtt.volume = [[${session.musicVol}]];
+		sAtt.play();
+	}
+	
+	function soundcDJ() {
+		var cDJ = document.getElementById("cDJ");
+		cDJ.volume = [[${session.musicVol}]]*2;
+		cDJ.play();
+	}
+	
+	function soundEM(x, t) {
+		if(x==1){var sEM = document.getElementById("sEM1");}
+		else if(x==2){var sEM = document.getElementById("sEM2");}
+		else if(x==3){var sEM = document.getElementById("sEM3");}
+		sEM.volume = [[${session.musicVol}]];
+		setTimeout(() => {  sEM.play(); }, t);
+	}
+	
+	function soundCW() {
+		var sCW = document.getElementById("sCW");
+		sCW.volume = [[${session.musicVol}]];
+		sCW.play();
+	}
+	
+	
+	function animSang(sang) {
+		sang.style.transition = "all 0.5s linear 0.01s";
+		sang.style.transform = "scale(0.5) translateY(-100%)";
+		sang.style.visibility="visible";
+		}
+
+	function cardEffect() {
+		let iphase = document.getElementById("phase");
+		let phase = iphase.value;
+		let cdef1=document.getElementById("def1");
+		let cdef2=document.getElementById("def2");
+		let cdef3=document.getElementById("def3");
+		let c1=document.getElementById("c1");
+		let c2=document.getElementById("c2");
+		let c3=document.getElementById("c3");
+		let c4=document.getElementById("c4");
+		let c5=document.getElementById("c5");
+		let c6=document.getElementById("c6");
+		let idCardDef = document.getElementById("idCardDef");
+		let cardDef = idCardDef.value;
+		let idCardAtk = document.getElementById("idCardAtk");
+		let cardAtk = idCardAtk.value;
+		
+		let card1=document.getElementById("card1");
+		let card2=document.getElementById("card2");
+		let card3=document.getElementById("card3");
+		let card4=document.getElementById("card4");
+		let card5=document.getElementById("card5");
+		let card6=document.getElementById("card6");
+		let sang1=document.getElementById("sang1");
+		let sang2=document.getElementById("sang2");
+		let sang3=document.getElementById("sang3");
+		let sang4=document.getElementById("sang4");
+		let sang5=document.getElementById("sang5");
+		let sang6=document.getElementById("sang6");
+		let ilife1=document.getElementById("ilife1");
+		let life1 = ilife1.value;
+		let ilife2=document.getElementById("ilife2");
+		let life2 = ilife2.value;
+		let ilife3=document.getElementById("ilife3");
+		let life3 = ilife3.value;
+		let ilife4=document.getElementById("ilife4");
+		let life4 = ilife4.value;
+		let ilife5=document.getElementById("ilife5");
+		let life5 = ilife5.value;
+		let ilife6=document.getElementById("ilife6");
+		let life6 = ilife6.value;
+		
+		cdef1.style.visibility="hidden";
+		cdef2.style.visibility="hidden";
+		cdef3.style.visibility="hidden";
+		c1.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #000000)");
+		c2.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #000000)");
+		c3.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #000000)");
+		if ([[${session.boss}]]==0) {
+			c4.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #000000)");
+			c5.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #000000)");
+			c6.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #000000)");
+		}
+		
+		if (cardDef=="1" && life1=="alive") {
+			cdef1.style.visibility="visible";}
+		else if (cardDef=="2" && life1=="alive") {
+			cdef2.style.visibility="visible";}
+		else if (cardDef=="3" && life1=="alive") {
+			cdef3.style.visibility="visible";}
+		
+		if (cardAtk=="1") {
+			if(life1=="alive"){c1.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 10px #ff0000)");}
+			if ([[${session.boss}]]==0 && life4=="alive") {c4.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 10px #ff0000)");}
+		}
+		else if (cardAtk=="2") {
+			if(life2=="alive"){c2.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 10px #ff0000)");}
+			if ([[${session.boss}]]==0 && life5=="alive") {c5.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 10px #ff0000)");}
+		}
+		else if (cardAtk=="3") {
+			if(life3=="alive"){c3.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 10px #ff0000)");}
+			if ([[${session.boss}]]==0 && life6=="alive") {c6.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 10px #ff0000)");}
+			}
+		
+		if(life1=="dead") {card1.style.filter = "grayscale(100%)";
+			card1.style.pointerEvents = "none"; sang1.style.visibility = "visible";
+			if (i1==0) {i1=1; soundAtt();}}
+		if(life2=="dead") {card2.style.filter = "grayscale(100%)";
+			card2.style.pointerEvents = "none"; sang2.style.visibility = "visible";
+			if (i2==0) {i2=1; soundAtt();}}
+		if(life3=="dead") {card3.style.filter = "grayscale(100%)";
+			card3.style.pointerEvents = "none"; sang3.style.visibility = "visible";
+			if (i3==0) {i3=1; soundAtt();}}
+		if([[${session.boss}]]==0) {
+			if(life4=="dead") {card4.style.filter = "grayscale(100%)";
+				card4.style.pointerEvents = "none"; sang4.style.visibility = "visible";
+				if(phase==1 && [[${session.idCard4}]]==4 && i4==0) {i4=1; soundcDJ();} else if(i4==0) {i4=1; soundAtt();}}
+			if(life5=="dead") {card5.style.filter = "grayscale(100%)";
+				card5.style.pointerEvents = "none"; sang5.style.visibility = "visible";
+				if(phase==1 && [[${session.idCard5}]]==4 && i5==0) {i5=1; soundcDJ();} else if(i5==0) {i5=1; soundAtt();}}
+			if(life6=="dead") {card6.style.filter = "grayscale(100%)";
+				card6.style.pointerEvents = "none"; sang6.style.visibility = "visible";
+				if(phase==1 && [[${session.idCard6}]]==4 && i6==0) {i6=1; soundcDJ();} else if(i6==0) {i6=1; soundAtt();}}
+		}
+		else {
+			card4.style.visibility ="hidden";
+			card5.style.visibility ="hidden";
+			card6.style.visibility ="hidden";
+		}
+	}
+	
+	function animDmg(dmg) {
+		dmg.style.transition = "all 0.7s linear 0.01s";
+		dmg.style.transform = "scale(0.5) translateY(-100%)";
+		dmg.style.opacity="0.5";
+		dmg.style.visibility="hidden";
+		}
+	
+	function affDmg() {		
+		let dmg1  = document.getElementById("dmg1");
+		let dmg2  = document.getElementById("dmg2");
+		let dmg3  = document.getElementById("dmg3");
+		let idmg1 = document.getElementById("idmg1");
+		let dg1 = idmg1.value;
+		let idmg2 = document.getElementById("idmg2");
+		let dg2 = idmg2.value;
+		let idmg3 = document.getElementById("idmg3");
+		let dg3 = idmg3.value;
+		
+		let dmg4  = document.getElementById("dmg4");
+		let dmg5  = document.getElementById("dmg5");
+		let dmg6  = document.getElementById("dmg6");
+		let idmg4 = document.getElementById("idmg4");
+		let dg4 = idmg4.value;
+		let idmg5 = document.getElementById("idmg5");
+		let dg5 = idmg5.value;
+		let idmg6 = document.getElementById("idmg6");
+		let dg6 = idmg6.value;
+		
+		let dmgBoss  = document.getElementById("dmgBoss");
+		let idmgBoss = document.getElementById("idmgBoss");
+		let dgBoss = idmgBoss.value;
+		
+		if (dg1>0) {
+			setTimeout(() => {  dmg1.style.visibility="visible"; }, 100);
+			setTimeout(() => {  animDmg(dmg1); }, 150);
+			}
+		if (dg2>0) {
+			setTimeout(() => {  dmg2.style.visibility="visible"; }, 100);
+			setTimeout(() => {  animDmg(dmg2); }, 150);
+			}
+		if (dg3>0) {
+			setTimeout(() => {  dmg3.style.visibility="visible"; }, 100);
+			setTimeout(() => {  animDmg(dmg3); }, 150);
+			}
+		if (dg4>0 && [[${session.boss}]]==0) {
+			setTimeout(() => {  dmg4.style.visibility="visible"; }, 100);
+			setTimeout(() => {  animDmg(dmg4); }, 150);
+			}
+		if (dg5>0 && [[${session.boss}]]==0) {
+			setTimeout(() => {  dmg5.style.visibility="visible"; }, 100);
+			setTimeout(() => {  animDmg(dmg5); }, 150);
+			}
+		if (dg6>0 && [[${session.boss}]]==0) {
+			setTimeout(() => {  dmg6.style.visibility="visible"; }, 100);
+			setTimeout(() => {  animDmg(dmg6); }, 150);
+			}
+		
+		if (dgBoss>0 && [[${session.boss}]]==1) {
+			setTimeout(() => {  dmgBoss.style.visibility="visible"; }, 100);
+			setTimeout(() => {  animDmg(dmgBoss); }, 150);
+			}
+		
+	}
+	
+	function meteorRain() {
+		let meteor1=document.getElementById("meteor1");
+		let meteor2=document.getElementById("meteor2");
+		let meteor3=document.getElementById("meteor3");
+		let exploMeteor1=document.getElementById("exploMeteor1");
+		let exploMeteor2=document.getElementById("exploMeteor2");
+		let exploMeteor3=document.getElementById("exploMeteor3");
+		let x1=-470; let y1=330;
+		let x2=-315; let y2=280;
+		let x3=-315; let y3=410;
+		let t=1;
+		let src = 'assets/img/battlefield/exploMeteor.gif';
+		
+		meteor1.style.visibility="visible";
+		meteor2.style.visibility="visible";
+		meteor3.style.visibility="visible";
+		setTimeout(() => { meteor(meteor1, x1, y1); }, 0+t);
+		setTimeout(() => { meteor(meteor2, x2, y2); }, 200+t);
+		setTimeout(() => { meteor(meteor3, x3, y3);  }, 400+t);
+		
+		
+		setTimeout(() => { initGif('#exploMeteor1', src); exploMeteor1.style.visibility="visible"; }, 450+t);
+		setTimeout(() => { exploMeteor1.style.visibility="hidden"; }, 1500+t);
+		soundEM(1, 100);
+		
+		setTimeout(() => { initGif('#exploMeteor2', src); exploMeteor2.style.visibility="visible"; }, 650+t);
+		setTimeout(() => { exploMeteor2.style.visibility="hidden"; }, 1700+t);
+		soundEM(2, 300);
+		
+		setTimeout(() => { initGif('#exploMeteor3', src); exploMeteor3.style.visibility="visible"; }, 850+t);
+		setTimeout(() => { exploMeteor3.style.visibility="hidden"; }, 1900+t);
+		soundEM(3, 500);
+	}
+	
+	function meteor(meteor, x, y) {
+		meteor.style.transition = "all 0.5s linear 0.01s";
+		meteor.style.transform = "translateX("+x+"%)  translateY("+y+"%)";
+		meteor.style.visibility="hidden";
+	}
+	
+	function shockWave() {
+		let shockWave=document.getElementById("shockWave");
+		let src = 'assets/img/battlefield/shockWave1.gif';
+		initGif('#shockWave', src);
+		shockWave.style.visibility="visible";
+		soundCW();
+		setTimeout(() => { shockWave.style.visibility="hidden"; },1190);
+	}
+	
+	function initGif(name, src) {
+	        $(name).show().each(function() {
+	            this.offsetHeight;
+	        }).prop('src', src);
+	    }
+	
+	function effetAtk() {
+		let ibossAtk=document.getElementById("bossAtk");
+		let bossAtk=ibossAtk.value;
+		if([[${session.boss}]]==1){
+			if(bossAtk==1) {
+				
+			}
+			if(bossAtk==2) {
+				shockWave();
+			}
+			if(bossAtk==3) {
+				meteorRain();
+			}
+			
+		}
+	}
+	
+	function endGame() {
+		var endG = document.getElementById("endGame");
+		var end = endG.value;
+		var sBat = document.getElementById("music");
+		if (end=="win") {
+			sBat.pause();
+			if ([[${session.boss}]]==0) {
+				document.getElementById('win').style.visibility='visible';
+				var sVic = document.getElementById("victory");
+				sVic.volume = [[${session.musicVol}]]*2;
+				sVic.play();
+				setTimeout(function(){window.location.href = "choice";}, 6000);
+			}
+			else if ([[${session.boss}]]==1) {
+				document.getElementById('win').style.visibility='visible';
+				var sVic = document.getElementById("victory");
+				sVic.volume = [[${session.musicVol}]]*2;
+				sVic.play();
+				setTimeout(function(){lauchSurvey();}, 6000);
+			}
+			
+		}
+		else if (end=="lose") {
+			sBat.pause();
+			document.getElementById('lose').style.visibility='visible';
+			var sGO = document.getElementById("gameOver");
+			sGO.volume = [[${session.musicVol}]]*2;
+			sGO.play();
+			if ([[${session.boss}]]==0) {
+				setTimeout(function(){window.location.href = "home";}, 6000);
+			}
+			else if ([[${session.boss}]]==1) {
+				setTimeout(function(){lauchSurvey();}, 6000);
+			}
+		}
+		else{
+			console.log("rien");}
+	}
+	
+	bossEntrance()
+	cardEffect()
+	endGame()
+	initCard()
+	setVolume()
+</script>
+
+</html>

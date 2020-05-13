@@ -63,7 +63,7 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 								<div th:id="${'card'+session.idCard1}">
 									<input type="image" class="imgcard" th:idCard="${session.idCard1}" th:id="${'c'+session.idCard1}"
 										th:src="${session.img1}"
-										th:style="${'cursor: url('+cursorch+'), not-allowed;'}">
+										th:style="${'cursor: ' + cursorch + ';'}">
 									<div class="divdmg">
 										<p class="dmg" th:id="${'dmg'+session.idCard1}">[[${dmg1}]]</p>
 									</div>
@@ -98,7 +98,7 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 								<div th:id="${'card'+session.idCard2}">
 									<input type="image" class="imgcard" th:idCard="${session.idCard2}" th:id="${'c'+session.idCard2}"
 										th:src="${session.img2}"
-										th:style="${'cursor: url('+cursorch+'), not-allowed;'}">
+										th:style="${'cursor: ' + cursorch + ';'}">
 									<div class="divdmg">
 										<p class="dmg" th:id="${'dmg'+session.idCard2}">[[${dmg2}]]</p>
 									</div>
@@ -128,7 +128,7 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 								<div th:id="${'card'+session.idCard4}">
 									<input type="image" class="imgcard" th:idCard="${session.idCard4}" th:id="${'c'+session.idCard4}"
 										th:src="${session.img4}"
-										th:style="${'cursor: url('+cursorai+'), not-allowed;'}">
+										th:style="${'cursor: ' + cursorai + ';'}">
 									<div class="divdmg">
 										<p class="dmg" th:id="${'dmg'+session.idCard4}">[[${dmg4}]]</p>
 									</div>
@@ -161,7 +161,7 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 								<div th:id="${'card'+session.idCard3}">
 									<input type="image" class="imgcard" th:idCard="${session.idCard3}" th:id="${'c'+session.idCard3}"
 										th:src="${session.img3}"
-										th:style="${'cursor: url('+cursorch+'), not-allowed;'}">
+										th:style="${'cursor: ' + cursorch + ';'}">
 									<div class="divdmg">
 										<p class="dmg" th:id="${'dmg'+session.idCard3}">[[${dmg3}]]</p>
 									</div>
@@ -191,7 +191,7 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 								<div th:id="${'card'+session.idCard5}">
 									<input type="image" class="imgcard" th:idCard="${session.idCard5}" th:id="${'c'+session.idCard5}"
 										th:src="${session.img5}"
-										th:style="${'cursor: url('+cursorai+'), not-allowed;'}">
+										th:style="${'cursor: ' + cursorai + ';'}">
 									<div class="divdmg">
 										<p class="dmg" th:id="${'dmg'+session.idCard5}">[[${dmg5}]]</p>
 									</div>
@@ -222,7 +222,7 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 								<div th:id="${'card'+session.idCard6}">
 									<input type="image" class="imgcard" th:idCard="${session.idCard6}" th:id="${'c'+session.idCard6}"
 										th:src="${session.img6}"
-										th:style="${'cursor: url('+cursorai+'), not-allowed;'}">
+										th:style="${'cursor: ' + cursorai + ';'}">
 									<div class="divdmg">
 										<p class="dmg" th:id="${'dmg'+session.idCard6}">[[${dmg6}]]</p>
 									</div>
@@ -297,7 +297,7 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 		<div id="divBoss">
 			<input type="image" class="boss" th:idCard="${session.idCard4}" id="cBoss"
 					src="assets/img/battlefield/BOSS.png"
-					th:style="${'visibility: '+discBoss+'; cursor: url('+cursorai+'), not-allowed;'}">
+					th:style="${'visibility: '+discBoss+'; cursor: '+cursorai+';'}">
 		</div>
 		<img class="shockWave" id="shockWave" src="assets/img/battlefield/shockWave.gif">
 		<img class="teleport" id="teleport" src="assets/img/battlefield/essai2.gif">
