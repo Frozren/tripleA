@@ -125,9 +125,8 @@ public class History {
 
 	@Override
 	public String toString() {
-		return "History [id=" + id + ", dmg_taken=" + dmgTaken + ", dmg_dealt=" + dmgDealt + ", phase=" + phase
-				+ ", etat=" + etat + ", dateEnd=" + dateEnd + ", name=" + name.toString() + ", nbWin=" + nbWin + "]";
+		return "History [id=" + id + ", dmgTaken=" + dmgTaken + ", dmgDealt=" + dmgDealt + ", phase=" + phase
+				+ ", etat=" + etat + ", dateEnd=" + dateEnd + ", name=" + name + ", nbWin=" + nbWin + "]";
 	}
-	
 	
 }
