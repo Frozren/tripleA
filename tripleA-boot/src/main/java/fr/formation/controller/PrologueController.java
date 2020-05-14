@@ -11,7 +11,6 @@ public class PrologueController {
 	@GetMapping({"/","/prologue"})
 	public String afficher(HttpSession session) {
 
-		System.out.println("prologue");
 		session.setAttribute("difficulte", 2);
 		session.setAttribute("sceneNum", 6);
 		session.setAttribute("musicNum", 0);

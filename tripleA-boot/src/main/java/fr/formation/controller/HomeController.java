@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import fr.formation.annotation.IsAdmin;
 import fr.formation.dao.IDAOHistory;
 import fr.formation.model.History;
 
@@ -80,6 +81,7 @@ public class HomeController {
 	}
 	
 	@GetMapping("/home/resetHisto")
+	@IsAdmin
 	public String resetHisto() {
 		this.daoHistory.deleteAll();
 		return "redirect:/home";

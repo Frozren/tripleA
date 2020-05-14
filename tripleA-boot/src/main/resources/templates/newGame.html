@@ -16,13 +16,13 @@
 			<br>
 			<div id="erreur"></div>
 			<a class="button" id="charger">Charger</a>
-			<a class="button" id="supprimer">Supprimer</a>
+			<a class="button" id="supprimer" sec:authorize="hasRole('ADMIN')">Supprimer</a>
+			<a id="supprimer" sec:authorize="!hasRole('ADMIN')" style="display: none;"></a>
 		</div>
 
 		<script type="text/javascript">
 			var input = document.getElementById("pseudo");
 			var titre = document.getElementById("titre");
-			var home = document.getElementById("logoHome");
 			var messErreur = document.getElementById("erreur");
 			var chargeText = document.getElementById("charge");
 			var buttonCharge = document.getElementById("charger");
@@ -30,34 +30,29 @@
 			var pseudoOK = false;
 			var suppression = false;
 		
-			home.onclick = retour;
-			buttonCharge.onclick = charger;
-			buttonSuppr.onclick = suppr;
 			onkeyup = flou;
 			onkeypress = alphaOnly;
 			
-			window.onload = function() {smoothOpening()}
+			window.onload = smoothOpening;
+			window.onclick = select;
 			
-			function smoothOpening() {
-				bodyOp(0);
-				bodyOpTimer(0);
+			function select(e){
+				var object = e.target.id;
+				
+				if (object == "charger"){
+					charge.value = true;
+					document.forms["myform"].submit();
+				} else if (object == "supprimer"){
+					suppression = true;
+					verifPseudo();
+				} else if (object == "logoHome"){
+					window.location.href = "home";
+				}
 			}
 			
 			function alphaOnly(event) {
 				var key = event.keyCode;
 				return ((key >= 65 && key <= 90) || (key >= 95 && key <= 122) || key == 13);
-			}
-		
-			function bodyOp(num) {
-				document.body.style.opacity = num/100;
-			}
-		
-			function bodyOpTimer(num) {
-				if (num <= 100) {
-					bodyOp(num);
-					num += 4;
-					window.setTimeout("bodyOpTimer("+num+")", 100);
-				}
 			}
 		
 			function flou(e){
@@ -78,20 +73,6 @@
 				} else if (pseudoOK) {
 					document.forms["myform"].submit();
 				}
-			}
-		
-			function charger(){
-				charge.value = true;
-				document.forms["myform"].submit();
-			}
-			
-			function suppr(){
-				suppression = true;
-				verifPseudo();
-			}
-			
-			function retour() {
-				window.location.href = "home";
 			}
 			
 			function verifPseudo(){

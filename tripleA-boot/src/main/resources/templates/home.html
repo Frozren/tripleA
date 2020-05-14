@@ -5,7 +5,6 @@
 	<body>
 		<div id="home">
 			<a class="button" id="connectAdmin">Admin</a>
-			<span sec:authentication="name"></span>
 			<div id="logo1"><img src="assets/img/home/logoHaut.png"></div>
 			<div id="menu">
 				<div id="nav">
@@ -93,20 +92,19 @@
 			var button = document.getElementById("connectAdmin");
 			var password = document.getElementById("password");
 			
-			window.onload = smoothOpening;
+			window.onload = opening;
 			window.onclick = menu;
 			window.onkeydown = musique;
 			
-			function smoothOpening() {
+			function opening() {
 				audio.volume = [[${session.musicVol}]];
 				if ("[[${#authentication.name}]]" == "admin"){
 					connectAdmin.innerHTML = "Log Out";
 				}
-				bodyOp(0);
-				bodyOpTimer(0);
 				if (!empty){
 					histo();
 				}
+				smoothOpening();
 			}
 			
 			function musique(event){
@@ -154,18 +152,6 @@
 			
 			function points(){
 				tri.innerHTML = "•" + tri.textContent + "•";
-			}
-		
-			function bodyOp(num) {
-				document.body.style.opacity = num/100;
-			}
-		
-			function bodyOpTimer(num) {
-				if (num <= 100) {
-					bodyOp(num);
-					num += 4;
-					window.setTimeout("bodyOpTimer("+num+")", 100);
-				}
 			}
 		
 			function menu(e) {

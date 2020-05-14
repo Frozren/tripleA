@@ -10,7 +10,7 @@
 				<span class="button" id="title2">Scène de combat</span>
 				<span class="button" id="title3">Musique</span>
 				<span class="button" id="title4">Luminosité</span>
-				<span class="button" id="title5">Statistiques</span>
+				<span sec:authorize="hasRole('ADMIN')" class="button" id="title5">Statistiques</span>
 			</nav>
 			<div class="menu" id="menu1">
 				<ul>
@@ -133,11 +133,11 @@
 			var music = [[${session.musicNum}]];
 		
 			window.onclick = select;
-			window.onload = smoothOpening;
+			window.onload = opening;
 			appliquer.onclick = send;
 			reinitialiser.onclick = reset;
 			
-			function smoothOpening() {
+			function opening() {
 				difficulteTitle.style.backgroundColor = "rgba(160, 0, 0, 0.2)";
 				difficulteTitle.style.color = "#b30000";
 				difficulteTitle.style.border = "solid 1px rgba(160, 0, 0, 0.5)";
@@ -163,20 +163,8 @@
 				audio.volume = sound;
 				volumeBar.style.width = sound*1000 + "%";
 				battlefield(image);
-				bodyOp(0);
-				bodyOpTimer(0);
-			}
-		
-			function bodyOp(num) {
-				document.body.style.opacity = num/100;
-			}
-		
-			function bodyOpTimer(num) {
-				if (num <= 100) {
-					bodyOp(num);
-					num += 4;
-					window.setTimeout("bodyOpTimer("+num+")", 100);
-				}
+				
+				smoothOpening();
 			}
 			
 			function select(e){

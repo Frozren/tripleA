@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import fr.formation.annotation.IsAdmin;
 import fr.formation.dao.IDAOCard;
 import fr.formation.dao.IDAOPlayer;
 import fr.formation.model.AI;
@@ -43,6 +44,7 @@ public class SaveController {
 	
 	@PostMapping("/save")
 	@ResponseBody
+	@IsAdmin
 	public void delete(Model model, @RequestParam int saveId) {
 		List<Player> list = this.daoPlayer.findByTypePlayer(true);
 		Player p1 = list.get(saveId);

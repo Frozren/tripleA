@@ -70,8 +70,8 @@
 			<div id="danger0"><h2>BOSS</h2></div>
 			<div id="danger1"><div><img src="assets/img/choice/danger.png"></div><div>DANGER</div></div>
 		</div>
-		<div id = "decompte">
-			<img id="explo" src="assets/img/choice/explo.gif" style="width:500px;position:absolute;top:10%;left:35%"/>
+		<div id = "decompte" style="display:none;">
+			<img id="explo" src="assets/img/choice/explo.gif" style="width:500px;display:none;position:absolute;top:10%;left:35%"/>
 			<h1 id="decText"></h1>
 		</div>
 		<audio id="Audio3" style="display: none;">
@@ -106,35 +106,20 @@
 			var i = 3;
 			var echap = false;
 		
-			window.onload = smoothOpening;
+			window.onload = opening;
 			window.onclick = select;
 			window.onkeydown = skip;
 			
-			function smoothOpening() {
+			function opening() {
 				if (phase == 2){
 					danger.style.display = "block";
 				}
 				
-				decompte.style.display = "none";
-				explo.style.display = "none";
 				audio0.volume = [[${session.musicVol}]];
 				audio1.volume = [[${session.musicVol}]];
 				audio2.volume = [[${session.musicVol}]];
 				audio3.volume = [[${session.musicVol}]];
-				bodyOp(0);
-				bodyOpTimer(0);
-			}
-	
-			function bodyOp(num) {
-				document.body.style.opacity = num/100;
-			}
-	
-			function bodyOpTimer(num) {
-				if (num <= 100) {
-					bodyOp(num);
-					num += 4;
-					window.setTimeout("bodyOpTimer("+num+")", 100);
-				}
+				smoothOpening();
 			}
 	
 			function select(e){
