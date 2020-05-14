@@ -63,7 +63,7 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 								<div th:id="${'card'+session.idCard1}">
 									<input type="image" class="imgcard" th:idCard="${session.idCard1}" th:id="${'c'+session.idCard1}"
 										th:src="${session.img1}"
-										th:style="${'cursor: ' + cursorch + ';'}">
+										th:style="${'cursor: ' + cursorch + 'not-allowed;'}">
 									<div class="divdmg">
 										<p class="dmg" th:id="${'dmg'+session.idCard1}">[[${dmg1}]]</p>
 									</div>
@@ -98,7 +98,7 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 								<div th:id="${'card'+session.idCard2}">
 									<input type="image" class="imgcard" th:idCard="${session.idCard2}" th:id="${'c'+session.idCard2}"
 										th:src="${session.img2}"
-										th:style="${'cursor: ' + cursorch + ';'}">
+										th:style="${'cursor: ' + cursorch + 'not-allowed;'}">
 									<div class="divdmg">
 										<p class="dmg" th:id="${'dmg'+session.idCard2}">[[${dmg2}]]</p>
 									</div>
@@ -128,7 +128,7 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 								<div th:id="${'card'+session.idCard4}">
 									<input type="image" class="imgcard" th:idCard="${session.idCard4}" th:id="${'c'+session.idCard4}"
 										th:src="${session.img4}"
-										th:style="${'cursor: ' + cursorai + ';'}">
+										th:style="${'cursor: ' + cursorai + 'not-allowed;'}">
 									<div class="divdmg">
 										<p class="dmg" th:id="${'dmg'+session.idCard4}">[[${dmg4}]]</p>
 									</div>
@@ -161,7 +161,7 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 								<div th:id="${'card'+session.idCard3}">
 									<input type="image" class="imgcard" th:idCard="${session.idCard3}" th:id="${'c'+session.idCard3}"
 										th:src="${session.img3}"
-										th:style="${'cursor: ' + cursorch + ';'}">
+										th:style="${'cursor: ' + cursorch + 'not-allowed;'}">
 									<div class="divdmg">
 										<p class="dmg" th:id="${'dmg'+session.idCard3}">[[${dmg3}]]</p>
 									</div>
@@ -191,7 +191,7 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 								<div th:id="${'card'+session.idCard5}">
 									<input type="image" class="imgcard" th:idCard="${session.idCard5}" th:id="${'c'+session.idCard5}"
 										th:src="${session.img5}"
-										th:style="${'cursor: ' + cursorai + ';'}">
+										th:style="${'cursor: ' + cursorai + 'not-allowed;'}">
 									<div class="divdmg">
 										<p class="dmg" th:id="${'dmg'+session.idCard5}">[[${dmg5}]]</p>
 									</div>
@@ -222,7 +222,7 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 								<div th:id="${'card'+session.idCard6}">
 									<input type="image" class="imgcard" th:idCard="${session.idCard6}" th:id="${'c'+session.idCard6}"
 										th:src="${session.img6}"
-										th:style="${'cursor: ' + cursorai + ';'}">
+										th:style="${'cursor: ' + cursorai + 'not-allowed;'}">
 									<div class="divdmg">
 										<p class="dmg" th:id="${'dmg'+session.idCard6}">[[${dmg6}]]</p>
 									</div>
@@ -295,9 +295,9 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 			</div>
 		</div>
 		<div id="divBoss">
-			<input type="image" class="boss" th:idCard="${session.idCard4}" id="cBoss"
+			<input type="image" class="boss" th:idCard="${session.idCard6}" id="cBoss"
 					src="assets/img/battlefield/BOSS.png"
-					th:style="${'visibility: '+discBoss+'; cursor: '+cursorai+';'}">
+					th:style="${'cursor: ' + cursorai + 'not-allowed;'}">
 		</div>
 		<img class="shockWave" id="shockWave" src="assets/img/battlefield/shockWave.gif">
 		<img class="teleport" id="teleport" src="assets/img/battlefield/essai2.gif">
@@ -352,36 +352,37 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 					</button>
 				</div>
 				<div class="modal-body">
-					<form method="POST" action="valideSurvey" id="formSurvey">
+					<form class="was-validated" method="POST" action="valideSurvey" id="formSurvey">
 						<fieldset>
 						<legend>Informations personnelles</legend>
 							<div class="form-row">
 								<div class="custom-control custom-radio custom-control-inline">
-									<input class="custom-control-input" name="genre" type="radio" value="femme" id="femme">
+									<input class="custom-control-input" name="survey.genre" type="radio" value="femme" id="femme" required>
 									<label class="custom-control-label" for="femme">Femme</label>
 								</div>
 								<div class="custom-control custom-radio custom-control-inline">
-									<input class="custom-control-input" name="genre" type="radio" value="homme" id="homme">
+									<input class="custom-control-input" name="survey.genre" type="radio" value="homme" id="homme" required>
 									<label class="custom-control-label" for="homme">Homme</label>
 								</div>
 								<div class="custom-control custom-radio custom-control-inline">
-									<input class="custom-control-input" name="genre" type="radio" value="nonBinaire" id="nonBinaire">
+									<input class="custom-control-input" name="survey.genre" type="radio" value="nonBinaire" id="nonBinaire" required>
 									<label class="custom-control-label" for="nonBinaire">Non binaire</label>
 								</div>
 								<div class="custom-control custom-radio custom-control-inline">
-									<input class="custom-control-input" name="genre" type="radio"  checked="checked" value="jeNeSaisPas" id="jeNeSaisPas">
+									<input class="custom-control-input" name="survey.genre" type="radio" value="jeNeSaisPas" id="jeNeSaisPas" required>
 									<label class="custom-control-label" for=jeNeSaisPas>Je ne sais pas</label>
 								</div>
 							</div>
 							<div class="form-row">	
 								<div class="col">	
 									<label for="age">Age</label>
-									<input class="form-control" name="age" id="age" placeholder="saisir age" type="number" min="5" max="110" step="1"/>
+									<input class="form-control" name="survey.age" id="age" placeholder="saisir age" type="number" min="5" max="110" step="1" required/>
 								</div>
 								<div class="col">
 									<label for="support">Support</label>
-									<select name="support" id="support" class="custom-select">
-										<option selected value="ordinateur">Ordinateur</option>
+									<select name="survey.support" id="support" class="custom-select" required>
+										<option value="">Choisir...</option>
+										<option value="ordinateur">Ordinateur</option>
 										<option value="console">Console</option>
 										<option value="smartphone">Smartphone</option>
 									</select>
@@ -390,11 +391,11 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 							<div class="form-row">
 								<div class="col">
 									<label for="ville">Ville</label>
-									<input class="form-control" type="text" name="ville" id="ville" placeholder="saisir ville">
+									<input class="form-control" type="text" name="survey.ville" id="ville" placeholder="saisir ville" required>
 								</div>
 								<div class="col">
 									<label for="pays">Pays</label>
-									<input class="form-control" type="text" name="pays" id="pays" placeholder="saisir pays">
+									<input class="form-control" type="text" name="survey.pays" id="pays" placeholder="saisir pays" required>
 								</div>
 							</div>
 						</fieldset>
@@ -405,23 +406,23 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 							</div>
 							<div class="form-row">
 								<div class="custom-control custom-radio custom-control-inline">
-									<input class="custom-control-input" name="note" type="radio" value="1" id="note1">
+									<input class="custom-control-input" name="survey.note" type="radio" value="1" id="note1" required>
 									<label class="custom-control-label" for="note1">1</label>
 								</div>
 								<div class="custom-control custom-radio custom-control-inline">
-									<input class="custom-control-input" name="note" type="radio" value="2" id="note2">
+									<input class="custom-control-input" name="survey.note" type="radio" value="2" id="note2" required>
 									<label class="custom-control-label" for="note2">2</label>
 								</div>
 								<div class="custom-control custom-radio custom-control-inline">
-									<input class="custom-control-input" name="note" type="radio" value="3" id="note3">
+									<input class="custom-control-input" name="survey.note" type="radio" value="3" id="note3" required>
 									<label class="custom-control-label" for="note3">3</label>
 								</div>
 								<div class="custom-control custom-radio custom-control-inline">
-									<input class="custom-control-input" name="note" type="radio" value="4" id="note4">
+									<input class="custom-control-input" name="survey.note" type="radio" value="4" id="note4" required>
 									<label class="custom-control-label" for="note4">4</label>
 								</div>
 								<div class="custom-control custom-radio custom-control-inline">
-									<input class="custom-control-input" name="note" type="radio"  checked="checked" value="5" id="note5">
+									<input class="custom-control-input" name="survey.note" type="radio" value="5" id="note5" required>
 									<label class="custom-control-label" for="note5">5</label>
 								</div>
 							</div>
@@ -430,23 +431,23 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 							</div>
 							<div class="form-row">
 								<div class="custom-control custom-radio custom-control-inline">
-									<input class="custom-control-input" name="ressenti" type="radio" value="tropFacile"  id="tropFacile">
+									<input class="custom-control-input" name="survey.ressenti" type="radio" value="tropFacile"  id="tropFacile" required>
 									<label class="custom-control-label" for="tropFacile">Trop facile</label>
 								</div>
 								<div class="custom-control custom-radio custom-control-inline">
-									<input class="custom-control-input" name="ressenti" type="radio" value="facile" id="facile">
+									<input class="custom-control-input" name="survey.ressenti" type="radio" value="facile" id="facile" required>
 									<label class="custom-control-label" for="facile">Facile</label>
 								</div>
 								<div class="custom-control custom-radio custom-control-inline">
-									<input class="custom-control-input" name="ressenti" type="radio"  checked="checked" value="equilibree" id="equilibree">
+									<input class="custom-control-input" name="ressenti" type="radio" value="equilibree" id="equilibree" required>
 									<label class="custom-control-label" for="equilibree">Equilibrée</label>
 								</div>
 								<div class="custom-control custom-radio custom-control-inline">
-									<input class="custom-control-input" name="ressenti" type="radio" value="difficile" id="difficile">
+									<input class="custom-control-input" name="survey.ressenti" type="radio" value="difficile" id="difficile" required>
 									<label class="custom-control-label" for="difficile">Difficile</label>
 								</div>
 								<div class="custom-control custom-radio custom-control-inline">
-									<input class="custom-control-input" name="ressenti" type="radio" value="hardcore" id="hardcore">
+									<input class="custom-control-input" name="survey.ressenti" type="radio" value="hardcore" id="hardcore" required>
 									<label class="custom-control-label" for="hardcore">Hardcore</label>
 								</div>
 							</div>
@@ -484,14 +485,15 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 	}
 	
 	//fin test
+	var idth1=0; var idth2=0; var idth3=0;
+	var idth4=0; var idth5=0; var idth6=0;
+	
+	var idef1=0; var idef2=0; var idef3=0;
 
 	function lauchSurvey() {$('#modalEndBoss').modal('show')}
 	var buttonValidSurvey = document.getElementById("validSurvey");
 	buttonValidSurvey.onclick=submitSurvey;
 	function submitSurvey() {document.forms["formSurvey"].submit();}
-
-	var i1=0; var i2=0; var i3=0;
-	var i4=0; var i5=0; var i6=0;
 	
 	var buttonFermer = document.getElementById("fermer");
 	buttonFermer.onclick=fermer;
@@ -618,10 +620,13 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 		let c4=document.getElementById("c4");
 		let c5=document.getElementById("c5");
 		let c6=document.getElementById("c6");
+		let cBoss=document.getElementById("divBoss");
 		let idCardDef = document.getElementById("idCardDef");
 		let cardDef = idCardDef.value;
 		let idCardAtk = document.getElementById("idCardAtk");
 		let cardAtk = idCardAtk.value;
+		let endG = document.getElementById("endGame");
+		let end = endG.value;
 		
 		let card1=document.getElementById("card1");
 		let card2=document.getElementById("card2");
@@ -661,11 +666,14 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 		}
 		
 		if (cardDef=="1" && life1=="alive") {
-			cdef1.style.visibility="visible";}
-		else if (cardDef=="2" && life1=="alive") {
-			cdef2.style.visibility="visible";}
-		else if (cardDef=="3" && life1=="alive") {
-			cdef3.style.visibility="visible";}
+			cdef1.style.visibility="visible";
+			if (idef1==0) {idef1=1; idef2=0; idef3=0; setTimeout(() => {soundDef();}, 100);}}
+		else if (cardDef=="2" && life2=="alive") {
+			cdef2.style.visibility="visible";
+			if (idef2==0) {idef1=0; idef2=1; idef3=0; setTimeout(() => {soundDef();}, 100);}}
+		else if (cardDef=="3" && life3=="alive") {
+			cdef3.style.visibility="visible";
+			if (idef3==0) {idef1=0; idef2=0; idef3=1; setTimeout(() => {soundDef();}, 100);}}
 		
 		if (cardAtk=="1") {
 			if(life1=="alive"){c1.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 10px #ff0000)");}
@@ -682,28 +690,34 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 		
 		if(life1=="dead") {card1.style.filter = "grayscale(100%)";
 			card1.style.pointerEvents = "none"; sang1.style.visibility = "visible";
-			if (i1==0) {i1=1; soundAtt();}}
+			if (idth1==0) {idth1=1; soundAtt();}}
 		if(life2=="dead") {card2.style.filter = "grayscale(100%)";
 			card2.style.pointerEvents = "none"; sang2.style.visibility = "visible";
-			if (i2==0) {i2=1; soundAtt();}}
+			if (idth2==0) {idth2=1; soundAtt();}}
 		if(life3=="dead") {card3.style.filter = "grayscale(100%)";
 			card3.style.pointerEvents = "none"; sang3.style.visibility = "visible";
-			if (i3==0) {i3=1; soundAtt();}}
-		if([[${session.boss}]]==0) {
+			if (idth3==0) {idth3=1; soundAtt();}}
+		if([[${session.boss}]]==0) {cBoss.style.visibility="hidden";
 			if(life4=="dead") {card4.style.filter = "grayscale(100%)";
 				card4.style.pointerEvents = "none"; sang4.style.visibility = "visible";
-				if(phase==1 && [[${session.idCard4}]]==4 && i4==0) {i4=1; soundcDJ();} else if(i4==0) {i4=1; soundAtt();}}
+				if(phase==1 && [[${session.idCardDist}]]==4 && idth4==0) {idth4=1; setTimeout(() => {soundcDJ();}, 100);} 
+				else if(idth4==0) {idth4=1; setTimeout(() => {soundAtt();}, 100);}}
 			if(life5=="dead") {card5.style.filter = "grayscale(100%)";
 				card5.style.pointerEvents = "none"; sang5.style.visibility = "visible";
-				if(phase==1 && [[${session.idCard5}]]==4 && i5==0) {i5=1; soundcDJ();} else if(i5==0) {i5=1; soundAtt();}}
+				if(phase==1 && [[${session.idCardDist}]]==5 && idth5==0) {idth5=1; setTimeout(() => {soundcDJ();}, 100);} 
+				else if(idth5==0) {idth5=1; setTimeout(() => {soundAtt();}, 100);}}
 			if(life6=="dead") {card6.style.filter = "grayscale(100%)";
 				card6.style.pointerEvents = "none"; sang6.style.visibility = "visible";
-				if(phase==1 && [[${session.idCard6}]]==4 && i6==0) {i6=1; soundcDJ();} else if(i6==0) {i6=1; soundAtt();}}
+				if(phase==1 && [[${session.idCardDist}]]==6 && idth6==0) {idth6=1; setTimeout(() => {soundcDJ();}, 100);} 
+				else if(idth6==0) {idth6=1; setTimeout(() => {soundAtt();}, 100);}}
 		}
 		else {
 			card4.style.visibility ="hidden";
 			card5.style.visibility ="hidden";
 			card6.style.visibility ="hidden";
+			
+			if(end=="win") {cBoss.style.visibility="hidden";}
+			else {cBoss.style.visibility="visible";}
 		}
 	}
 	

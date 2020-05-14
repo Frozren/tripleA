@@ -4,13 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.formation.dao.IDAOCard;
@@ -167,7 +170,7 @@ public class BattleFieldController {
 				c4="5"; id5="4"; c5="6"; id6="5"; c6="4"; id4="6";
 			}
 			
-		}
+		
 			
 			model.addAttribute("endGame", "start");
 			
@@ -210,9 +213,11 @@ public class BattleFieldController {
 			session.setAttribute("idCard4", id4);
 			session.setAttribute("idCard5", id5);
 			session.setAttribute("idCard6", id6);
+			
+			session.setAttribute("idCardDist", posai+3);
 
 			refresh(model);
-			
+		}
 		
 		return "battleField";
 	}
@@ -272,7 +277,7 @@ public class BattleFieldController {
 		if(ai.verifyEnd() && saveHist) {
 			turn=0;
 			session.setAttribute("turn", "0");
-			message="<p>Le joueur a gagne!!!</p>"+message;
+			message="<p><u><font color='#FFD700'>Le joueur a gagne!!!</font></u></p>"+message;
 			if (boss) {
 				saveHistory(true);
 			}
@@ -281,7 +286,7 @@ public class BattleFieldController {
 		else if(h.verifyEnd() && saveHist) {
 			turn=0;
 			session.setAttribute("turn", "0");
-			message="<p>Le joueur a perdu...</p>"+message;
+			message="<p><u><font color='#FF0000'>Le joueur a perdu...</font></u></p>"+message;
 			saveHistory(false);
 			model.addAttribute("endGame", "lose");
 			saveHist=false;
@@ -293,14 +298,15 @@ public class BattleFieldController {
 	}
 	
 	@PostMapping("/valideSurvey")
-	public String survey(Survey survey, BindingResult result ) {
+	public String survey(@Valid @ModelAttribute Survey survey, BindingResult result ) {
 		System.out.println(survey);
 		if (result.hasErrors()) {
-			return("redirect:/home");
 		}
+		else {
 		daoSurvey.save(survey);
 		System.out.println(survey);
-		return("redirect:/home");
+		return("redirect:/home");}
+		return "";
 	}
 
 	public void nextTurn() {
@@ -395,11 +401,11 @@ public class BattleFieldController {
 		model.addAttribute("hpb2", (deckAI.get(0).getLife() + deckAI.get(1).getLife() + deckAI.get(2).getLife()) * 100 / maxhp2);
 
 		if(def==1) {model.addAttribute("cursor", "'assets/img/battlefield/cursor/shield.ico'");
-		model.addAttribute("cursorai", "not-allowed");
-		model.addAttribute("cursorch", "url('assets/img/battlefield/cursor/shield.ico')");}
+		model.addAttribute("cursorai", " ");
+		model.addAttribute("cursorch", "url('assets/img/battlefield/cursor/shield.ico'), ");}
 		else if(def==0) {model.addAttribute("cursor", "'assets/img/battlefield/cursor/epeg.ico'");
-		model.addAttribute("cursorai", "url('assets/img/battlefield/cursor/eped.ico')");
-		model.addAttribute("cursorch", "not-allowed");}
+		model.addAttribute("cursorai", "url('assets/img/battlefield/cursor/eped.ico'), ");
+		model.addAttribute("cursorch", " ");}
 
 		model.addAttribute("deckH", deckHAff);
 		model.addAttribute("deckAI", deckAIAff);
@@ -410,14 +416,12 @@ public class BattleFieldController {
 		else {model.addAttribute("disc2", "dead");}
 		if(deckHAff.get(2).getLife()>0) {model.addAttribute("disc3", "alive");}
 		else {model.addAttribute("disc3", "dead");}
-		if(deckAIAff.get(0).getLife()>0 && !boss) {model.addAttribute("disc4", "alive");}
+		if(deckAIAff.get(0).getLife()>0) {model.addAttribute("disc4", "alive");}
 		else {model.addAttribute("disc4", "dead");}
 		if(deckAIAff.get(1).getLife()>0 && !boss) {model.addAttribute("disc5", "alive");}
 		else {model.addAttribute("disc5", "dead");}
 		if(deckAIAff.get(2).getLife()>0 && !boss) {model.addAttribute("disc6", "alive");}
 		else {model.addAttribute("disc6", "dead");}
-		if(boss) {model.addAttribute("discBoss", "visible");}
-		else {model.addAttribute("discBoss", "hidden");}
 
 		String idCardDef = Integer.toString(h.getCardProtected(deckH));
 		String idCardAtk = Integer.toString(i+1);
