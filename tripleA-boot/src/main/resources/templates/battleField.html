@@ -10,7 +10,7 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 </bootstrap>
 
 <body id="battle">
-	<form method="POST" action="BattleField" id="form">
+	<form method="POST" action="BattleField" id="formBattle">
 
 		<div class="row" id="top">
 			<div class="col-2">
@@ -301,6 +301,7 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 		</div>
 		<img class="shockWave" id="shockWave" src="assets/img/battlefield/shockWave.gif">
 		<img class="teleport" id="teleport" src="assets/img/battlefield/essai2.gif">
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 	</form>
 	<div class="modal fade" id="modalClose" tabindex="-1" role="dialog" aria-labelledby="closeModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document" id="modal">
@@ -351,36 +352,36 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="modal-body">
-					<form class="was-validated" method="POST" action="valideSurvey" id="formSurvey">
+				<form class="was-validated" method="POST" action="valideSurvey" id="formSurvey">
+					<div class="modal-body">
 						<fieldset>
 						<legend>Informations personnelles</legend>
 							<div class="form-row">
 								<div class="custom-control custom-radio custom-control-inline">
-									<input class="custom-control-input" name="survey.genre" type="radio" value="femme" id="femme" required>
+									<input class="custom-control-input" name="genre" type="radio" value="femme" id="femme" required>
 									<label class="custom-control-label" for="femme">Femme</label>
 								</div>
 								<div class="custom-control custom-radio custom-control-inline">
-									<input class="custom-control-input" name="survey.genre" type="radio" value="homme" id="homme" required>
+									<input class="custom-control-input" name="genre" type="radio" value="homme" id="homme" required>
 									<label class="custom-control-label" for="homme">Homme</label>
 								</div>
 								<div class="custom-control custom-radio custom-control-inline">
-									<input class="custom-control-input" name="survey.genre" type="radio" value="nonBinaire" id="nonBinaire" required>
+									<input class="custom-control-input" name="genre" type="radio" value="nonBinaire" id="nonBinaire" required>
 									<label class="custom-control-label" for="nonBinaire">Non binaire</label>
 								</div>
 								<div class="custom-control custom-radio custom-control-inline">
-									<input class="custom-control-input" name="survey.genre" type="radio" value="jeNeSaisPas" id="jeNeSaisPas" required>
+									<input class="custom-control-input" name="genre" type="radio" value="jeNeSaisPas" id="jeNeSaisPas" required>
 									<label class="custom-control-label" for=jeNeSaisPas>Je ne sais pas</label>
 								</div>
 							</div>
 							<div class="form-row">	
 								<div class="col">	
 									<label for="age">Age</label>
-									<input class="form-control" name="survey.age" id="age" placeholder="saisir age" type="number" min="5" max="110" step="1" required/>
+									<input class="form-control" name="age" id="age" placeholder="saisir age" type="number" min="5" max="110" step="1" required/>
 								</div>
 								<div class="col">
 									<label for="support">Support</label>
-									<select name="survey.support" id="support" class="custom-select" required>
+									<select name="support" id="support" class="custom-select" required>
 										<option value="">Choisir...</option>
 										<option value="ordinateur">Ordinateur</option>
 										<option value="console">Console</option>
@@ -391,11 +392,11 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 							<div class="form-row">
 								<div class="col">
 									<label for="ville">Ville</label>
-									<input class="form-control" type="text" name="survey.ville" id="ville" placeholder="saisir ville" required>
+									<input class="form-control" type="text" name="ville" id="ville" placeholder="saisir ville" required>
 								</div>
 								<div class="col">
 									<label for="pays">Pays</label>
-									<input class="form-control" type="text" name="survey.pays" id="pays" placeholder="saisir pays" required>
+									<input class="form-control" type="text" name="pays" id="pays" placeholder="saisir pays" required>
 								</div>
 							</div>
 						</fieldset>
@@ -406,23 +407,23 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 							</div>
 							<div class="form-row">
 								<div class="custom-control custom-radio custom-control-inline">
-									<input class="custom-control-input" name="survey.note" type="radio" value="1" id="note1" required>
+									<input class="custom-control-input" name="note" type="radio" value="1" id="note1" required>
 									<label class="custom-control-label" for="note1">1</label>
 								</div>
 								<div class="custom-control custom-radio custom-control-inline">
-									<input class="custom-control-input" name="survey.note" type="radio" value="2" id="note2" required>
+									<input class="custom-control-input" name="note" type="radio" value="2" id="note2" required>
 									<label class="custom-control-label" for="note2">2</label>
 								</div>
 								<div class="custom-control custom-radio custom-control-inline">
-									<input class="custom-control-input" name="survey.note" type="radio" value="3" id="note3" required>
+									<input class="custom-control-input" name="note" type="radio" value="3" id="note3" required>
 									<label class="custom-control-label" for="note3">3</label>
 								</div>
 								<div class="custom-control custom-radio custom-control-inline">
-									<input class="custom-control-input" name="survey.note" type="radio" value="4" id="note4" required>
+									<input class="custom-control-input" name="note" type="radio" value="4" id="note4" required>
 									<label class="custom-control-label" for="note4">4</label>
 								</div>
 								<div class="custom-control custom-radio custom-control-inline">
-									<input class="custom-control-input" name="survey.note" type="radio" value="5" id="note5" required>
+									<input class="custom-control-input" name="note" type="radio" value="5" id="note5" required>
 									<label class="custom-control-label" for="note5">5</label>
 								</div>
 							</div>
@@ -431,11 +432,11 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 							</div>
 							<div class="form-row">
 								<div class="custom-control custom-radio custom-control-inline">
-									<input class="custom-control-input" name="survey.ressenti" type="radio" value="tropFacile"  id="tropFacile" required>
+									<input class="custom-control-input" name="ressenti" type="radio" value="tropFacile"  id="tropFacile" required>
 									<label class="custom-control-label" for="tropFacile">Trop facile</label>
 								</div>
 								<div class="custom-control custom-radio custom-control-inline">
-									<input class="custom-control-input" name="survey.ressenti" type="radio" value="facile" id="facile" required>
+									<input class="custom-control-input" name="ressenti" type="radio" value="facile" id="facile" required>
 									<label class="custom-control-label" for="facile">Facile</label>
 								</div>
 								<div class="custom-control custom-radio custom-control-inline">
@@ -443,48 +444,33 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 									<label class="custom-control-label" for="equilibree">Equilibrée</label>
 								</div>
 								<div class="custom-control custom-radio custom-control-inline">
-									<input class="custom-control-input" name="survey.ressenti" type="radio" value="difficile" id="difficile" required>
+									<input class="custom-control-input" name="ressenti" type="radio" value="difficile" id="difficile" required>
 									<label class="custom-control-label" for="difficile">Difficile</label>
 								</div>
 								<div class="custom-control custom-radio custom-control-inline">
-									<input class="custom-control-input" name="survey.ressenti" type="radio" value="hardcore" id="hardcore" required>
+									<input class="custom-control-input" name="ressenti" type="radio" value="hardcore" id="hardcore" required>
 									<label class="custom-control-label" for="hardcore">Hardcore</label>
 								</div>
 							</div>
 						</fieldset>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal" id="annulerSurvey">Annuler</button>
-					<input type="button" class="btn btn-primary" id="validSurvey"  value="valider">
-				</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal" id="annulerSurvey">Annuler</button>
+						<input type="button" class="btn btn-primary" id="validSurvey"  value="valider">
+					</div>
+					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+				</form>
 			</div>
 		</div>
 	</div>
-</body>
-
-<script>
+	
+	<script>
 	//test
 	var buttonTest = document.getElementById("test");
 	buttonTest.onclick=lauchSurvey;
-	
-	function bossEntrance() {
-		if([[${session.turn}]]==0 && [[${session.boss}]]==1) {
-			let bJ=document.getElementById("cBoss");
-			let tele=document.getElementById("teleport");
-			let src = 'assets/img/battlefield/essai2.gif';
-			let t=2500;
-			
-			bJ.style.display="none";
-			
-			setTimeout(() => { initGif('#teleport', src); teleport.style.visibility="visible"; soundCW(); },0+t);
-			setTimeout(() => { tele.style.visibility="hidden"; },1400+t);
-			setTimeout(() => { bJ.style.display="inline"; },500+t);
-			
-		}
-	}
-	
 	//fin test
+	
+	
 	var idth1=0; var idth2=0; var idth3=0;
 	var idth4=0; var idth5=0; var idth6=0;
 	
@@ -507,19 +493,21 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 	}
 
 	function initCard(){
-		var endG = document.getElementById("endGame");
-		var end = endG.value;
+		let endG = document.getElementById("endGame");
+		let end = endG.value;
 		if(end!="win" && end!="lose") {
 			$('input[type="image"]').on('click', function() {
 				let idCard = $(this).attr('idCard');
 				$('#c').val(idCard);
-				console.log(idCard)
 				
 				$.ajax({
 					type : 'POST',
 					processData : false,
 					contentType : false,
 					url : "battle?c=" + idCard,
+					data: {
+						_csrf: "[[${_csrf.token}]]"
+					},
 					success : function(resp) {
 						
 						let container = $('<div />');
@@ -546,6 +534,7 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 							container.find('#divBoss').html()
 						)
 						
+						submit()
 						effetAtk()
 						affDmg()
 						cardEffect()
@@ -557,11 +546,14 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 			});
 		}
 	}
-	$("form").submit(function(e){
-		console.log('form submit')
-		e.preventDefault();
-		return false;
-	});
+	
+	function submit() {
+		$("#formBattle").submit(function(e){
+			console.log('form submit')
+			e.preventDefault();
+			return false;});
+		
+	}
 
 
 	function setVolume() {
@@ -601,6 +593,21 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 		sCW.play();
 	}
 	
+	function bossEntrance() {
+		if([[${session.turn}]]==0 && [[${session.boss}]]==1) {
+			let bJ=document.getElementById("cBoss");
+			let tele=document.getElementById("teleport");
+			let src = 'assets/img/battlefield/essai2.gif';
+			let t=2500;
+			
+			bJ.style.display="none";
+			
+			setTimeout(() => { initGif('#teleport', src); teleport.style.visibility="visible"; soundCW(); },0+t);
+			setTimeout(() => { tele.style.visibility="hidden"; },1400+t);
+			setTimeout(() => { bJ.style.display="inline"; },500+t);
+			
+		}
+	}
 	
 	function animSang(sang) {
 		sang.style.transition = "all 0.5s linear 0.01s";
@@ -896,11 +903,13 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 			console.log("rien");}
 	}
 	
+	submit()
 	bossEntrance()
 	cardEffect()
 	endGame()
 	initCard()
 	setVolume()
 </script>
-
+	
+</body>
 </html>

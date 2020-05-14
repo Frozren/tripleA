@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="survey")
@@ -16,24 +18,31 @@ public class Survey {
 	protected int id;
 	
 	@Column(name = "genre")
+	@NotBlank
 	protected String genre;
 	
-	@Column(name = "age")
+	@Column(name = "age", nullable = false)
+	@Min(value=5)	
 	protected int age;
 
 	@Column(name = "support")
+	@NotBlank
 	protected String support;
 
 	@Column(name = "ville")
+	@NotBlank
 	protected String ville;
 	
 	@Column(name = "pays")
+	@NotBlank
 	protected String pays;
 	
 	@Column(name = "note")
+	@NotBlank
 	protected int note;
 	
 	@Column(name = "ressenti")
+	@NotBlank
 	protected String ressenti;
 	
 	public Survey() {}

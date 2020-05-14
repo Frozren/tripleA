@@ -293,7 +293,6 @@ public class BattleFieldController {
 		}
 		refresh(model);
 		
-		
 		return"fieldAjax";
 	}
 	
@@ -301,12 +300,11 @@ public class BattleFieldController {
 	public String survey(@Valid @ModelAttribute Survey survey, BindingResult result ) {
 		System.out.println(survey);
 		if (result.hasErrors()) {
-		}
+			return "redirect:/home";}
 		else {
 		daoSurvey.save(survey);
-		System.out.println(survey);
-		return("redirect:/home");}
-		return "";
+		System.out.println(survey);}
+		return "redirect:/home";
 	}
 
 	public void nextTurn() {
