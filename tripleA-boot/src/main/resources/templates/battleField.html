@@ -504,15 +504,11 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 					type : 'POST',
 					processData : false,
 					contentType : false,
-					url : "battle?c=" + idCard,
-					data: {
-						_csrf: "[[${_csrf.token}]]"
-					},
+					url : "battle?c=" + idCard + "&_csrf=[[${_csrf.token}]]",
 					success : function(resp) {
-						
+												
 						let container = $('<div />');
 						container.html(resp);
-						console.log(container);
 						
 						$('#hp1').parent().html(
 							container.find('#hp1').html()
@@ -534,7 +530,7 @@ th:replace="~{layout.html :: layout(~{::body}, ~{::script}, ~{::bootstrap})}">
 							container.find('#divBoss').html()
 						)
 						
-						submit()
+						//submit()
 						effetAtk()
 						affDmg()
 						cardEffect()
