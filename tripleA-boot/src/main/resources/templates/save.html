@@ -24,102 +24,103 @@
 				</tr>
 			</table>
 		</div>
-	</body>
 	
-	<script type="text/javascript" th:inline="javascript">
-		var text = document.getElementById("text");
-		var index = document.getElementById("index");
-		var saveId = document.getElementById("saveId");
-		var suppr = document.getElementById("delete");
-		var arr = new Array();
-		var i = 0;
-		var k = 0;
-		var empty = [[${emptyList}]];
-	
-		window.onclick = select;
-		window.onload = smoothOpening;
+		<script type="text/javascript" th:inline="javascript">
+			var text = document.getElementById("text");
+			var index = document.getElementById("index");
+			var saveId = document.getElementById("saveId");
+			var suppr = document.getElementById("delete");
+			var arr = new Array();
+			var i = 0;
+			var k = 0;
+			var empty = [[${emptyList}]];
 		
-		function smoothOpening() {
-			if (empty){
-				suppr.style.visibility = "hidden";
-				text.innerHTML = "Aucune partie enregistrée !";
-				index.innerHTML = "";
-			} else {
-				arr = [[${player}]];
-				i = arr.length;
-				suppr.style.visibility = "visible";
-				text.innerHTML = "Partie de " + arr[k].name;
-				index.innerHTML = (k+1) + "/" + i;
+			window.onclick = select;
+			window.onload = smoothOpening;
+			
+			function smoothOpening() {
+				if (empty){
+					suppr.style.visibility = "hidden";
+					text.innerHTML = "Aucune partie enregistrée !";
+					index.innerHTML = "";
+				} else {
+					arr = [[${player}]];
+					i = arr.length;
+					suppr.style.visibility = "visible";
+					text.innerHTML = "Partie de " + arr[k].name;
+					index.innerHTML = (k+1) + "/" + i;
+				}
+				bodyOp(0);
+				bodyOpTimer(0);
 			}
-			bodyOp(0);
-			bodyOpTimer(0);
-		}
-	
-		function bodyOp(num) {
-			document.body.style.opacity = num/100;
-		}
-	
-		function bodyOpTimer(num) {
-			if (num <= 100) {
-				bodyOp(num);
-				num += 4;
-				window.setTimeout("bodyOpTimer("+num+")", 100);
-			}
-		}
 		
-		function select(e){
-			if (!empty){
-				if (e.target.id == "imgPrev"){
-					k--;
-				} else if (e.target.id == "imgNext"){
-					k++;
-				} else if (e.target.id == "logoHome"){
-					window.location.href = "home";
-				} else if (e.target.id == "text"){
-					saveId.value = k;
-					document.forms["myform"].submit();
-				}
-				
-				if (k > (i-1)){
-					k = 0;
-				} else if (k < 0){
-					k = (i-1);
-				}
-				text.innerHTML = "Partie de " + arr[k].name;
-				index.innerHTML = (k+1) + "/" + i;
-			} else {
-				if (e.target.id == "logoHome" || e.target.id == "text"){
-					window.location.href = "home";
+			function bodyOp(num) {
+				document.body.style.opacity = num/100;
+			}
+		
+			function bodyOpTimer(num) {
+				if (num <= 100) {
+					bodyOp(num);
+					num += 4;
+					window.setTimeout("bodyOpTimer("+num+")", 100);
 				}
 			}
-		}
-		
-		$("#delete").click(function() {
-			if (confirm("Êtes-vous sûr de vouloir supprimer la partie de " + arr[k].name)){
-				$.ajax({
-					type : 'POST',
-					data : {
-						saveId : k,
-						suppression : "true"
-						},
-					success : function(){
-						arr.splice(k,1);
-						i--;
-						k = 0;
-						
-						if (i == 0){
-							text.innerHTML = "Aucune partie enregistrée !";
-							index.innerHTML = "";
-							suppr.style.visibility = "hidden";
-							empty = true;
-						} else {
-							suppr.style.visibility = "visible";
-							text.innerHTML = "Partie de " + arr[k].name;
-							index.innerHTML = (k+1) + "/" + i;
-						}
+			
+			function select(e){
+				if (!empty){
+					if (e.target.id == "imgPrev"){
+						k--;
+					} else if (e.target.id == "imgNext"){
+						k++;
+					} else if (e.target.id == "logoHome"){
+						window.location.href = "home";
+					} else if (e.target.id == "text"){
+						saveId.value = k;
+						document.forms["myform"].submit();
 					}
-				});
+					
+					if (k > (i-1)){
+						k = 0;
+					} else if (k < 0){
+						k = (i-1);
+					}
+					text.innerHTML = "Partie de " + arr[k].name;
+					index.innerHTML = (k+1) + "/" + i;
+				} else {
+					if (e.target.id == "logoHome" || e.target.id == "text"){
+						window.location.href = "home";
+					}
+				}
 			}
-		});
-	</script>
+			
+			$("#delete").click(function() {
+				if (confirm("Êtes-vous sûr de vouloir supprimer la partie de " + arr[k].name)){
+					$.ajax({
+						type : 'POST',
+						data : {
+							saveId : k,
+							suppression : "true",
+							_csrf : "[[${_csrf.token}]]"
+							},
+						success : function(){
+							arr.splice(k,1);
+							i--;
+							k = 0;
+							
+							if (i == 0){
+								text.innerHTML = "Aucune partie enregistrée !";
+								index.innerHTML = "";
+								suppr.style.visibility = "hidden";
+								empty = true;
+							} else {
+								suppr.style.visibility = "visible";
+								text.innerHTML = "Partie de " + arr[k].name;
+								index.innerHTML = (k+1) + "/" + i;
+							}
+						}
+					});
+				}
+			});
+		</script>
+	</body>
 </html>

@@ -75,171 +75,171 @@
 			<input type="hidden" name="logout" value="Sign Out" />
 			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 		</form>
-	</body>
-	
-	<script type="text/javascript">
-		var reset = document.getElementById("reset");
-		var audio = document.getElementById("Audio");
-		var tri = document.getElementById("tri");
-		var toptier1 = document.getElementById("toptier1");
-		var toptier2 = document.getElementById("toptier2");
-		var toptier3 = document.getElementById("toptier3");
-		var empty = [[${emptyHistory}]];
-		var scores = [" Dégâts infligés ", " Dégâts reçus ", " Nombre de victoires "];
-		var a = 1;
-		var b = 1;
-		var i = 0;
-		var flecheBool = false;
-		var col = "colDate";
-		var button = document.getElementById("connectAdmin");
-		var password = document.getElementById("password");
-		
-		window.onload = smoothOpening;
-		window.onclick = menu;
-		window.onkeydown = musique;
-		
-		function smoothOpening() {
-			audio.volume = [[${session.musicVol}]];
-			if ("[[${#authentication.name}]]" == "admin"){
-				connectAdmin.innerHTML = "Log Out";
-			}
-			bodyOp(0);
-			bodyOpTimer(0);
-			if (!empty){
-				histo();
-			}
-		}
-		
-		function musique(event){
-			var key = event.keyCode;
-			if (key == 32){
-				if (i == 0){
-					audio.pause();
-					i = 1;
-				} else {
-					audio.play();
-					i = 0;
+
+		<script type="text/javascript">
+			var reset = document.getElementById("reset");
+			var audio = document.getElementById("Audio");
+			var tri = document.getElementById("tri");
+			var toptier1 = document.getElementById("toptier1");
+			var toptier2 = document.getElementById("toptier2");
+			var toptier3 = document.getElementById("toptier3");
+			var empty = [[${emptyHistory}]];
+			var scores = [" Dégâts infligés ", " Dégâts reçus ", " Nombre de victoires "];
+			var a = 1;
+			var b = 1;
+			var i = 0;
+			var flecheBool = false;
+			var col = "colDate";
+			var button = document.getElementById("connectAdmin");
+			var password = document.getElementById("password");
+			
+			window.onload = smoothOpening;
+			window.onclick = menu;
+			window.onkeydown = musique;
+			
+			function smoothOpening() {
+				audio.volume = [[${session.musicVol}]];
+				if ("[[${#authentication.name}]]" == "admin"){
+					connectAdmin.innerHTML = "Log Out";
+				}
+				bodyOp(0);
+				bodyOpTimer(0);
+				if (!empty){
+					histo();
 				}
 			}
-		}
-		
-		function histo(){
-			if (b%6 != 0){
-				points();
-				b++;
-			} else {
-				tri.innerHTML = scores[a];
-				
-				if (a == 0){
-					if (!empty){
-						toptier2.style.display = "none";
-						toptier3.style.display = "none";
-						toptier1.style.display = "block";
-						a++;
+			
+			function musique(event){
+				var key = event.keyCode;
+				if (key == 32){
+					if (i == 0){
+						audio.pause();
+						i = 1;
+					} else {
+						audio.play();
+						i = 0;
 					}
-				} else if (a == 1){
-					toptier1.style.display = "none";
-					toptier3.style.display = "none";
-					toptier2.style.display = "block";
-					a++;
-				} else if (a == 2){
-					toptier1.style.display = "none";
-					toptier2.style.display = "none";
-					toptier3.style.display = "block";
-					a = 0;
 				}
-				b = 1;
 			}
-			window.setTimeout(histo, 1000);
-		}
+			
+			function histo(){
+				if (b%6 != 0){
+					points();
+					b++;
+				} else {
+					tri.innerHTML = scores[a];
+					
+					if (a == 0){
+						if (!empty){
+							toptier2.style.display = "none";
+							toptier3.style.display = "none";
+							toptier1.style.display = "block";
+							a++;
+						}
+					} else if (a == 1){
+						toptier1.style.display = "none";
+						toptier3.style.display = "none";
+						toptier2.style.display = "block";
+						a++;
+					} else if (a == 2){
+						toptier1.style.display = "none";
+						toptier2.style.display = "none";
+						toptier3.style.display = "block";
+						a = 0;
+					}
+					b = 1;
+				}
+				window.setTimeout(histo, 1000);
+			}
+			
+			function points(){
+				tri.innerHTML = "•" + tri.textContent + "•";
+			}
 		
-		function points(){
-			tri.innerHTML = "•" + tri.textContent + "•";
-		}
-	
-		function bodyOp(num) {
-			document.body.style.opacity = num/100;
-		}
-	
-		function bodyOpTimer(num) {
-			if (num <= 100) {
-				bodyOp(num);
-				num += 4;
-				window.setTimeout("bodyOpTimer("+num+")", 100);
+			function bodyOp(num) {
+				document.body.style.opacity = num/100;
 			}
-		}
-	
-		function menu(e) {
-			let id = e.target.id;
-			if (id == "newGame" || id == "save" || id == "options"){
-				window.location.href = id;
-			} else if (id.includes("col")){
-				triHistory(id);
-			} else if (id == "reset"){
-				if (confirm("Voulez-vous vraiment supprimer l'historique ?")){
-					window.location.href = "/home/resetHisto";
-				}
-			} else if (id == "leave"){
-				if (confirm("Voulez-vous vraiment quitter ?")){
-					window.location.href = "https://www.google.com/";
-				}
-			} else if (id == "connectAdmin"){
-				connect();
-			}
-		}
 		
-		function triHistory(colonne){
-			let x = document.getElementById("tableTitles").querySelectorAll("a");
-			
-			for (k = 0; k < x.length; k++) {
-				x[k].innerHTML = x[k].id.substring(3);
-				x[k].style.color = "#c8c8c8";
+			function bodyOpTimer(num) {
+				if (num <= 100) {
+					bodyOp(num);
+					num += 4;
+					window.setTimeout("bodyOpTimer("+num+")", 100);
+				}
+			}
+		
+			function menu(e) {
+				let id = e.target.id;
+				if (id == "newGame" || id == "save" || id == "options"){
+					window.location.href = id;
+				} else if (id.includes("col")){
+					triHistory(id);
+				} else if (id == "reset"){
+					if (confirm("Voulez-vous vraiment supprimer l'historique ?")){
+						window.location.href = "/home/resetHisto";
+					}
+				} else if (id == "leave"){
+					if (confirm("Voulez-vous vraiment quitter ?")){
+						window.location.href = "https://www.google.com/";
+					}
+				} else if (id == "connectAdmin"){
+					connect();
+				}
 			}
 			
-			document.getElementById(colonne).style.color = "#b30000";
-			
-			fetch('history-ajax', {
-				method: 'POST',
-				body: colonne,
-				headers: {
-					'X-CSRF-Token': "[[${_csrf.token}]]",
-					'Content-Type': 'application/json'
+			function triHistory(colonne){
+				let x = document.getElementById("tableTitles").querySelectorAll("a");
+				
+				for (k = 0; k < x.length; k++) {
+					x[k].innerHTML = x[k].id.substring(3);
+					x[k].style.color = "#c8c8c8";
 				}
-			})
-			.then(resp => resp.text())
-			.then(historyHtml => {
-				document.querySelector('tbody').innerHTML = historyHtml;
-			});
-			console.log(col, colonne);
-			if (col == colonne){
-				if (flecheBool){
+				
+				document.getElementById(colonne).style.color = "#b30000";
+				
+				fetch('history-ajax', {
+					method: 'POST',
+					body: colonne,
+					headers: {
+						'X-CSRF-Token': "[[${_csrf.token}]]",
+						'Content-Type': 'application/json'
+					}
+				})
+				.then(resp => resp.text())
+				.then(historyHtml => {
+					document.querySelector('tbody').innerHTML = historyHtml;
+				});
+				console.log(col, colonne);
+				if (col == colonne){
+					if (flecheBool){
+						var fleche = "↓";
+						flecheBool = false;
+					} else {
+						var fleche = "↑";
+						flecheBool = true;
+					}
+				} else {
 					var fleche = "↓";
 					flecheBool = false;
-				} else {
-					var fleche = "↑";
-					flecheBool = true;
 				}
-			} else {
-				var fleche = "↓";
-				flecheBool = false;
+				
+				col = colonne;
+				
+				document.getElementById(colonne).innerHTML += "&nbsp;" + fleche;
 			}
 			
-			col = colonne;
-			
-			document.getElementById(colonne).innerHTML += "&nbsp;" + fleche;
-		}
-		
-		function connect(){
-			if ("[[${#authentication.name}]]" != "admin"){
-				var mdp = prompt("Veuillez renseigner votre mot de passe:", "**********");
-				
-				password.value = mdp;
-				console.log(password.value);
-				
-				document.forms["myform"].submit();
-			} else {
-				document.forms["myformLogout"].submit();
+			function connect(){
+				if ("[[${#authentication.name}]]" != "admin"){
+					var mdp = prompt("Veuillez renseigner votre mot de passe:", "**********");
+					
+					password.value = mdp;
+					console.log(password.value);
+					
+					document.forms["myform"].submit();
+				} else {
+					document.forms["myformLogout"].submit();
+				}
 			}
-		}
-	</script>
+		</script>
+	</body>
 </html>

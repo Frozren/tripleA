@@ -60,6 +60,7 @@
 			<div>
 				<form id="myform" method="POST" action="matchup">
 					<input type="hidden" value="" id="choicePos" name="choicePos"/>
+					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 					<a id="continue">FIGHT<br>>></a>
 				</form>
 			</div>
@@ -85,138 +86,138 @@
 		<audio id="Audio0" style="display: none;">
 			<source src="assets/sound/SEFight.mp3" type="audio/mp3">
 		</audio>
-	</body>
 
-	<script type="text/javascript">
-		var matchup = document.getElementById("matchup");
-		var decompte = document.getElementById("decompte");
-		var decText = document.getElementById("decText");
-		var explo = document.getElementById("explo");
-		var card1 = document.getElementById("card1");
-		var card2 = document.getElementById("card2");
-		var card3 = document.getElementById("card3");
-		var choicePos = document.getElementById("choicePos");
-		var audio0 = document.getElementById("Audio0");
-		var audio1 = document.getElementById("Audio1");
-		var audio2 = document.getElementById("Audio2");
-		var audio3 = document.getElementById("Audio3");
-		var danger = document.getElementById("danger");
-		var phase = [[${phase}]];
-		var card = 0;
-		var i = 3;
-		var echap = false;
-	
-		window.onload = smoothOpening;
-		window.onclick = select;
-		window.onkeydown = skip;
+		<script type="text/javascript">
+			var matchup = document.getElementById("matchup");
+			var decompte = document.getElementById("decompte");
+			var decText = document.getElementById("decText");
+			var explo = document.getElementById("explo");
+			var card1 = document.getElementById("card1");
+			var card2 = document.getElementById("card2");
+			var card3 = document.getElementById("card3");
+			var choicePos = document.getElementById("choicePos");
+			var audio0 = document.getElementById("Audio0");
+			var audio1 = document.getElementById("Audio1");
+			var audio2 = document.getElementById("Audio2");
+			var audio3 = document.getElementById("Audio3");
+			var danger = document.getElementById("danger");
+			var phase = [[${phase}]];
+			var card = 0;
+			var i = 3;
+			var echap = false;
 		
-		function smoothOpening() {
-			if (phase == 2){
-				danger.style.display = "block";
+			window.onload = smoothOpening;
+			window.onclick = select;
+			window.onkeydown = skip;
+			
+			function smoothOpening() {
+				if (phase == 2){
+					danger.style.display = "block";
+				}
+				
+				decompte.style.display = "none";
+				explo.style.display = "none";
+				audio0.volume = [[${session.musicVol}]];
+				audio1.volume = [[${session.musicVol}]];
+				audio2.volume = [[${session.musicVol}]];
+				audio3.volume = [[${session.musicVol}]];
+				bodyOp(0);
+				bodyOpTimer(0);
+			}
+	
+			function bodyOp(num) {
+				document.body.style.opacity = num/100;
+			}
+	
+			function bodyOpTimer(num) {
+				if (num <= 100) {
+					bodyOp(num);
+					num += 4;
+					window.setTimeout("bodyOpTimer("+num+")", 100);
+				}
+			}
+	
+			function select(e){
+				if (e.target.id == "logoHome"){
+					window.location.href = "home";
+				} else if (e.target.id == "card1"){
+					card1.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 10px #00e4ff)");
+					card2.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #00e4ff)");
+					card3.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #00e4ff)");
+					card = 1;
+				} else if (e.target.id == "card2"){
+					card1.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #00e4ff)");
+					card2.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 10px #00e4ff)");
+					card3.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #00e4ff)");
+					card = 2;
+				} else if (e.target.id == "card3"){
+					card1.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #00e4ff)");
+					card2.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #00e4ff)");
+					card3.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 10px #00e4ff)");
+					card = 3;
+				} else if (e.target.id == "continue"){
+					if (card == 0){
+						alert("Choisir votre carte à distance !");
+					} else if (echap){
+						explosion();
+					} else {
+						decText.style.transition = "all 1.5s";
+						matchup.style.display = "none";
+						decText.innerHTML = i;
+						decompte.style.display = "block";
+						window.setTimeout(countDown, 100);
+					}
+				}
 			}
 			
-			decompte.style.display = "none";
-			explo.style.display = "none";
-			audio0.volume = [[${session.musicVol}]];
-			audio1.volume = [[${session.musicVol}]];
-			audio2.volume = [[${session.musicVol}]];
-			audio3.volume = [[${session.musicVol}]];
-			bodyOp(0);
-			bodyOpTimer(0);
-		}
-
-		function bodyOp(num) {
-			document.body.style.opacity = num/100;
-		}
-
-		function bodyOpTimer(num) {
-			if (num <= 100) {
-				bodyOp(num);
-				num += 4;
-				window.setTimeout("bodyOpTimer("+num+")", 100);
+			function skip(event){
+				var key = event.keyCode;
+				if (key == 27){
+					echap = true;
+				}
 			}
-		}
-
-		function select(e){
-			if (e.target.id == "logoHome"){
-				window.location.href = "home";
-			} else if (e.target.id == "card1"){
-				card1.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 10px #00e4ff)");
-				card2.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #00e4ff)");
-				card3.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #00e4ff)");
-				card = 1;
-			} else if (e.target.id == "card2"){
-				card1.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #00e4ff)");
-				card2.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 10px #00e4ff)");
-				card3.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #00e4ff)");
-				card = 2;
-			} else if (e.target.id == "card3"){
-				card1.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #00e4ff)");
-				card2.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 0px #00e4ff)");
-				card3.style.setProperty("-webkit-filter", "drop-shadow(0px 0px 10px #00e4ff)");
-				card = 3;
-			} else if (e.target.id == "continue"){
-				if (card == 0){
-					alert("Choisir votre carte à distance !");
-				} else if (echap){
-					explosion();
+			
+			function countDown(){
+				decText.style.transition = "all 1.5s";
+				decText.style.fontSize = "20vw";
+				if (i != 0){
+					if (i == 3){
+						audio3.play();
+					} else if (i == 2){
+						audio2.play();
+					} else {
+						audio1.play();
+					}
+					window.setTimeout(displayOFF, 2000);
 				} else {
-					decText.style.transition = "all 1.5s";
-					matchup.style.display = "none";
+					audio0.play();
+					window.setTimeout(explosion, 840);
+				}
+			}
+			
+			function explosion(){
+				explo.style.display = "none";
+				window.setTimeout(function(){choicePos.value = card; document.forms["myform"].submit();}, 1000);
+			}
+			
+			function displayON(){
+				decompte.style.visibility = "visible";
+				window.setTimeout(countDown, 100);
+			}
+			
+			function displayOFF(){
+				decText.style.transition = "all 0s";
+				decompte.style.visibility = "hidden";
+				i--;
+				if (i != 0){
 					decText.innerHTML = i;
-					decompte.style.display = "block";
-					window.setTimeout(countDown, 100);
-				}
-			}
-		}
-		
-		function skip(event){
-			var key = event.keyCode;
-			if (key == 27){
-				echap = true;
-			}
-		}
-		
-		function countDown(){
-			decText.style.transition = "all 1.5s";
-			decText.style.fontSize = "20vw";
-			if (i != 0){
-				if (i == 3){
-					audio3.play();
-				} else if (i == 2){
-					audio2.play();
 				} else {
-					audio1.play();
+					decText.innerHTML = "¡ FIGHT !";
+					explo.style.display = "block";
 				}
-				window.setTimeout(displayOFF, 2000);
-			} else {
-				audio0.play();
-				window.setTimeout(explosion, 840);
+				decText.style.fontSize = "1vw";
+				displayON();
 			}
-		}
-		
-		function explosion(){
-			explo.style.display = "none";
-			window.setTimeout(function(){choicePos.value = card; document.forms["myform"].submit();}, 1000);
-		}
-		
-		function displayON(){
-			decompte.style.visibility = "visible";
-			window.setTimeout(countDown, 100);
-		}
-		
-		function displayOFF(){
-			decText.style.transition = "all 0s";
-			decompte.style.visibility = "hidden";
-			i--;
-			if (i != 0){
-				decText.innerHTML = i;
-			} else {
-				decText.innerHTML = "¡ FIGHT !";
-				explo.style.display = "block";
-			}
-			decText.style.fontSize = "1vw";
-			displayON();
-		}
-	</script>
+		</script>
+	</body>
 </html>

@@ -28,88 +28,88 @@
 		<audio id="Audio" style="display: none;">
 			<source src="assets/sound/prologue.mp3" type="audio/mp3">
 		</audio>
+	
+		<script type="text/javascript">
+			var playButton = document.getElementById("play");
+			var avant = document.getElementById("avant");
+			var apres = document.getElementById("apres");
+			var audio = document.getElementById("Audio");
+			var echapDisp = document.getElementById("echap");
+			var sound = document.getElementById("sound");
+			var jordan = document.getElementById("jordan");
+			var i = 0;
+			var j = 0;
+			var k = 0;
+			
+			window.onload = load;
+			window.onkeydown = echap;
+			audio.onended = timer;
+			playButton.onmouseover = changeImg;
+			playButton.onmouseout = changeImg;
+			playButton.onclick = next;
+			
+			function load(){
+				document.documentElement.style.background = "none";
+				document.documentElement.style.backgroundColor = "black";
+			}
+			
+			function changeImg(){
+				if (k == 0){
+					playButton.setAttribute('src', 'assets/img/home/logoPlay2.png');
+					k = 1;
+				} else {
+					playButton.setAttribute('src', 'assets/img/home/logoPlay1.png');
+					k = 0;
+				}
+			}
+			
+			function next(){
+				audio.volume = 0.05;
+				avant.style.display = "none";
+				apres.style.display = "block";
+				window.setTimeout(play, 6000);
+			}
+			
+			function play(){
+				audio.play();
+				window.setTimeout(image, 26500);
+			}
+			
+			function image(){
+				if (j == 0){
+					jordan.style.visibility = "visible";
+					window.setTimeout(image, 1000);
+					j = 1;
+				} else {
+					jordan.style.visibility = "hidden";
+				}
+			}
+		
+			function timer(){
+				window.setTimeout(function(){window.location.href = ("home")}, 3000);
+			}
+			
+			function echap(event){
+				var key = event.keyCode;
+				if (key == 27){
+					if (i == 0){
+						echapDisp.style.visibility = "visible";
+						i = 1;
+					} else {
+						window.location.href = "home";
+						return false;
+					}
+				} else if (key == 32){
+					if (audio.volume == 0.1){
+						audio.volume = 0;
+						sound.style.visibility = "visible";
+					} else {
+						audio.volume = 0.1;
+						sound.style.visibility = "hidden";
+					}
+				}
+			}
+			
+		</script>
 	</body>
-	
-	<script type="text/javascript">
-		var playButton = document.getElementById("play");
-		var avant = document.getElementById("avant");
-		var apres = document.getElementById("apres");
-		var audio = document.getElementById("Audio");
-		var echapDisp = document.getElementById("echap");
-		var sound = document.getElementById("sound");
-		var jordan = document.getElementById("jordan");
-		var i = 0;
-		var j = 0;
-		var k = 0;
-		
-		window.onload = load;
-		window.onkeydown = echap;
-		audio.onended = timer;
-		playButton.onmouseover = changeImg;
-		playButton.onmouseout = changeImg;
-		playButton.onclick = next;
-		
-		function load(){
-			document.documentElement.style.background = "none";
-			document.documentElement.style.backgroundColor = "black";
-		}
-		
-		function changeImg(){
-			if (k == 0){
-				playButton.setAttribute('src', 'assets/img/home/logoPlay2.png');
-				k = 1;
-			} else {
-				playButton.setAttribute('src', 'assets/img/home/logoPlay1.png');
-				k = 0;
-			}
-		}
-		
-		function next(){
-			audio.volume = 0.05;
-			avant.style.display = "none";
-			apres.style.display = "block";
-			window.setTimeout(play, 6000);
-		}
-		
-		function play(){
-			audio.play();
-			window.setTimeout(image, 26500);
-		}
-		
-		function image(){
-			if (j == 0){
-				jordan.style.visibility = "visible";
-				window.setTimeout(image, 1000);
-				j = 1;
-			} else {
-				jordan.style.visibility = "hidden";
-			}
-		}
-	
-		function timer(){
-			window.setTimeout(function(){window.location.href = ("home")}, 3000);
-		}
-		
-		function echap(event){
-			var key = event.keyCode;
-			if (key == 27){
-				if (i == 0){
-					echapDisp.style.visibility = "visible";
-					i = 1;
-				} else {
-					window.location.href = "home";
-					return false;
-				}
-			} else if (key == 32){
-				if (audio.volume == 0.1){
-					audio.volume = 0;
-					sound.style.visibility = "visible";
-				} else {
-					audio.volume = 0.1;
-					sound.style.visibility = "hidden";
-				}
-			}
-		}
-		
-	</script>
 </html>
