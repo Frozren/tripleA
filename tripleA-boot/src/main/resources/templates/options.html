@@ -351,7 +351,7 @@
 		}
 
 		$('#rotateable').draggable({
-			handle : '#rotate',
+			handle : '#rotateable',
 			opacity : 0.001,
 			helper : 'clone',
 			scroll: false,
@@ -370,8 +370,11 @@
 				
 				if (degree > memDegree){
 					memDegree = degree;
-					if (sound < 100){
+					if (sound < 0.1){
 						sound = sound + 0.0005;
+						if (sound > 1){
+							sound = 1;
+						}
 						$('#volumeBar').css({'width' : sound*1000 + '%'});
 						audio.volume = sound;
 					}
@@ -379,10 +382,14 @@
 					memDegree = degree;
 					if (sound > 0){
 						sound = sound - 0.0005;
+						if (sound < 0){
+							sound = 0;
+						}
 						$('#volumeBar').css({'width' : sound*1000 + '%'});
 						audio.volume = sound;
 					}
 				}
+				console.log(sound);
 			}
 		});
 		
@@ -453,7 +460,7 @@
 			var textLeave = leave(false);
 			if (textLeave != ""){
 				textLeave = "";
-				window.location.href = "/tripleAFront/optionsReset";
+				window.location.href = "/optionsReset";
 			}
 		}
 	</script>

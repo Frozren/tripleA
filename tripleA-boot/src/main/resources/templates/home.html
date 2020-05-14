@@ -24,22 +24,15 @@
 							<th id="tableTitle" colspan="5">HISTORIQUE</th>
 						</tr>
 						<tr id="tableTitles">
-							<th>Date</th>
-							<th>Joueur</th>
-							<th>Étage</th>
-							<th>Dgts infligés</th>
-							<th>Dgts reçus</th>
+							<th><a id="colDate" style="color: #b30000;">Date ↓</a></th>
+							<th><a id="colJoueur">Joueur </a></th>
+							<th><a id="colEtage">Étage </a></th>
+							<th><a id="colInfligés">Infligés </a></th>
+							<th><a id="colReçus">Reçus </a></th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="h : ${history}"
-							th:style="${ 'color: ' + (h.etat == true ? 'green' : 'darkred') }">
-							<td>[[${h.dateEnd}]]</td>
-							<td>[[${h.name}]]</td>
-							<td>[[${h.phase}]]</td>
-							<td>[[${h.dmgDealt}]]</td>
-							<td>[[${h.dmgTaken}]]</td>
-						</tr>
+						<tr th:replace="home-history.html"/>
 					</tbody>
 				</table>
 			</div>
@@ -85,6 +78,8 @@
 		var a = 1;
 		var b = 1;
 		var i = 0;
+		var flecheBool = false;
+		var col = "colDate";
 		
 		window.onload = smoothOpening;
 		window.onclick = menu;
@@ -159,17 +154,60 @@
 		}
 	
 		function menu(e) {
-			if (e.target.id == "newGame" || e.target.id == "save" || e.target.id == "options"){
-				window.location.href = e.target.id;
-			} else if (e.target.id == "reset"){
+			let id = e.target.id;
+			if (id == "newGame" || id == "save" || id == "options"){
+				window.location.href = id;
+			} else if (id.includes("col")){
+				triHistory(id);
+			} else if (id == "reset"){
 				if (confirm("Voulez-vous vraiment supprimer l'historique ?")){
-					window.location.href = "/tripleAFront/home/resetHisto";
+					window.location.href = "/home/resetHisto";
 				}
-			} else if (e.target.id == "leave"){
+			} else if (id == "leave"){
 				if (confirm("Voulez-vous vraiment quitter ?")){
 					window.location.href = "https://www.google.com/";
 				}
 			}
+		}
+		
+		function triHistory(colonne){
+			let x = document.getElementById("tableTitles").querySelectorAll("a");
+			
+			for (k = 0; k < x.length; k++) {
+				x[k].innerHTML = x[k].id.substring(3);
+				x[k].style.color = "#c8c8c8";
+			}
+			
+			document.getElementById(colonne).style.color = "#b30000";
+			
+			fetch('history-ajax', {
+				method: 'POST',
+				body: colonne,
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+			.then(resp => resp.text())
+			.then(historyHtml => {
+				document.querySelector('tbody').innerHTML = historyHtml;
+			});
+			console.log(col, colonne);
+			if (col == colonne){
+				if (flecheBool){
+					var fleche = "↓";
+					flecheBool = false;
+				} else {
+					var fleche = "↑";
+					flecheBool = true;
+				}
+			} else {
+				var fleche = "↓";
+				flecheBool = false;
+			}
+			
+			col = colonne;
+			
+			document.getElementById(colonne).innerHTML += "&nbsp;" + fleche;
 		}
 	</script>
 </html>

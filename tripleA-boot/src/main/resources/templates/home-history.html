@@ -1,0 +1,8 @@
+<tr th:each="h : ${history}"
+	th:style="${ 'color: ' + (h.etat == true ? 'green' : 'darkred') }">
+	<td>[[${h.dateEnd}]]</td>
+	<td>[[${h.name}]]</td>
+	<td>[[${h.phase}]]</td>
+	<td>[[${h.dmgDealt}]]</td>
+	<td>[[${h.dmgTaken}]]</td>
+</tr>

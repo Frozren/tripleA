@@ -256,7 +256,7 @@ input:focus, textarea:focus {
     max-height: 185px;
     overflow-y: scroll;
     /*
-    scroll-snap-type: both mandatory;
+    scroll-snap-type: both mandatory;		//SCROLL QUI S'ARRETE PILE SUR LES LIGNES MAIS PAS TRES FLUIDE
     scroll-padding: 1rem;
     padding: 1rem;
     */
@@ -320,6 +320,11 @@ input:focus, textarea:focus {
 	color: #c8c8c8;
 	text-shadow: 0 0 20px #b00000;
 	height: 40px;
+}
+
+#home #tableTitles a
+{
+	cursor: pointer;
 }
 
 #home table
