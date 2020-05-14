@@ -99,7 +99,8 @@
 				type : 'POST',
 				data : {
 					pseudo : $("#pseudo").val(),
-					suppression : suppression
+					suppression : suppression,
+					_csrf : "[[${_csrf.token}]]"
 					},
 				success : function(resp){
 					if (resp == "Y"){

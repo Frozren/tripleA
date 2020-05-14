@@ -138,4 +138,9 @@ public class HomeController {
 		
 		return "home-history";
 	}
+	
+	@GetMapping("/connect")
+	public String test() {
+		return "connect";
+	}
 }

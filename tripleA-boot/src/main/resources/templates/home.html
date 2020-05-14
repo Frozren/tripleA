@@ -4,6 +4,8 @@
 	
 	<body>
 		<div id="home">
+			<a class="button" id="connectAdmin">Admin</a>
+			<span sec:authentication="name"></span>
 			<div id="logo1"><img src="assets/img/home/logoHaut.png"></div>
 			<div id="menu">
 				<div id="nav">
@@ -17,7 +19,7 @@
 				<div id="logo2"><img src="assets/img/home/logoBas.png"></div>
 			</div>
 			<div id="history">
-				<div id="reset" th:if="${emptyHistory == false}">reset</div>
+				<div id="reset" sec:authorize="hasRole('ADMIN')" th:if="${emptyHistory == false}">reset</div>
 				<table>
 					<thead>
 						<tr>
@@ -64,6 +66,15 @@
 		<audio id="Audio" loop autoplay style="display: none;">
 			<source src="assets/sound/menu_theme.mp3" type="audio/mp3">
 		</audio>
+		<form id="myform" method="POST" action="connect">
+			<input type="hidden" name="username" placeholder="username" value="admin" />
+			<input id="password" type="hidden" name="password" placeholder="password" required />
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+		</form>
+		<form id="myformLogout" method="POST" action="logout">
+			<input type="hidden" name="logout" value="Sign Out" />
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+		</form>
 	</body>
 	
 	<script type="text/javascript">
@@ -80,6 +91,8 @@
 		var i = 0;
 		var flecheBool = false;
 		var col = "colDate";
+		var button = document.getElementById("connectAdmin");
+		var password = document.getElementById("password");
 		
 		window.onload = smoothOpening;
 		window.onclick = menu;
@@ -87,6 +100,9 @@
 		
 		function smoothOpening() {
 			audio.volume = [[${session.musicVol}]];
+			if ("[[${#authentication.name}]]" == "admin"){
+				connectAdmin.innerHTML = "Log Out";
+			}
 			bodyOp(0);
 			bodyOpTimer(0);
 			if (!empty){
@@ -167,6 +183,8 @@
 				if (confirm("Voulez-vous vraiment quitter ?")){
 					window.location.href = "https://www.google.com/";
 				}
+			} else if (id == "connectAdmin"){
+				connect();
 			}
 		}
 		
@@ -184,6 +202,7 @@
 				method: 'POST',
 				body: colonne,
 				headers: {
+					'X-CSRF-Token': "[[${_csrf.token}]]",
 					'Content-Type': 'application/json'
 				}
 			})
@@ -208,6 +227,19 @@
 			col = colonne;
 			
 			document.getElementById(colonne).innerHTML += "&nbsp;" + fleche;
+		}
+		
+		function connect(){
+			if ("[[${#authentication.name}]]" != "admin"){
+				var mdp = prompt("Veuillez renseigner votre mot de passe:", "**********");
+				
+				password.value = mdp;
+				console.log(password.value);
+				
+				document.forms["myform"].submit();
+			} else {
+				document.forms["myformLogout"].submit();
+			}
 		}
 	</script>
 </html>
