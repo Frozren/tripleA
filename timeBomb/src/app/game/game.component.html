@@ -1,1 +1,42 @@
-<p>game works!</p>
+<table id="tableau">
+    <tr class="players" *ngFor="let u of playerFiltered()">
+        <td class="name">{{u.name}}</td>
+        <td class="cards" *ngFor="let c of u.hand">
+            <img class="imgCard" *ngIf="c.revealed && c.type=='BOMB'" 
+            src="../assets/img/cards/cardBomb.png">
+            <img class="imgCard" *ngIf="c.revealed && c.type=='DIFFUSE'" 
+            src="../assets/img/cards/cardDiffuse.png">
+            <img class="imgCard" *ngIf="c.revealed && c.type=='BAIT'" 
+            src="../assets/img/cards/cardBait.png">
+            <img (click)="selectCard()" class="imgCard" *ngIf="!c.revealed" 
+            src="../assets/img/cards/cardBack.png">
+
+        </td>
+    </tr>
+
+</table>
+<table id="tablePlayer">
+    <tr class="players">
+        <td class="cards" *ngFor="let c of match.current.hand">
+            <img class="imgCard" *ngIf="c.type=='BOMB'" 
+            src="../assets/img/cards/cardBomb.png">
+            <img class="imgCard" *ngIf="c.type=='DIFFUSE'" 
+            src="../assets/img/cards/cardDiffuse.png">
+            <img class="imgCard" *ngIf="c.type=='BAIT'" 
+            src="../assets/img/cards/cardBait.png">
+        </td>
+    </tr>
+</table>
+
+<table id="tableRevealed">
+    <tr class="players">
+        <td class="cards" *ngFor="let c of revealCard">
+            <img class="imgCard" *ngIf="c.type=='BOMB'" 
+            src="../assets/img/cards/cardBomb.png">
+            <img class="imgCard" *ngIf="c.type=='DIFFUSE'" 
+            src="../assets/img/cards/cardDiffuse.png">
+            <img class="imgCard" *ngIf="c.type=='BAIT'" 
+            src="../assets/img/cards/cardBait.png">
+        </td>
+    </tr>
+</table>

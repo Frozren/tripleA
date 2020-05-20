@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { ConnectComponent } from './connect/connect.component';
 import { HomeComponent } from './home/home.component';
 import { GameComponent } from './game/game.component';
+import { PlayerPipe } from './player.pipe';
 
 const routes: Routes = [
 	{path: 'connect', component: ConnectComponent},
@@ -22,7 +23,8 @@ const routes: Routes = [
     AppComponent,
     ConnectComponent,
     HomeComponent,
-    GameComponent
+    GameComponent,
+    PlayerPipe
   ],
   imports: [
     BrowserModule,
