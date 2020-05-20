@@ -14,7 +14,6 @@ import fr.formation.model.AI;
 import fr.formation.model.Card;
 import fr.formation.model.Game;
 import fr.formation.model.Human;
-import fr.formation.model.Player;
 
 @Controller
 public class MatchupController {
@@ -62,7 +61,6 @@ public class MatchupController {
 	public String getPosition(@RequestParam int choicePos, HttpSession session) {
 		
 		Human h = Game.getInstance().getHuman();
-		AI ai = Game.getInstance().getAI();
 		
 		int phase = h.getPhase() + 1;
 		h.setPhase(phase);

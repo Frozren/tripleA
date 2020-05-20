@@ -2,8 +2,11 @@ package fr.formation.controller;
 
 import java.util.Optional;
 
+import javax.validation.constraints.Size;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +21,7 @@ import fr.formation.model.Human;
 import fr.formation.model.Player;
 
 @Controller
+@Validated
 public class NewGameController {
 	
 	@Autowired
@@ -58,8 +62,7 @@ public class NewGameController {
 	}
 	
 	@PostMapping("/newGameNext")
-	public String getName(@RequestParam String pseudo, @RequestParam Boolean charge) {
-		
+	public String getName(@RequestParam @Size(min= 3, max = 14, message = "La taille du pseudo doit être entre 3 et 14 !") String pseudo, @RequestParam Boolean charge) {
 		if (!charge) {
 			Human h = Game.getInstance().getHuman();
 			

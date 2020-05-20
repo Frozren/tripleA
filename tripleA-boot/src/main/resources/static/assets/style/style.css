@@ -860,7 +860,7 @@ input:focus, textarea:focus {
 	margin-top: 10px;
 	color: #c8c8c8;
 	font-size: 4vw;
-	text-shadow: 0 0 100px #b00000;
+	text-shadow: 0 0 5vw #b00000;
 	margin-bottom: 1vw;
 }
 
@@ -882,6 +882,7 @@ input:focus, textarea:focus {
 {
 	filter: drop-shadow(0 0 10px white);
 	padding-right: 20px;
+	width: auto;
 	cursor: pointer;
   	-webkit-transform: translate(0);
 	-webkit-animation-name: pulseleft;
@@ -928,6 +929,7 @@ input:focus, textarea:focus {
 #save table #show img
 {
 	width: 100%;
+	min-width: 200px;
 }
 
 #save table #show #myform a

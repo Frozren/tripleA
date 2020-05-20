@@ -101,7 +101,7 @@
 				<input id="formScene" type="hidden" name="formScene" value="6"/>
 				<input id="formMusique" type="hidden" name="formMusique" value="0"/>
 				<input id="formVolume" type="hidden" name="formVolume" value="0.1"/>
-			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 			</form>
 		</div>
 		
@@ -388,15 +388,21 @@
 				var formVolume = document.getElementById("formVolume");
 				
 				formDifficulte.value = difficulty;
+				localStorage.setItem('difficulte', difficulty);
 				formScene.value = image;
+				localStorage.setItem('sceneNum', image);
 				
 				if (check.checked == true){
 					formMusique.value = 0;
+					localStorage.setItem('musicNum', 0);
 				} else {
 					formMusique.value = music;
+					localStorage.setItem('musicNum', music);
 				}
 	
 				formVolume.value = Math.round((sound + Number.EPSILON) * 1000) / 1000;
+				localStorage.setItem('musicVol', Math.round((sound + Number.EPSILON) * 1000) / 1000);
+				
 				document.forms["myform"].submit();
 			}
 			

@@ -46,8 +46,7 @@
 				} else {
 					arr = [[${player}]];
 					i = arr.length;
-					text.innerHTML = "Partie de " + arr[k].name;
-					index.innerHTML = (k+1) + "/" + i;
+					refresh(k);
 				}
 				smoothOpening();
 			}
@@ -70,8 +69,7 @@
 					} else if (k < 0){
 						k = (i-1);
 					}
-					text.innerHTML = "Partie de " + arr[k].name;
-					index.innerHTML = (k+1) + "/" + i;
+					refresh(k);
 				} else {
 					if (e.target.id == "logoHome" || e.target.id == "text"){
 						window.location.href = "home";
@@ -100,13 +98,27 @@
 								empty = true;
 							} else {
 								suppr.style.visibility = "visible";
-								text.innerHTML = "Partie de " + arr[k].name;
-								index.innerHTML = (k+1) + "/" + i;
+								refresh(k);
 							}
 						}
 					});
 				}
 			});
+			
+			function etage(num){
+				if (num == 0){
+					return "Étage 1";
+				} else if (num == 1){
+					return "Étage 2";
+				} else {
+					return "BOSS";
+				}
+			}
+			
+			function refresh(num){
+				text.innerHTML = arr[k].name + " (" + etage(k) + ")";
+				index.innerHTML = (k+1) + "/" + i;
+			}
 		</script>
 	</body>
 </html>

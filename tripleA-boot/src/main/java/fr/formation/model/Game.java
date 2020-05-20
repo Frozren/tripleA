@@ -4,10 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import fr.formation.dao.IDAOCard;
-import fr.formation.dao.IDAOHistory;
-import fr.formation.dao.IDAOPlayer;
-
 public class Game {
 
 	private int passivePoints = 50;

@@ -28,6 +28,13 @@
 		<audio id="Audio" style="display: none;">
 			<source src="assets/sound/prologue.mp3" type="audio/mp3">
 		</audio>
+		<form id="myform" method="POST" action="optionsApply">
+			<input id="formDifficulte" type="hidden" name="formDifficulte" value="2"/>
+			<input id="formScene" type="hidden" name="formScene" value="6"/>
+			<input id="formMusique" type="hidden" name="formMusique" value="0"/>
+			<input id="formVolume" type="hidden" name="formVolume" value="0.1"/>
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+		</form>
 	
 		<script type="text/javascript">
 			var playButton = document.getElementById("play");
@@ -37,6 +44,10 @@
 			var echapDisp = document.getElementById("echap");
 			var sound = document.getElementById("sound");
 			var jordan = document.getElementById("jordan");
+			var formDifficulte = document.getElementById("formDifficulte");
+			var formScene = document.getElementById("formScene");
+			var formMusique = document.getElementById("formMusique");
+			var formVolume = document.getElementById("formVolume");
 			var i = 0;
 			var j = 0;
 			var k = 0;
@@ -86,7 +97,7 @@
 			}
 		
 			function timer(){
-				window.setTimeout(function(){window.location.href = ("home")}, 3000);
+				window.setTimeout(options(), 3000);
 			}
 			
 			function echap(event){
@@ -96,7 +107,7 @@
 						echapDisp.style.visibility = "visible";
 						i = 1;
 					} else {
-						window.location.href = "home";
+						options();
 						return false;
 					}
 				} else if (key == 32){
@@ -110,6 +121,25 @@
 				}
 			}
 			
+			function options(){
+				var difficulte = localStorage.getItem('difficulte');
+				var sceneNum = localStorage.getItem('sceneNum');
+				var musicNum = localStorage.getItem('musicNum');
+				var musicVol = localStorage.getItem('musicVol');
+				
+				if (difficulte == null){
+					localStorage.setItem('difficulte', 2);
+					localStorage.setItem('sceneNum', 6);
+					localStorage.setItem('musicNum', 0);
+					localStorage.setItem('musicVol', 0.05);
+				} else {
+					formDifficulte.value = difficulte;
+					formScene.value = sceneNum;
+					formMusique.value = musicNum;
+					formVolume.value = musicVol;
+				}
+				document.forms["myform"].submit();
+			}
 		</script>
 	</body>
 </html>

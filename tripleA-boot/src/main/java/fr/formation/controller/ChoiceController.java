@@ -82,8 +82,10 @@ public class ChoiceController {
 	
 	@PostMapping("/choice")
 	public String getCards(@RequestParam String choiceStats, HttpSession session) {
-		int pts;
+		@SuppressWarnings("unused")
+		int pts = 0;
 		
+		@SuppressWarnings("unchecked")
 		List<Card> listChoice = (List<Card>) session.getAttribute("listChoice");
 		
 		String[] stats = choiceStats.split("\\|");
