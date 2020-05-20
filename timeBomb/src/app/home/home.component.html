@@ -1,1 +1,37 @@
-<p>home works!</p>
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-6">
+        <div id="nav">
+          <p (click)="test()">Rejoindre une partie</p>
+          <p>Créer une partie</p>
+          <p>Regarder une partie</p>
+          <p>Quitter le jeu</p>
+        </div>
+      </div>
+      <div class="col-6">
+        <div id="history">
+          <table class="table">
+            <caption>Historique</caption>
+            <thead>
+              <tr>
+                <th>Nom</th>
+                <th>Joueurs</th>
+                <th>Gagnant</th>
+                <th>Créateur</th>
+              </tr>
+            </thead>
+    
+            <tbody>
+              <tr *ngFor="let match of matches">
+                <td>{{match.name}}</td>
+                <td>{{match.size}}</td>
+                <td *ngIf="match.winner == 'SHERLOCK'" style="color: darkgreen">{{match.winner}}</td>
+                <td *ngIf="match.winner == 'MORIARTY'" style="color: darkred">{{match.winner}}</td>
+                <td>{{match.owner}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+  </div>
+</div>

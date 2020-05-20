@@ -1,1 +1,20 @@
-<p>connect works!</p>
+<div class="container">
+  <form>
+    <div class="form-group">
+      <label for="inputLogin">Identifiant</label>
+      <input type="text" class="form-control" id="inputLogin" [(ngModel)]="user.name" name="test1" placeholder="Identifiant">
+    </div>
+    <div class="form-group">
+      <label for="inputPseudo">Pseudonyme</label>
+      <input type="text" class="form-control" id="inputPseudo" [(ngModel)]="user.username" name="test2" placeholder="Pseudonyme">
+    </div>
+    <div class="form-group">
+      <label for="inputPwd">Mot de passe</label>
+      <input type="password" class="form-control" id="inputPwd" [(ngModel)]="user.password" name="test3" placeholder="Mot de passe">
+    </div>
+    <div>
+      <p id="register">Inscription</p>
+    </div>
+    <div id="submit" (click)="submit()"><p>Submit</p></div>
+  </form>
+</div>

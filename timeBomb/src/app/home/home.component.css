@@ -1,0 +1,94 @@
+#logo
+{
+  position: absolute;
+  text-align: center;
+  width: 50%;
+}
+
+img
+{
+  filter: drop-shadow(0 0 0.75rem white);
+}
+
+#nav
+{
+	text-align: center;
+  margin: 30% 0 0 40%;
+  width: 45%;
+}
+
+#nav p
+{
+  color: #ffffff;
+	font-size: 1.5vw;
+	font-weight: bold;
+	text-transform: uppercase;
+	padding: 3%;
+  border-left: solid 2px rgba(0, 0, 0, 0);
+  border-radius: 0 5px 5px 0;
+	transition: all .3s ease-out;
+	background: linear-gradient(90deg, #300c0c 0%, rgba(0, 0, 0, 0.5) 33%);
+	background-size: 200% 100%;
+  background-position:right bottom;
+}
+
+#nav p:hover
+{
+	color: #d54137;
+	border-left: solid 2px #d54137;
+	background-position:left bottom;
+	cursor: pointer;
+}
+
+#history
+{
+  position: absolute;
+  width: 50%;
+  height: 75%;
+  overflow-y: scroll;
+  top: 25%;
+  right: 10%;
+}
+
+caption
+{
+  color: white;
+  font-size: 1.5vw;
+  caption-side: top;
+  text-align: center;
+}
+
+table th
+{
+  text-align: center;
+  color: #d54137;
+}
+
+table td
+{
+  text-align: center;
+}
+
+::-webkit-scrollbar {
+	width: 9px;
+	height: 9px;
+}
+
+::-webkit-scrollbar-button {
+	width: 100px;
+	height: 100px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #6a0000;
+	border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #800000;
+}
+
+::-webkit-scrollbar-track {
+	background: #c8c8c8;
+	border-radius: 100px;
+}

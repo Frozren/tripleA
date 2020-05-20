@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatchService } from '../matches.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  isConnect: boolean = false;
+  matches = this.srvMatch.matches;
+
+  match = {
+    name: "TOTO",
+    size: 5,
+    state: "WAITING",
+    winner: null,
+    owner: {
+      id: 154,
+      name: "BEN"
+    }
+  }
+
+  constructor(public srvMatch: MatchService) {
+    this.srvMatch.reload();
+  }
 
   ngOnInit(): void {
+  }
+
+  test(){
+    alert("test");
+    this.srvMatch.add(this.match);
   }
 
 }
