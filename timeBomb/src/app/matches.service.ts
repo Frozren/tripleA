@@ -19,6 +19,11 @@ export class MatchService {
         .subscribe(matches => this.matches = matches);
   }
 
+  public reloadTerminated(){
+    this.http.get<Array<Match>>(`${this.apiUrl}/terminated`)
+        .subscribe(matches => this.matches = matches);
+  }
+
   public add(match){
     this.http.post<Match>(this.apiUrl, match)
         .subscribe(match => this.matches.push(match));

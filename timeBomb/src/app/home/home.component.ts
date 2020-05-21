@@ -9,7 +9,6 @@ import { MatchService } from '../matches.service';
 export class HomeComponent implements OnInit {
 
   isConnect: boolean = false;
-  matches = this.srvMatch.matches;
 
   match = {
     name: "TOTO",
@@ -23,7 +22,7 @@ export class HomeComponent implements OnInit {
   }
 
   constructor(public srvMatch: MatchService) {
-    this.srvMatch.reload();
+    this.srvMatch.reloadTerminated();
   }
 
   ngOnInit(): void {
@@ -34,4 +33,7 @@ export class HomeComponent implements OnInit {
     this.srvMatch.add(this.match);
   }
 
+  leave(){
+    console.log(this.srvMatch.matches);
+  }
 }

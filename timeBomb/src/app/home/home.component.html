@@ -5,7 +5,7 @@
           <p (click)="test()">Rejoindre une partie</p>
           <p>Créer une partie</p>
           <p>Regarder une partie</p>
-          <p>Quitter le jeu</p>
+          <p routerLink="/visite">Se déconnecter</p>
         </div>
       </div>
       <div class="col-6">
@@ -22,12 +22,13 @@
             </thead>
     
             <tbody>
-              <tr *ngFor="let match of matches">
+              <tr *ngFor="let match of srvMatch.matches">
                 <td>{{match.name}}</td>
                 <td>{{match.size}}</td>
                 <td *ngIf="match.winner == 'SHERLOCK'" style="color: darkgreen">{{match.winner}}</td>
                 <td *ngIf="match.winner == 'MORIARTY'" style="color: darkred">{{match.winner}}</td>
-                <td>{{match.owner}}</td>
+                <td *ngIf="match.winner == null">BOB</td>
+                <td>{{match.owner.name}}</td>
               </tr>
             </tbody>
           </table>

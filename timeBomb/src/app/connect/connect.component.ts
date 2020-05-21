@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { User } from '../user';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-connect',
@@ -9,15 +10,33 @@ import { User } from '../user';
 export class ConnectComponent implements OnInit {
 
   user: User = new User();
-  test: string = "oui";
+  isRegistering: boolean = false;
 
-  constructor() { }
+  constructor(public srvUser: UserService) { }
 
   ngOnInit(): void {
   }
 
-  submit(){
-    alert(this.user.name + " - " + this.user.username + " - " + this.user.password);
+  anim(){
+    document.getElementById("logo").className = "anim";
   }
 
+  @HostListener ('document: keydown', ['$event']) onKeyDown(e: KeyboardEvent){
+    if (e.key == "Enter"){
+      this.submit();
+    }
+  }
+
+  submit(){
+    if (this.isRegistering){
+      alert("Créer un nouveau compte");
+    } else {
+      this.srvUser.connexion(this.user);
+    }
+    
+  }
+
+  register(){
+    this.isRegistering = true;
+  }
 }

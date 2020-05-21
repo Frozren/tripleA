@@ -44,10 +44,23 @@ img
 {
   position: absolute;
   width: 50%;
+  min-width: min-content;
   height: 75%;
-  overflow-y: scroll;
+  overflow-x: hidden;
   top: 25%;
   right: 10%;
+}
+
+#history tbody {
+  display: block;
+  max-height: 185px;
+  overflow-y: scroll;
+}
+
+#history thead, #history tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
 }
 
 caption
@@ -67,6 +80,7 @@ table th
 table td
 {
   text-align: center;
+  color: #fff9e3;
 }
 
 ::-webkit-scrollbar {
