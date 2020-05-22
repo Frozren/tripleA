@@ -11,6 +11,7 @@ export class MatchService {
   private apiUrl: string = "";
   public matches : Array<Match> = null;
   public page: string = "";
+  public match: Match = null;
 
   constructor(private appConfig: AppConfigService, private http: HttpClient, private zone: NgZone) {
     this.apiUrl = `${this.appConfig.url}/matches`;

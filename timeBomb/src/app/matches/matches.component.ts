@@ -42,10 +42,11 @@ export class MatchesComponent implements OnInit {
   }
 
   join(){
+    this.srvMatch.match = this.match;
     if (this.srvMatch.page == "join"){
-      alert("rejoindre partie pour jouer : " + this.match.name);
+      this.router.navigate([ '/game' ]);
     } else if (this.srvMatch.page == "look"){
-      alert("rejoindre partie pour regarder : " + this.match.name);
+      this.router.navigate([ '/game' ]);
     }
   }
 
