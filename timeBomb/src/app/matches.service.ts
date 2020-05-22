@@ -47,12 +47,16 @@ export class MatchService {
         });
   }
 
-  public play(idPartie: number, id) {
-    this.http.put(`${ this.apiUrl }/${ idPartie }/play`, id).subscribe(resp =>{});
+  public launch(match) {
+    this.http.put(`${ this.apiUrl }/${ match.id }/start`,match, this.appConfig.httpOptions).subscribe(resp =>{});
+  }
+
+  public play(match, id) {
+    this.http.put(`${ this.apiUrl }/${ match.id }/play`, id, this.appConfig.httpOptions).subscribe(resp =>{});
   }
 
   public getEventSource(): EventSource {
-    return new EventSource(`${this.apiUrl}/sse-stream`);
+    return new EventSource(`${this.apiUrl}/sse-stream`, this.appConfig.httpOptions);
   }
 
   public getServerSentEvent() {

@@ -68,6 +68,6 @@
       </div>
     </div>
     <div class="row" id="submit" routerLink="/home">
-        <p *ngIf="this.match.state =='READY'" (click)="lancer()">Lancer la partie</p>
+        <p *ngIf="btnStart()" (click)="lancer()">Lancer la partie</p>
     </div>
 </div>

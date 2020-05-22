@@ -24,7 +24,7 @@ export class GameComponent implements OnInit {
   user2: User = new User(1,"Jeremy","jeremy","","MORIARTY",1,this.cards3);
   user3: User = new User(1,"Adrien","adrien","","SHERLOCK",1,this.cards2);
   user4: User = new User(1,"Julien","julien","","MORIARTY",1,this.cards4);
-  public match: Match = new Match(1, "theGame", 4, "READY", "", this.user1, this.user2, [this.user1,this.user2,this.user3,this.user4],this.deck1);
+  public match: Match = new Match(1, "theGame", 4, "READY", "", this.user1, this.user1, [this.user1,this.user2,this.user3,this.user4],this.deck1);
 
   public revealCard : Array<Card> =[new Card(6,"DIFFUSE",true),new Card(6,"DIFFUSE",true)];
 
@@ -45,7 +45,14 @@ export class GameComponent implements OnInit {
     else {return true;}
   }
 
+  public btnStart() {
+    if (this.match.state =="READY" && this.player()==this.match.owner) {return true;}
+    else {return false;}
+  }
+
   public lancer() {
+    if(this.player()==this.match.owner) {
+    this.matchService.launch(this.match);}
     
   }
 
@@ -65,8 +72,8 @@ public revealCards() {
 }
 
 public selectCard(id: number) {
-  alert(id);
-
+  //alert(id);
+  this.matchService.play(this.match, id);
 }
 
 public endGame() {
