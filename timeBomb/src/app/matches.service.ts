@@ -11,8 +11,9 @@ export class MatchService {
   private apiUrl: string = "";
   public matches : Array<Match> = null;
 
-  constructor(private appConfig: AppConfigService, private http: HttpClient, private _zone: NgZone) {
+  constructor(private appConfig: AppConfigService, private http: HttpClient, private zone: NgZone) {
     this.apiUrl = `${this.appConfig.url}/matches`;
+    
   }
 
   public reload(){
@@ -31,11 +32,11 @@ export class MatchService {
   }
 
   public play(idPartie: number, id) {
-    this.http.put(`${ this.apiUrl }/matches/${ idPartie }/play`, id).subscribe(resp =>{});
+    this.http.put(`${ this.apiUrl }/${ idPartie }/play`, id).subscribe(resp =>{});
   }
 
   public getEventSource(): EventSource {
-    return new EventSource(`${this.apiUrl}/matches/sse-stream`);
+    return new EventSource(`${this.apiUrl}/sse-stream`);
   }
 
   public getServerSentEvent() {
@@ -43,16 +44,18 @@ export class MatchService {
       const eventSource = this.getEventSource();
 
       eventSource.onmessage = event => {
-        this._zone.run(() => {
+        this.zone.run(() => {
           observer.next(event);
         });
       };
       eventSource.onerror = error => {
-        this._zone.run(() => {
+        this.zone.run(() => {
           observer.error(error);
         });
       };
     });
   }
+
+  
 
 }

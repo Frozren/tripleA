@@ -1,3 +1,8 @@
+<p id="textTour">
+<span *ngIf="match.current.name!=playerName">C'est au tour de {{match.current.name}}</span>
+<span *ngIf="match.current.name==playerName">C'est à vous de jouer!</span>
+</p>
+
 <table id="tableau">
     <tr class="players" *ngFor="let u of playerFiltered()">
         <td class="name">{{u.name}}</td>
@@ -13,11 +18,11 @@
 
         </td>
     </tr>
-
 </table>
+
 <table id="tablePlayer">
     <tr class="players">
-        <td class="cards" *ngFor="let c of match.current.hand">
+        <td class="cards" *ngFor="let c of player().hand">
             <img class="imgCard" *ngIf="c.type=='BOMB'" 
             src="../assets/img/cards/cardBomb.png">
             <img class="imgCard" *ngIf="c.type=='DIFFUSE'" 
@@ -30,7 +35,7 @@
 
 <table id="tableRevealed">
     <tr class="players">
-        <td class="cards" *ngFor="let c of revealCard">
+        <td class="cards" *ngFor="let c of revealCards()">
             <img class="imgCard" *ngIf="c.type=='BOMB'" 
             src="../assets/img/cards/cardBomb.png">
             <img class="imgCard" *ngIf="c.type=='DIFFUSE'" 
@@ -40,3 +45,23 @@
         </td>
     </tr>
 </table>
+
+<div class="container" *ngIf="endGame()">
+    <p class="text">Fin de la partie</p>
+    <p class="text">Les gagnants sont : {{match.winner}}</p>
+    <button routerLink="/home">quitter</button>
+</div>
+
+<div class="container">
+    <div class="row" id="titre"></div>
+    <div class="row">
+      <div class="form-group">
+        <p class="text">Fin de la partie</p>
+      </div>
+      <div class="form-group">
+        <p class="text">Les gagnants sont : {{match.winner}}</p>
+      </div>
+    </div>
+    <div class="row" id="submit"><p></p></div>
+    <div style="color: #d54137; margin-top: 5%; text-align: center; font-size: small;">La connexion a échouée !</div>
+  </div>

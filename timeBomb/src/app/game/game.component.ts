@@ -10,39 +10,58 @@ import { MatchService } from '../matches.service';
   styleUrls: ['./game.component.css']
 })
 export class GameComponent implements OnInit {
-  deck1: Array<Card> = [];
+ public playerName: string = "jordan";
+  deck1: Array<Card> = [new Card(4,"BAIT",false), new Card(4,"BAIT",false), new Card(6,"DIFFUSE",true),new Card(6,"DIFFUSE",true)];
   cards1: Array<Card> = [new Card(1,"BOMB",true), new Card(2,"DIFFUSE",true), 
   new Card(3,"BAIT",true), new Card(4,"BAIT",false), new Card(4,"BAIT",false), new Card(4,"BAIT",false)];
   cards2: Array<Card> = [new Card(5,"BAIT",false), new Card(6,"DIFFUSE",false), 
   new Card(7,"BAIT",true), new Card(8,"BAIT",true), new Card(4,"BAIT",false), new Card(4,"BAIT",false)];
+  cards3: Array<Card> = [new Card(5,"BAIT",false), new Card(6,"DIFFUSE",false), 
+  new Card(7,"BAIT",true), new Card(8,"DIFFUSE",true), new Card(4,"BAIT",false), new Card(4,"BAIT",true)];
+  cards4: Array<Card> = [new Card(5,"BAIT",false), new Card(6,"DIFFUSE",false), 
+  new Card(7,"BAIT",true), new Card(8,"DIFFUSE",true), new Card(4,"DIFFUSE",true), new Card(4,"BAIT",false)];
   user1: User = new User(1,"Jordan","jordan","","SHERLOCK",1,this.cards1);
-  user2: User = new User(1,"Jeremy","Jeremy","","MORIARTY",1,this.cards1);
-  user3: User = new User(1,"adrien","adrien","","MORIARTY",1,this.cards2);
-  public match: Match = new Match(1, "theGame", 2, "PLAYING", "", this.user1, this.user1, [this.user3,this.user1,this.user2,this.user3],this.deck1);
+  user2: User = new User(1,"Jeremy","jeremy","","MORIARTY",1,this.cards3);
+  user3: User = new User(1,"Adrien","adrien","","SHERLOCK",1,this.cards2);
+  user4: User = new User(1,"Julien","julien","","MORIARTY",1,this.cards4);
+  public match: Match = new Match(1, "theGame", 2, "PLAYING", "", this.user1, this.user1, [this.user1,this.user2,this.user3,this.user4],this.deck1);
 
   public revealCard : Array<Card> =[new Card(6,"DIFFUSE",true),new Card(6,"DIFFUSE",true)];
 
-  constructor(private matchService: MatchService) { }
+  constructor(private matchService: MatchService) {
+    matchService.getServerSentEvent().subscribe(match => this.match = match);
+  }
   
   ngOnInit(): void {
     this.matchService
       .getServerSentEvent()
-      .subscribe(data => {
-        console.log(data);
-        this.match = data;
+      .subscribe(match => {
+        console.log(match);
       });
-
   }
 
 public playerFiltered() {
   return this.match.players.filter(p =>
-    p != this.match.current);
+    p.username != this.playerName);
 }
 
+public player() {
+  let player = this.match.players.filter(p =>
+    p.username == this.playerName);
+    return player[0];
+}
 
+public revealCards() {
+  return this.match.deck.filter(d => d.type == "DIFFUSE" && d.revealed);
+}
 
 public selectCard(id: number) {
   alert(id);
+
+}
+
+public endGame() {
+  return true;
 }
 
 }
