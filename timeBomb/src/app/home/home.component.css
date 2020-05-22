@@ -1,8 +1,10 @@
 #logo
 {
   position: absolute;
-  text-align: center;
-  width: 50%;
+  width: 16%;
+  top: 1%;
+  left: 42%;
+  filter: drop-shadow(0 0 0.75rem white);
 }
 
 img

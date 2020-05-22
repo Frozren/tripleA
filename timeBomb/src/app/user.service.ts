@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class UserService {
   private apiUrl: string = "";
   public user: User = null;
+  public connectionOK: boolean = false;
 
   constructor(private appConfig: AppConfigService, private http: HttpClient) {
     this.apiUrl = `${this.appConfig.url}/users`;
@@ -20,7 +21,6 @@ export class UserService {
   }
 
   public connexion(user){
-    this.http.post<User>(`${this.apiUrl}/login`, user)
-        .subscribe(user => console.log("post login: " + user));
+    return this.http.post<User>(`${this.apiUrl}/login`, user);
   }
 }

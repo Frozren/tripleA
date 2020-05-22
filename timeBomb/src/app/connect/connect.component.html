@@ -22,4 +22,5 @@
     <p id="register" (click)="register()">Inscription</p>
   </div>
   <div class="row" id="submit" (click)="submit()"><p>{{isRegistering | connectTitre: "submit"}}</p></div>
+  <div *ngIf="connectionOk == false" style="color: #d54137; margin-top: 5%; text-align: center; font-size: small;">La connexion a échouée !</div>
 </div>

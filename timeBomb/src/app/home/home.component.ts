@@ -9,9 +9,10 @@ import { MatchService } from '../matches.service';
 export class HomeComponent implements OnInit {
 
   isConnect: boolean = false;
+  page: string = "menu";
 
   match = {
-    name: "TOTO",
+    name: "OUIOUI",
     size: 5,
     state: "WAITING",
     winner: null,
@@ -34,6 +35,6 @@ export class HomeComponent implements OnInit {
   }
 
   leave(){
-    console.log(this.srvMatch.matches);
+    
   }
 }

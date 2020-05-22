@@ -1,11 +1,15 @@
-<div class="container-fluid">
+<div>
+  <img id="logo" src="../../assets/img/timeBomb.png" />
+</div>
+
+<div class="container-fluid" *ngIf="page == 'menu'">
   <div class="row">
       <div class="col-6">
         <div id="nav">
           <p (click)="test()">Rejoindre une partie</p>
           <p>Créer une partie</p>
           <p>Regarder une partie</p>
-          <p routerLink="/visite">Se déconnecter</p>
+          <p routerLink="/connect">Se déconnecter</p>
         </div>
       </div>
       <div class="col-6">
@@ -34,5 +38,32 @@
           </table>
         </div>
       </div>
+  </div>
+</div>
+
+<div *ngIf="page == 'join'">
+  <div id="parties">
+    <table class="table">
+      <caption>Historique</caption>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Joueurs</th>
+          <th>Gagnant</th>
+          <th>Créateur</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let match of srvMatch.matches">
+          <td>{{match.name}}</td>
+          <td>{{match.size}}</td>
+          <td *ngIf="match.winner == 'SHERLOCK'" style="color: darkgreen">{{match.winner}}</td>
+          <td *ngIf="match.winner == 'MORIARTY'" style="color: darkred">{{match.winner}}</td>
+          <td *ngIf="match.winner == null">BOB</td>
+          <td>{{match.owner.name}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
