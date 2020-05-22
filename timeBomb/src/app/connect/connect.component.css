@@ -43,6 +43,11 @@
   color: white;
 }
 
+::placeholder
+{
+  color: lightgrey;
+}
+
 .row
 {
   margin: 5% 0 5% 7%;

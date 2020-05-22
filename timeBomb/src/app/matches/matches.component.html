@@ -22,6 +22,6 @@
         </tr>
       </tbody>
     </table>
-    <div id="submit" (click)="join()"><p>Rejoindre</p></div>
+    <div id="buttons"><span id="submit" (click)="join()">Rejoindre</span><span id="submit" *ngIf="suppr" (click)="delete()">Supprimer</span></div>
   </div>
 </div>

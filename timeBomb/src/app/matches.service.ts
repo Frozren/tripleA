@@ -18,18 +18,33 @@ export class MatchService {
   }
 
   public reload(){
-    this.http.get<Array<Match>>(this.apiUrl)
+    this.http.get<Array<Match>>(this.apiUrl, this.appConfig.httpOptions)
         .subscribe(matches => this.matches = matches);
   }
 
   public reloadTerminated(){
-    this.http.get<Array<Match>>(`${this.apiUrl}/terminated`)
+    this.http.get<Array<Match>>(`${this.apiUrl}/terminated`, this.appConfig.httpOptions)
         .subscribe(matches => this.matches = matches);
   }
 
   public add(match){
-    this.http.post<Match>(this.apiUrl, match)
+    this.http.post<Match>(this.apiUrl, match, this.appConfig.httpOptions)
         .subscribe();
+  }
+
+  public join(match){
+    this.http.put(`${this.apiUrl}/${match.id}`, match, this.appConfig.httpOptions)
+        .subscribe();
+  }
+
+  public delete(match){
+    this.http.delete(`${this.apiUrl}/${match.id}`, this.appConfig.httpOptions)
+        .subscribe(resp => {
+          if(resp){
+            let index = this.matches.indexOf(match);
+            this.matches.splice(index, 1);
+          }
+        });
   }
 
   public play(idPartie: number, id) {
@@ -56,7 +71,4 @@ export class MatchService {
       };
     });
   }
-
-  
-
 }

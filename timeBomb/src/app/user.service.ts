@@ -16,8 +16,7 @@ export class UserService {
   }
 
   public add(user){
-    this.http.post<User>(`${this.apiUrl}/subscribe`, user)
-        .subscribe(user => this.user = user);
+    return this.http.post<User>(`${this.apiUrl}/subscribe`, user);
   }
 
   public connexion(user){

@@ -14,6 +14,7 @@ export class ConnectComponent implements OnInit {
   user: User = new User();
   isRegistering: boolean = false;
   connectionOk: boolean = null;
+  registerOk: boolean = null;
 
   constructor(public srvUser: UserService, private appConfig: AppConfigService, private router: Router) { }
 
@@ -33,13 +34,25 @@ export class ConnectComponent implements OnInit {
   submit(){
     if (this.isRegistering){
       alert(this.user.name + this.user.username + this.user.password);
-      this.srvUser.add(this.user);
+      this.srvUser.add(this.user)
+          .subscribe(
+            user => {
+              this.user = user;
+            },
+            error => {
+              this.registerOk = false;
+              this.user.username = "";
+              this.user.password = "";
+            });
+      
     } else {
+      this.srvUser.user = this.user;
       this.srvUser.connexion(this.user)
           .subscribe(
             user => {
             this.appConfig.setLogin(this.user);
             this.router.navigateByUrl("/home");
+            this.srvUser.user.id = user.id;
           },
             error => {
               this.connectionOk = false;

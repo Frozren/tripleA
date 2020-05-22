@@ -7,11 +7,11 @@
   <div class="row">
     <div class="form-group" *ngIf="isRegistering">
       <label for="inputLogin">Nom d'utilisateur</label>
-      <input type="text" autocomplete="off" class="form-control" id="inputLogin" [(ngModel)]="user.name" name="test1" placeholder="Pierre">
+      <input type="text" autocomplete="off" class="form-control" id="inputLogin" [(ngModel)]="user.name" name="test1" placeholder="John">
     </div>
     <div class="form-group">
       <label for="inputIdent">Identifiant</label>
-      <input type="text" autocomplete="off" class="form-control" id="inputIdent" [(ngModel)]="user.username" name="test2" placeholder="Stucki">
+      <input type="text" autocomplete="off" class="form-control" id="inputIdent" [(ngModel)]="user.username" name="test2" placeholder="Johnny">
     </div>
     <div class="form-group">
       <label for="inputPwd">Mot de passe</label>
@@ -23,4 +23,5 @@
   </div>
   <div class="row" id="submit" (click)="submit()"><p>{{isRegistering | connectTitre: "submit"}}</p></div>
   <div *ngIf="connectionOk == false" style="color: #d54137; margin-top: 5%; text-align: center; font-size: small;">La connexion a échouée !</div>
+  <div *ngIf="registerOk == false" style="color: #d54137; margin-top: 5%; text-align: center; font-size: small;">L'inscription a échouée !</div>
 </div>
