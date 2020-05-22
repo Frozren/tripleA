@@ -3,6 +3,7 @@ import { User } from '../user';
 import { Match } from '../match';
 import { Card } from '../card';
 import { MatchService } from '../matches.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-game',
@@ -10,7 +11,9 @@ import { MatchService } from '../matches.service';
   styleUrls: ['./game.component.css']
 })
 export class GameComponent implements OnInit {
-  public playerName: string = "jordan";
+  //public playerName: string = "jordan";
+  public playerName: string;
+
   deck1: Array<Card> = [new Card(4,"BAIT",false), new Card(4,"BAIT",false), new Card(6,"DIFFUSE",true),new Card(6,"DIFFUSE",true)];
   cards1: Array<Card> = [new Card(1,"BOMB",false), new Card(2,"DIFFUSE",true), 
   new Card(3,"BAIT",true), new Card(4,"BAIT",false), new Card(4,"BAIT",false), new Card(4,"BAIT",false)];
@@ -28,8 +31,9 @@ export class GameComponent implements OnInit {
 
   public revealCard : Array<Card> =[new Card(6,"DIFFUSE",true),new Card(6,"DIFFUSE",true)];
 
-  constructor(private matchService: MatchService) {
+  constructor(private matchService: MatchService, private userService: UserService) {
     matchService.getServerSentEvent().subscribe(match => this.match = match);
+    this.playerName = this.userService.user.name;
   }
   
   ngOnInit(): void {

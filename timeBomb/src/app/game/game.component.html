@@ -63,8 +63,8 @@
     <div class="row" id="titre"></div>
     <div class="row">
       <div class="form-group">
-        <p class="text">Nombre de joueurs</p>
-        <p class="text">Joueurs:</p>
+        <p class="text">Nombre de joueurs {{match.players.length}} sur {{match.size}}</p>
+        <p class="text">Joueurs:<span *ngFor="let p of match.players"> {{p.name}}</span></p>
       </div>
     </div>
     <div class="row" id="submit" routerLink="/home">
