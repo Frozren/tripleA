@@ -10,9 +10,9 @@ import { MatchService } from '../matches.service';
   styleUrls: ['./game.component.css']
 })
 export class GameComponent implements OnInit {
- public playerName: string = "jordan";
+  public playerName: string = "jordan";
   deck1: Array<Card> = [new Card(4,"BAIT",false), new Card(4,"BAIT",false), new Card(6,"DIFFUSE",true),new Card(6,"DIFFUSE",true)];
-  cards1: Array<Card> = [new Card(1,"BOMB",true), new Card(2,"DIFFUSE",true), 
+  cards1: Array<Card> = [new Card(1,"BOMB",false), new Card(2,"DIFFUSE",true), 
   new Card(3,"BAIT",true), new Card(4,"BAIT",false), new Card(4,"BAIT",false), new Card(4,"BAIT",false)];
   cards2: Array<Card> = [new Card(5,"BAIT",false), new Card(6,"DIFFUSE",false), 
   new Card(7,"BAIT",true), new Card(8,"BAIT",true), new Card(4,"BAIT",false), new Card(4,"BAIT",false)];
@@ -24,7 +24,7 @@ export class GameComponent implements OnInit {
   user2: User = new User(1,"Jeremy","jeremy","","MORIARTY",1,this.cards3);
   user3: User = new User(1,"Adrien","adrien","","SHERLOCK",1,this.cards2);
   user4: User = new User(1,"Julien","julien","","MORIARTY",1,this.cards4);
-  public match: Match = new Match(1, "theGame", 2, "PLAYING", "", this.user1, this.user1, [this.user1,this.user2,this.user3,this.user4],this.deck1);
+  public match: Match = new Match(1, "theGame", 4, "READY", "", this.user1, this.user2, [this.user1,this.user2,this.user3,this.user4],this.deck1);
 
   public revealCard : Array<Card> =[new Card(6,"DIFFUSE",true),new Card(6,"DIFFUSE",true)];
 
@@ -38,6 +38,15 @@ export class GameComponent implements OnInit {
       .subscribe(match => {
         console.log(match);
       });
+  }
+
+  public start() {
+    if (this.match.state =="WAITING" || this.match.state =="READY") {return false;}
+    else {return true;}
+  }
+
+  public lancer() {
+    
   }
 
 public playerFiltered() {
@@ -61,7 +70,25 @@ public selectCard(id: number) {
 }
 
 public endGame() {
-  return true;
+  let end: Boolean=false;
+  let nbBomb=0;
+  let nbDiffuse=0;
+  let nbReveal=0;
+  for (let d of this.match.deck) {
+    if(d.type == "BOMB" && d.revealed) {nbBomb++}
+  }
+  for (let d of this.match.deck) {
+    if(d.type == "DIFFUSE" && d.revealed) {nbDiffuse++}
+  }
+  for (let d of this.match.deck) {
+    if(d.revealed) {nbReveal++}
+  }
+
+  if (nbBomb>0) {end=true}
+  if (nbDiffuse==this.match.size) {end=true}
+  if (nbReveal==this.match.size*4) {end=true}
+
+  return end;
 }
 
 }
