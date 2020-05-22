@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
 import { Match } from '../match';
 import { Card } from '../card';
+import { MatchService } from '../matches.service';
 
 @Component({
   selector: 'app-game',
@@ -21,9 +22,16 @@ export class GameComponent implements OnInit {
 
   public revealCard : Array<Card> =[new Card(6,"DIFFUSE",true),new Card(6,"DIFFUSE",true)];
 
-  constructor() { }
+  constructor(private matchService: MatchService) { }
   
   ngOnInit(): void {
+    this.matchService
+      .getServerSentEvent()
+      .subscribe(data => {
+        console.log(data);
+        this.match = data;
+      });
+
   }
 
 public playerFiltered() {
@@ -31,12 +39,10 @@ public playerFiltered() {
     p != this.match.current);
 }
 
-public deck() {
-  
-}
 
-public selectCard() {
-  
+
+public selectCard(id: number) {
+  alert(id);
 }
 
 }

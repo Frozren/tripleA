@@ -8,7 +8,7 @@
             src="../assets/img/cards/cardDiffuse.png">
             <img class="imgCard" *ngIf="c.revealed && c.type=='BAIT'" 
             src="../assets/img/cards/cardBait.png">
-            <img (click)="selectCard()" class="imgCard" *ngIf="!c.revealed" 
+            <img (click)="selectCard(c.id)" class="imgCard" *ngIf="!c.revealed" 
             src="../assets/img/cards/cardBack.png">
 
         </td>
