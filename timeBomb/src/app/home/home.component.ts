@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatchService } from '../matches.service';
+import { AppConfigService } from '../app-config.service';
+import { ConnectComponent } from '../connect/connect.component';
+import { Router } from '@angular/router';
+import { Match } from '../match';
 
 @Component({
   selector: 'app-home',
@@ -9,32 +13,38 @@ import { MatchService } from '../matches.service';
 export class HomeComponent implements OnInit {
 
   isConnect: boolean = false;
-  page: string = "menu";
+  page: string = "";
+  isCreating: boolean = false;
+  match: Match = new Match();
 
-  match = {
-    name: "OUIOUI",
-    size: 5,
-    state: "WAITING",
-    winner: null,
-    owner: {
-      id: 154,
-      name: "BEN"
-    }
-  }
-
-  constructor(public srvMatch: MatchService) {
+  constructor(public srvMatch: MatchService, private router: Router) {
     this.srvMatch.reloadTerminated();
   }
 
   ngOnInit(): void {
   }
 
-  test(){
-    alert("test");
+  join(page){
+    this.srvMatch.page = page;
+    this.router.navigate([ '/matches' ]);
+  }
+
+  create(){
+    this.isCreating = true;
+  }
+
+  submit(){
     this.srvMatch.add(this.match);
+    this.match = null;
+    this.isCreating = false;
+    this.router.navigate([ '/home' ]);
+  }
+
+  retour(){
+    this.isCreating = false;
   }
 
   leave(){
-    
+    this.router.navigate([ '/connect' ]);
   }
 }

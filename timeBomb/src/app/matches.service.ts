@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 export class MatchService {
   private apiUrl: string = "";
   public matches : Array<Match> = null;
+  public page: string = "";
 
   constructor(private appConfig: AppConfigService, private http: HttpClient, private zone: NgZone) {
     this.apiUrl = `${this.appConfig.url}/matches`;
@@ -28,7 +29,7 @@ export class MatchService {
 
   public add(match){
     this.http.post<Match>(this.apiUrl, match)
-        .subscribe(match => this.matches.push(match));
+        .subscribe();
   }
 
   public play(idPartie: number, id) {

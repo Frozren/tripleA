@@ -43,7 +43,7 @@ export class ConnectComponent implements OnInit {
           },
             error => {
               this.connectionOk = false;
-              this.user = new User();
+              this.user.password = "";
           });
     }
   }

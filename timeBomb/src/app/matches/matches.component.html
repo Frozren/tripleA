@@ -1,0 +1,27 @@
+<div>
+  <img id="logo" routerLink="/home" src="../../assets/img/timeBomb.png" />
+</div>
+
+<div class="container-fluid">
+  <div id="parties">
+    <table class="table">
+      <caption>Parties ({{matchesFiltered().length}})</caption>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Créateur</th>
+          <th>Joueurs</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let match of matchesFiltered()" id="match{{match.id}}" (click)="charger(match)">
+          <td>{{match.name}}</td>
+          <td>{{match.owner.name}}</td>
+          <td>{{match.players.length}}/{{match.size}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div id="submit" (click)="join()"><p>Rejoindre</p></div>
+  </div>
+</div>

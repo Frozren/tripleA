@@ -12,7 +12,7 @@ export class AppConfigService {
 
   setLogin(user){
     let myHeaders: HttpHeaders = new HttpHeaders();
-    myHeaders = myHeaders.append('Authorization', 'Basic' + btoa(user.username + ":" + user.password));
+    myHeaders = myHeaders.append('Authorization', 'Basic ' + btoa(user.username + ":" + user.password));
     this.httpOptions = {headers: myHeaders};
   }
 }

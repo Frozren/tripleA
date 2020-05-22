@@ -10,10 +10,12 @@ import { HomeComponent } from './home/home.component';
 import { GameComponent } from './game/game.component';
 import { PlayerPipe } from './player.pipe';
 import { ConnectTitrePipe } from './connect-titre.pipe';
+import { MatchesComponent } from './matches/matches.component';
 
 const routes: Routes = [
 	{path: 'connect', component: ConnectComponent},
 	{path: 'home', component: HomeComponent},
+	{path: 'matches', component: MatchesComponent},
 	{path: 'game', component: GameComponent},
 	{path: '', redirectTo: 'connect', pathMatch: 'full'},
 	{path: '**', redirectTo: 'connect', pathMatch: 'full'}
@@ -26,7 +28,8 @@ const routes: Routes = [
     HomeComponent,
     GameComponent,
     PlayerPipe,
-    ConnectTitrePipe
+    ConnectTitrePipe,
+    MatchesComponent
   ],
   imports: [
     BrowserModule,
