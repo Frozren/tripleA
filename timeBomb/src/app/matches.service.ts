@@ -57,7 +57,7 @@ export class MatchService {
   }
 
   public getEventSource(): EventSource {
-    return new EventSource(`${this.apiUrl}/sse-stream`, this.appConfig.httpOptions);
+    return new EventSource(`${this.apiUrl}/sse-stream`);
   }
 
   public getServerSentEvent() {
@@ -72,6 +72,7 @@ export class MatchService {
       eventSource.onerror = error => {
         this.zone.run(() => {
           observer.error(error);
+
         });
       };
     });

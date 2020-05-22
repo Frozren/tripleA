@@ -11,25 +11,12 @@ import { UserService } from '../user.service';
   styleUrls: ['./game.component.css']
 })
 export class GameComponent implements OnInit {
-  //public playerName: string = "jordan";
+  public card1 = new Card(1,"BAIT",false);
+  public deck1 = [this.card1];
+  public user1 = new User(1,"Adrien","","","",1,)
+  public users1 = [this.user1];
+  public match = new Match(1,"nc",1,"WAITING","",this.user1,this.user1,this.users1,this.deck1);
   public playerName: string;
-
-  deck1: Array<Card> = [new Card(4,"BAIT",false), new Card(4,"BAIT",false), new Card(6,"DIFFUSE",true),new Card(6,"DIFFUSE",true)];
-  cards1: Array<Card> = [new Card(1,"BOMB",false), new Card(2,"DIFFUSE",true), 
-  new Card(3,"BAIT",true), new Card(4,"BAIT",false), new Card(4,"BAIT",false), new Card(4,"BAIT",false)];
-  cards2: Array<Card> = [new Card(5,"BAIT",false), new Card(6,"DIFFUSE",false), 
-  new Card(7,"BAIT",true), new Card(8,"BAIT",true), new Card(4,"BAIT",false), new Card(4,"BAIT",false)];
-  cards3: Array<Card> = [new Card(5,"BAIT",false), new Card(6,"DIFFUSE",false), 
-  new Card(7,"BAIT",true), new Card(8,"DIFFUSE",true), new Card(4,"BAIT",false), new Card(4,"BAIT",true)];
-  cards4: Array<Card> = [new Card(5,"BAIT",false), new Card(6,"DIFFUSE",false), 
-  new Card(7,"BAIT",true), new Card(8,"DIFFUSE",true), new Card(4,"DIFFUSE",true), new Card(4,"BAIT",false)];
-  user1: User = new User(1,"Jordan","jordan","","SHERLOCK",1,this.cards1);
-  user2: User = new User(1,"Jeremy","jeremy","","MORIARTY",1,this.cards3);
-  user3: User = new User(1,"Adrien","adrien","","SHERLOCK",1,this.cards2);
-  user4: User = new User(1,"Julien","julien","","MORIARTY",1,this.cards4);
-  public match: Match = new Match(1, "theGame", 4, "READY", "", this.user1, this.user1, [this.user1,this.user2,this.user3,this.user4],this.deck1);
-
-  public revealCard : Array<Card> =[new Card(6,"DIFFUSE",true),new Card(6,"DIFFUSE",true)];
 
   constructor(private matchService: MatchService, private userService: UserService) {
     matchService.getServerSentEvent().subscribe(match => this.match = match);
