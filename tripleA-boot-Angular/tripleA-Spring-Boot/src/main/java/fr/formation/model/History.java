@@ -9,6 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name="history")
 public class History {
@@ -30,6 +34,8 @@ public class History {
 	protected Boolean etat; //true = win
 
 	@Column(name = "dateEnd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	protected LocalDate dateEnd;
 	
 	@Column(name = "name", length=50, nullable = false)
