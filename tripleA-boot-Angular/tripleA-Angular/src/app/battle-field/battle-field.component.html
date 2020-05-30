@@ -1,1 +1,431 @@
-<p>battle-field works!</p>
+<body id="battle">
+	<form method="POST" action="BattleField" id="formBattle">
+
+		<div class="row" id="top">
+			<div class="col-2">
+				<img id="logoHome" src="assets/img/logo.png"  type="button" data-toggle="modal"  data-target="#modalClose"/>
+			</div>
+			<button id="test" style="position: absolute; right: 3%;">test</button>
+		</div>
+		<div class="row" id="hp">
+			<div class="col-2" style="visibility: hidden"></div>
+			<div class="col-3">
+				<div id="hp1">
+					<div class="progress">
+						<div
+							class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
+							role="progressbar" style="{{  'width: ' + hpb1 + '%'  }}"
+							aria-valuenow="hpb1" aria-valuemin="0"
+							aria-valuemax="100"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-2">
+				<img id="vs" src="assets/img/battlefield/field/vs.png">
+			</div>
+			<div class="col-3">
+				<div id="hp2">
+					<div class="progress">
+						<div
+							class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
+							role="progressbar" style="{{  'width: ' + hpb2 + '%'  }}"
+							aria-valuenow="hpb2" aria-valuemin="0"
+							aria-valuemax="100"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row" id="mid">
+			<div id="divconsole">
+				<div class="scroll" id="console">{{ message }}</div>
+				
+			</div>
+			
+
+			<div id="field" style="{{ 'cursor: url('+cursor+'), crosshair; background-image: url('+imgField+');' }}">
+				<div class="row" id="hfield">
+					<div class="col-2" id="left">
+						<div class="row" id="tleft"></div>
+						<div class="row" id="hcard">
+							<div class="col-8">
+								<div id="{{ 'card'+idCard1 }}">
+									<input type="image" class="imgcard"id="{{ 'c'+idCard1 }}"
+										src="{{ img1 }}"
+										style="{{ 'cursor: ' + cursorch + 'not-allowed;' }}">
+									<div class="divdmg">
+										<p class="dmg"id="{{ 'dmg'+idCard1 }}">{{ dmg1 }}</p>
+									</div>
+									<div class="divname">
+										<p class="name">{{ namec1 }}</p>
+									</div>
+									<div class="divclass">
+										<p class="class">Carte C{{ idCard1 }}: {{ classc1 }}</p>
+									</div>
+									<div class="def">
+										<p class="stat">{{ deckH[0].def }}</p>
+										<img class="cdef"id="{{ 'def'+idCard1 }}" src="assets/img/battlefield/cursor/shield.ico">
+									</div>
+									<div class="atk">
+										<p class="stat">{{ deckH[0].atk }}</p>
+									</div>
+									<div class="life">
+										<p class="stat">{{ deckH[0].life }}</p>
+									</div>
+								</div>
+								<img class="sang"id="{{ 'sang'+idCard1 }}" src="assets/img/battlefield/sang.png">
+								<img class="meteor" id="meteor1" src="assets/img/battlefield/meteor.gif">
+								<img class="exploMeteor" id="exploMeteor1" src="assets/img/battlefield/exploMeteor.gif">
+							</div>
+						</div>
+					</div>
+					<div class="col-8">
+						<div class="row" id="topField"></div>
+						<div class="row" id="hcard">
+							<div class="col-1" id="ltcard"></div>
+							<div class="col-2">
+								<div id="{{ 'card'+idCard2 }}">
+									<input type="image" class="imgcard"id="{{ 'c'+idCard2 }}"
+										src="{{ img2 }}"
+										style="{{ 'cursor: ' + cursorch + 'not-allowed;' }}">
+									<div class="divdmg">
+										<p class="dmg"id="{{ 'dmg'+idCard2 }}">{{ dmg2 }}</p>
+									</div>
+									<div class="divname">
+										<p class="name">{{ namec2 }}</p>
+									</div>
+									<div class="divclass">
+										<p class="class">Carte C{{ idCard2 }}: {{ classc2 }}</p>
+									</div>
+									<div class="def">
+										<p class="stat">{{ deckH[1].def }}</p>
+										<img class="cdef"id="{{ 'def'+idCard2 }}" src="assets/img/battlefield/cursor/shield.ico">
+									</div>
+									<div class="atk">
+										<p class="stat">{{ deckH[1].atk }}</p>
+									</div>
+									<div class="life">
+										<p class="stat">{{ deckH[1].life }}</p>
+									</div>
+								</div>
+								<img class="sang"id="{{ 'sang'+idCard2 }}" src="assets/img/battlefield/sang.png">
+								<img class="meteor" id="meteor2" src="assets/img/battlefield/meteor.gif">
+								<img class="exploMeteor" id="exploMeteor2" src="assets/img/battlefield/exploMeteor.gif">
+							</div>
+							<div class="col-5" id="mtcard"></div>
+							<div class="col-2">
+								<div id="{{ 'card'+idCard4 }}">
+									<input type="image" class="imgcard"id="{{ 'c'+idCard4 }}"
+										src="{{ img4 }}"
+										style="{{ 'cursor: ' + cursorai + 'not-allowed;' }}">
+									<div class="divdmg">
+										<p class="dmg"id="{{ 'dmg'+idCard4 }}">{{ dmg4 }}</p>
+									</div>
+									<div class="divname">
+										<p class="name">{{ namec4 }}</p>
+									</div>
+									<div class="divclass">
+										<p class="class">Carte C{{ idCard4 }}: {{ classc4 }}</p>
+									</div>
+									<div class="def">
+										<p class="stat">{{ deckAI[0].def }}</p>
+									</div>
+									<div class="atk">
+										<p class="stat">{{ deckAI[0].atk }}</p>
+									</div>
+									<div class="life">
+										<p class="stat">{{ deckAI[0].life }}</p>
+									</div>
+								</div>
+								<img class="sang"id="{{ 'sang'+idCard4 }}" src="assets/img/battlefield/sang.png">
+							</div>
+						</div>
+						<div class="row" id="midField">
+							<img src="assets/img/battlefield/youWin.png" id="win">
+							<img src="assets/img/battlefield/gameOver.gif" id="lose">
+						</div>
+						<div class="row" id="hcard">
+							<div class="col-1" id="ltcard"></div>
+							<div class="col-2">
+								<div id="{{ 'card'+idCard3 }}">
+									<input type="image" class="imgcard"id="{{ 'c'+idCard3 }}"
+										src="{{ img3 }}"
+										style="{{ 'cursor: ' + cursorch + 'not-allowed;' }}">
+									<div class="divdmg">
+										<p class="dmg"id="{{ 'dmg'+idCard3 }}">{{ dmg3 }}</p>
+									</div>
+									<div class="divname">
+										<p class="name">{{ namec3 }}</p>
+									</div>
+									<div class="divclass">
+										<p class="class">Carte C{{ idCard3 }}: {{ classc3 }}</p>
+									</div>
+									<div class="def">
+										<p class="stat">{{ deckH[2].def }}</p>
+										<img class="cdef"id="{{ 'def'+idCard3 }}" src="assets/img/battlefield/cursor/shield.ico">
+									</div>
+									<div class="atk">
+										<p class="stat">{{ deckH[2].atk }}</p>
+									</div>
+									<div class="life">
+										<p class="stat">{{ deckH[2].life }}</p>
+									</div>
+								</div>
+								<img class="sang"id="{{ 'sang'+idCard3 }}" src="assets/img/battlefield/sang.png">
+								<img class="meteor" id="meteor3" src="assets/img/battlefield/meteor.gif">
+								<img class="exploMeteor" id="exploMeteor3" src="assets/img/battlefield/exploMeteor.gif">
+							</div>
+							<div class="col-5" id="mtcard"></div>
+							<div class="col-2">
+								<div id="{{ 'card'+idCard5 }}">
+									<input type="image" class="imgcard"id="{{ 'c'+idCard5 }}"
+										src="{{ img5 }}"
+										style="{{ 'cursor: ' + cursorai + 'not-allowed;' }}">
+									<div class="divdmg">
+										<p class="dmg"id="{{ 'dmg'+idCard5 }}">{{ dmg5 }}</p>
+									</div>
+									<div class="divname">
+										<p class="name">{{ namec5 }}</p>
+									</div>
+									<div class="divclass">
+										<p class="class">Carte C{{ idCard5 }}: {{ classc5 }}</p>
+									</div>
+									<div class="def">
+										<p class="stat">{{ deckAI[1].def }}</p>
+									</div>
+									<div class="atk">
+										<p class="stat">{{ deckAI[1].atk }}</p>
+									</div>
+									<div class="life">
+										<p class="stat">{{ deckAI[1].life }}</p>
+									</div>
+								</div>
+								<img class="sang"id="{{ 'sang'+idCard5 }}" src="assets/img/battlefield/sang.png">
+							</div>
+						</div>
+					</div>
+					<div class="col-2" id="left">
+						<div class="row" id="tleft"></div>
+						<div class="row" id="hcard">
+							<div class="col-8">
+								<div id="{{ 'card'+idCard6 }}">
+									<input type="image" class="imgcard"id="{{ 'c'+idCard6 }}"
+										src="{{ img6 }}"
+										style="{{ 'cursor: ' + cursorai + 'not-allowed;' }}">
+									<div class="divdmg">
+										<p class="dmg"id="{{ 'dmg'+idCard6 }}">{{ dmg6 }}</p>
+									</div>
+									<div class="divname" >
+										<p class="name">{{ namec6 }}</p>
+									</div>
+									<div class="divclass">
+										<p class="class">Carte C{{ idCard6 }}: {{ classc6 }}</p>
+									</div>
+									<div class="def">
+										<p class="stat">{{ deckAI[2].def }}</p>
+									</div>
+									<div class="atk">
+										<p class="stat">{{ deckAI[2].atk }}</p>
+									</div>
+									<div class="life">
+										<p class="stat">{{ deckAI[2].life }}</p>
+									</div>
+								</div>
+								<img class="sang"id="{{ 'sang'+idCard6 }}" src="assets/img/battlefield/sang.png">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="divdmgBoss">
+					<p class="dmgBoss" id="dmgBoss">{{ dmgBoss }}</p>
+				</div>
+			</div>
+		</div>
+		<div class="row" id="bottom">
+			<div class="col-2">
+				<audio controls="controls" id="music" loop="loop" autoplay="autoplay">
+					<source id="sBat"src="{{ musicBattle }}" type="audio/mp3"/>
+				</audio>
+			</div>
+			<div class="col-3">
+			
+				<audio id="sDef" src="assets/sound/def.mp3"></audio>
+				<audio id="sAtt" src="assets/sound/att.mp3"></audio>
+				<audio id="cDJ" src="assets/sound/cardDeadJ.mp3"></audio>
+				<audio id="gameOver" src="assets/sound/gameOver.mp3"></audio>
+				<audio id="victory" src="assets/sound/victory.mp3"></audio>
+				<audio id="sEM1" src="assets/sound/explosionMeteor.mp3"></audio>
+				<audio id="sEM2" src="assets/sound/explosionMeteor.mp3"></audio>
+				<audio id="sEM3" src="assets/sound/explosionMeteor.mp3"></audio>
+				<audio id="sCW" src="assets/sound/shockWave.mp3"></audio>
+				
+			</div>
+		</div>
+		<div id="divBoss">
+			<input type="image" class="boss" id="cBoss"
+					src="assets/img/battlefield/BOSS.png"
+					style="{{ 'cursor: ' + cursorai + 'not-allowed;' }}">
+		</div>
+		<img class="shockWave" id="shockWave" src="assets/img/battlefield/shockWave.gif">
+		<img class="teleport" id="teleport" src="assets/img/battlefield/essai2.gif">
+	</form>
+	<div class="modal fade" id="modalClose" tabindex="-1" role="dialog" aria-labelledby="closeModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document" id="modal">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="closeModalLabel">Quitter</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					Voullez vous quitter la partie?
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal" id="annuler">Annuler</button>
+					<button type="button" class="btn btn-primary" id="fermer">Confirmer</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="modalEndBoss" tabindex="-1" role="dialog" aria-labelledby="endBossModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document" id="modal">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="closeModalLabel">Questionnaire</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					Souhaitez vous répondre à notre questionnaire?
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal" id="non">Non</button>
+					<button type="button" class="btn btn-primary" id="oui" data-dismiss="modal" data-toggle="modal"  data-target="#modalSurvey">Oui</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="modalSurvey" tabindex="-1" role="dialog" aria-labelledby="surveyModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document" id="modal">
+			<div class="modal-content" id="modalSurv">
+				<div class="modal-header">
+					<h5 class="modal-title" id="closeModalLabel">Questionnaire</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<form class="was-validated" method="POST" action="valideSurvey" id="formSurvey">
+					<div class="modal-body">
+						<fieldset>
+						<legend>Informations personnelles</legend>
+							<div class="form-row">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="genre" type="radio" value="femme" id="femme" required>
+									<label class="custom-control-label" for="femme">Femme</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="genre" type="radio" value="homme" id="homme" required>
+									<label class="custom-control-label" for="homme">Homme</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="genre" type="radio" value="nonBinaire" id="nonBinaire" required>
+									<label class="custom-control-label" for="nonBinaire">Non binaire</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="genre" type="radio" value="jeNeSaisPas" id="jeNeSaisPas" required>
+									<label class="custom-control-label" for=jeNeSaisPas>Je ne sais pas</label>
+								</div>
+							</div>
+							<div class="form-row">	
+								<div class="col">	
+									<label for="age">Age</label>
+									<input class="form-control" name="age" id="age" placeholder="saisir age" type="number" min="5" max="110" step="1" required/>
+								</div>
+								<div class="col">
+									<label for="support">Support</label>
+									<select name="support" id="support" class="custom-select" required>
+										<option value="">Choisir...</option>
+										<option value="ordinateur">Ordinateur</option>
+										<option value="console">Console</option>
+										<option value="smartphone">Smartphone</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="col">
+									<label for="ville">Ville</label>
+									<input class="form-control" type="text" name="ville" id="ville" placeholder="saisir ville" required>
+								</div>
+								<div class="col">
+									<label for="pays">Pays</label>
+									<input class="form-control" type="text" name="pays" id="pays" placeholder="saisir pays" required>
+								</div>
+							</div>
+						</fieldset>
+						<fieldset>
+						<legend>Evaluation</legend>
+							<div class="form-row">
+								<label>Note sur 5</label>
+							</div>
+							<div class="form-row">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="note" type="radio" value="1" id="note1" required>
+									<label class="custom-control-label" for="note1">1</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="note" type="radio" value="2" id="note2" required>
+									<label class="custom-control-label" for="note2">2</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="note" type="radio" value="3" id="note3" required>
+									<label class="custom-control-label" for="note3">3</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="note" type="radio" value="4" id="note4" required>
+									<label class="custom-control-label" for="note4">4</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="note" type="radio" value="5" id="note5" required>
+									<label class="custom-control-label" for="note5">5</label>
+								</div>
+							</div>
+							<div class="form-row">
+								<label>Ressenti de la difficulté</label>
+							</div>
+							<div class="form-row">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="ressenti" type="radio" value="tropFacile"  id="tropFacile" required>
+									<label class="custom-control-label" for="tropFacile">Trop facile</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="ressenti" type="radio" value="facile" id="facile" required>
+									<label class="custom-control-label" for="facile">Facile</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="ressenti" type="radio" value="equilibree" id="equilibree" required>
+									<label class="custom-control-label" for="equilibree">Equilibrée</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="ressenti" type="radio" value="difficile" id="difficile" required>
+									<label class="custom-control-label" for="difficile">Difficile</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input class="custom-control-input" name="ressenti" type="radio" value="hardcore" id="hardcore" required>
+									<label class="custom-control-label" for="hardcore">Hardcore</label>
+								</div>
+							</div>
+						</fieldset>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal" id="annulerSurvey">Annuler</button>
+						<input type="button" class="btn btn-primary" id="validSurvey"  value="valider">
+					</div>
+				</form>
+			</div>
+		</div>
+    </div>
+</body>

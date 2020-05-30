@@ -1,1 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+html
+{
+	background-image: url("assets/img/background.jpg");
+	background-position: fixed;
+	background-repeat: no-repeat;
+}
+
+body
+{
+	font-family: 'Trebuchet MS', Arial, sans-serif;
+	text-align: center;
+	overflow: hidden;
+	user-select: none;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+}

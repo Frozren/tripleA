@@ -1,0 +1,392 @@
+#battle
+{
+	position: absolute;
+	text-align: center;
+	user-select: none;
+	opacity: 1;
+	background-color: transparent;
+	position: absolute;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+}
+
+ #battle .row
+ {
+	margin-right: 0px !important;
+	margin-left: 0px !important;
+ }
+#battle .col, .col-1, .col-10, .col-11, .col-12, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-auto, .col-lg, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-auto, .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-auto, .col-sm, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto
+{
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
+
+#battle #formBattle {
+	height: 100%;
+}
+
+#battle #logoHome
+{
+	position: absolute;
+	width: 50%;
+	top: 5%;
+	left: 5%;
+}
+
+#battle #logoHome:hover
+{
+	filter: drop-shadow(0 0 0.75rem #762919);
+}
+
+#battle #top
+{
+	height: 6%;
+}
+
+#battle #hp
+{
+	height: 5%;
+}
+
+#battle #vs
+{
+	width: 70%;
+	position: absolute;
+	left: 15%;
+	bottom: 15%;
+}
+
+#battle #hp1
+{
+	height: 100%;
+	width: 100%;
+	transform: rotateY(180deg);
+	position: absolute;
+	right: 3%
+}
+
+#battle #hp2
+{
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	left : 3%;
+}
+
+#battle #mid
+{
+	height: 78%;
+}
+
+#battle #divconsole
+{
+	width: 10%;
+}
+
+#battle #console
+{
+	position: absolute;
+	top: 25%;
+	left: 1%;
+	height: 50%;
+	width: 8%;
+	border: solid 1px white;
+	background-color: #330000;
+	font-size: 0.8vw;
+	color: white;
+}
+
+#battle #controls
+{
+	height: 10%;
+}
+
+#battle #music
+{
+	opacity:0;
+}
+
+#battle #music:hover
+{
+	opacity:1;
+}
+
+#battle .scroll
+{
+	overflow-x: hidden;
+	overflow-x: auto;
+	text-align: left;
+}
+
+#battle #field
+{
+	background-position: bottom;
+	background-size: cover;
+	background-repeat: no-repeat;
+	width: 80%;
+	height: 100%;
+}
+
+#battle #field #left
+{
+	height: 100%;
+}
+
+#battle #field #tleft
+{
+	height: 40%;
+}
+
+#battle #field #hfield
+{
+	height: 100%;
+}
+
+#battle #field #topField
+{
+	height: 25%;
+}
+
+#battle #field #midField
+{
+	height: 5%;
+}
+
+#battle #field #hcard
+{
+
+}
+
+#battle #field .imgcard
+{
+	width: 100%;
+	position: relative;
+	left: 20%;
+}
+
+#battle #field .divname
+{
+	position: absolute;
+	text-align: center;
+	top: 46%;
+	left: 36%;
+	width: 70%;
+	transform: rotate(-5deg);
+}
+
+#battle #field .name
+{
+	font-size: 1vw;
+	font-weight: bold;
+	color: white;
+	text-shadow: 0 0 10px #cc9900;
+}
+
+#battle #field .divclass
+{
+	position: absolute;
+	text-align: center;
+	top: 61%;
+	left: 36%;
+	width: 70%;
+}
+
+#battle #field .class
+{
+	font-size: 0.9vw;
+	font-weight: bold;
+	color: white;
+	text-shadow: 0 0 10px #cc9900;
+}
+
+#battle #field .sang {
+	visibility: hidden;
+	position: absolute;
+	width: 76%;
+	bottom: 17.5%;
+	left: 34%;
+	
+}
+	
+#battle #field .def
+{
+	position: absolute;
+	text-align: center;
+	top: 4.5%;
+	left: 23%;
+	width: 25%;
+}
+
+#battle #field .cdef {
+	position: absolute;
+	visibility: hidden;
+	top: -30%;
+	left: -20%;
+	width: 130%;
+}
+
+#battle #field .atk
+{
+	position: absolute;
+	text-align: center;
+	top: 83%;
+	left: 23%;
+	width: 25%;
+}
+
+#battle #field .life
+{
+	position: absolute;
+	text-align: center;
+	top: 83%;
+	left: 96%;
+	width: 25%;
+}
+
+#battle #field #card
+{
+	z-index : 1;
+	position: relatif;
+	left: 1%;
+	top: 1%;
+}
+
+#battle #field .stat
+{
+	font-size: 0.9vw;
+	font-weight: bold;
+	color: white;
+	text-shadow: 0 0 10px #b30000;
+}
+
+
+
+#battle .boss {
+	z-index : 1;
+	position: absolute;
+	filter: drop-shadow(0 0 20px gold);
+	height: 100%;
+	width: auto;
+	bottom: -5%;
+	right: 10%;
+	-webkit-animation-name: boss-pulse;
+	-webkit-animation-duration: 3s;
+	-webkit-animation-timing-function: ease-out;
+	-webkit-animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes boss-pulse {
+	25% {
+		-webkit-transform: scaleY(1.005) translateY(-0.2%);
+	}
+	75% {
+		-webkit-transform: scaleY(0.995) translateY(0.2%);
+	}
+}
+
+
+#battle #field .divdmg {
+	visibility: hidden;
+	position: absolute;
+	text-align: center;
+	top: 10%;
+	left: 60%;
+	height: 20%;
+	width: 20%;
+}
+
+#battle .dmg {
+	visibility: hidden;
+	position: absolute;
+	font-size: 3vw;
+	font-family: 'Showcard Gothic';
+	color: red;
+	text-shadow: 0 0 10px #cc9900;
+}
+
+#battle #field .divdmgBoss {
+	z-index : 2;
+	visibility: hidden;
+	position: absolute;
+	text-align: center;
+	top: 20%;
+	left: 70%;
+	height: 20%;
+	width: 20%;
+}
+
+#battle .dmgBoss {
+	visibility: hidden;
+	position: absolute;
+	font-size: 5vw;
+	font-family: 'Showcard Gothic';
+	color: red;
+	text-shadow: 0 0 10px #cc9900;
+}
+
+#battle #bottom
+{
+	height: 13%;
+}
+
+#battle #win, #battle #lose{
+	visibility: hidden;
+	z-index : 2;
+	position: absolute;
+	top: 0%; left: 15%;
+	height: 100%;
+}
+
+#battle #exit
+{
+	z-index : 2;
+	position: absolute;
+	height: 70%;
+}
+
+#battle #field .meteor {
+	z-index : 2;
+	visibility: hidden;
+	position: absolute;
+	width: 130%;
+}
+#battle #field #meteor1 {transform: rotate(-8deg);
+	bottom: 285%; left: 650%;}
+#battle #field #meteor2 {transform: rotate(-15deg);
+	bottom: 240%; left: 450%;}
+#battle #field #meteor3 {transform: rotate(-23deg);
+	bottom: 360%; left: 450%;}
+
+
+#battle #field .exploMeteor {
+	visibility: hidden;
+	z-index : 3;
+	position: absolute;
+	width: 130%;
+	bottom: 5%;
+	left: 5%;
+}
+
+#battle #shockWave {
+	display: none;
+	position: absolute;
+	width: 36%;
+	height: 70%;
+	top: 11%;
+	left: 30%;
+}
+
+#modalSurv {
+	width: 120%;
+	left: -10%;
+}
+
+#teleport {
+	z-index : 3;
+	position: absolute;
+	visibility: hidden;
+	height: 150%;
+	bottom: -15%;
+	right: -30%;
+}
